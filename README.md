@@ -1,4 +1,5 @@
-<h1>LPOO Project - G64</h1>
+LPOO Project - G64
+
 **ASCIIWorld**
 Bullet points for development;
 
