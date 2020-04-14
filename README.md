@@ -1,7 +1,7 @@
 # LPOO Project - G64
 
 **ASCIIWorld**
-Bullet points for development:
+Bullet points for development (In Progress):
 
 - [ ] UI with different tabs, selectable from keyboard hotkeys -> Architect, Work, Animals, ...
 - [ ] Colonists with different attributes that develop as they work
