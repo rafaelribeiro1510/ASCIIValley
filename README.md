@@ -1,12 +1,17 @@
 # LPOO Project - G64
 
-**ASCIIWorld**
-Bullet points for development (In Progress):
+**ASCII Valley (Stardew Valley)**
+Bullet points for development (in progress):
 
-- [ ] UI with different tabs, selectable from keyboard hotkeys -> Architect, Work, Animals, ...
-- [ ] Colonists with different attributes that develop as they work
-- [ ] Rudimentary building with implementation of cursor
-- [ ] Terrain generation (May be discarded)
-- [ ] Raid system, with human raider groups that spawn on edges of map at given encounters and possibly alien raids through drop pods (May be discarded)
-- [ ] Combat system (?)
-- [ ] Order queue: Colonists each have work and lifestyle priorities that take from the queue of player given commands and routines (essential to maintain the rts feel)
+- [ ] Character controlled by the player
+- [ ] Terrain Generation
+- [ ] Combat System (melee and/or ranged - melee based onn hero's)
+- [ ] Menu
+  - [ ] New Game
+  - [ ] Save Game
+  - [ ] Load Game
+  - [ ] Quit
+- [ ] Day-night Cycle
+- [ ] Seasons
+- [ ] Basic building
+- [ ] Farming
