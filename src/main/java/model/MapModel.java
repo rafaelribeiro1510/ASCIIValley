@@ -31,12 +31,13 @@ public class MapModel {
 
 
     matrix (cores do ecrã)
-    g -> grass
-    s -> sand
-    d -> dirt
-    w -> water
+    g -> grass  -> 1
+    s -> sand   -> 2
+    d -> dirt   -> 3
+    w -> water  -> 4
+    r -> rock   -> 5
 
-    -> criar o ficheiro .csv
+    -> criar o ficheiro .csv  - DONE
     -> read .csv function -> mapModel (info de cada mapChunk) mapChunk model / view
     -> display
 
