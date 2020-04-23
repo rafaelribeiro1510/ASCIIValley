@@ -6,23 +6,23 @@ import view.MapView;
 import java.io.IOException;
 
 public class MapController {
-    private MapModel map;
-    private MapView gui;
+    private MapModel model;
+    private MapView view;
 
-    public MapController(MapModel map, MapView gui) {
-        this.map = map;
-        this.gui = gui;
+    public MapController(MapModel model, MapView view) {
+        this.model = model;
+        this.view = view;
     }
 
     public void start() throws IOException {
         while (true){
 
             //Update entities
-            gui.drawMap(map);
+            view.drawMap(model);
 
             //Get commands
-            MapView.COMMAND command = gui.getCommand();
-            map.getPlayer().updatePosition(command);
+            MapView.COMMAND command = view.getCommand();
+            model.getPlayer().updatePosition(command);
         }
     }
 }

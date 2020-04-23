@@ -9,8 +9,8 @@ import controller.MapController;
 import java.io.IOException;
 
 public class Game {
-    private static final int MAP_WIDTH = 60;
-    private static final int MAP_HEIGHT = 30;
+    private static final int MAP_WIDTH = 40;
+    private static final int MAP_HEIGHT = 15;
 
     public static void main(String[] args) throws IOException {
         Player player = new Player(new Position(30, 15), new TextCharacter('H'), TextColor.ANSI.BLUE, TextColor.ANSI.YELLOW);
