@@ -1,7 +1,7 @@
-package rules;
+package controller;
 
-import data.MapModel;
-import gui.MapView;
+import model.MapModel;
+import view.MapView;
 
 import java.io.IOException;
 
@@ -16,9 +16,13 @@ public class MapController {
 
     public void start() throws IOException {
         while (true){
-            //Get commands
+
             //Update entities
             gui.drawMap(map);
+
+            //Get commands
+            MapView.COMMAND command = gui.getCommand();
+            map.getPlayer().updatePosition(command);
         }
     }
 }

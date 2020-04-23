@@ -1,16 +1,20 @@
-package data.entities;
+package model.entities;
 
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import data.Position;
+import model.Position;
 
 public abstract class Entity {
-    private Position position;
-    private char character;
-    private TextColor.ANSI backgroundColor;
-    private TextColor.ANSI foregroundColor;
+    protected Position position;
+    protected TextCharacter character;
+    protected TextColor.ANSI backgroundColor;
+    protected TextColor.ANSI foregroundColor;
 
-    public Entity() {
+    public Entity(Position position, TextCharacter character, TextColor.ANSI backgroundColor, TextColor.ANSI foregroundColor) {
+        this.position = position;
+        this.character = character;
+        this.backgroundColor = backgroundColor;
+        this.foregroundColor = foregroundColor;
     }
 
     public Position getPosition() {
@@ -21,11 +25,11 @@ public abstract class Entity {
         this.position = position;
     }
 
-    public char getCharacter() {
+    public TextCharacter getCharacter() {
         return character;
     }
 
-    public void setCharacter(char character) {
+    public void setCharacter(TextCharacter character) {
         this.character = character;
     }
 
