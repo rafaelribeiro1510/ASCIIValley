@@ -1,6 +1,5 @@
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
-import javafx.geometry.Pos;
 import model.MapModel;
 import model.Position;
 import model.entities.Player;
