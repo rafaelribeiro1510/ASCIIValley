@@ -3,7 +3,7 @@ package model.entities;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import model.Position;
-import view.MapView;
+import view.map.MapView;
 
 public class Player extends Entity{
 

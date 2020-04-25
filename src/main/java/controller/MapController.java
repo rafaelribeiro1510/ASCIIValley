@@ -1,7 +1,7 @@
 package controller;
 
-import model.MapModel;
-import view.MapView;
+import model.map.MapModel;
+import view.map.MapView;
 
 import java.io.IOException;
 

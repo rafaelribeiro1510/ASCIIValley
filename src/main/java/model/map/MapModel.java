@@ -1,7 +1,8 @@
-package model;
+package model.map;
 
 
 import model.entities.Player;
+import model.map.ChunkModel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,15 +15,20 @@ public class MapModel {
 
     private Player player;
 
+    private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
 
-    public MapModel(int width, int height, Player player) {
+    public MapModel(int width, int height, Player player, int currentChunkID) {
         this.width = width;
         this.height = height;
         this.player = player;
+        this.chunks = new ArrayList<ChunkModel>();
+        this.currentChunkID = currentChunkID;
     }
     // This right?? vv
     public Player getPlayer(){ return player; }
+
+    public ChunkModel getChunk() { return chunks.get(currentChunkID); }
 
     public void setChunks(ArrayList<ChunkModel> chunks) {
         this.chunks = chunks;
@@ -35,7 +41,7 @@ public class MapModel {
         try (Scanner scanner = new Scanner(new File("chunks.csv"));) {
             while (scanner.hasNextLine()) {
 
-                parseLine(scanner.nextLine());
+                values.add(parseLine(scanner.nextLine()));
 
                 rowCounter++;
 
