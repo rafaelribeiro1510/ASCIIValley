@@ -4,8 +4,7 @@ package model.map;
 import model.entities.Player;
 import model.map.ChunkModel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -38,42 +37,44 @@ public class MapModel {
     public void readMap() throws FileNotFoundException {
         int rowCounter = 0;
         ArrayList<ArrayList<Integer> > values = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("chunks.csv"));) {
-            while (scanner.hasNextLine()) {
 
-                values.add(parseLine(scanner.nextLine()));
+        String line = "";
+
+        try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/Rafael/Documents/GitHub/lpoo-2020-g64/src/main/java/model/map/chunks.csv"))) {
+            while ((line = br.readLine()) != null) {
+
+                values.add(parseLine(line));
 
                 rowCounter++;
 
                 // parse Chunk
-                if ((rowCounter % 15) == 0) {
+                if (rowCounter == 17) {
 
                     // chunk id is the first value of the first line (index 0)
                     int chunkId = values.get(0).get(0);
 
                     // neighbours are on the first line: indexes 1,2,3,4 (North, East, South, West)
-                    ArrayList<Integer> neighbourChunks = (ArrayList<Integer>) values.get(0).subList(1, 5);
+                    ArrayList<Integer> neighbourChunks = (ArrayList<Integer>) values.get(1);
 
                     // terrain matrix is the rest of the array
-                    ArrayList<ArrayList<Integer> > terrain = (ArrayList<ArrayList<Integer>>) values.subList(1, 16);
+                    ArrayList<ArrayList<Integer> > terrain = (ArrayList<ArrayList<Integer>>) values.subList(2, 16);
 
                     chunks.add(new ChunkModel(width, height, terrain, chunkId, neighbourChunks));
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        this.setChunks(chunks);
     }
 
     // Parses a line of a CSV File
     private ArrayList<Integer> parseLine (String line) {
+        String cvsSplitBy = ";";
         ArrayList<Integer> values = new ArrayList<>();
 
-        try (Scanner rowScanner = new Scanner(line)) {
-            rowScanner.useDelimiter(";");
-            while (rowScanner.hasNext()) {
-                values.add(Integer.parseInt(rowScanner.next()));
-            }
-        }
+        String[] characters = line.split(cvsSplitBy);
+        for (String s : characters) values.add(Integer.parseInt(s));
+
         return values;
     }
 
