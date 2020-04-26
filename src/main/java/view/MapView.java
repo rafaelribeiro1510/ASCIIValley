@@ -35,9 +35,10 @@ public class MapView {
         try{
             screen.clear();
             //Draw map here
-            chunkView.draw(screen, map.getChunk());
+            chunkView.draw(map.getChunk());
             //Draw entities here
-            entityView.draw(screen, map.getPlayerModel());
+            entityView.draw(map.getPlayerModel(), map.getChunk().getTerrainCell(map.getPlayerModel().getPosition()));
+            //TODO entity must receive terrain to preserve background color (Should entityView receive chunk attribute? or should entityView be called in chunkView?)
             screen.refresh();
         }
         catch (IOException e){

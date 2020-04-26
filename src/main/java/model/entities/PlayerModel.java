@@ -7,7 +7,7 @@ import view.MapView;
 
 public class PlayerModel extends EntityModel {
 
-    public PlayerModel(Position position, TextCharacter character, TextColor foregroundColor) {
+    public PlayerModel(Position position, char character, TextColor foregroundColor) {
         super(position, character, foregroundColor);
     }
 

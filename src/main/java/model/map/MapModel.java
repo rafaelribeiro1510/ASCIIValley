@@ -1,7 +1,9 @@
 package model.map;
 
 
+import com.googlecode.lanterna.TextColor;
 import model.entities.PlayerModel;
+import view.CSVColors;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class MapModel {
     public void readMap() {
         int chunkID = 0;
         ArrayList<Integer> neighbourChunks = null;
-        ArrayList<ArrayList<Integer>> terrain = new ArrayList<>();
+        ArrayList<ArrayList<TextColor>> terrain = new ArrayList<>();
 
         String line = "";
 
@@ -61,10 +63,10 @@ public class MapModel {
 
                 else if (rowCounter == CSVNEIGHBORS) neighbourChunks = parseCSVLineToArray(line, ",");
 
-                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter < CSVTERRAINEND) terrain.add(parseCSVLineToArray(line, ","));
+                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter < CSVTERRAINEND) terrain.add(parseArrayToColors(parseCSVLineToArray(line, ",")));
 
                 else {
-                    terrain.add(parseCSVLineToArray(line, ","));
+                    terrain.add(parseArrayToColors(parseCSVLineToArray(line, ",")));
                     rowCounter = 0;
                     this.chunks.add(new ChunkModel(width, height, terrain, chunkID, neighbourChunks));
                 }
@@ -72,6 +74,13 @@ public class MapModel {
         } catch (NumberFormatException | IOException | NullPointerException e){
             e.printStackTrace();
         }
+    }
+
+    private ArrayList<TextColor> parseArrayToColors (ArrayList<Integer> array){
+        ArrayList<TextColor> result = new ArrayList<>();
+        for (Integer value : array)
+            result.add(new CSVColors(value).getRgb());
+        return result;
     }
 
     //TODO put in utils
