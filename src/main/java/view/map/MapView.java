@@ -25,7 +25,7 @@ public class MapView {
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
 
-        chunkView = new ChunkView();
+        chunkView = new ChunkView(screen);
     }
 
     public void drawMap(MapModel map){

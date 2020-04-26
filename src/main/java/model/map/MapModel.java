@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapModel {
+    private static final int CSVID = 1;
+    private static final int CSVNEIGHBORS = 2;
+    private static final int CSVTERRAINBEGIN = 3;
+    private static final int CSVTERRAINEND = 17;
+
     private int width;
     private int height;
 
@@ -23,61 +28,63 @@ public class MapModel {
         this.player = player;
         this.chunks = new ArrayList<ChunkModel>();
         this.currentChunkID = currentChunkID;
+        this.readMap();
     }
     // This right?? vv
     public Player getPlayer(){ return player; }
 
-    public ChunkModel getChunk() { return chunks.get(currentChunkID); }
+    public ChunkModel getChunk() {
+        for (ChunkModel chunk : this.chunks)
+            if (chunk.getId() == this.currentChunkID)
+                return chunk;
+         return null;
+    }
 
     public void setChunks(ArrayList<ChunkModel> chunks) {
         this.chunks = chunks;
     }
 
     // Reads the Map From a CSV File (whose name is at least for now hard-coded in)
-    public void readMap() throws FileNotFoundException {
-        int rowCounter = 0;
-        ArrayList<ArrayList<Integer> > values = new ArrayList<>();
+    public void readMap() {
+        int chunkID = 0;
+        ArrayList<Integer> neighbourChunks = null;
+        ArrayList<ArrayList<Integer>> terrain = new ArrayList<>();
 
         String line = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/Rafael/Documents/GitHub/lpoo-2020-g64/src/main/java/model/map/chunks.csv"))) {
+            int rowCounter = 0;
+
             while ((line = br.readLine()) != null) {
-
-                values.add(parseLine(line));
-
                 rowCounter++;
+                System.out.print(line + "\n");
 
-                // parse Chunk
-                if (rowCounter == 17) {
+                //Should be line instead of "1", cant fix
+                if (rowCounter == CSVID) chunkID = Integer.parseInt("1");
 
-                    // chunk id is the first value of the first line (index 0)
-                    int chunkId = values.get(0).get(0);
+                else if (rowCounter == CSVNEIGHBORS) neighbourChunks = parseCSVLineToArray(line, ",");
 
-                    // neighbours are on the first line: indexes 1,2,3,4 (North, East, South, West)
-                    ArrayList<Integer> neighbourChunks = (ArrayList<Integer>) values.get(1);
+                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter < CSVTERRAINEND) terrain.add(parseCSVLineToArray(line, ","));
 
-                    // terrain matrix is the rest of the array
-                    ArrayList<ArrayList<Integer> > terrain = (ArrayList<ArrayList<Integer>>) values.subList(2, 16);
-
-                    chunks.add(new ChunkModel(width, height, terrain, chunkId, neighbourChunks));
+                else {
+                    terrain.add(parseCSVLineToArray(line, ","));
+                    System.out.print("Added chunk\n");
+                    rowCounter = 0;
+                    this.chunks.add(new ChunkModel(width, height, terrain, chunkID, neighbourChunks));
                 }
             }
-        } catch (IOException e) {
+        } catch (NumberFormatException | IOException | NullPointerException e){
             e.printStackTrace();
         }
     }
 
-    // Parses a line of a CSV File
-    private ArrayList<Integer> parseLine (String line) {
-        String cvsSplitBy = ";";
+    //TODO put in utils
+    private ArrayList<Integer> parseCSVLineToArray (String line, String splitBy) throws NumberFormatException{
         ArrayList<Integer> values = new ArrayList<>();
-
-        String[] characters = line.split(cvsSplitBy);
+        String[] characters = line.split(splitBy);
         for (String s : characters) values.add(Integer.parseInt(s));
-
         return values;
     }
-
 
     /*
     Map Model (chunk)

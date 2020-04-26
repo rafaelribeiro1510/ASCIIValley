@@ -7,7 +7,7 @@ public class ChunkModel {
     private int width;
     private int height;
 
-    //TODO Ids or "pointers"?
+    //TODO ints or "pointers"?
     private ArrayList<ArrayList<Integer>> terrain;
     private int id;
     private ArrayList<Integer> neighbours;
@@ -32,4 +32,6 @@ public class ChunkModel {
     public int getHeight() {
         return height;
     }
+
+    public int getId() { return id; }
 }

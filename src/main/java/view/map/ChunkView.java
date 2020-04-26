@@ -1,6 +1,7 @@
 package view.map;
 
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import model.map.ChunkModel;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 public class ChunkView {
 
     private TextGraphics graphics;
+
+    public ChunkView(Screen screen) {
+        this.graphics = screen.newTextGraphics();
+    }
 
     //Drawing each pixel , may not be needed
     public void drawChunk(Screen screen, ChunkModel chunk) throws IOException {
