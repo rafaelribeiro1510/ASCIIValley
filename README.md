@@ -3,7 +3,7 @@
 **ASCII Valley (Stardew Valley)**
 Bullet points for development (in progress):
 
-- [ ] Character controlled by the player
+- [ ] Character controlled by the playerModel
 - [ ] Terrain Generation
 - [ ] Combat System (melee and/or ranged - melee based onn hero's)
 - [ ] Menu

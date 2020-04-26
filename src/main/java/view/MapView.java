@@ -1,4 +1,4 @@
-package view.map;
+package view;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -7,6 +7,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import model.entities.EntityModel;
 import model.map.MapModel;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class MapView {
     public enum COMMAND {UP, RIGHT, DOWN, LEFT}
     //TODO ChunkController aqui?? Ou comunica logo com o ChunkView?
     private ChunkView chunkView;
+    private EntityView entityView;
     private Screen screen;
 
     public MapView(int width, int height) throws IOException {
@@ -26,15 +28,16 @@ public class MapView {
         screen.doResizeIfNecessary();     // resize screen if necessary
 
         chunkView = new ChunkView(screen);
+        entityView = new EntityView(screen);
     }
 
     public void drawMap(MapModel map){
         try{
             screen.clear();
             //Draw map here
-            chunkView.drawChunk(screen, map.getChunk());
+            chunkView.draw(screen, map.getChunk());
             //Draw entities here
-            screen.setCharacter(map.getPlayer().getPosition().getX(), map.getPlayer().getPosition().getY(), map.getPlayer().getCharacter());
+            entityView.draw(screen, map.getPlayerModel());
             screen.refresh();
         }
         catch (IOException e){

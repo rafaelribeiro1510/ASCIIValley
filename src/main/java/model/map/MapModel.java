@@ -1,12 +1,10 @@
 package model.map;
 
 
-import model.entities.Player;
-import model.map.ChunkModel;
+import model.entities.PlayerModel;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MapModel {
     private static final int CSVID = 1;
@@ -17,21 +15,21 @@ public class MapModel {
     private int width;
     private int height;
 
-    private Player player;
+    private PlayerModel playerModel;
 
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
 
-    public MapModel(int width, int height, Player player, int currentChunkID) {
+    public MapModel(int width, int height, PlayerModel playerModel, int currentChunkID) {
         this.width = width;
         this.height = height;
-        this.player = player;
+        this.playerModel = playerModel;
         this.chunks = new ArrayList<ChunkModel>();
         this.currentChunkID = currentChunkID;
         this.readMap();
     }
-    // This right?? vv
-    public Player getPlayer(){ return player; }
+    // TODO This right?? vv
+    public PlayerModel getPlayerModel(){ return playerModel; }
 
     public ChunkModel getChunk() {
         for (ChunkModel chunk : this.chunks)
@@ -57,7 +55,6 @@ public class MapModel {
 
             while ((line = br.readLine()) != null) {
                 rowCounter++;
-                System.out.print(line + "\n");
 
                 //Should be line instead of "1", cant fix
                 if (rowCounter == CSVID) chunkID = Integer.parseInt("1");
@@ -68,7 +65,6 @@ public class MapModel {
 
                 else {
                     terrain.add(parseCSVLineToArray(line, ","));
-                    System.out.print("Added chunk\n");
                     rowCounter = 0;
                     this.chunks.add(new ChunkModel(width, height, terrain, chunkID, neighbourChunks));
                 }

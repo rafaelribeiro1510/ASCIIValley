@@ -1,7 +1,7 @@
 package controller;
 
 import model.map.MapModel;
-import view.map.MapView;
+import view.MapView;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class MapController {
 
             //Get commands
             MapView.COMMAND command = view.getCommand();
-            model.getPlayer().updatePosition(command);
+            model.getPlayerModel().updatePosition(command);
         }
     }
 }

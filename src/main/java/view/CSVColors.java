@@ -1,4 +1,4 @@
-package view.map;
+package view;
 
 import com.googlecode.lanterna.TextColor;
 

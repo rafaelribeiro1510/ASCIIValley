@@ -3,12 +3,12 @@ package model.entities;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import model.Position;
-import view.map.MapView;
+import view.MapView;
 
-public class Player extends Entity{
+public class PlayerModel extends EntityModel {
 
-    public Player(Position position, TextCharacter character, TextColor.ANSI backgroundColor, TextColor.ANSI foregroundColor) {
-        super(position, character, backgroundColor, foregroundColor);
+    public PlayerModel(Position position, TextCharacter character, TextColor foregroundColor) {
+        super(position, character, foregroundColor);
     }
 
     public void updatePosition(MapView.COMMAND command) {
