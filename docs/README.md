@@ -14,9 +14,12 @@ This project was developed by João Sousa (up201806613@fe.up.pt) and Rafael Ribe
 ## Planned Features
 
 - Movement between chunks. When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk (drawing the new chunk in the place of the previous one).
-- Other Entities (Insects, for example).
+- Other Entities (Insects, for example) and their "behaviour".
 - Combat (melee based on the hero project of the practical classes).
 - Farming: "creating" farmland, planting, plant "development", harvesting.
+- Save game, Load Game.
+- Basic Building (to be decided what things will be buildable).
+- Day-night Cycle / Seasons (may get cut if time is an issue).
 [This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.]
 
 ## Design
