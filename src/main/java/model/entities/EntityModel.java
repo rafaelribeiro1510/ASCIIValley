@@ -1,6 +1,5 @@
 package model.entities;
 
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import model.Position;
 

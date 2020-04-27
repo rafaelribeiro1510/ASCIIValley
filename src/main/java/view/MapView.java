@@ -7,8 +7,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import model.entities.EntityModel;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import model.map.MapModel;
 
 import java.awt.*;
@@ -16,7 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MapView {
-    public enum COMMAND {UP, RIGHT, DOWN, LEFT}
+    public enum COMMAND {UP, RIGHT, DOWN, LEFT, EXIT}
     //TODO ChunkController aqui?? Ou comunica logo com o ChunkView?
     private ChunkView chunkView;
     private EntityView entityView;
@@ -24,7 +23,7 @@ public class MapView {
 
     public MapView(int width, int height) throws IOException {
         //TODO need help with resizing
-        AWTTerminalFontConfiguration fontConfiguration = AWTTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 40));
         Terminal terminal = new DefaultTerminalFactory().setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
         screen = new TerminalScreen(terminal);
 

@@ -1,13 +1,10 @@
 package model.map;
 
 import com.googlecode.lanterna.TextColor;
-import javafx.geometry.Pos;
 import model.Position;
-import model.entities.EntityModel;
 import model.entities.MapEntityModel;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ChunkModel {
     private int id;
@@ -42,6 +39,8 @@ public class ChunkModel {
     }
 
     public TextColor getTerrainAt(Position position){
+        //TODO this fine? vv
+        if (position.getY() >= terrain.size() || position.getX() >= terrain.get(0).size() || position.getX() < 0 || position.getY() < 0) return TextColor.ANSI.BLACK;
         return terrain.get(position.getY()).get(position.getX());
     }
 

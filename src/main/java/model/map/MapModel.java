@@ -3,13 +3,13 @@ package model.map;
 
 import com.googlecode.lanterna.TextColor;
 import model.Position;
-import model.entities.EntityModel;
 import model.entities.MapEntityModel;
 import model.entities.PlayerModel;
 import view.CSVColors;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MapModel {
     private static final int CSVID = 1;
@@ -48,8 +48,8 @@ public class MapModel {
 
     // Reads the Map From a CSV File (whose name is at least for now hard-coded in)
     public void readMap() {
-        int chunkID = 0;
-        ArrayList<Integer> neighbourChunks = null;
+        int id = 0;
+        ArrayList<Integer> neighbors = null;
         ArrayList<ArrayList<TextColor>> terrain = new ArrayList<>();
         ArrayList<ArrayList<MapEntityModel>> entities = new ArrayList<>();
 
@@ -62,18 +62,18 @@ public class MapModel {
                 rowCounter++;
 
                 //Should be line instead of "1", cant fix
-                if (rowCounter == CSVID) chunkID = Integer.parseInt("1");
+                if (rowCounter == CSVID) id = Integer.parseInt("1");
 
-                else if (rowCounter == CSVNEIGHBORS) neighbourChunks = parseCSVLineToIntegers(line, ",");
+                else if (rowCounter == CSVNEIGHBORS) neighbors = parseCSVLineToIntegers(line, ",");
 
                 else if (rowCounter >= CSVTERRAINBEGIN && rowCounter <= CSVTERRAINEND) terrain.add(parseArrayToColors(parseCSVLineToIntegers(line, ",")));
 
-                else if (rowCounter >= CSVENTITIESBEGIN && rowCounter < CSVENTITIESEND) entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ",")));
+                else if (rowCounter >= CSVENTITIESBEGIN && rowCounter < CSVENTITIESEND) entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ","), rowCounter - CSVENTITIESBEGIN));
 
                 else {
-                    entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ",")));
+                    entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ","), rowCounter - CSVENTITIESBEGIN));
                     rowCounter = 0;
-                    this.chunks.add(new ChunkModel(chunkID, width, height, terrain, entities, neighbourChunks));
+                    this.chunks.add(new ChunkModel(id, width, height, terrain, entities, neighbors));
                 }
             }
         } catch (NumberFormatException | IOException | NullPointerException e){
@@ -81,10 +81,13 @@ public class MapModel {
         }
     }
 
-    private ArrayList<MapEntityModel> parseArrayToEntities(ArrayList<String> array) {
+    private ArrayList<MapEntityModel> parseArrayToEntities(ArrayList<String> array, int row) {
         ArrayList<MapEntityModel> result = new ArrayList<>();
-        for (String value : array)
-            result.add(new MapEntityModel(new Position(0, 0), value));
+        int column = 1;
+        for (String value : array){
+            result.add(new MapEntityModel(new Position(column, row), value));
+            column++;
+        }
         //TODO Position dilemma: MapEntityModel inherits from EntityModel, should there be a MapEntityView ?
         return result;
     }
@@ -106,10 +109,8 @@ public class MapModel {
 
     //TODO put in utils
     private ArrayList<String> parseCSVLineToStrings (String line, String splitBy) {
-        ArrayList<String> values = new ArrayList<>();
         String[] characters = line.split(splitBy);
-        for (String s : characters) values.add(s);
-        return values;
+        return new ArrayList<>(Arrays.asList(characters));
     }
 
     /*
