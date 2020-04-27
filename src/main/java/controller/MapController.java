@@ -20,7 +20,7 @@ public class MapController {
             //Update entities
             view.drawMap(model);
 
-            //Get commands
+            //Get commands ; not finished
             MapView.COMMAND command = view.getCommand();
 
             if (command == MapView.COMMAND.QUIT) {

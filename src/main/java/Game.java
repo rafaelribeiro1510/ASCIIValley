@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import model.map.MapModel;
 import model.Position;
@@ -9,7 +8,6 @@ import controller.MapController;
 import java.io.IOException;
 
 public class Game {
-    // TODO #define assim?? vv
     private static final int MAP_WIDTH = 40;
     private static final int MAP_HEIGHT = 15;
 
