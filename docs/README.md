@@ -1,14 +1,15 @@
 # LPOO_T6G? - ASCII Valley
 
-ASCII Valley is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley in which the player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
+ASCII Valley is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley with some influences of Dwarf Fortress when it comes to the visual details;
+the player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
 Planting and harvesting crops and fighting off insects are some of the things that will make you play ASCII Valley for hours on end!
-This project was developed by João Sousa (up201806613@fe.up.pt) and Rafael Ribeiro (up201806330@fe.up.pt) for LPOO 2019⁄20.
+This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribeiro (up201806330@fe.up.pt) for LPOO 2019⁄20.
 
 ## Implemented Features
 
-- Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: chunk ID, neighbour chunks (IDs), 
+- Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: chunk ID, neighbour chunks (IDs), a "matrix" that has information about the type of "tile" of each square of the chunk and another one that stores the background colors.
 - Displaying of the map and entities (currently only the player).
-- Entities' Movement. For now the only entity is the player which can be moved using the Arrow Keys. 
+- Entities' Movement. For now the only entity is the player which can be moved using the Arrow Keys.
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.]
 
 ## Planned Features
@@ -37,7 +38,7 @@ This section should be organized in different subsections, each describing a dif
 
 ## SELF-EVALUATION
 
-50% Rafael
-50% João
+50% Rafael Ribeiro
+50% Joao Sousa
 
 [In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.]

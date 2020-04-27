@@ -15,7 +15,7 @@ public class Game {
 
     public static void main(String[] args) throws IOException {
         PlayerModel playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
-        MapModel map = new MapModel(MAP_WIDTH, MAP_HEIGHT, playerModel, 1);
+        MapModel map = new MapModel(MAP_WIDTH, MAP_HEIGHT, playerModel, 1, "src/main/java/model/map/chunks.csv");
         MapView gui = new MapView(MAP_WIDTH, MAP_HEIGHT);
         MapController controller = new MapController(map, gui);
         controller.start();

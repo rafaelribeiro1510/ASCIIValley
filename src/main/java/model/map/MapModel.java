@@ -27,12 +27,15 @@ public class MapModel {
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
 
-    public MapModel(int width, int height, PlayerModel playerModel, int currentChunkID) {
+    private String relativePathnameFile;
+
+    public MapModel(int width, int height, PlayerModel playerModel, int currentChunkID, String relativePathname) {
         this.width = width;
         this.height = height;
         this.playerModel = playerModel;
         this.chunks = new ArrayList<>();
         this.currentChunkID = currentChunkID;
+        this.relativePathnameFile = relativePathname;
         this.readMap();
     }
     // TODO This right?? vv
@@ -55,7 +58,7 @@ public class MapModel {
 
         String line = "";
 
-        String filePath = new File("src/main/java/model/map/chunks.csv").getAbsolutePath();
+        String filePath = new File(this.relativePathnameFile).getAbsolutePath();
         System.out.println("Path: " + filePath);
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int rowCounter = 0;
