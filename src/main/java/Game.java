@@ -14,7 +14,7 @@ public class Game {
     private static final int MAP_HEIGHT = 15;
 
     public static void main(String[] args) throws IOException {
-        PlayerModel playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), '¬', TextColor.ANSI.BLACK);
+        PlayerModel playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         MapModel map = new MapModel(MAP_WIDTH, MAP_HEIGHT, playerModel, 1);
         MapView gui = new MapView(MAP_WIDTH, MAP_HEIGHT);
         MapController controller = new MapController(map, gui);

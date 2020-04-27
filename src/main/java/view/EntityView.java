@@ -14,8 +14,8 @@ public class EntityView {
 
     public void draw(EntityModel entity, TextColor backgroundColor) throws IOException {
         //TODO is this ugly or nah? vv
-        graphics.setForegroundColor(entity.getForegroundColor());
+        graphics.setForegroundColor(entity.getColor());
         graphics.setBackgroundColor(backgroundColor);
-        graphics.setCharacter(entity.getPosition().getX(), entity.getPosition().getY(), entity.getTextCharacter().getCharacter());
+        graphics.putString(entity.getPosition().getX(), entity.getPosition().getY(), entity.getString());
     }
 }

@@ -6,11 +6,13 @@ import model.Position;
 
 public abstract class EntityModel {
     protected Position position;
-    protected TextCharacter textCharacter;
+    protected String string;
+    protected TextColor color;
 
-    public EntityModel(Position position, char character, TextColor foregroundColor) {
-            this.position = position;
-        this.textCharacter = new TextCharacter(character, foregroundColor, TextColor.ANSI.BLACK);
+    public EntityModel(Position position, String string, TextColor color) {
+        this.position = position;
+        this.string = string;
+        this.color = color;
     }
 
     public Position getPosition() {
@@ -21,11 +23,8 @@ public abstract class EntityModel {
         this.position = position;
     }
 
-    public TextCharacter getTextCharacter() {
-        return textCharacter;
-    }
+    public String getString() { return string; }
 
-    //TODO smelly smell??
-    public TextColor getForegroundColor() { return textCharacter.getForegroundColor(); }
+    public TextColor getColor() { return color; }
 
 }

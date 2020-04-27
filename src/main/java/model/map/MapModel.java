@@ -2,6 +2,9 @@ package model.map;
 
 
 import com.googlecode.lanterna.TextColor;
+import model.Position;
+import model.entities.EntityModel;
+import model.entities.MapEntityModel;
 import model.entities.PlayerModel;
 import view.CSVColors;
 
@@ -13,6 +16,8 @@ public class MapModel {
     private static final int CSVNEIGHBORS = 2;
     private static final int CSVTERRAINBEGIN = 3;
     private static final int CSVTERRAINEND = 17;
+    private static final int CSVENTITIESBEGIN = 18;
+    private static final int CSVENTITIESEND = 32;
 
     private int width;
     private int height;
@@ -26,7 +31,7 @@ public class MapModel {
         this.width = width;
         this.height = height;
         this.playerModel = playerModel;
-        this.chunks = new ArrayList<ChunkModel>();
+        this.chunks = new ArrayList<>();
         this.currentChunkID = currentChunkID;
         this.readMap();
     }
@@ -37,11 +42,8 @@ public class MapModel {
         for (ChunkModel chunk : this.chunks)
             if (chunk.getId() == this.currentChunkID)
                 return chunk;
-         return null;
-    }
-
-    public void setChunks(ArrayList<ChunkModel> chunks) {
-        this.chunks = chunks;
+        System.out.print("getChunkFailed\n");
+        return null;
     }
 
     // Reads the Map From a CSV File (whose name is at least for now hard-coded in)
@@ -49,6 +51,7 @@ public class MapModel {
         int chunkID = 0;
         ArrayList<Integer> neighbourChunks = null;
         ArrayList<ArrayList<TextColor>> terrain = new ArrayList<>();
+        ArrayList<ArrayList<MapEntityModel>> entities = new ArrayList<>();
 
         String line = "";
 
@@ -61,19 +64,29 @@ public class MapModel {
                 //Should be line instead of "1", cant fix
                 if (rowCounter == CSVID) chunkID = Integer.parseInt("1");
 
-                else if (rowCounter == CSVNEIGHBORS) neighbourChunks = parseCSVLineToArray(line, ",");
+                else if (rowCounter == CSVNEIGHBORS) neighbourChunks = parseCSVLineToIntegers(line, ",");
 
-                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter < CSVTERRAINEND) terrain.add(parseArrayToColors(parseCSVLineToArray(line, ",")));
+                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter <= CSVTERRAINEND) terrain.add(parseArrayToColors(parseCSVLineToIntegers(line, ",")));
+
+                else if (rowCounter >= CSVENTITIESBEGIN && rowCounter < CSVENTITIESEND) entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ",")));
 
                 else {
-                    terrain.add(parseArrayToColors(parseCSVLineToArray(line, ",")));
+                    entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ",")));
                     rowCounter = 0;
-                    this.chunks.add(new ChunkModel(width, height, terrain, chunkID, neighbourChunks));
+                    this.chunks.add(new ChunkModel(chunkID, width, height, terrain, entities, neighbourChunks));
                 }
             }
         } catch (NumberFormatException | IOException | NullPointerException e){
             e.printStackTrace();
         }
+    }
+
+    private ArrayList<MapEntityModel> parseArrayToEntities(ArrayList<String> array) {
+        ArrayList<MapEntityModel> result = new ArrayList<>();
+        for (String value : array)
+            result.add(new MapEntityModel(new Position(0, 0), value));
+        //TODO Position dilemma: MapEntityModel inherits from EntityModel, should there be a MapEntityView ?
+        return result;
     }
 
     private ArrayList<TextColor> parseArrayToColors (ArrayList<Integer> array){
@@ -84,10 +97,18 @@ public class MapModel {
     }
 
     //TODO put in utils
-    private ArrayList<Integer> parseCSVLineToArray (String line, String splitBy) throws NumberFormatException{
+    private ArrayList<Integer> parseCSVLineToIntegers (String line, String splitBy) throws NumberFormatException{
         ArrayList<Integer> values = new ArrayList<>();
         String[] characters = line.split(splitBy);
         for (String s : characters) values.add(Integer.parseInt(s));
+        return values;
+    }
+
+    //TODO put in utils
+    private ArrayList<String> parseCSVLineToStrings (String line, String splitBy) {
+        ArrayList<String> values = new ArrayList<>();
+        String[] characters = line.split(splitBy);
+        for (String s : characters) values.add(s);
         return values;
     }
 

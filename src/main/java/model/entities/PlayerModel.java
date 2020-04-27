@@ -6,9 +6,9 @@ import model.Position;
 import view.MapView;
 
 public class PlayerModel extends EntityModel {
-
-    public PlayerModel(Position position, char character, TextColor foregroundColor) {
-        super(position, character, foregroundColor);
+    private Position position;
+    public PlayerModel(Position position,  String string, TextColor color) {
+        super(position, string, color);
     }
 
     public void updatePosition(MapView.COMMAND command) {
