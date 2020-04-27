@@ -55,7 +55,9 @@ public class MapModel {
 
         String line = "";
 
-        try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/Rafael/Documents/GitHub/lpoo-2020-g64/src/main/java/model/map/chunks.csv"))) {
+        String filePath = new File("src/main/java/model/map/chunks.csv").getAbsolutePath();
+        System.out.println("Path: " + filePath);
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int rowCounter = 0;
 
             while ((line = br.readLine()) != null) {

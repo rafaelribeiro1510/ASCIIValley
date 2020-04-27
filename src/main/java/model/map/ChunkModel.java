@@ -1,7 +1,7 @@
 package model.map;
 
 import com.googlecode.lanterna.TextColor;
-import javafx.geometry.Pos;
+// import javafx.geometry.Pos;
 import model.Position;
 import model.entities.EntityModel;
 import model.entities.MapEntityModel;
