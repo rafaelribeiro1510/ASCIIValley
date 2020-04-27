@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MapView {
-    public enum COMMAND {UP, RIGHT, DOWN, LEFT}
+    public enum COMMAND {UP, RIGHT, DOWN, LEFT, QUIT}
     //TODO ChunkController aqui?? Ou comunica logo com o ChunkView?
     private ChunkView chunkView;
     private EntityView entityView;
@@ -58,6 +58,11 @@ public class MapView {
             if (key.getKeyType() == KeyType.ArrowRight) return COMMAND.RIGHT;
             if (key.getKeyType() == KeyType.ArrowDown) return COMMAND.DOWN;
             if (key.getKeyType() == KeyType.ArrowLeft) return COMMAND.LEFT;
+
+            if (key.getKeyType() == KeyType.Escape) {
+                screen.close();
+                return COMMAND.QUIT;
+            }
         }
     }
 }

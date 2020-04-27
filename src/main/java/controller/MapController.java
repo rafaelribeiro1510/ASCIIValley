@@ -22,6 +22,12 @@ public class MapController {
 
             //Get commands
             MapView.COMMAND command = view.getCommand();
+
+            if (command == MapView.COMMAND.QUIT) {
+                System.out.println("\nQuitting");
+                break;
+            }
+
             model.getPlayerModel().updatePosition(command);
         }
     }
