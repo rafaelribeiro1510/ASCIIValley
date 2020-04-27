@@ -4,8 +4,8 @@
 Bullet points for development (in progress):
 
 - [ ] Character controlled by the playerModel
-- [ ] Terrain Generation
-- [ ] Combat System (melee and/or ranged - melee based onn hero's)
+- [ ] Melee Combat System 
+- [ ] Inventory system with different tools and matterial collection
 - [ ] Menu
   - [ ] New Game
   - [ ] Save Game
