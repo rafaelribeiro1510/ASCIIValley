@@ -88,7 +88,7 @@ public class MapModel {
 
     private ArrayList<MapEntityModel> parseArrayToEntities(ArrayList<String> array, int row) {
         ArrayList<MapEntityModel> result = new ArrayList<>();
-        int column = 1;
+        int column = 0;
         for (String value : array){
             result.add(new MapEntityModel(new Position(column, row), value));
             column++;

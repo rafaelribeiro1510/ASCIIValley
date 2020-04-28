@@ -7,7 +7,7 @@ public class MapEntityModel extends EntityModel {
 
     public MapEntityModel(Position position, String string) {
         super(position, string, TextColor.ANSI.BLACK);
-        System.out.print(string + "\n");
+
         switch (string){
             case "^": //Stone
                 this.color = new TextColor.RGB(40,40,40)

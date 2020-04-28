@@ -13,6 +13,7 @@ import model.map.MapModel;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 public class MapView {
 
@@ -26,7 +27,7 @@ public class MapView {
     public MapView(int width, int height) throws IOException {
         //TODO need help with resizing
         SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 40));
-        Terminal terminal = new DefaultTerminalFactory().setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+        Terminal terminal = new DefaultTerminalFactory(System.out, System.in, Charset.forName("UTF8")).setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
         screen = new TerminalScreen(terminal);
 
         screen.setCursorPosition(null);   // we don't need a cursor
