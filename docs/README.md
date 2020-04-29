@@ -39,7 +39,37 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribei
 
 ## Design
 
-This section should be organized in different subsections, each describing a different design problem that you had to solve during the
+### 1.
+
+#### **Problem in Context**
+At the start of the project, even before writing any lines of code, while drafting a general idea of the project it became clear that
+ file organization would have to be one of the foundations in order to find quickly what we are looking for and, in general, to have a good
+  development process.
+
+#### **The Pattern**
+
+Therefore we chose to use the architectural pattern known as MVC: Model-View-Controller. It divides the application in three parts
+, allowing for separation in groups of functions according to their role and by extension allowing also better function separation
+/organization.
+
+
+#### **Implementation**
+
+
+#### **Consequences**
+
+Benefits:
+- ease of working simultaneously in the same project without interfering with each other's work.
+- allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
+ files [ChunkView.java](../src/main/java/view/ChunkView.java), [MapView.java](../src/main/java/view/MapView.java) and [EntityView.java
+ ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package view.
+- possibly faster development speed in the long run due to the consistent organization.
+
+
+Liabilities:
+- requires a higher number of files that can build up over time with the increase of the project's complexity.
+
+[comment]: <> (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
  project. Each subsection should be organized in four different parts:
 - **Problem in Context**. The description of the design context and the concrete problem that motivated the instantiation of the pattern
 . Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When
@@ -51,7 +81,8 @@ This section should be organized in different subsections, each describing a dif
  with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be relative links
  . When doing this, always point to the latest version of the code.
 - **Consequences**. Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with
- those of alternative solutions.
+ those of alternative solutions.)
+
 
 ## Known Code Smells And Refactoring Suggestions
 
