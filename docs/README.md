@@ -15,9 +15,7 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribei
 - Entities' Movement. For now the only entity is the player which can be moved using the Arrow Keys.
 
 
-![Basic Map and Player Drawing] [figure1]
-
-[figure1]: ./screenshots/basicMapAndPlayerDrawing.png
+[Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
 
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three
  screenshots that illustrate the most important features.]
