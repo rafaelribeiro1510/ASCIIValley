@@ -3,15 +3,15 @@
 ASCII Valley is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley with some influences of
  Dwarf Fortress when it comes to the visual details;
 the player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
-Planting and harvesting crops and fighting off insects are some of the things that will make you play ASCII Valley for hours on end!
+Planting and harvesting crops and fighting off mummies are some of the things that will make you play ASCII Valley for hours on end!
 This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribeiro (up201806330@fe.up.pt) for LPOO 2019⁄20.
 
 ## Implemented Features
 
-- Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: chunk ID, neighbour
- chunks (IDs), a "matrix" that has information about the type of "tile" of each square of the chunk and
- another one that stores the background colors.
-- Displaying of the map and entities (currently only the player) - figure 1.
+- Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: chunk ID, neighbouring 
+ chunks on all 4 directions (IDs), a matrix that references the ground "type" and another that references the entity on said tile. 
+ The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
+- Displaying of the map, map stored entities and player entity - figure 1.
 - Entities' Movement. For now the only entity is the player which can be moved using the Arrow Keys.
 
 
@@ -24,14 +24,18 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribei
 
 - Movement between chunks. When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk (drawing the
  new chunk in the place of the previous one).
-- Other Entities (Insects, for example) and their "behaviour".
+- Other Entities (Mummies, for example) and their "behaviour".
 - Combat (melee based on the hero project of the practical classes).
-- Farming: "creating" farmland, planting, plant "development", harvesting.
 - Save game, Load Game.
-- Basic Building (to be decided what things will be buildable).
-- Day-night Cycle / Seasons (may get cut if time is an issue).
+- Player interaction with other entities, namely breaking blocks, toiling soil and planting seeds.
+- GUI with player toolbar that holds the players' tools and collected items.
 [This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should
  include GUI mock-ups for the planned features.]
+
+## Desired Features
+
+- Day-night Cycle, that visually alters the map.
+[This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will not be achieved in the time frame we have.]
 
 ## Design
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MapModel {
+    //usar enum, camel case mais descritivo
     private static final int CSVID = 1;
     private static final int CSVNEIGHBORS = 2;
     private static final int CSVTERRAINBEGIN = 3;
@@ -50,6 +51,7 @@ public class MapModel {
     }
 
     // Reads the Map From a CSV File (whose name is at least for now hard-coded in)
+    //TODO simplificar
     public void readMap() {
         int id = 0;
         ArrayList<Integer> neighbors = null;

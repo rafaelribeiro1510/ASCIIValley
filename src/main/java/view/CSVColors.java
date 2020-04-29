@@ -6,6 +6,7 @@ public class CSVColors {
     public TextColor rgb;
 
     public CSVColors(Integer id) {
+        //Classe para material, polimorfismo
         switch (id){
             case 0: //NULL
                 rgb = new TextColor.RGB(0, 0, 0);

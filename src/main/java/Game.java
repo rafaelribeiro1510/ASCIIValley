@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Game {
     private static final int MAP_WIDTH = 40;
     private static final int MAP_HEIGHT = 15;
+    //^^Desnecessario, pode ser tirado do csv
 
     public static void main(String[] args) throws IOException {
         PlayerModel playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
