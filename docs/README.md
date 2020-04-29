@@ -17,7 +17,7 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribei
 
 ![Basic Map and Player Drawing] [figure1]
 
-[figure1]: ./screenshots/basicMapAndPlayerDrawing.png
+[figure1]: https://github.com/FEUP-LPOO/lpoo-2020-g64/tree/master/docs/screenshots/basicMapAndPlayerDrawing.png
 
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three
  screenshots that illustrate the most important features.]
