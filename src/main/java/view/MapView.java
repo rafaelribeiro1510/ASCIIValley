@@ -25,7 +25,7 @@ public class MapView {
     private Screen screen;
 
     public MapView(int width, int height) throws IOException {
-        //TODO need help with resizing
+
         SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 40));
         Terminal terminal = new DefaultTerminalFactory(System.out, System.in, Charset.forName("UTF8")).setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
         screen = new TerminalScreen(terminal);
