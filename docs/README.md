@@ -57,7 +57,7 @@ Therefore we chose to use the architectural pattern known as MVC: Model-View-Con
 Benefits:
 - ease of working simultaneously in the same project without interfering with each other's work.
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
- files ![ChunkView.java](../src/main/java/view/ChunkView.java), ![MapView.java](../src/main/java/view/MapView.java) and ![EntityView.java
+ files [ChunkView.java](../src/main/java/view/ChunkView.java), [MapView.java](../src/main/java/view/MapView.java) and [EntityView.java
  ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package view.
 - possibly faster development speed in the long run due to the consistent organization.
 
