@@ -1,7 +1,7 @@
 package model.map;
 
-import model.Position;
-import model.entities.PlayerModel;
+import model.MapModel;
+import model.PlayerModel;
 import org.junit.Test;
 import org.mockito.Mockito;
 

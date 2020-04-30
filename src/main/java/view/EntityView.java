@@ -3,7 +3,7 @@ package view;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import model.entities.EntityModel;
+import model.EntityModel;
 
 import java.io.IOException;
 
@@ -12,8 +12,7 @@ public class EntityView {
 
     public EntityView(Screen screen) { this.graphics = screen.newTextGraphics(); }
 
-    public void draw(EntityModel entity, TextColor backgroundColor) throws IOException {
-        //TODO is this ugly or nah? vv
+    public void draw(EntityModel entity, TextColor backgroundColor) {
         graphics.setForegroundColor(entity.getColor());
         graphics.setBackgroundColor(backgroundColor);
         graphics.putString(entity.getPosition().getX(), entity.getPosition().getY(), entity.getString());

@@ -2,12 +2,10 @@ package model.map;
 
 import com.googlecode.lanterna.TextColor;
 import model.Position;
-import model.entities.PlayerModel;
+import model.PlayerModel;
 import org.junit.Test;
 import org.mockito.Mockito;
 import view.MapView;
-
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 

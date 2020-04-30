@@ -1,5 +1,7 @@
 package model;
 
+import controller.GameController;
+
 public class Position {
     private int x;
     private int y;
@@ -17,20 +19,24 @@ public class Position {
         return y;
     }
 
-    public Position up() {
-        return new Position(this.x, this.y - 1);
+    public void up() {
+        this.y--;
     }
 
-    public Position right() {
-        return new Position(this.x + 1, this.y);
+    public void down() {
+        this.y++;
     }
 
-    public Position down() {
-        return new Position(this.x, this.y + 1);
+    public void left() {
+        this.x--;
     }
 
-    public Position left() {
-        return new Position(this.x - 1, this.y);
+    public void right() {
+        this.x++;
+    }
+
+    public boolean insideMapBounds(){
+        return (x >= 0 && x < GameController.MAP_WIDTH && y >= 0 && y < GameController.MAP_HEIGHT);
     }
 
 }

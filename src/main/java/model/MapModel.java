@@ -1,10 +1,7 @@
-package model.map;
+package model;
 
 
 import com.googlecode.lanterna.TextColor;
-import model.Position;
-import model.entities.MapEntityModel;
-import model.entities.PlayerModel;
 import view.CSVColors;
 
 import java.io.*;
@@ -23,24 +20,17 @@ public class MapModel {
     private int width;
     private int height;
 
-    private PlayerModel playerModel;
-
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
 
-    private String relativePathnameFile;
 
-    public MapModel(int width, int height, PlayerModel playerModel, int currentChunkID, String relativePathname) {
+    public MapModel(int width, int height, int currentChunkID, String relativePathname) {
         this.width = width;
         this.height = height;
-        this.playerModel = playerModel;
         this.chunks = new ArrayList<>();
         this.currentChunkID = currentChunkID;
-        this.relativePathnameFile = relativePathname;
-        this.readMap();
+        this.readMap(relativePathname);
     }
-    // TODO This right?? vv
-    public PlayerModel getPlayerModel(){ return playerModel; }
 
     public ChunkModel getChunk() {
         for (ChunkModel chunk : this.chunks)
@@ -52,15 +42,15 @@ public class MapModel {
 
     // Reads the Map From a CSV File (whose name is at least for now hard-coded in)
     //TODO simplificar
-    public void readMap() {
+    public void readMap(String relativePathname) {
         int id = 0;
         ArrayList<Integer> neighbors = null;
-        ArrayList<ArrayList<TextColor>> terrain = new ArrayList<>();
+        ArrayList<ArrayList<MapTerrainModel>> terrain = new ArrayList<>();
         ArrayList<ArrayList<MapEntityModel>> entities = new ArrayList<>();
 
         String line = "";
 
-        String filePath = new File(this.relativePathnameFile).getAbsolutePath();
+        String filePath = new File(relativePathname).getAbsolutePath();
         System.out.println("Path: " + filePath);
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int rowCounter = 0;
@@ -68,19 +58,21 @@ public class MapModel {
             while ((line = br.readLine()) != null) {
                 rowCounter++;
 
-                //Should be line instead of "1", cant fix
-                if (rowCounter == CSVID) id = Integer.parseInt("1");
+                if (rowCounter == CSVID) id = Integer.parseInt(line);
 
                 else if (rowCounter == CSVNEIGHBORS) neighbors = parseCSVLineToIntegers(line, ",");
 
-                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter <= CSVTERRAINEND) terrain.add(parseArrayToColors(parseCSVLineToIntegers(line, ",")));
+                else if (rowCounter >= CSVTERRAINBEGIN && rowCounter <= CSVTERRAINEND) terrain.add(parseArrayToTerrain(parseCSVLineToIntegers(line, ",")));
 
                 else if (rowCounter >= CSVENTITIESBEGIN && rowCounter < CSVENTITIESEND) entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ","), rowCounter - CSVENTITIESBEGIN));
 
                 else {
                     entities.add(parseArrayToEntities(parseCSVLineToStrings(line, ","), rowCounter - CSVENTITIESBEGIN));
-                    rowCounter = 0;
                     this.chunks.add(new ChunkModel(id, width, height, terrain, entities, neighbors));
+                    rowCounter = 0;
+                    neighbors = null;
+                    terrain = new ArrayList<>();
+                    entities = new ArrayList<>();
                 }
             }
         } catch (NumberFormatException | IOException | NullPointerException e){
@@ -99,10 +91,10 @@ public class MapModel {
         return result;
     }
 
-    private ArrayList<TextColor> parseArrayToColors (ArrayList<Integer> array){
-        ArrayList<TextColor> result = new ArrayList<>();
+    private ArrayList<MapTerrainModel> parseArrayToTerrain (ArrayList<Integer> array){
+        ArrayList<MapTerrainModel> result = new ArrayList<>();
         for (Integer value : array)
-            result.add(new CSVColors(value).getRgb());
+            result.add(new MapTerrainModel(value));
         return result;
     }
 
