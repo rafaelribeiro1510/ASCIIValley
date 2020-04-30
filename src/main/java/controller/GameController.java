@@ -26,7 +26,7 @@ public class GameController {
 
     public GameController() {
         this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
-        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 3, "src/main/java/model/chunks.csv");
+        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 3,  "src/main/java/model/chunks.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT);
         this.entityView = new EntityView(mapView.getScreen());
     }
@@ -50,16 +50,15 @@ public class GameController {
 
     public void getCommand() {
         try {
-
-                Screen screen = mapView.getScreen();
-                KeyStroke key = screen.readInput();
-                if (key.getKeyType() == KeyType.ArrowUp) playerModel.updatePosition(COMMAND.UP, mapModel);
-                if (key.getKeyType() == KeyType.ArrowRight) playerModel.updatePosition(COMMAND.RIGHT, mapModel);
-                if (key.getKeyType() == KeyType.ArrowDown) playerModel.updatePosition(COMMAND.DOWN, mapModel);
-                if (key.getKeyType() == KeyType.ArrowLeft) playerModel.updatePosition(COMMAND.LEFT, mapModel);
-                if (key.getKeyType() == KeyType.Escape) {
-                    screen.close();
-                    System.out.println("\nQuitting");
+            Screen screen = mapView.getScreen();
+            KeyStroke key = screen.readInput();
+            if (key.getKeyType() == KeyType.ArrowUp) playerModel.updatePosition(COMMAND.UP, mapModel);
+            if (key.getKeyType() == KeyType.ArrowRight) playerModel.updatePosition(COMMAND.RIGHT, mapModel);
+            if (key.getKeyType() == KeyType.ArrowDown) playerModel.updatePosition(COMMAND.DOWN, mapModel);
+            if (key.getKeyType() == KeyType.ArrowLeft) playerModel.updatePosition(COMMAND.LEFT, mapModel);
+            if (key.getKeyType() == KeyType.Escape) {
+                screen.close();
+                System.out.println("\nQuitting");
             }
         }
         catch (IOException e){

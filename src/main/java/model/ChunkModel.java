@@ -12,6 +12,14 @@ public class ChunkModel {
     private ArrayList<ArrayList<MapEntityModel>> entities;
     private ArrayList<Integer> neighbours;
 
+    public ChunkModel(int width, int height){
+        this.id = 0;
+        this.width = width;
+        this.height = height;
+        this.terrain = new ArrayList<>();
+        this.entities = new ArrayList<>();
+        this.neighbours = null;
+    }
 
     public ChunkModel(int id, int width, int height, ArrayList<ArrayList<MapTerrainModel>> terrain, ArrayList<ArrayList<MapEntityModel>> entities, ArrayList<Integer> neighbours) {
         this.id = id;
@@ -29,6 +37,8 @@ public class ChunkModel {
     public int getHeight() {
         return height;
     }
+
+    public void setId(int id) { this.id = id; }
 
     public int getId() { return id; }
 
@@ -51,5 +61,17 @@ public class ChunkModel {
     public MapEntityModel getEntityAt(Position position){
         if (position.insideMapBounds()) return entities.get(position.getX()).get(position.getY());
         else return null;
+    }
+
+    public void setNeighbours(ArrayList<Integer> neighbours) {
+        this.neighbours = neighbours;
+    }
+
+    public void addTerrainLine(ArrayList<MapTerrainModel> line){
+        this.terrain.add(line);
+    }
+
+    public void addEntityLine(ArrayList<MapEntityModel> line){
+        this.entities.add(line);
     }
 }
