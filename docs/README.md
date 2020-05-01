@@ -8,43 +8,45 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribei
 
 ## Implemented Features
 
-- Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: chunk ID, neighbouring 
- chunks on all 4 directions (IDs), a matrix that references the ground "type" and another that references the entity on said tile. 
- The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
-- Displaying of the map, map stored entities and player entity - figure 1.
-- Entities' Movement. For now the only entity is the player which can be moved using the Arrow Keys.
+###Map Saving
+Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: an ID, the IDs of it's neighbor 
+chunks, a matrix that references the ground "type" and another that references the entity on said tile, if it exists. 
+The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
+###Map visualization
+Displaying of the chunk where the player is located, terrain and map entities included - [Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
+###Movement
+As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
 
-
-[Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
 
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three
  screenshots that illustrate the most important features.]
 
 ## Planned Features
 
-- Movement between chunks. When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk (drawing the
- new chunk in the place of the previous one).
+- Movement between chunks. When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk.
 - Other Entities (Mummies, for example) and their "behaviour".
 - Combat (melee based on the hero project of the practical classes).
 - Save game, Load Game.
 - Player interaction with other entities, namely breaking blocks, toiling soil and planting seeds.
 - GUI with player toolbar that holds the players' tools and collected items.
+
 [This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should
  include GUI mock-ups for the planned features.]
 
 ## Desired Features
 
 - Day-night Cycle, that visually alters the map.
+
 [This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will not be achieved in the time frame we have.]
 
 ## Design
 
-### 1.
+### 1. MVC
 
 #### **Problem in Context**
 At the start of the project, even before writing any lines of code, while drafting a general idea of the project it became clear that
- file organization would have to be one of the foundations in order to find quickly what we are looking for and, in general, to have a good
-  development process.
+file organization would have to be one of the foundations in order to find quickly what we are looking for and, in general, to have a good
+development process.
 
 #### **The Pattern**
 
@@ -54,7 +56,8 @@ Therefore we chose to use the architectural pattern known as MVC: Model-View-Con
 
 
 #### **Implementation**
-
+We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
+From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
 #### **Consequences**
 
@@ -68,6 +71,8 @@ Benefits:
 
 Liabilities:
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
+
+ 
 
 [comment]: <> (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
  project. Each subsection should be organized in four different parts:
@@ -85,6 +90,28 @@ Liabilities:
 
 
 ## Known Code Smells And Refactoring Suggestions
+
+### Long Method
+
+#### **Problem in Context**
+Evidently, the function that sticks out the most as being too long is the readMap method,
+in charge of porting the map information from the .csv file to the Map object.
+
+#### **Solution**
+Even after multiple uses of the **Extract Method**, it can still be considered too long,
+mostly because of the mess of code in charge of opening and reading the file itself.
+
+### OOP Abuser - Switch statements
+
+#### **Problem in Context**
+On various parts of the map interpretation process are present switch cases, in charge
+of appropriately assigning the terrain and entities' attributes.
+
+#### **Solution**
+Since these are present on very simple classes, they can be removed by using the **Replace Conditional with Polymorphism** method, by creating different subclasses
+of these attribute classes that can later be improved upon. This applies namely to the MapEntityModel and CSVColors classes.
+
+
 
 [This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in
  which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.]
