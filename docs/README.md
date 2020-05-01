@@ -86,7 +86,7 @@ Liabilities:
 
 ## Known Code Smells And Refactoring Suggestions
 
-### Dispensable - If Statements
+### 1. Object-Orientation Abuse - If Statements
 
 The [PlayerModel](../src/main/java/model/PlayerModel.java) class has in its updatePosition function four long if statements that only differ a few words between them.
 This results in code that is harder to read and debug and that can be a source of issues in the future if a single word in one of the if statements is misspelled.
@@ -96,15 +96,23 @@ One way to improve this code would be to have a function with the name for examp
 that would be called inside a single ```if (canMove(command, mapModel))``` condition in the function updatePosition, implementing in some way the idea of the Strategy Pattern.
 
 
-### Dispensable - Data Class
+### 2. Dispensable - Data Class
 
-In class [MapEntityModel](../src/main/java/model/MapEntityModel.java) ...   ??? sera justificado o uso da data class neste caso?
+In the [MapEntityModel](../src/main/java/model/MapEntityModel.java) file there is an auxiliary class ``myPair`` (lines 10-18) that is only used to "group" data (data class).
+Even though its existence is, in our opinion, justified by its usage in the ``MapEntityModel`` class (groups a ``TextColor`` and a ``boolean``), its implementation can be improved.
+In order to increase encapsulation, the auxiliary class could be declared as `final`, all its fields as `private final` and by adding getters, or even maybe by nesting the class inside ``MapEntityModel``.  
 
-### Switch in canMove (MovableEntityModel class)
 
-TODO.........................................
+### 3. Object-Orientation Abuse - Switch
 
-### Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
+The method `canMove` in class [MovableEntityModel](../src/main/java/model/MovableEntityModel.java) has a ``switch`` statement whose cases have high number of similarities between them, only changing one of the arguments in each one, making 
+the code less readable and (even if only slightly) harder to maintain.
+As the code is, a plausible solution could maybe be to replace the `enum COMMAND` of the class ``GameController`` with a "Factory" class who would have subclasses (directions of movement) which implemented a kind of "getEntity" method, making use of the Factory Method Pattern.
+However, because this Code Smell is related with other code smells (such as the number 5 and somewhat also with number 1) and because the usage of the Factory Method Pattern in this situation may be considered forced, only when we start trying to correct this code smell can we infer if it is or not 
+actually the solution that makes the most sense for this case.
+
+
+### 4. Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
 
 Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 in ChunkModel and lines 21-22 in MapModel).
 This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 33 and 37, respectively).
@@ -113,7 +121,7 @@ Furthermore, because the ``width``and ``height`` fields have constant values (th
 those "constants" could be moved to [ChunkModel](../src/main/java/model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
 Despite what has been said previously, the solution presented may be subject to change if the width and height become "non-constant", i.e. if the chunks get the "ability" of having variable dimensions. 
 
-### Dispensable - Duplicate Code
+### 5. Dispensable - Duplicate Code
 
 In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 45) and ``getTerrainColorAt(Position position)`` (line 50)
 are essentially the same with the difference that in the first one the ``x`` and the ``y`` are passed directly while in the second one they are passed to the function inside a ``Position``
