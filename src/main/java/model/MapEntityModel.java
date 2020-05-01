@@ -20,10 +20,10 @@ class myPair {
 public class MapEntityModel extends EntityModel {
 
     Map<String, myPair> map2 = new HashMap<String, myPair>() {{
-        put("^", new myPair(new TextColor.RGB(40,40,40),    true) ); // Stone
-        put("~", new myPair(new TextColor.RGB(0, 204, 255),  true));  // Water
-        put(":", new myPair(new TextColor.RGB(26, 12, 0),false)); // Dirt
-        put("y", new myPair(new TextColor.RGB(0, 204, 0), false)); // Grass patch
+        put("^", new myPair(new TextColor.RGB(40,40,40),     true)); // Stone
+        put("~", new myPair(new TextColor.RGB(0, 204, 255),  true)); // Water
+        put(":", new myPair(new TextColor.RGB(26, 12, 0),   false)); // Dirt
+        put("y", new myPair(new TextColor.RGB(0, 204, 0),   false)); // Grass patch
     }};
 
     public MapEntityModel(Position position, String string) {
