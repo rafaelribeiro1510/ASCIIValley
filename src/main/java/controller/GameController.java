@@ -33,7 +33,6 @@ public class GameController {
 
     public void start() {
         while (true){
-
             mapView.drawMap(mapModel);
 
             //Draw entities here
@@ -44,7 +43,6 @@ public class GameController {
                 e.printStackTrace();
             }
             getCommand();
-
         }
     }
 
