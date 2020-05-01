@@ -115,6 +115,42 @@ of these attribute classes that can later be improved upon. This applies namely 
 
 [This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in
  which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.]
+### Dispensable - If Statements
+
+The [PlayerModel](../src/main/java/model/PlayerModel.java) class has in its updatePosition function four long if statements that only differ a few words between them.
+This results in code that is harder to read and debug and that can be a source of issues in the future if a single word in one of the if statements is misspelled.
+For example: if one by mistake changes ``this.getPosition().down();`` (line 15) to ``this.getPosition().up();`` at first sight it may go unnoticed and afterwards cost an unnecessary waste of time when the bug is detected.
+
+One way to improve this code would be to have a function with the name for example "move" associated with each of the elements of the ``enum COMMAND`` of the class [GameController](../src/main/java/controller/GameController.java) 
+that would be called inside a single ```if (canMove(command, mapModel))``` condition in the function updatePosition, implementing in some way the idea of the Strategy Pattern.
+
+
+### Dispensable - Data Class
+
+In class [MapEntityModel](../src/main/java/model/MapEntityModel.java) ...   ??? sera justificado o uso da data class neste caso?
+
+### Switch in canMove (MovableEntityModel class)
+
+TODO.........................................
+
+### Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
+
+Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 in ChunkModel and lines 21-22 in MapModel).
+This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 33 and 37, respectively).
+Therefore, they could be removed from [MapModel](../src/main/java/model/MapModel.java) which would reduce the number of parameters of this class's constructor.
+Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT``present in lines 19 and 20 of [GameController](../src/main/java/controller/GameController.java))`
+those "constants" could be moved to [ChunkModel](../src/main/java/model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
+Despite what has been said previously, the solution presented may be subject to change if the width and height become "non-constant", i.e. if the chunks get the "ability" of having variable dimensions. 
+
+### Dispensable - Duplicate Code
+
+In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 45) and ``getTerrainColorAt(Position position)`` (line 50)
+are essentially the same with the difference that in the first one the ``x`` and the ``y`` are passed directly while in the second one they are passed to the function inside a ``Position``
+object. The same applies to ``getEntityAt(int x, int y)`` (line 55) and ``getEntityAt(Position position)`` (line 61).
+This duplication of code could lead to time-consuming debugging caused for example by a small change only in one of the functions let's say "A1" (leaving "A2" unchanged) that could result in different outputs in situations apparently identical.
+
+To fix this repetition of code one could delete the version of each function that has 2 parameters and where those specific "2-parameter" functions were called, pass as the argument ``new Position(x,y)``.
+
 
 
 ## SELF-EVALUATION
