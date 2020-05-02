@@ -15,6 +15,14 @@ class myPair {
         this.myColor = myColor;
         this.myCollision = myCollision;
     }
+
+    public TextColor getColor() {
+        return myColor;
+    }
+
+    public boolean getCollision() {
+        return myCollision;
+    }
 }
 
 public class MapEntityModel extends EntityModel {
@@ -56,4 +64,5 @@ public class MapEntityModel extends EntityModel {
         }
         */
     }
+
 }

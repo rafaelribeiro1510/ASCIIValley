@@ -20,6 +20,10 @@ public abstract class EntityModel {
         return position;
     }
 
+    public void setPosition(Position position){
+        this.position = position;
+    }
+
     public String getString() { return string; }
 
     public TextColor getColor() { return color; }

@@ -23,12 +23,18 @@ As of now, the player can move around the current map chunk, colliding with the 
 
 ## Planned Features
 
-- Movement between chunks. When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk.
-- Other Entities (Mummies, for example) and their "behaviour".
-- Combat (melee based on the hero project of the practical classes).
-- Save game, Load Game.
-- Player interaction with other entities, namely breaking blocks, toiling soil and planting seeds.
-- GUI with player toolbar that holds the players' tools and collected items.
+###Movement between chunks. 
+When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk.
+###Other Entities and their "behaviour".
+The game needs more ways of interacting with the player and this will be achieved with enemy entities (Mummies, for example)
+that present simple aggressive behaviour.
+###Combat 
+Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
+###Main menu
+The starting point of the game will be a menu that presents the player with options to load the game and see game controls.
+###GUI 
+In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
+and also the items collected through said interactions.
 
 [This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should
  include GUI mock-ups for the planned features.]
@@ -37,7 +43,8 @@ As of now, the player can move around the current map chunk, colliding with the 
 
 - Day-night Cycle, that visually alters the map.
 
-[This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will not be achieved in the time frame we have.]
+[This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
+not be achieved in the time frame we have.]
 
 ## Design
 
@@ -61,7 +68,7 @@ From here it will be easy to implement new features on the Player and Entity end
 
 #### **Consequences**
 
-Benefits:
+**Benefits:**
 - ease of working simultaneously in the same project without interfering with each other's work.
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
  files [ChunkView.java](../src/main/java/view/ChunkView.java), [MapView.java](../src/main/java/view/MapView.java) and [EntityView.java
@@ -69,7 +76,7 @@ Benefits:
 - possibly faster development speed in the long run due to the consistent organization.
 
 
-Liabilities:
+**Liabilities:**
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
 
  

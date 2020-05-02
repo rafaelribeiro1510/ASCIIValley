@@ -43,25 +43,25 @@ public class ChunkModel {
     public int getId() { return id; }
 
     public TextColor getTerrainColorAt(int x, int y){
-        if (new Position(x, y).insideMapBounds()) return terrain.get(y).get(x).getColor();
-        else return TextColor.ANSI.BLACK;
+        return terrain.get(y).get(x).getColor();
     }
 
     public TextColor getTerrainColorAt(Position position){
-        if (position.insideMapBounds()) return terrain.get(position.getY()).get(position.getX()).getColor();
-        else return TextColor.ANSI.BLACK;
+        return terrain.get(position.getY()).get(position.getX()).getColor();
     }
 
     public MapEntityModel getEntityAt(int x, int y){
-
-        if (new Position(x, y).insideMapBounds()) return entities.get(y).get(x);
-        else return null;
+        return entities.get(y).get(x);
     }
 
     public MapEntityModel getEntityAt(Position position){
-        if (position.insideMapBounds()) return entities.get(position.getX()).get(position.getY());
-        else return null;
+        return entities.get(position.getY()).get(position.getX());
     }
+
+    public int getNorthId(){ return neighbours.get(0); }
+    public int getSouthId(){ return neighbours.get(1); }
+    public int getEastId(){ return neighbours.get(2); }
+    public int getWestId(){ return neighbours.get(3); }
 
     public void setNeighbours(ArrayList<Integer> neighbours) {
         this.neighbours = neighbours;

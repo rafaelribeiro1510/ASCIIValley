@@ -1,9 +1,7 @@
 package model.map;
 
 import model.MapModel;
-import model.PlayerModel;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,6 +22,6 @@ public class mapModelTest {
         MapModel mp = new MapModel(40, 20, 1, relativePathname);
         mp.readMap(relativePathname);
 
-        assertEquals(1, mp.getChunk().getId());
+        assertEquals(1, mp.thisChunk().getId());
     }
 }

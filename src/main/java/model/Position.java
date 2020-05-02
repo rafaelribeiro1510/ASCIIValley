@@ -1,5 +1,9 @@
 package model;
 
+import Exceptions.CrossedEast;
+import Exceptions.CrossedNorth;
+import Exceptions.CrossedSouth;
+import Exceptions.CrossedWest;
 import controller.GameController;
 
 public class Position {
@@ -35,8 +39,24 @@ public class Position {
         this.x++;
     }
 
-    public boolean insideMapBounds(){
-        return (x >= 0 && x < GameController.MAP_WIDTH && y >= 0 && y < GameController.MAP_HEIGHT);
+    public Position checkDown(int height) throws CrossedSouth {
+        if (this.y + 1 < height) return new Position(this.x, this.y + 1);
+        else throw new CrossedSouth();
+    }
+
+    public Position checkUp(int height) throws CrossedNorth {
+        if (this.y - 1 >= 0) return new Position(this.x, this.y - 1);
+        else throw new CrossedNorth();
+    }
+
+    public Position checkLeft(int width) throws CrossedWest {
+        if (this.x - 1 >= 0) return new Position(this.x - 1, this.y);
+        else throw new CrossedWest();
+    }
+
+    public Position checkRight(int width) throws CrossedEast {
+        if (this.x + 1 < width) return new Position(this.x + 1, this.y);
+        else throw new CrossedEast();
     }
 
 }
