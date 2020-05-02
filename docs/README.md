@@ -66,23 +66,23 @@ We started off by creating a GameController class in charge of holding a MapView
 From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
 ```puml
-@startuml Command
-interface ActionEvent{
-    execute()
+@startuml
+class Game{
+  main()
 }
-class MoveDown{
-    execute()
+class GameController{
+  MapView
+  EntityView  
+  start()  
+  processKey()
 }
-class MoveRight{
-    execute()
+class MapView{
+  Screen
+  ChunkView
+  drawMap()
 }
-class QuitGame{
-    execute()
-}
-
-ActionEvent <|-- MoveDown
-ActionEvent <|-- MoveRight
-ActionEvent <|-- QuitGame
+Game -> GameController : uses
+GameController -> MapView : uses
 @enduml
 ```
 
@@ -109,6 +109,27 @@ Thus, the **Command** pattern was implemented, since it parametrizes clients wit
 
 #### **Implementation**
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
+
+```puml
+@startuml Command
+interface ActionEvent{
+  execute()
+}
+class MoveDown{
+  execute()
+}
+class MoveRight{
+  execute()
+}
+class QuitGame{
+  execute()
+}
+
+ActionEvent <|-- MoveDown
+ActionEvent <|-- MoveRight
+ActionEvent <|-- QuitGame
+@enduml
+```
 
 #### **Consequences**
 The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
