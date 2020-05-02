@@ -16,15 +16,14 @@ The interpretation of these values is intentionally hardcoded, since these save 
 Displaying of the chunk where the player is located, terrain and map entities included - [Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
-
+###Movement between chunks. 
+When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk.
 
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three
  screenshots that illustrate the most important features.]
 
 ## Planned Features
 
-###Movement between chunks. 
-When the player goes beyond an "edge" of a chunk it should move to the respective neighbour chunk.
 ###Other Entities and their "behaviour".
 The game needs more ways of interacting with the player and this will be achieved with enemy entities (Mummies, for example)
 that present simple aggressive behaviour.
@@ -41,7 +40,7 @@ and also the items collected through said interactions.
 
 ## Desired Features
 
-- Day-night Cycle, that visually alters the map.
+Day-night Cycle, that visually alters the map.
 
 [This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
 not be achieved in the time frame we have.]
@@ -66,6 +65,27 @@ Therefore we chose to use the architectural pattern known as MVC: Model-View-Con
 We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
 From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
+```puml
+@startuml Command
+interface ActionEvent{
+    execute()
+}
+class MoveDown{
+    execute()
+}
+class MoveRight{
+    execute()
+}
+class QuitGame{
+    execute()
+}
+
+ActionEvent <|-- MoveDown
+ActionEvent <|-- MoveRight
+ActionEvent <|-- QuitGame
+@enduml
+```
+
 #### **Consequences**
 
 **Benefits:**
@@ -75,11 +95,24 @@ From here it will be easy to implement new features on the Player and Entity end
  ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package view.
 - possibly faster development speed in the long run due to the consistent organization.
 
-
 **Liabilities:**
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
 
- 
+
+###2. Actions
+#### **Problem in Context**
+After initially writing in the reading of keyboard inputs, it was clear the "switch" approach was messy and 
+not scale properly.
+
+#### **The Pattern**
+Thus, the **Command** pattern was implemented, since it parametrizes clients with different requests, in our case, the player actions.  
+
+#### **Implementation**
+This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
+
+#### **Consequences**
+The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
+
 
 [comment]: <> (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
  project. Each subsection should be organized in four different parts:
