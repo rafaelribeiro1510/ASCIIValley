@@ -68,7 +68,7 @@ Therefore we chose to use the architectural pattern known as MVC: Model-View-Con
 We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
 From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
-![mvc](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/docs/umls/mvc.iuml)
+![mvc](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/mvc.iuml?token=AK5LFP5ZIWNVWUXW5O6BNEK6XAWHI)
 
 [//]: # (This uml represents the current primitve setup, it will be altered along the line, especially on the subject of
 entities besides the player.)
@@ -97,7 +97,7 @@ Thus, the **Command** pattern was implemented, since it parametrizes clients wit
 #### **Implementation**
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
 
-![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/docs/umls/action.iuml)
+![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/action.iuml?token=AK5LFP4RSKI6DRLWYPNPMES6XAWG6)
 
 #### **Consequences**
 The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
