@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
-public class mapViewTest {
+public class MapViewTest {
 
     @Test
     public void mapViewConstructorTest() throws IOException {

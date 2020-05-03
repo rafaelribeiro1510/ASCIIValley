@@ -21,15 +21,6 @@ public class ChunkModel {
         this.neighbours = null;
     }
 
-    public ChunkModel(int id, int width, int height, ArrayList<ArrayList<MapTerrainModel>> terrain, ArrayList<ArrayList<MapEntityModel>> entities, ArrayList<Integer> neighbours) {
-        this.id = id;
-        this.width = width;
-        this.height = height;
-        this.terrain = terrain;
-        this.entities = entities;
-        this.neighbours = neighbours;
-    }
-
     public int getWidth() {
         return width;
     }

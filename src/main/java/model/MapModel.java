@@ -67,4 +67,6 @@ public class MapModel {
             e.printStackTrace();
         }
     }
+
+    public int getId(){ return this.currentChunkID; }
 }

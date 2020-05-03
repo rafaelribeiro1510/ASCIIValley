@@ -10,19 +10,18 @@ import model.MapModel;
 
 import java.awt.*;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class MapView {
 
     //TODO ChunkController aqui?? Ou comunica logo com o ChunkView?
     private ChunkView chunkView;
-    private EntityView entityView;
     private Screen screen;
 
     public MapView(int width, int height)  {
         try {
             SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 40));
-            Terminal terminal = new DefaultTerminalFactory(System.out, System.in, Charset.forName("UTF8")).setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+            Terminal terminal = new DefaultTerminalFactory(System.out, System.in, StandardCharsets.UTF_8).setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
             screen = new TerminalScreen(terminal);
 
             screen.setCursorPosition(null);   // we don't need a cursor
@@ -30,7 +29,6 @@ public class MapView {
             screen.doResizeIfNecessary();     // resize screen if necessary
 
             chunkView = new ChunkView(screen);
-            entityView = new EntityView(screen);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -38,18 +36,12 @@ public class MapView {
     }
 
     public void drawMap(MapModel map){
-        try{
-            screen.clear();
-            //Draw map here
-            chunkView.draw(map.thisChunk());
-            //TODO entity must receive terrain to preserve background color (Should entityView receive chunk attribute? or should entityView be called in chunkView?)
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+        screen.clear();
+        //Draw map here
+        chunkView.draw(map.thisChunk());
+        //TODO entity must receive terrain to preserve background color (Should entityView receive chunk attribute? or should entityView be called in chunkView?)
     }
 
-    //TODO needs better alternative
     public Screen getScreen() {
         return screen;
     }

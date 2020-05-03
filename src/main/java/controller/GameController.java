@@ -18,7 +18,6 @@ import view.MapView;
 import java.io.IOException;
 
 public class GameController {
-    public enum COMMAND {UP, RIGHT, DOWN, LEFT, QUIT}
 
     public static final int MAP_WIDTH = 40;
     public static final int MAP_HEIGHT = 15;
@@ -31,8 +30,8 @@ public class GameController {
     private boolean running;
 
     public GameController() {
-        this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
-        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 3,  "src/main/java/model/chunks.csv");
+        this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
+        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 1,  "src/main/java/model/chunks.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT);
         this.entityView = new EntityView(mapView.getScreen());
         this.running = true;
@@ -42,11 +41,9 @@ public class GameController {
         while (running){
             mapView.drawMap(mapModel);
 
-            //Draw entities here
             entityView.draw(playerModel, mapModel.thisChunk().getTerrainColorAt(playerModel.getPosition()));
             try {
                 mapView.getScreen().refresh();
-
                 processKey(getActionEvent());
             } catch (IOException e) {
                 e.printStackTrace();

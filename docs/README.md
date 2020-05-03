@@ -42,6 +42,8 @@ and also the items collected through said interactions.
 
 Day-night Cycle, that visually alters the map.
 
+Simple NPC system with item delivery missions.
+
 [This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
 not be achieved in the time frame we have.]
 
@@ -71,20 +73,26 @@ class Game{
   main()
 }
 class GameController{
-  MapView
-  EntityView  
+  MapModel
+  PlayerModel
   start()  
   processKey()
 }
 class MapView{
   Screen
   ChunkView
-  drawMap()
+  drawMap(MapModel)
+}
+class EntityView{
+  draw(PlayerModel)
 }
 Game -> GameController : uses
-GameController -> MapView : uses
+GameController -> MapView
+GameController --> EntityView 
 @enduml
 ```
+[comment]: <> (This uml represents the current primitve setup, it will be altered along the line, especially on the subject of
+entities besides the player.)
 
 #### **Consequences**
 
@@ -165,26 +173,15 @@ mostly because of the mess of code in charge of opening and reading the file its
 ### 2. OOP Abuser - Switch statements
 
 #### **Problem in Context**
-On various parts of the map interpretation process are present switch cases, in charge
-of appropriately assigning the terrain and entities' attributes.
+On the map terrain interpretation process is present a switch case, in charge of associating the each integer in the save file
+with its corresponding, hard coded color value. 
+[MapTerrainModel](../src/main/java/model/MapTerrainModel.java)
 
 #### **Solution**
-Since these are present on very simple classes, they can be removed by using the **Replace Conditional with Polymorphism** method, by creating different subclasses
-of these attribute classes that can later be improved upon. This applies namely to the MapEntityModel and CSVColors classes.
+This could be resolved by breaking up the rgb values into classes using **Replace Conditional with Polymorphism** method, which would make it more readable but also
+easier to, if needed, add specific attributes to certain terrain types (though as of now we do not see this happening).
 
-### 3. OOP Abuser - If Statements
-
-#### **Problem in Context**
-The [PlayerModel](../src/main/java/model/PlayerModel.java) class has in its updatePosition function four long if statements that only differ a few words between them.
-This results in code that is harder to read and debug and that can be a source of issues in the future if a single word in one of the if statements is misspelled.
-For example: if one by mistake changes ``this.getPosition().down()`` (line 15) to ``this.getPosition().up()`` at first sight it may go unnoticed and afterwards cost an unnecessary waste of time when the bug is detected.
-
-#### **Solution**
-One way to improve this code would be to have a function with the name for example "move" associated with each of the elements of the ``enum COMMAND`` of the class [GameController](../src/main/java/controller/GameController.java) 
-that would be called inside a single ```if (canMove(command, mapModel))``` condition in the function updatePosition, implementing in some way the idea of the Strategy Pattern.
-
-
-### 4. Dispensable - Data Class
+### 3. Dispensable - Data Class
 
 #### **Problem in Context**
 In the [MapEntityModel](../src/main/java/model/MapEntityModel.java) file there is an auxiliary class ``myPair`` (lines 10-18) that is only used to "group" data (data class).
@@ -194,31 +191,19 @@ Even though its existence is, in our opinion, justified by its usage in the ``Ma
 In order to increase encapsulation, the auxiliary class could be declared as `final`, all its fields as `private final` and by adding getters, or even maybe by nesting the class inside ``MapEntityModel``.  
 
 
-### 5. Object-Orientation Abuse - Switch
+### 4. Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
 
 #### **Problem in Context**
-The method `canMove` in class [MovableEntityModel](../src/main/java/model/MovableEntityModel.java) has a ``switch`` statement whose cases have high number of similarities between them, only changing one of the arguments in each one, making 
-the code less readable and (even if only slightly) harder to maintain.
-
-#### **Solution**
-As the code is, a plausible solution could maybe be to replace the `enum COMMAND` of the class ``GameController`` with a "Factory" class who would have subclasses (directions of movement) which implemented a kind of "getEntity" method, making use of the Factory Method Pattern.
-However, because this Code Smell is related with other code smells (such as the number 5 and somewhat also with number 1) and because the usage of the Factory Method Pattern in this situation may be considered forced, only when we start trying to correct this code smell can we infer if it is or not 
-actually the solution that makes the most sense for this case.
-
-
-### 6. Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
-
-#### **Problem in Context**
-Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 in ChunkModel and lines 21-22 in MapModel).
-This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 33 and 37, respectively).
+Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 and 21-22, respectively).
+This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 33 and 37).
 
 #### **Solution**
 Therefore, they could be removed from [MapModel](../src/main/java/model/MapModel.java) which would reduce the number of parameters of this class's constructor.
-Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT``present in lines 19 and 20 of [GameController](../src/main/java/controller/GameController.java))`
+Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 19 and 20 of [GameController](../src/main/java/controller/GameController.java))
 those "constants" could be moved to [ChunkModel](../src/main/java/model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
-Despite what has been said previously, the solution presented may be subject to change if the width and height become "non-constant", i.e. if the chunks get the "ability" of having variable dimensions. 
+ 
 
-### 7. Dispensable - Duplicate Code
+### 5. Dispensable - Duplicate Code
 
 #### **Problem in Context**
 In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 45) and ``getTerrainColorAt(Position position)`` (line 50)
