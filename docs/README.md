@@ -68,8 +68,7 @@ development process.
 #### **The Pattern**
 
 Therefore we chose to use the architectural pattern known as **MVC**: Model-View-Controller. It divides the application in three parts, 
-allowing for separation in groups of functions according to their role and by extension allowing also better function separation
-/organization.
+allowing for separation in groups of functions according to their role and by extension allowing also better function separation/organization.
 
 
 #### **Implementation**
