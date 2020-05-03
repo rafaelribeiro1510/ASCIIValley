@@ -151,7 +151,7 @@ refering to the implementation before the pattern was applied, don’t forget to
 The Pattern: Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing
 design context and the problem at hand.
 Implementation: Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it
-with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be relative links. When doing this, always point to the latest version of the code.
+with a UML class diagram, and refer to the corresponding source code with links to the relevant lines, these should be relative links. When doing this, always point to the latest version of the code.
 Consequences: Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with
  those of alternative solutions.)
 
