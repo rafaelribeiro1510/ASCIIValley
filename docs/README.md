@@ -158,7 +158,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
  those of alternative solutions.)
 
 
-## Known Code Smells And Refactoring Suggestions - TODO: "homogeneizar" esta parte melhor
+## Known Code Smells And Refactoring Suggestions
 
 ### 1. Long Method
 
@@ -214,6 +214,13 @@ This duplication of code could lead to time-consuming debugging caused for examp
 #### **Solution**
 To fix this repetition of code one could delete the version of each function that has 2 parameters and where those specific "2-parameter" functions were called, pass as the argument ``new Position(x,y)``.
 
+## Testing
+<div>
+    <img src="screenshots/lpoo_code_coverage1.png"/>
+</div>
+<div>
+    <img src="screenshots/lpoo_code_coverage2.png"/>
+</div>
 
 
 ## SELF-EVALUATION
@@ -221,5 +228,3 @@ To fix this repetition of code one could delete the version of each function tha
 50% Rafael Ribeiro
 50% Joao Sousa
 
-[In this section describe how the work regarding the project was divided between the students. In the event that members of the group do
- not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.]
