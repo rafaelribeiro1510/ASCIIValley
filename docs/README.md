@@ -1,11 +1,18 @@
 # LPOO_T6G4 - ASCII Valley
 
-ASCII Valley is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley with some influences of
- Dwarf Fortress when it comes to the visual details;
-the player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
+**ASCII Valley** is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley with some influences of
+ Dwarf Fortress when it comes to the visual details.
+ 
+The player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
 Planting and harvesting crops and fighting off mummies are some of the things that will make you play ASCII Valley for hours on end!
-This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribeiro (up201806330@fe.up.pt) for LPOO 2019⁄20.
 
+This project was developed by Joao Sousa (up201806613@fe.up.pt) 
+
+and Rafael Ribeiro (up201806330@fe.up.pt)
+ 
+ for LPOO 2019⁄20
+ 
+ 
 ## Implemented Features
 
 ### Map Saving
@@ -146,7 +153,7 @@ Even though its existence is, in our opinion, justified by its usage in the ``Ma
 In order to increase encapsulation, the auxiliary class could be declared as `final`, all its fields as `private final` and by adding getters, or even maybe by nesting the class inside ``MapEntityModel``.  
 
 
-### 4. Bloater - Data Clump (width and height variables exist both on ChunkModel and MapModel classes)
+### 4. Bloater - Data Clump
 
 #### **Problem in Context**
 Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 and 21-22, respectively).
@@ -170,13 +177,9 @@ This duplication of code could lead to time-consuming debugging caused for examp
 To fix this repetition of code one could delete the version of each function that has 2 parameters and where those specific "2-parameter" functions were called, pass as the argument ``new Position(x,y)``.
 
 ## Testing
-<div>
-    <img src="screenshots/lpoo_code_coverage1.png"/>
-</div>
-<div>
-    <img src="screenshots/lpoo_code_coverage2.png"/>
-</div>
+![Coverage1](screenshots/lpoo_code_coverage1.png)
 
+![Coverage2](screenshots/lpoo_code_coverage2.png)
 
 ## SELF-EVALUATION
 
