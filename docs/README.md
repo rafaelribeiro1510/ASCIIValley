@@ -19,7 +19,10 @@ Storing of map state in a save file. The map is divided in chunks and each chunk
 chunks, a matrix that references the ground "type" and another that references the entity on said tile, if it exists. 
 The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
 ### Map visualization
-Displaying of the chunk where the player is located, terrain and map entities included - ![Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
+Displaying of the chunk where the player is located, terrain and map entities included.
+
+![Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
+
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
 ### Movement between chunks. 
