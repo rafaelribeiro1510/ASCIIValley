@@ -23,7 +23,9 @@ Displaying of the chunk where the player is located, terrain and map entities in
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
 ### Movement between chunks. 
-When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk. ![Chunk Transition Previous - figure 2](./screenshots/movement.gif)
+When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk.
+
+![Chunk Transition Previous - figure 2](./screenshots/movement.gif)
 
 
 ## Planned Features
@@ -120,7 +122,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 
 ## Known Code Smells And Refactoring Suggestions
 
-### 1. Long Method
+### 1. Bloater - Long Method
 
 #### **Problem in Context**
 Evidently, the function that sticks out the most as being too long is the readMap method,
@@ -130,16 +132,18 @@ in charge of porting the map information from the .csv file to the Map object.
 Even after multiple uses of the **Extract Method**, it can still be considered too long,
 mostly because of the mess of code in charge of opening and reading the file itself.
 
+
 ### 2. OOP Abuser - Switch statements
 
 #### **Problem in Context**
-On the map terrain interpretation process is present a switch case, in charge of associating the each integer in the save file
-with its corresponding, hard coded color value. 
+On the map terrain interpretation process there is a switch case that is in charge of associating each integer in the save file
+with its corresponding, hardcoded color value. 
 [MapTerrainModel](../src/main/java/model/MapTerrainModel.java)
 
 #### **Solution**
-This could be resolved by breaking up the rgb values into classes using **Replace Conditional with Polymorphism** method, which would make it more readable but also
+This could be resolved by breaking up the rgb values into classes by using the **Replace Conditional with Polymorphism** method, which would make it more readable but also
 easier to, if needed, add specific attributes to certain terrain types (though as of now we do not see this happening).
+
 
 ### 3. Dispensable - Data Class
 
@@ -154,21 +158,21 @@ In order to increase encapsulation, the auxiliary class could be declared as `fi
 ### 4. Bloater - Data Clump
 
 #### **Problem in Context**
-Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height`` (lines 9-10 and 21-22, respectively).
-This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 33 and 37).
+Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height``.
+This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 24 and 28).
 
 #### **Solution**
 Therefore, they could be removed from [MapModel](../src/main/java/model/MapModel.java) which would reduce the number of parameters of this class's constructor.
-Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 19 and 20 of [GameController](../src/main/java/controller/GameController.java))
+Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 22 and 23 of [GameController](../src/main/java/controller/GameController.java))
 those "constants" could be moved to [ChunkModel](../src/main/java/model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
  
 
 ### 5. Dispensable - Duplicate Code
 
 #### **Problem in Context**
-In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 45) and ``getTerrainColorAt(Position position)`` (line 50)
+In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 36) and ``getTerrainColorAt(Position position)`` (line 40)
 are essentially the same with the difference that in the first one the ``x`` and the ``y`` are passed directly while in the second one they are passed to the function inside a ``Position``
-object. The same applies to ``getEntityAt(int x, int y)`` (line 55) and ``getEntityAt(Position position)`` (line 61).
+object. The same applies to ``getEntityAt(int x, int y)`` (line 44) and ``getEntityAt(Position position)`` (line 48).
 This duplication of code could lead to time-consuming debugging caused for example by a small change only in one of the functions let's say "A1" (leaving "A2" unchanged) that could result in different outputs in situations apparently identical.
 
 #### **Solution**
