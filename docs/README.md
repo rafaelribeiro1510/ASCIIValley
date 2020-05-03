@@ -36,8 +36,6 @@ The starting point of the game will be a menu that presents the player with opti
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
 and also the items collected through said interactions - [GUI Mock-up](./screenshots/guiMockup.png).
 
-[This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should
- include GUI mock-ups for the planned features.]
 
 ## Desired Features
 
