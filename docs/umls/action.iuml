@@ -1,0 +1,18 @@
+@startuml Command
+interface ActionEvent{
+  execute()
+}
+class MoveDown{
+  execute()
+}
+class MoveRight{
+  execute()
+}
+class QuitGame{
+  execute()
+}
+
+ActionEvent <|-- MoveDown
+ActionEvent <|-- MoveRight
+ActionEvent <|-- QuitGame
+@enduml

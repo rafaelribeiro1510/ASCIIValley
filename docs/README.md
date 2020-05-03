@@ -68,30 +68,8 @@ Therefore we chose to use the architectural pattern known as MVC: Model-View-Con
 We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
 From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
-```puml
-@startuml
-class Game{
-  main()
-}
-class GameController{
-  MapModel
-  PlayerModel
-  start()  
-  processKey()
-}
-class MapView{
-  Screen
-  ChunkView
-  drawMap(MapModel)
-}
-class EntityView{
-  draw(PlayerModel)
-}
-Game -> GameController : uses
-GameController -> MapView
-GameController --> EntityView 
-@enduml
-```
+![mvc](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/docs/umls/mvc.iuml)
+
 [//]: # (This uml represents the current primitve setup, it will be altered along the line, especially on the subject of
 entities besides the player.)
 
@@ -119,26 +97,7 @@ Thus, the **Command** pattern was implemented, since it parametrizes clients wit
 #### **Implementation**
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
 
-```puml
-@startuml Command
-interface ActionEvent{
-  execute()
-}
-class MoveDown{
-  execute()
-}
-class MoveRight{
-  execute()
-}
-class QuitGame{
-  execute()
-}
-
-ActionEvent <|-- MoveDown
-ActionEvent <|-- MoveRight
-ActionEvent <|-- QuitGame
-@enduml
-```
+![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/docs/umls/action.iuml)
 
 #### **Consequences**
 The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
@@ -156,7 +115,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
  those of alternative solutions.)
 
 
-## Known Code Smells And Refactoring Suggestions - TODO: "homogeneizar" esta parte melhor
+## Known Code Smells And Refactoring Suggestions
 
 ### 1. Long Method
 
@@ -212,6 +171,13 @@ This duplication of code could lead to time-consuming debugging caused for examp
 #### **Solution**
 To fix this repetition of code one could delete the version of each function that has 2 parameters and where those specific "2-parameter" functions were called, pass as the argument ``new Position(x,y)``.
 
+## Testing
+<div>
+    <img src="screenshots/lpoo_code_coverage1.png"/>
+</div>
+<div>
+    <img src="screenshots/lpoo_code_coverage2.png"/>
+</div>
 
 
 ## SELF-EVALUATION
@@ -219,5 +185,3 @@ To fix this repetition of code one could delete the version of each function tha
 50% Rafael Ribeiro
 50% Joao Sousa
 
-[In this section describe how the work regarding the project was divided between the students. In the event that members of the group do
- not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.]
