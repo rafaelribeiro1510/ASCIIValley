@@ -23,7 +23,7 @@ Displaying of the chunk where the player is located, terrain and map entities in
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
 ### Movement between chunks. 
-When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk - ![Chunk Transition Previous - figure 2](./screenshots/chunkTransitionPrevious.png) ![Chunk Transition Next - figure 3](./screenshots/chunkTransitionNext.png)
+When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk - ![Chunk Transition Previous - figure 2](./screenshots/movement.gif)
 
 
 ## Planned Features
