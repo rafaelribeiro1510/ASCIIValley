@@ -1,0 +1,22 @@
+@startuml
+class Game{
+  main()
+}
+class GameController{
+  MapModel
+  PlayerModel
+  start()
+  processKey()
+}
+class MapView{
+  Screen
+  ChunkView
+  drawMap(MapModel)
+}
+class EntityView{
+  draw(PlayerModel)
+}
+Game -> GameController : uses
+GameController -> MapView
+GameController --> EntityView
+@enduml
