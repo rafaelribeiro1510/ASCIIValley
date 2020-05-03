@@ -16,7 +16,7 @@ The interpretation of these values is intentionally hardcoded, since these save 
 Displaying of the chunk where the player is located, terrain and map entities included - [Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
-###Movement between chunks. 
+### Movement between chunks. 
 When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk.
 
 [This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three
@@ -24,14 +24,17 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 
 ## Planned Features
 
-###Other Entities and their "behaviour".
+### Other Entities and their "behaviour".
 The game needs more ways of interacting with the player and this will be achieved with enemy entities (Mummies, for example)
 that present simple aggressive behaviour.
-###Combat 
+
+### Combat 
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
-###Main menu
+
+### Main menu
 The starting point of the game will be a menu that presents the player with options to load the game and see game controls.
-###GUI 
+
+### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
 and also the items collected through said interactions.
 
@@ -107,7 +110,7 @@ entities besides the player.)
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
 
 
-###2. Actions
+### 2. Actions
 #### **Problem in Context**
 After initially writing in the reading of keyboard inputs, it was clear the "switch" approach was messy and 
 not scale properly.
@@ -143,19 +146,16 @@ ActionEvent <|-- QuitGame
 The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
 
 
-[comment]: <> (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
- project. Each subsection should be organized in four different parts:
-- **Problem in Context**. The description of the design context and the concrete problem that motivated the instantiation of the pattern
-. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When
- refering to the implementation before the pattern was applied, don’t forget to link to the relevant lines of code in the appropriate
-  version.
-- **The Pattern**. Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing
- design context and the problem at hand.
-- **Implementation**. Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it
- with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be relative links
- . When doing this, always point to the latest version of the code.
-- **Consequences**. Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with
- those of alternative solutions.)
+[comment]: <> (This section should be organized in different subsections, each describing a different design problem that you had to solve during the)
+ [comment]: <> (project. Each subsection should be organized in four different parts:)
+[comment]: <> (- **Problem in Context**. The description of the design context and the concrete problem that motivated the instantiation of the pattern)
+[comment]: <> (. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When)
+ [comment]: <> (refering to the implementation before the pattern was applied, don’t forget to link to the relevant lines of code in the appropriate version.)
+[comment]: <> (- **The Pattern**. Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.)
+[comment]: <> (- **Implementation**. Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it)
+ [comment]: <> (with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be relative links)
+ [comment]: <> (. When doing this, always point to the latest version of the code.)
+[comment]: <> (- **Consequences**. Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.)
 
 
 ## Known Code Smells And Refactoring Suggestions - TODO: "homogeneizar" esta parte melhor
