@@ -2,7 +2,7 @@
 
 ASCII Valley is a simplified text-based adaptation of the indie simulation role-playing video game Stardew Valley with some influences of
  Dwarf Fortress when it comes to the visual details;
-the player takes on the role of a character who takes charge of his deceased grandfather abandoned farm located in a site named Stardew Valley.
+the player takes on the role of a character who takes charge of his deceased grandfather's abandoned farm located in a site named Stardew Valley.
 Planting and harvesting crops and fighting off mummies are some of the things that will make you play ASCII Valley for hours on end!
 This project was developed by Joao Sousa (up201806613@fe.up.pt) and Rafael Ribeiro (up201806330@fe.up.pt) for LPOO 2019⁄20.
 
@@ -38,13 +38,12 @@ and also the items collected through said interactions - ![GUI Mock-up](./screen
 
 
 ## Desired Features
+This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
+not be achieved in the time frame we have.
 
 ### Day-night Cycle, that visually alters the map.
 
 ### Simple NPC system with item delivery missions.
-
-[This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
-not be achieved in the time frame we have.]
 
 ## Design
 
@@ -57,8 +56,8 @@ development process.
 
 #### **The Pattern**
 
-Therefore we chose to use the architectural pattern known as MVC: Model-View-Controller. It divides the application in three parts
-, allowing for separation in groups of functions according to their role and by extension allowing also better function separation
+Therefore we chose to use the architectural pattern known as **MVC**: Model-View-Controller. It divides the application in three parts, 
+allowing for separation in groups of functions according to their role and by extension allowing also better function separation
 /organization.
 
 
@@ -77,7 +76,7 @@ entities besides the player.)
 - ease of working simultaneously in the same project without interfering with each other's work.
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
  files [ChunkView.java](../src/main/java/view/ChunkView.java), [MapView.java](../src/main/java/view/MapView.java) and [EntityView.java
- ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package view.
+ ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `view`.
 - possibly faster development speed in the long run due to the consistent organization.
 
 **Liabilities:**
@@ -87,7 +86,7 @@ entities besides the player.)
 ### 2. Actions
 #### **Problem in Context**
 After initially writing in the reading of keyboard inputs, it was clear the "switch" approach was messy and 
-not scale properly.
+did not scale properly.
 
 #### **The Pattern**
 Thus, the **Command** pattern was implemented, since it parametrizes clients with different requests, in our case, the player actions.  
