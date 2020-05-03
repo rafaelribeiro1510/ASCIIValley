@@ -89,4 +89,8 @@ public class GameController {
     public void setRunning(boolean running){ this.running = running; }
 
     public PlayerModel getPlayer(){ return playerModel; }
+
+    public MapModel getMapModel() {
+        return mapModel;
+    }
 }
