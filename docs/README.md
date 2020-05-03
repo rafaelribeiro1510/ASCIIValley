@@ -13,11 +13,11 @@ Storing of map state in a save file. The map is divided in chunks and each chunk
 chunks, a matrix that references the ground "type" and another that references the entity on said tile, if it exists. 
 The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
 ### Map visualization
-Displaying of the chunk where the player is located, terrain and map entities included - [Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png).
+Displaying of the chunk where the player is located, terrain and map entities included - ![Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
 ### Movement between chunks. 
-When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk - [Chunk Transition Previous - figure 2](./screenshots/chunkTransitionPrevious.png) and [Chunk Transition Next - figure 3](./screenshots/chunkTransitionNext.png).
+When the player goes beyond an "edge" of a chunk it moves to the respective neighbour chunk - ![Chunk Transition Previous - figure 2](./screenshots/chunkTransitionPrevious.png) ![Chunk Transition Next - figure 3](./screenshots/chunkTransitionNext.png)
 
 
 ## Planned Features
@@ -30,18 +30,18 @@ that present simple aggressive behaviour.
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
 
 ### Main menu
-The starting point of the game will be a menu that presents the player with options to load the game and see game controls - [Main menu Mock-up](./screenshots/mainMenuMockup.png).
+The starting point of the game will be a menu that presents the player with options to load the game and see game controls - ![Main menu Mock-up](./screenshots/mainMenuMockup.png)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
-and also the items collected through said interactions - [GUI Mock-up](./screenshots/guiMockup.png).
+and also the items collected through said interactions - ![GUI Mock-up](./screenshots/guiMockup.png)
 
 
 ## Desired Features
 
-Day-night Cycle, that visually alters the map.
+### Day-night Cycle, that visually alters the map.
 
-Simple NPC system with item delivery missions.
+### Simple NPC system with item delivery missions.
 
 [This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
 not be achieved in the time frame we have.]
