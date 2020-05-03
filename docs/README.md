@@ -41,11 +41,11 @@ that present simple aggressive behaviour.
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
 
 ### Main menu
-The starting point of the game will be a menu that presents the player with options to load the game and see game controls - ![Main menu Mock-up](./screenshots/mainMenuMockup.png)
+The starting point of the game will be a menu that presents the player with options to load the game and see game controls - ![Main menu Mock-up - figure 3](./screenshots/mainMenuMockup.png)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
-and also the items collected through said interactions - ![GUI Mock-up](./screenshots/guiMockup.png)
+and also the items collected through said interactions. ![GUI Mock-up - figure 4](./screenshots/guiMockup.png)
 
 
 ## Desired Features
