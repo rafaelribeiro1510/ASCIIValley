@@ -1,6 +1,6 @@
 package view;
 
-import model.MapModel;
+import model.map.MapModel;
 import org.junit.Test;
 import org.mockito.Mockito;
 

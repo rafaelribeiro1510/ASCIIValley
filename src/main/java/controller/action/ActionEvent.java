@@ -1,12 +1,12 @@
 package controller.action;
 
-import Exceptions.CrossedEast;
-import Exceptions.CrossedNorth;
-import Exceptions.CrossedSouth;
-import Exceptions.CrossedWest;
+import exceptions.CrossedDown;
+import exceptions.CrossedLeft;
+import exceptions.CrossedRight;
+import exceptions.CrossedUp;
 
 import java.io.IOException;
 
 public interface ActionEvent {
-    void execute() throws IOException, CrossedSouth, CrossedNorth, CrossedEast, CrossedWest;
+    void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft;
 }

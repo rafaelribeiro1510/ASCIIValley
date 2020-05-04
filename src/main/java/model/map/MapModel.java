@@ -1,4 +1,6 @@
-package model;
+package model.map;
+
+import model.Utils;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package model;
 
-import model.MapModel;
+import model.map.MapModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class MapModelTest {
 
     @Before
     public void checkReadMap() {
-        String relativePathname = "src/main/java/model/chunks.csv";
+        String relativePathname = "resources/chunks.csv";
         mp = new MapModel(40, 20, 1, relativePathname);
     }
 

@@ -1,10 +1,9 @@
 package model;
 
-import Exceptions.CrossedEast;
-import Exceptions.CrossedNorth;
-import Exceptions.CrossedSouth;
-import Exceptions.CrossedWest;
-import com.googlecode.lanterna.TerminalSize;
+import exceptions.CrossedLeft;
+import exceptions.CrossedRight;
+import exceptions.CrossedUp;
+import exceptions.CrossedDown;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,29 +39,29 @@ public class PositionTest {
     }
 
     @Test
-    public void crossedNorth() throws CrossedNorth {
-        thrown.expect(CrossedNorth.class);
+    public void crossedNorth() throws CrossedUp {
+        thrown.expect(CrossedUp.class);
         this.position.up();
         this.position.checkUp(height);
     }
 
     @Test
-    public void crossedSouth() throws CrossedSouth {
-        thrown.expect(CrossedSouth.class);
+    public void crossedSouth() throws CrossedDown {
+        thrown.expect(CrossedDown.class);
         this.position.down();
         this.position.checkDown(height);
     }
 
     @Test
-    public void crossedEast() throws CrossedEast {
-        thrown.expect(CrossedEast.class);
+    public void crossedEast() throws CrossedRight {
+        thrown.expect(CrossedRight.class);
         this.position.right();
         this.position.checkRight(width);
     }
 
     @Test
-    public void crossedWest() throws CrossedWest {
-        thrown.expect(CrossedWest.class);
+    public void crossedWest() throws CrossedLeft {
+        thrown.expect(CrossedLeft.class);
         this.position.left();
         this.position.checkLeft(width);
     }

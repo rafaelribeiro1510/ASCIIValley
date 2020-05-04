@@ -1,15 +1,16 @@
 package controller;
 
-import Exceptions.CrossedEast;
-import Exceptions.CrossedNorth;
-import Exceptions.CrossedSouth;
-import Exceptions.CrossedWest;
+import exceptions.CrossedDown;
+import exceptions.CrossedLeft;
+import exceptions.CrossedRight;
+import exceptions.CrossedUp;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import controller.action.*;
-import model.MapModel;
+import model.InventoryModel;
+import model.map.MapModel;
 import model.PlayerModel;
 import model.Position;
 import view.EntityView;
@@ -25,13 +26,15 @@ public class GameController {
     private MapModel mapModel;
     private MapView mapView;
     private PlayerModel playerModel;
+    private InventoryModel inventoryModel;
     private EntityView entityView;
 
     private boolean running;
 
     public GameController() {
         this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
-        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 1,  "src/main/java/model/chunks.csv");
+        this.inventoryModel = new InventoryModel();
+        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 1,  "resources/chunks.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT);
         this.entityView = new EntityView(mapView.getScreen());
         this.running = true;
@@ -41,7 +44,7 @@ public class GameController {
         while (running){
             mapView.drawMap(mapModel);
 
-            entityView.draw(playerModel, mapModel.thisChunk().getTerrainColorAt(playerModel.getPosition()));
+            entityView.draw(playerModel, mapModel.thisChunk());
             try {
                 mapView.getScreen().refresh();
                 processKey(getActionEvent());
@@ -58,16 +61,16 @@ public class GameController {
         }
         catch (IOException e){
             e.printStackTrace();
-        } catch (CrossedNorth crossedNorth) {
+        } catch (CrossedUp crossedUp) {
             mapModel.moveNorth();
             playerModel.setPosition(new Position(playerModel.getPosition().getX(), MAP_HEIGHT - 1));
-        } catch (CrossedWest crossedWest) {
+        } catch (CrossedLeft crossedLeft) {
             mapModel.moveWest();
             playerModel.setPosition(new Position(MAP_WIDTH - 1, playerModel.getPosition().getY()));
-        } catch (CrossedSouth crossedSouth) {
+        } catch (CrossedDown crossedDown) {
             mapModel.moveSouth();
             playerModel.setPosition(new Position(playerModel.getPosition().getX(), 0));
-        } catch (CrossedEast crossedEast) {
+        } catch (CrossedRight crossedRight) {
             mapModel.moveEast();
             playerModel.setPosition(new Position(0, playerModel.getPosition().getY()));
         }
@@ -81,6 +84,21 @@ public class GameController {
         if (key.getKeyType() == KeyType.ArrowDown) return new InteractDown(this);
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
+
+        //TODO Which is better?? vv  (if its this one, SelectSlot needs fixing)
+        //if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, key.getCharacter());
+
+        if (key.getCharacter() == '1') return new SelectSlot(this, 0);
+        if (key.getCharacter() == '2') return new SelectSlot(this, 1);
+        if (key.getCharacter() == '3') return new SelectSlot(this, 2);
+        if (key.getCharacter() == '4') return new SelectSlot(this, 3);
+        if (key.getCharacter() == '5') return new SelectSlot(this, 4);
+        if (key.getCharacter() == '6') return new SelectSlot(this, 5);
+        if (key.getCharacter() == '7') return new SelectSlot(this, 6);
+        if (key.getCharacter() == '8') return new SelectSlot(this, 7);
+        if (key.getCharacter() == '9') return new SelectSlot(this, 8);
+        if (key.getCharacter() == '0') return new SelectSlot(this, 9);
+
         if (key.getCharacter() == 'w') return new MoveUp(this);
         if (key.getCharacter() == 'd') return new MoveRight(this);
         if (key.getCharacter() == 's') return new MoveDown(this);
@@ -95,4 +113,6 @@ public class GameController {
     public MapModel getMapModel() { return mapModel; }
 
     public MapView getMapView() { return mapView; }
+
+    public InventoryModel getInventoryModel() { return inventoryModel; }
 }

@@ -1,6 +1,7 @@
-package model;
+package model.map;
 
 import com.googlecode.lanterna.TextColor;
+import model.Position;
 
 import java.util.ArrayList;
 
@@ -8,8 +9,8 @@ public class ChunkModel {
     private int id;
     private int width;
     private int height;
-    private ArrayList<ArrayList<MapTerrainModel>> terrain;
-    private ArrayList<ArrayList<MapEntityModel>> entities;
+    private ArrayList<ArrayList<MapTerrain>> terrain;
+    private ArrayList<ArrayList<MapEntity>> entities;
     private ArrayList<Integer> neighbours;
 
     public ChunkModel(int width, int height){
@@ -33,19 +34,19 @@ public class ChunkModel {
 
     public int getId() { return id; }
 
-    public TextColor getTerrainColorAt(int x, int y){
-        return terrain.get(y).get(x).getColor();
+    public MapTerrain getTerrainAt(int x, int y){
+        return terrain.get(y).get(x);
     }
 
-    public TextColor getTerrainColorAt(Position position){
-        return terrain.get(position.getY()).get(position.getX()).getColor();
+    public MapTerrain getTerrainAt(Position position){
+        return terrain.get(position.getY()).get(position.getX());
     }
 
-    public MapEntityModel getEntityAt(int x, int y){
+    public MapEntity getEntityAt(int x, int y){
         return entities.get(y).get(x);
     }
 
-    public MapEntityModel getEntityAt(Position position){
+    public MapEntity getEntityAt(Position position){
         return entities.get(position.getY()).get(position.getX());
     }
 
@@ -58,11 +59,11 @@ public class ChunkModel {
         this.neighbours = neighbours;
     }
 
-    public void addTerrainLine(ArrayList<MapTerrainModel> line){
+    public void addTerrainLine(ArrayList<MapTerrain> line){
         this.terrain.add(line);
     }
 
-    public void addEntityLine(ArrayList<MapEntityModel> line){
+    public void addEntityLine(ArrayList<MapEntity> line){
         this.entities.add(line);
     }
 }

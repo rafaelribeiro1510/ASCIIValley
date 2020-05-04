@@ -1,9 +1,8 @@
 package controller.action;
 
-import Exceptions.CrossedNorth;
+import exceptions.CrossedUp;
 import controller.GameController;
-import model.MapEntityModel;
-import model.MapModel;
+import model.map.MapEntity;
 
 public class MoveUp implements ActionEvent {
     private final GameController controller;
@@ -11,8 +10,8 @@ public class MoveUp implements ActionEvent {
     public MoveUp(GameController controller) { this.controller = controller; }
 
     @Override
-    public void execute() throws CrossedNorth {
-        MapEntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkUp(GameController.MAP_HEIGHT));
+    public void execute() throws CrossedUp {
+        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkUp(GameController.MAP_HEIGHT));
         if (!target.hasCollision()) controller.getPlayer().getPosition().up();
     }
 }

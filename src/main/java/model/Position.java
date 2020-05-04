@@ -1,10 +1,9 @@
 package model;
 
-import Exceptions.CrossedEast;
-import Exceptions.CrossedNorth;
-import Exceptions.CrossedSouth;
-import Exceptions.CrossedWest;
-import controller.GameController;
+import exceptions.CrossedRight;
+import exceptions.CrossedUp;
+import exceptions.CrossedDown;
+import exceptions.CrossedLeft;
 
 public class Position {
     private int x;
@@ -39,24 +38,24 @@ public class Position {
         this.x++;
     }
 
-    public Position checkDown(int height) throws CrossedSouth {
+    public Position checkDown(int height) throws CrossedDown {
         if (this.y + 1 < height) return new Position(this.x, this.y + 1);
-        else throw new CrossedSouth();
+        else throw new CrossedDown();
     }
 
-    public Position checkUp(int height) throws CrossedNorth {
+    public Position checkUp(int height) throws CrossedUp {
         if (this.y - 1 >= 0) return new Position(this.x, this.y - 1);
-        else throw new CrossedNorth();
+        else throw new CrossedUp();
     }
 
-    public Position checkLeft(int width) throws CrossedWest {
+    public Position checkLeft(int width) throws CrossedLeft {
         if (this.x - 1 >= 0) return new Position(this.x - 1, this.y);
-        else throw new CrossedWest();
+        else throw new CrossedLeft();
     }
 
-    public Position checkRight(int width) throws CrossedEast {
+    public Position checkRight(int width) throws CrossedRight {
         if (this.x + 1 < width) return new Position(this.x + 1, this.y);
-        else throw new CrossedEast();
+        else throw new CrossedRight();
     }
 
 }

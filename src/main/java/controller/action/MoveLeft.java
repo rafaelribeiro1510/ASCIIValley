@@ -1,9 +1,8 @@
 package controller.action;
 
-import Exceptions.CrossedWest;
+import exceptions.CrossedLeft;
 import controller.GameController;
-import model.MapEntityModel;
-import model.MapModel;
+import model.map.MapEntity;
 
 public class MoveLeft implements ActionEvent {
     private final GameController controller;
@@ -11,8 +10,8 @@ public class MoveLeft implements ActionEvent {
     public MoveLeft(GameController controller) { this.controller = controller; }
 
     @Override
-    public void execute() throws CrossedWest {
-        MapEntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkLeft(GameController.MAP_WIDTH));
+    public void execute() throws CrossedLeft {
+        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkLeft(GameController.MAP_WIDTH));
         if (!target.hasCollision()) controller.getPlayer().getPosition().left();
     }
 }

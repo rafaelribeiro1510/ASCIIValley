@@ -1,5 +1,9 @@
 package model;
 
+import model.map.ChunkModel;
+import model.map.MapEntity;
+import model.map.MapTerrain;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -36,20 +40,20 @@ public class Utils {
         return new ArrayList<>(Arrays.asList(characters));
     }
 
-    private static ArrayList<MapEntityModel> parseArrayToEntities(ArrayList<String> array, int row) {
-        ArrayList<MapEntityModel> result = new ArrayList<>();
+    private static ArrayList<MapEntity> parseArrayToEntities(ArrayList<String> array, int row) {
+        ArrayList<MapEntity> result = new ArrayList<>();
         int column = 0;
-        for (String value : array){
-            result.add(new MapEntityModel(new Position(column, row), value));
+        for (String string : array){
+            result.add(new MapEntity(new Position(column, row), string));
             column++;
         }
         return result;
     }
 
-    private static ArrayList<MapTerrainModel> parseArrayToTerrain (ArrayList<Integer> array){
-        ArrayList<MapTerrainModel> result = new ArrayList<>();
-        for (Integer value : array)
-            result.add(new MapTerrainModel(value));
+    private static ArrayList<MapTerrain> parseArrayToTerrain (ArrayList<Integer> array){
+        ArrayList<MapTerrain> result = new ArrayList<>();
+        for (Integer string : array)
+            result.add(new MapTerrain(string));
         return result;
     }
 }
