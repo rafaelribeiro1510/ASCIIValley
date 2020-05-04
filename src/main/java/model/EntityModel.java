@@ -16,13 +16,9 @@ public abstract class EntityModel {
         this.collision = collision;
     }
 
-    public Position getPosition() {
-        return position;
-    }
+    public Position getPosition() { return position; }
 
-    public void setPosition(Position position){
-        this.position = position;
-    }
+    public void setPosition(Position position){ this.position = position; }
 
     public String getString() { return string; }
 

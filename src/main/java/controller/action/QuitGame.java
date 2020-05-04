@@ -7,13 +7,12 @@ import java.io.IOException;
 
 public class QuitGame implements ActionEvent {
     private final GameController controller;
-    private final MapView view;
 
-    public QuitGame(GameController controller, MapView view) { this.controller = controller; this.view = view;}
+    public QuitGame(GameController controller) { this.controller = controller; }
 
     @Override
     public void execute() throws IOException {
-        view.getScreen().close();
+        controller.getMapView().getScreen().close();
         controller.setRunning(false);
         System.out.println("\nQuitting");
     }

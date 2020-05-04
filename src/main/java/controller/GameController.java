@@ -48,7 +48,6 @@ public class GameController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -75,22 +74,25 @@ public class GameController {
     }
 
     public ActionEvent getActionEvent() throws IOException{
-        ActionEvent event = null;
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.readInput();
-        if (key.getKeyType() == KeyType.ArrowUp) event = new MoveUp(this, mapModel);
-        if (key.getKeyType() == KeyType.ArrowRight) event = new MoveRight(this, mapModel);
-        if (key.getKeyType() == KeyType.ArrowDown) event = new MoveDown(this, mapModel);
-        if (key.getKeyType() == KeyType.ArrowLeft) event = new MoveLeft(this, mapModel);
-        if (key.getKeyType() == KeyType.Escape) event = new QuitGame(this, this.mapView);
-        return event;
+        if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
+        if (key.getKeyType() == KeyType.ArrowUp) return new InteractUp(this);
+        if (key.getKeyType() == KeyType.ArrowDown) return new InteractDown(this);
+        if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
+        if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
+        if (key.getCharacter() == 'w') return new MoveUp(this);
+        if (key.getCharacter() == 'd') return new MoveRight(this);
+        if (key.getCharacter() == 's') return new MoveDown(this);
+        if (key.getCharacter() == 'a') return new MoveLeft(this);
+        return null;
     }
 
     public void setRunning(boolean running){ this.running = running; }
 
     public PlayerModel getPlayer(){ return playerModel; }
 
-    public MapModel getMapModel() {
-        return mapModel;
-    }
+    public MapModel getMapModel() { return mapModel; }
+
+    public MapView getMapView() { return mapView; }
 }
