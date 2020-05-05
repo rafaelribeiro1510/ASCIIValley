@@ -63,6 +63,35 @@ public class MapModel {
         } catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
+
+
+        // just here to test the writeMap function
+        /*
+        try {
+            writeMap(relativePathname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+    }
+
+
+    public void writeMap(String relativePathname) throws IOException {
+        ChunkModel newChunk = new ChunkModel();
+        String filePath = new File(relativePathname).getAbsolutePath();
+        // filePath = "/Users/joaosousa/Documents/GitHub/lpoo-2020-g64/resources/chunks2.csv";
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+
+            for (int i = 0; i < this.chunks.size(); i++) {
+                Utils.parseObjectIntoCSVLine(bw, this.chunks.get(i));
+                if (i + 1 < this.chunks.size()) bw.write("\n");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public int getId(){ return this.currentChunkID; }

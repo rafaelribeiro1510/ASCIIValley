@@ -1,11 +1,17 @@
 package model;
 
+import com.googlecode.lanterna.TextColor;
 import model.map.ChunkModel;
 import model.map.MapEntity;
 import model.map.MapTerrain;
 
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utils {
     private static final String CSV_DELIMITER = ",";
@@ -58,5 +64,93 @@ public class Utils {
             column++;
         }
         return result;
+    }
+
+
+    public static void parseObjectIntoCSVLine(BufferedWriter bw, ChunkModel chunk) {
+
+        try {
+            writeIdLine(bw, chunk);
+            writeNeighboursLine(bw, chunk);
+            writeTerrainLines(bw, chunk);
+            writeEntityLines(bw, chunk);
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeIdLine(BufferedWriter bw, ChunkModel chunk) throws IOException {
+        bw.write(String.valueOf(chunk.getId()) + "\n");
+    }
+
+    private static void writeNeighboursLine(BufferedWriter bw, ChunkModel chunk) throws IOException {
+        String neighboursLine = chunk.getNorthId() + "," +
+                chunk.getSouthId() + "," +
+                chunk.getEastId() + "," +
+                chunk.getWestId() + "\n";
+        bw.write(neighboursLine);
+    }
+
+    private static void writeTerrainLines(BufferedWriter bw, ChunkModel chunk) throws IOException {
+
+        Map<Color, Integer> tMapInverted = new HashMap<Color, Integer>() {{
+            put(new TextColor.RGB(0, 0, 0).toColor(),         0); // Null
+            put(new TextColor.RGB(0, 102, 0).toColor(),       1); //Grass
+            put(new TextColor.RGB(204, 153, 0).toColor(),     2); //Sand
+            put(new TextColor.RGB(102, 51, 0).toColor(),      3); //Dirt
+            put(new TextColor.RGB(0, 153, 255).toColor(),     4); //Water
+            put(new TextColor.RGB(105, 105, 105).toColor(),   5); //Stone
+        }};
+
+        StringBuilder terrainLine = new StringBuilder();
+
+        for (int row = 0; row < 15; row++) {
+            for (int col = 0; col < 40; col++) {
+
+                if (col != 0) terrainLine.append(",");
+
+                TextColor posColor = chunk.getTerrainAt(new Position(col,row)).getColor();
+                terrainLine.append(tMapInverted.get(posColor.toColor()));
+            }
+            // if (row + 1 < 15)
+            terrainLine.append("\n");
+            bw.write(terrainLine.toString());
+
+            terrainLine = new StringBuilder(); // "clearing" the StringBuilder
+        }
+
+    }
+
+    private static void writeEntityLines(BufferedWriter bw, ChunkModel chunk) throws IOException {
+
+        Map<Color, String> eMapInverted = new HashMap<Color, String>() {{
+            put(new TextColor.RGB(40,40,40).toColor(),      "^"); // Stone
+            put(new TextColor.RGB(0, 204, 255).toColor(),   "~"); // Water
+            put(new TextColor.RGB(26, 12, 0).toColor(),     ":"); // Dirt
+            put(new TextColor.RGB(0, 204, 0).toColor(),     "y"); // Grass patch
+        }};
+
+        StringBuilder entityLine = new StringBuilder();
+
+        for (int row = 0; row < 15; row++) {
+            for (int col = 0; col < 40; col++) {
+
+                if (col != 0) entityLine.append(",");
+
+                TextColor entityColor = chunk.getEntityAt(new Position(col, row)).getColor();
+
+                String entityString;
+                if ( (entityString = eMapInverted.get(entityColor.toColor())) != null) {
+                    entityLine.append(entityString);
+                }
+                else { entityLine.append(" "); }
+            }
+
+            if (row + 1 < 15) entityLine.append("\n");
+            bw.write(entityLine.toString());
+
+            entityLine = new StringBuilder(); // "clearing" the StringBuilder
+        }
     }
 }
