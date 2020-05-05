@@ -3,6 +3,8 @@ package view;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import model.map.ChunkModel;
+import model.map.MapEntity;
+import model.map.MapTerrain;
 
 public class ChunkView {
 
@@ -12,11 +14,8 @@ public class ChunkView {
     public ChunkView(Screen screen) { this.graphics = screen.newTextGraphics(); entityView = new EntityView(screen);}
 
     public void draw(ChunkModel chunk) {
-        for (int y = 0 ; y < chunk.getHeight() ; y++){
-            for (int x = 0 ; x < chunk.getWidth() ; x++){
-                graphics.setBackgroundColor(chunk.getTerrainAt(x, y).getColor());
-                entityView.draw(chunk.getEntityAt(x,y), chunk);
-            }
+        for (MapEntity cell : chunk.getEntities()){
+            entityView.draw(cell, chunk);
         }
     }
 }

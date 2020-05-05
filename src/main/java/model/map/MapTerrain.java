@@ -1,12 +1,15 @@
 package model.map;
 
 import com.googlecode.lanterna.TextColor;
+import model.Position;
 
 public class MapTerrain {
+    private Position position;
     private InteractionType type;
 
-    public MapTerrain(int id) {
-        type = InteractionType.values()[id];
+    public MapTerrain(Position position, int id) {
+        this.position = position;
+        this.type = InteractionType.values()[id];
     }
 
     public TextColor getColor() {
@@ -30,5 +33,7 @@ public class MapTerrain {
     public InteractionType getType() { return type; }
 
     public void setType(InteractionType type) { this.type = type; }
+
+    public Position getPosition() { return this.position; }
 
 }

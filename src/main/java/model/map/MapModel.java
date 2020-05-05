@@ -50,7 +50,7 @@ public class MapModel {
     }
 
     public void readMap(String relativePathname) {
-        ChunkModel newChunk = new ChunkModel(this.width, this.height);
+        ChunkModel newChunk = new ChunkModel();
         String line = "";
         String filePath = new File(relativePathname).getAbsolutePath();
         System.out.println("Path: " + filePath);
@@ -62,7 +62,7 @@ public class MapModel {
                 if (Utils.parseCSVLineIntoObject(line, rowCounter, newChunk)) {
                     this.addChunk(newChunk);
                     rowCounter = 0;
-                    newChunk = new ChunkModel(this.width, this.height);
+                    newChunk = new ChunkModel();
                 }
             }
         } catch (IOException | NullPointerException e){

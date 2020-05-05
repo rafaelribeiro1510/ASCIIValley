@@ -21,7 +21,7 @@ public class Utils {
 
         else if (rowCounter == CSV_NEIGHBORS) newChunk.setNeighbours(parseCSVLineToIntegers(line));
 
-        else if (rowCounter >= CSV_TERRAIN_START && rowCounter <= CSV_TERRAIN_END) newChunk.addTerrainLine(parseArrayToTerrain(Utils.parseCSVLineToIntegers(line)));
+        else if (rowCounter >= CSV_TERRAIN_START && rowCounter <= CSV_TERRAIN_END) newChunk.addTerrainLine(parseArrayToTerrain(Utils.parseCSVLineToIntegers(line), rowCounter - CSV_TERRAIN_START));
 
         else if (rowCounter >= CSV_ENTITIES_START && rowCounter <= CSV_ENTITIES_END) newChunk.addEntityLine(parseArrayToEntities(Utils.parseCSVLineToStrings(line), rowCounter - CSV_ENTITIES_START));
 
@@ -50,10 +50,13 @@ public class Utils {
         return result;
     }
 
-    private static ArrayList<MapTerrain> parseArrayToTerrain (ArrayList<Integer> array){
+    private static ArrayList<MapTerrain> parseArrayToTerrain (ArrayList<Integer> array, int row){
         ArrayList<MapTerrain> result = new ArrayList<>();
-        for (Integer string : array)
-            result.add(new MapTerrain(string));
+        int column = 0;
+        for (Integer integer : array) {
+            result.add(new MapTerrain(new Position(column, row), integer));
+            column++;
+        }
         return result;
     }
 }
