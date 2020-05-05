@@ -12,4 +12,6 @@ public abstract class Item {
     public int getDurability() { return durability; }
 
     public abstract void use(GameController controller, Position position);
+
+    public void decrementDurability(){ if (durability > 0) durability--; }
 }

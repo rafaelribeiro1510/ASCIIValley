@@ -43,5 +43,6 @@ public class MapEntity extends EntityModel {
 
     public void remove(){
         string = " ";
+        collision = false;
     }
 }

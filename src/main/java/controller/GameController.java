@@ -46,6 +46,7 @@ public class GameController {
     public void start() {
         while (running){
             mapView.draw(mapModel);
+            inventoryModel.cleanup();
             inventoryView.draw(inventoryModel);
             entityView.draw(playerModel, mapModel.thisChunk());
             try {
@@ -88,19 +89,7 @@ public class GameController {
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
 
-        //TODO Which is better?? vv  (if its this one, SelectSlot needs fixing)
-        //if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, key.getCharacter());
-
-        if (key.getCharacter() == '1') return new SelectSlot(this, 0);
-        if (key.getCharacter() == '2') return new SelectSlot(this, 1);
-        if (key.getCharacter() == '3') return new SelectSlot(this, 2);
-        if (key.getCharacter() == '4') return new SelectSlot(this, 3);
-        if (key.getCharacter() == '5') return new SelectSlot(this, 4);
-        if (key.getCharacter() == '6') return new SelectSlot(this, 5);
-        if (key.getCharacter() == '7') return new SelectSlot(this, 6);
-        if (key.getCharacter() == '8') return new SelectSlot(this, 7);
-        if (key.getCharacter() == '9') return new SelectSlot(this, 8);
-        if (key.getCharacter() == '0') return new SelectSlot(this, 9);
+        if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
 
         if (key.getCharacter() == 'w') return new MoveUp(this);
         if (key.getCharacter() == 'd') return new MoveRight(this);

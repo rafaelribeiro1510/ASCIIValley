@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 
 public class MapView {
 
-    //TODO ChunkController aqui?? Ou comunica logo com o ChunkView?
     private ChunkView chunkView;
     private Screen screen;
 

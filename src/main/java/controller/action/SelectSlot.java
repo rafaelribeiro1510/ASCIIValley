@@ -6,7 +6,8 @@ public class SelectSlot implements ActionEvent {
     private final GameController controller;
     private final int slot;
 
-    public SelectSlot(GameController controller, int slot) { this.controller = controller;
+    public SelectSlot(GameController controller, int slot) {
+        this.controller = controller;
         this.slot = slot;
     }
 

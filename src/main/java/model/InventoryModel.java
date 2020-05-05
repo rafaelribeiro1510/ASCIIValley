@@ -5,8 +5,6 @@ import model.items.*;
 import java.util.ArrayList;
 
 public class InventoryModel {
-    private static final int INVENTORY_SLOTS = 10;
-
     ArrayList<Item> items;
     int selectedIndex;
 
@@ -32,5 +30,9 @@ public class InventoryModel {
     public void setSelectedItem(int selectedIndex) {
         if (selectedIndex >= items.size()) return;
         this.selectedIndex = selectedIndex;
+    }
+
+    public void cleanup(){
+        items.removeIf(item -> item.getDurability() == 0);
     }
 }

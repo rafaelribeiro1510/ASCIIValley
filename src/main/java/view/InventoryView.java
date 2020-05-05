@@ -5,6 +5,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import controller.GameController;
 import model.InventoryModel;
+import model.items.Item;
 
 public class InventoryView {
     private TextGraphics graphics;
@@ -13,7 +14,7 @@ public class InventoryView {
 
     public void draw(InventoryModel inventory){
         for (int i = 0 ; i < inventory.getItems().size() ; i++){
-            System.out.print(inventory.getItems().get(i).getName() + "\n");
+            Item item = inventory.getItems().get(i);
             if (i == inventory.getSelectedIndex()) {
                 graphics.setBackgroundColor(TextColor.ANSI.WHITE);
                 graphics.setForegroundColor(TextColor.ANSI.BLACK);
@@ -22,8 +23,9 @@ public class InventoryView {
                 graphics.setBackgroundColor(TextColor.ANSI.BLACK);
                 graphics.setForegroundColor(TextColor.ANSI.WHITE);
             }
-            graphics.putString(i * 4, GameController.MAP_HEIGHT, inventory.getItems().get(i).getName());
-            graphics.putString(i * 4, GameController.MAP_HEIGHT + 1, String.valueOf(inventory.getItems().get(i).getDurability()));
+            graphics.putString(i * 4, GameController.MAP_HEIGHT, item.getName());
+
+            graphics.putString(i * 4, GameController.MAP_HEIGHT + 1, String.valueOf(item.getDurability()));
         }
     }
 }

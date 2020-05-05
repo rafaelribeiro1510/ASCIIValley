@@ -13,7 +13,6 @@ public class MapViewTest {
         MapView mv = new MapView(20,40);
     }
 
-    // Just testing if the function works. Maybe delete this?
     @Test
     public void drawMapTest() {
         MapView mv = Mockito.mock(MapView.class);

@@ -1,7 +1,6 @@
 package model;
 
 import com.googlecode.lanterna.TextColor;
-import model.Position;
 
 public abstract class EntityModel {
     protected Position position;
