@@ -17,6 +17,6 @@ public class MapViewTest {
     @Test
     public void drawMapTest() {
         MapView mv = Mockito.mock(MapView.class);
-        mv.drawMap(Mockito.mock(MapModel.class));
+        mv.draw(Mockito.mock(MapModel.class));
     }
 }

@@ -5,7 +5,8 @@ import model.Position;
 
 public class WateringCan extends Item{
     public WateringCan() {
-        name = "WATR";
+        this.name = "CAN ";
+        this.durability = 200;
     }
 
     @Override

@@ -6,16 +6,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MapModel {
-    private int width;
-    private int height;
-
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
 
 
-    public MapModel(int width, int height, int currentChunkID, String relativePathname) {
-        this.width = width;
-        this.height = height;
+    public MapModel(int currentChunkID, String relativePathname) {
         this.chunks = new ArrayList<>();
         this.currentChunkID = currentChunkID;
         this.readMap(relativePathname);

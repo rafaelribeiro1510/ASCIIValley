@@ -14,6 +14,7 @@ import model.map.MapModel;
 import model.PlayerModel;
 import model.Position;
 import view.EntityView;
+import view.InventoryView;
 import view.MapView;
 
 import java.io.IOException;
@@ -28,22 +29,24 @@ public class GameController {
     private PlayerModel playerModel;
     private InventoryModel inventoryModel;
     private EntityView entityView;
+    private InventoryView inventoryView;
 
     private boolean running;
 
     public GameController() {
         this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
         this.inventoryModel = new InventoryModel();
-        this.mapModel = new MapModel(MAP_WIDTH, MAP_HEIGHT, 1,  "resources/chunks.csv");
-        this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT);
+        this.mapModel = new MapModel(1,  "resources/chunks.csv");
+        this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 2);
         this.entityView = new EntityView(mapView.getScreen());
+        this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
     }
 
     public void start() {
         while (running){
-            mapView.drawMap(mapModel);
-
+            mapView.draw(mapModel);
+            inventoryView.draw(inventoryModel);
             entityView.draw(playerModel, mapModel.thisChunk());
             try {
                 mapView.getScreen().refresh();

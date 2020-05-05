@@ -20,7 +20,7 @@ public class MapView {
 
     public MapView(int width, int height)  {
         try {
-            SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 40));
+            SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(new Font(Font.MONOSPACED, Font.PLAIN, 35));
             Terminal terminal = new DefaultTerminalFactory(System.out, System.in, StandardCharsets.UTF_8).setTerminalEmulatorFontConfiguration(fontConfiguration).setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
             screen = new TerminalScreen(terminal);
 
@@ -35,11 +35,9 @@ public class MapView {
         }
     }
 
-    public void drawMap(MapModel map){
+    public void draw(MapModel map){
         screen.clear();
-        //Draw map here
         chunkView.draw(map.thisChunk());
-        //TODO entity must receive terrain to preserve background color (Should entityView receive chunk attribute? or should entityView be called in chunkView?)
     }
 
     public Screen getScreen() {

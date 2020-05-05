@@ -8,7 +8,7 @@ public class InventoryModel {
     private static final int INVENTORY_SLOTS = 10;
 
     ArrayList<Item> items;
-    int selectedItem;
+    int selectedIndex;
 
     public InventoryModel() {
         this.items = new ArrayList<>();
@@ -17,16 +17,20 @@ public class InventoryModel {
         items.add(new Scythe());
         items.add(new Pickaxe());
         items.add(new WateringCan());
-        selectedItem = 0;
+        selectedIndex = 0;
     }
+
+    public ArrayList<Item> getItems() { return items; }
+
+    public int getSelectedIndex() { return selectedIndex; }
 
     public Item getSelectedItem() {
-        if (selectedItem >= items.size()) return null;
-        return items.get(selectedItem);
+        if (selectedIndex >= items.size()) return null;
+        return items.get(selectedIndex);
     }
 
-    public void setSelectedItem(int selectedItem) {
-        if (selectedItem >= items.size()) return;
-        this.selectedItem = selectedItem;
+    public void setSelectedItem(int selectedIndex) {
+        if (selectedIndex >= items.size()) return;
+        this.selectedIndex = selectedIndex;
     }
 }
