@@ -21,8 +21,6 @@ public class ChunkModel {
 
     public int getId() { return id; }
 
-    public ArrayList<MapTerrain> getTerrain() { return terrain; }
-
     public ArrayList<MapEntity> getEntities() { return entities; }
 
     public MapTerrain getTerrainAt(Position position){

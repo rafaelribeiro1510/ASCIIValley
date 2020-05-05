@@ -13,6 +13,6 @@ public class Hoe extends Item {
     @Override
     public void use(GameController controller, Position position) {
         MapTerrain target = controller.getMapModel().thisChunk().getTerrainAt(position);
-        if(target.getType() == InteractionType.Plant) target.setType(InteractionType.Soil);
+        if(target.getType() == InteractionType.Grass) target.setType(InteractionType.Soil);
     }
 }
