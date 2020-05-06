@@ -23,9 +23,9 @@ public class InventoryView {
                 graphics.setBackgroundColor(TextColor.ANSI.BLACK);
                 graphics.setForegroundColor(TextColor.ANSI.WHITE);
             }
-            graphics.putString(i * 4, GameController.MAP_HEIGHT, item.getName());
+            graphics.putString(i * 5, GameController.MAP_HEIGHT, item.getName());
 
-            graphics.putString(i * 4, GameController.MAP_HEIGHT + 1, String.valueOf(item.getDurability()));
+            graphics.putString(i * 5, GameController.MAP_HEIGHT + 1, String.valueOf(item.getValue()));
         }
     }
 }

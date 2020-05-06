@@ -2,7 +2,7 @@ package view;
 
 import com.googlecode.lanterna.screen.Screen;
 import model.map.ChunkModel;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 
 public class ChunkView {
 

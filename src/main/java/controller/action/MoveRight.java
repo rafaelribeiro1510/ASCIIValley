@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedRight;
 import controller.GameController;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 
 public class MoveRight implements ActionEvent {
     private final GameController controller;

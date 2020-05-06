@@ -2,7 +2,7 @@ package view;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import model.EntityModel;
+import model.entities.EntityModel;
 import model.map.ChunkModel;
 
 public class EntityView {

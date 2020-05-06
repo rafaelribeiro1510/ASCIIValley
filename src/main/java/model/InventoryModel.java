@@ -1,6 +1,8 @@
 package model;
 
 import model.items.*;
+import model.items.drops.Drop;
+import model.items.tools.*;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,16 @@ public class InventoryModel {
     }
 
     public void cleanup(){
-        items.removeIf(item -> item.getDurability() == 0);
+        items.removeIf(item -> item.getValue() == 0);
+    }
+
+    public void add(Item drop) {
+        for (Item item : items) {
+            if (item.getClass() == drop.getClass()) {
+                ((Drop) item).incrementAmount();
+                return;
+            }
+        }
+        items.add(drop);
     }
 }

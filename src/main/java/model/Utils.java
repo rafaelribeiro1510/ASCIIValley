@@ -2,7 +2,7 @@ package model;
 
 import com.googlecode.lanterna.TextColor;
 import model.map.ChunkModel;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 import model.map.MapTerrain;
 
 import java.awt.*;
@@ -15,12 +15,12 @@ import java.util.Map;
 
 public class Utils {
     private static final String CSV_DELIMITER = ",";
-    private static final int CSV_ID = 1;
-    private static final int CSV_NEIGHBORS = 2;
-    private static final int CSV_TERRAIN_START = 3;
-    private static final int CSV_TERRAIN_END = 17;
-    private static final int CSV_ENTITIES_START = 18;
-    private static final int CSV_ENTITIES_END = 32;
+    private static final int    CSV_ID = 1;
+    private static final int    CSV_NEIGHBORS = 2;
+    private static final int    CSV_TERRAIN_START = 3;
+    private static final int    CSV_TERRAIN_END = 17;
+    private static final int    CSV_ENTITIES_START = 18;
+    private static final int    CSV_ENTITIES_END = 32;
 
     public static boolean parseCSVLineIntoObject (String line, int rowCounter, ChunkModel newChunk){
         if (rowCounter == CSV_ID) newChunk.setId(Integer.parseInt(line));

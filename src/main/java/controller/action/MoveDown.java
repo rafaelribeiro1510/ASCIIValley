@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedDown;
 import controller.GameController;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 
 public class MoveDown implements ActionEvent {
     private final GameController controller;

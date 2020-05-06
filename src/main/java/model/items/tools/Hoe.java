@@ -1,13 +1,13 @@
-package model.items;
+package model.items.tools;
 
 import controller.GameController;
 import model.Position;
 import model.map.InteractionType;
 import model.map.MapTerrain;
 
-public class Hoe extends Item {
+public class Hoe extends Tool {
     public Hoe(){
-        this.name = "HOE ";
+        this.name = "HOE  ";
         this.durability = 100;
     }
 

@@ -11,7 +11,7 @@ import com.googlecode.lanterna.screen.Screen;
 import controller.action.*;
 import model.InventoryModel;
 import model.map.MapModel;
-import model.PlayerModel;
+import model.entities.Player;
 import model.Position;
 import view.EntityView;
 import view.InventoryView;
@@ -26,7 +26,7 @@ public class GameController {
 
     private MapModel mapModel;
     private MapView mapView;
-    private PlayerModel playerModel;
+    private Player player;
     private InventoryModel inventoryModel;
     private EntityView entityView;
     private InventoryView inventoryView;
@@ -34,7 +34,7 @@ public class GameController {
     private boolean running;
 
     public GameController() {
-        this.playerModel = new PlayerModel(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
+        this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
         this.inventoryModel = new InventoryModel();
         this.mapModel = new MapModel(1,  "resources/chunks.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 2);
@@ -48,7 +48,7 @@ public class GameController {
             mapView.draw(mapModel);
             inventoryModel.cleanup();
             inventoryView.draw(inventoryModel);
-            entityView.draw(playerModel, mapModel.thisChunk());
+            entityView.draw(player, mapModel.thisChunk());
             try {
                 mapView.getScreen().refresh();
                 processKey(getActionEvent());
@@ -67,16 +67,16 @@ public class GameController {
             e.printStackTrace();
         } catch (CrossedUp crossedUp) {
             mapModel.moveNorth();
-            playerModel.setPosition(new Position(playerModel.getPosition().getX(), MAP_HEIGHT - 1));
+            player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
         } catch (CrossedLeft crossedLeft) {
             mapModel.moveWest();
-            playerModel.setPosition(new Position(MAP_WIDTH - 1, playerModel.getPosition().getY()));
+            player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
         } catch (CrossedDown crossedDown) {
             mapModel.moveSouth();
-            playerModel.setPosition(new Position(playerModel.getPosition().getX(), 0));
+            player.setPosition(new Position(player.getPosition().getX(), 0));
         } catch (CrossedRight crossedRight) {
             mapModel.moveEast();
-            playerModel.setPosition(new Position(0, playerModel.getPosition().getY()));
+            player.setPosition(new Position(0, player.getPosition().getY()));
         }
     }
 
@@ -100,7 +100,7 @@ public class GameController {
 
     public void setRunning(boolean running){ this.running = running; }
 
-    public PlayerModel getPlayer(){ return playerModel; }
+    public Player getPlayer(){ return player; }
 
     public MapModel getMapModel() { return mapModel; }
 

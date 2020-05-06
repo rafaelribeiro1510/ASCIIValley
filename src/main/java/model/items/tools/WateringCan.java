@@ -1,11 +1,11 @@
-package model.items;
+package model.items.tools;
 
 import controller.GameController;
 import model.Position;
 
-public class WateringCan extends Item{
+public class WateringCan extends Tool{
     public WateringCan() {
-        this.name = "CAN ";
+        this.name = "CAN  ";
         this.durability = 100;
     }
 

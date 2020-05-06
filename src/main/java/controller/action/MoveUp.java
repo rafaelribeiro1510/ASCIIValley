@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedUp;
 import controller.GameController;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 
 public class MoveUp implements ActionEvent {
     private final GameController controller;

@@ -1,13 +1,13 @@
-package model.items;
+package model.items.tools;
 
 import controller.GameController;
 import model.Position;
 import model.map.InteractionType;
-import model.map.MapEntity;
+import model.entities.MapEntity;
 
-public class Pickaxe extends Item {
+public class Pickaxe extends Tool {
     public Pickaxe(){
-        this.name = "PIC ";
+        this.name = "PICK ";
         this.durability = 100;
     }
 
@@ -16,6 +16,7 @@ public class Pickaxe extends Item {
         MapEntity target = controller.getMapModel().thisChunk().getEntityAt(position);
         if(target.getType() == InteractionType.Rock) {
             this.decrementDurability();
+            controller.getInventoryModel().add(target.getRandomDrop());
             target.remove();
         }
     }
