@@ -51,7 +51,7 @@ public class MapEntity extends EntityModel {
     public void remove(){
         string = " ";
         collision = false;
-
+        type = InteractionType.Null;
     }
 
     public void replace(String string){
