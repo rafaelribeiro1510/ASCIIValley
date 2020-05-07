@@ -7,7 +7,7 @@ import model.entities.MapEntity;
 
 public class Axe extends Tool {
     public Axe() {
-        this.name = "AXE  ";
+        this.name = "AXE";
         this.durability = 100;
     }
 

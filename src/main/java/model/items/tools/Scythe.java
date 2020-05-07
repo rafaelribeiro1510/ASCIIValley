@@ -7,7 +7,7 @@ import model.entities.MapEntity;
 
 public class Scythe extends Tool{
     public Scythe(){
-        this.name = "SCYT ";
+        this.name = "SCYT";
         this.durability = 100;
     }
 

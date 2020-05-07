@@ -7,7 +7,7 @@ import model.map.MapTerrain;
 
 public class Hoe extends Tool {
     public Hoe(){
-        this.name = "HOE  ";
+        this.name = "HOE";
         this.durability = 100;
     }
 

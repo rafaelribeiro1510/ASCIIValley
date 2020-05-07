@@ -7,7 +7,7 @@ import model.entities.MapEntity;
 
 public class Pickaxe extends Tool {
     public Pickaxe(){
-        this.name = "PICK ";
+        this.name = "PICK";
         this.durability = 100;
     }
 

@@ -7,6 +7,7 @@ public enum InteractionType {
     Soil,
     Water,
     Stone,
+    Planks,
 
     Rock,
     Plant,
