@@ -3,6 +3,7 @@ package model.entities;
 import com.googlecode.lanterna.TextColor;
 import model.Position;
 import model.items.drops.Grass;
+import model.items.drops.Log;
 import model.items.drops.Rock;
 import model.items.drops.Seed;
 import model.map.InteractionType;
@@ -42,6 +43,17 @@ public class MapEntity extends EntityModel {
                 type = InteractionType.Plant;
                 drops.add(new Seed());
                 drops.add(new Grass());
+                break;
+            case "O": // Tree
+                color = new TextColor.RGB(40,20,0);
+                collision = true;
+                type = InteractionType.Wood;
+                drops.add(new Log());
+                break;
+            case "#": // Invisible wall
+                color = new TextColor.RGB(0,0,0);
+                collision = true;
+                type = InteractionType.Null;
                 break;
         }
     }
