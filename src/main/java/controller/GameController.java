@@ -24,6 +24,8 @@ public class GameController {
     public static final int MAP_WIDTH = 40;
     public static final int MAP_HEIGHT = 15;
 
+    private static final int frameRate = 60;
+
     private MapModel mapModel;
     private MapView mapView;
     private Player player;
@@ -52,7 +54,9 @@ public class GameController {
             try {
                 mapView.getScreen().refresh();
                 processKey(getActionEvent());
-            } catch (IOException e) {
+
+                Thread.sleep(1000/ frameRate);
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -82,7 +86,8 @@ public class GameController {
 
     public ActionEvent getActionEvent() throws IOException{
         Screen screen = mapView.getScreen();
-        KeyStroke key = screen.readInput();
+        KeyStroke key = screen.pollInput();
+        if (key == null) return null;
         if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
         if (key.getKeyType() == KeyType.ArrowUp) return new InteractUp(this);
         if (key.getKeyType() == KeyType.ArrowDown) return new InteractDown(this);
