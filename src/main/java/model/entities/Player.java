@@ -5,6 +5,6 @@ import model.Position;
 
 public class Player extends EntityModel {
     public Player(Position position, String string, TextColor color) {
-        super(position, string, color, true, null);
+        super(position, string, color, true, null, 40);
     }
 }

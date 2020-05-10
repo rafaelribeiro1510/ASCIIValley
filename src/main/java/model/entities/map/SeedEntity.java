@@ -7,6 +7,6 @@ import model.items.drops.SeedDrop;
 
 public class SeedEntity extends MapEntity {
     public SeedEntity(Position position){
-        super(position, ":", new TextColor.RGB(26, 12, 0), false, new Drop[] {new SeedDrop()});
+        super(position, ":", new TextColor.RGB(26, 12, 0), false, new Drop[] {new SeedDrop()}, 1);
     }
 }

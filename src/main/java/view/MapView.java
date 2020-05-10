@@ -1,5 +1,6 @@
 package view;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -7,6 +8,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import model.MapModel;
+import model.Position;
 
 import java.awt.*;
 import java.io.IOException;
@@ -41,5 +43,15 @@ public class MapView {
 
     public Screen getScreen() {
         return screen;
+    }
+
+    public void blink(Position position) {
+        screen.setCursorPosition(new TerminalPosition(position.getX(), position.getY()));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        screen.setCursorPosition(null);
     }
 }

@@ -4,8 +4,7 @@ import model.items.Item;
 
 public abstract class Tool extends Item {
     protected int durability;
-
-    public int getDurability() { return durability; }
+    protected int hitValue;
 
     public void decrementDurability(){ if (durability > 0) durability--; }
 

@@ -1,6 +1,7 @@
 package model.entities;
 
 import com.googlecode.lanterna.TextColor;
+import exceptions.Died;
 import model.Position;
 import model.items.drops.Drop;
 
@@ -12,13 +13,17 @@ public abstract class EntityModel {
     protected TextColor color;
     protected boolean collision;
     protected Drop[] drops;
+    protected int currentHealth;
+    protected final int maxHealth;
 
-    public EntityModel(Position position, String string, TextColor color, boolean collision, Drop[] drops) {
+    public EntityModel(Position position, String string, TextColor color, boolean collision, Drop[] drops, int maxHealth) {
         this.position = position;
         this.string = string;
         this.color = color;
         this.collision = collision;
         this.drops = drops;
+        this.currentHealth = maxHealth;
+        this.maxHealth = maxHealth;
     }
 
     public Position getPosition() { return position; }
@@ -33,5 +38,15 @@ public abstract class EntityModel {
 
     public Drop getRandomDrop(){
         return drops[new Random().nextInt(drops.length)];
+    }
+
+    public void addHealth(int x){
+        currentHealth = currentHealth + x;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+
+    public void reduceHealth(int x) throws Died {
+        currentHealth = currentHealth - x;
+        if (currentHealth <= 0) throw new Died();
     }
 }
