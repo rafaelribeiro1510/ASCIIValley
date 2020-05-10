@@ -1,7 +1,9 @@
-package model.map;
+package model;
 
-import model.Position;
-import model.entities.MapEntity;
+import model.entities.map.MapEntity;
+import model.entities.map.NullEntity;
+import model.terrain.MapTerrain;
+import model.terrain.NullTerrain;
 
 import java.util.ArrayList;
 
@@ -26,12 +28,12 @@ public class ChunkModel {
 
     public MapTerrain getTerrainAt(Position position){
         for (MapTerrain value : terrain) if (value.getPosition().equals(position)) return value;
-        return null;
+        return new NullTerrain(position);
     }
 
     public MapEntity getEntityAt(Position position){
         for (MapEntity value : entities) if (value.getPosition().equals(position)) return value;
-        return null;
+        return new NullEntity(position);
     }
 
     public int getNorthId(){ return neighbours.get(0); }
@@ -44,4 +46,6 @@ public class ChunkModel {
     public void addTerrainLine(ArrayList<MapTerrain> line){ this.terrain.addAll(line); }
 
     public void addEntityLine(ArrayList<MapEntity> line){ this.entities.addAll(line); }
+
+    public ArrayList<MapTerrain> getTerrain() { return terrain; }
 }

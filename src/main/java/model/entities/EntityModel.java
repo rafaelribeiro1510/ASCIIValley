@@ -2,9 +2,8 @@ package model.entities;
 
 import com.googlecode.lanterna.TextColor;
 import model.Position;
-import model.items.Item;
+import model.items.drops.Drop;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class EntityModel {
@@ -12,14 +11,14 @@ public abstract class EntityModel {
     protected String string;
     protected TextColor color;
     protected boolean collision;
-    protected ArrayList<Item> drops;
+    protected Drop[] drops;
 
-    public EntityModel(Position position, String string, TextColor color, boolean collision) {
+    public EntityModel(Position position, String string, TextColor color, boolean collision, Drop[] drops) {
         this.position = position;
         this.string = string;
         this.color = color;
         this.collision = collision;
-        this.drops = new ArrayList<>();
+        this.drops = drops;
     }
 
     public Position getPosition() { return position; }
@@ -32,7 +31,7 @@ public abstract class EntityModel {
 
     public boolean hasCollision() { return collision; }
 
-    public Item getRandomDrop(){
-        return drops.get(new Random().nextInt(drops.size()));
+    public Drop getRandomDrop(){
+        return drops[new Random().nextInt(drops.length)];
     }
 }

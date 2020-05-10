@@ -2,8 +2,9 @@ package model.items.tools;
 
 import controller.GameController;
 import model.Position;
-import model.map.InteractionType;
-import model.map.MapTerrain;
+import model.terrain.GrassTerrain;
+import model.terrain.MapTerrain;
+import model.terrain.SoilTerrain;
 
 public class Hoe extends Tool {
     public Hoe(){
@@ -14,9 +15,10 @@ public class Hoe extends Tool {
     @Override
     public void use(GameController controller, Position position) {
         MapTerrain target = controller.getMapModel().thisChunk().getTerrainAt(position);
-        if(target.getType() == InteractionType.Grass) {
+        if(target.getClass() == GrassTerrain.class) {
             this.decrementDurability();
-            target.setType(InteractionType.Soil);
+            controller.getMapModel().thisChunk().getTerrain().remove(target);
+            controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
         }
     }
 }

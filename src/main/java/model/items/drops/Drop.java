@@ -5,8 +5,9 @@ import model.items.Item;
 public abstract class Drop extends Item {
     int amount;
 
-    public Drop(){
+    public Drop(String name){
         amount = 1;
+        this.name = name;
     }
 
     public void incrementAmount(){ amount++; }

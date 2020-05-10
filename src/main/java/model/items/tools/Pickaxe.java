@@ -2,8 +2,8 @@ package model.items.tools;
 
 import controller.GameController;
 import model.Position;
-import model.map.InteractionType;
-import model.entities.MapEntity;
+import model.entities.map.MapEntity;
+import model.entities.map.RockEntity;
 
 public class Pickaxe extends Tool {
     public Pickaxe(){
@@ -14,10 +14,10 @@ public class Pickaxe extends Tool {
     @Override
     public void use(GameController controller, Position position) {
         MapEntity target = controller.getMapModel().thisChunk().getEntityAt(position);
-        if(target.getType() == InteractionType.Rock) {
+        if(target.getClass() == RockEntity.class) {
             this.decrementDurability();
             controller.getInventoryModel().add(target.getRandomDrop());
-            target.remove();
+            controller.getMapModel().thisChunk().getEntities().remove(target);
         }
     }
 }

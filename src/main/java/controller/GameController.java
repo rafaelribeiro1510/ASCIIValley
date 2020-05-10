@@ -10,7 +10,7 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import controller.action.*;
 import model.InventoryModel;
-import model.map.MapModel;
+import model.MapModel;
 import model.entities.Player;
 import model.Position;
 import view.EntityView;
@@ -36,9 +36,9 @@ public class GameController {
     private boolean running;
 
     public GameController() {
-        this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK, true);
+        this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
-        this.mapModel = new MapModel(5,  "resources/temp.csv");
+        this.mapModel = new MapModel(1,  "resources/temp.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 2);
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
@@ -52,9 +52,8 @@ public class GameController {
             inventoryView.draw(inventoryModel);
             entityView.draw(player, mapModel.thisChunk());
             try {
-                mapView.getScreen().refresh();
                 processKey(getActionEvent());
-
+                mapView.getScreen().refresh();
                 Thread.sleep(1000/ frameRate);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

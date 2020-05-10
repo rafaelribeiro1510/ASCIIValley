@@ -6,5 +6,7 @@ public class Game {
         GameController controller = new GameController();
         controller.start();
     }
-
 }
+
+
+//TODO polimorfismo nas map entities e map terrains -> .getClass() e .class ????

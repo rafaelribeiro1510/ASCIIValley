@@ -1,6 +1,5 @@
 package model;
 
-import model.map.MapModel;
 import org.junit.Before;
 import org.junit.Test;
 

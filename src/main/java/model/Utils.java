@@ -1,9 +1,10 @@
 package model;
 
 import com.googlecode.lanterna.TextColor;
-import model.map.ChunkModel;
-import model.entities.MapEntity;
-import model.map.MapTerrain;
+import model.entities.map.MapEntityFactory;
+import model.entities.map.MapEntity;
+import model.terrain.MapTerrain;
+import model.terrain.MapTerrainFactory;
 
 import java.awt.*;
 import java.io.BufferedWriter;
@@ -50,7 +51,8 @@ public class Utils {
         ArrayList<MapEntity> result = new ArrayList<>();
         int column = 0;
         for (String string : array){
-            result.add(new MapEntity(new Position(column, row), string));
+            MapEntity entity = MapEntityFactory.get(new Position(column, row), string);
+            if (entity != null) result.add(entity);
             column++;
         }
         return result;
@@ -60,7 +62,8 @@ public class Utils {
         ArrayList<MapTerrain> result = new ArrayList<>();
         int column = 0;
         for (Integer integer : array) {
-            result.add(new MapTerrain(new Position(column, row), integer));
+            MapTerrain terrain = MapTerrainFactory.get(new Position(column, row), integer);
+            if (terrain != null) result.add(terrain);
             column++;
         }
         return result;

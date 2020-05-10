@@ -1,8 +1,8 @@
 package view;
 
 import com.googlecode.lanterna.screen.Screen;
-import model.map.ChunkModel;
-import model.entities.MapEntity;
+import model.ChunkModel;
+import model.terrain.MapTerrain;
 
 public class ChunkView {
 
@@ -11,8 +11,8 @@ public class ChunkView {
     public ChunkView(Screen screen) { entityView = new EntityView(screen);}
 
     public void draw(ChunkModel chunk) {
-        for (MapEntity cell : chunk.getEntities()){
-            entityView.draw(cell, chunk);
+        for (MapTerrain cell : chunk.getTerrain()){
+            entityView.draw(chunk.getEntityAt(cell.getPosition()), chunk);
         }
     }
 }
