@@ -48,7 +48,7 @@ public class MapView {
     public void blink(Position position) {
         screen.setCursorPosition(new TerminalPosition(position.getX(), position.getY()));
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
