@@ -7,12 +7,16 @@ import model.entities.map.NullEntity;
 
 public class MoveRight implements ActionEvent {
     private final GameController controller;
+    private final EntityModel entity;
 
-    public MoveRight(GameController controller) { this.controller = controller; }
+    public MoveRight(GameController controller, EntityModel entity) {
+        this.controller = controller;
+        this.entity = entity;
+    }
 
     @Override
     public void execute() throws CrossedRight {
-        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkRight(GameController.MAP_WIDTH));
-        if (!target.hasCollision() || target.getClass() == NullEntity.class) controller.getPlayer().getPosition().right();
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkRight(GameController.MAP_WIDTH));
+        if (!target.hasCollision() || target.getClass() == NullEntity.class) entity.getPosition().right();
     }
 }

@@ -23,8 +23,8 @@ public class actionEventTest {
     @Test
     public void actionRightNewChunk() {
         gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveRight(gc, gc.getMapModel());
-        gc.processKey(event);
+        event = new MoveRight(gc, gc.getPlayer());
+        gc.processPlayerAction(event);
 
         assertEquals(0, gc.getPlayer().getPosition().getX());
         assertEquals(10, gc.getPlayer().getPosition().getY());
@@ -33,8 +33,8 @@ public class actionEventTest {
     @Test
     public void actionUpStoneCollision() {
         gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveUp(gc, gc.getMapModel());
-        gc.processKey(event);
+        event = new MoveUp(gc, gc.getPlayer());
+        gc.processPlayerAction(event);
 
         assertEquals(MAP_WIDTH - 1, gc.getPlayer().getPosition().getX());
         assertEquals(10, gc.getPlayer().getPosition().getY());
@@ -43,9 +43,9 @@ public class actionEventTest {
     @Test
     public void actionDownWaterCollision() {
         gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveDown(gc, gc.getMapModel());
-        gc.processKey(event);
-        gc.processKey(event);
+        event = new MoveDown(gc, gc.getPlayer());
+        gc.processPlayerAction(event);
+        gc.processPlayerAction(event);
 
         assertEquals(MAP_WIDTH - 1, gc.getPlayer().getPosition().getX());
         assertEquals(11, gc.getPlayer().getPosition().getY());

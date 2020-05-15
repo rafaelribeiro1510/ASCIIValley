@@ -11,7 +11,7 @@ public class MapModelTest {
     @Before
     public void checkReadMap() {
         String relativePathname = "resources/chunks.csv";
-        mp = new MapModel(40, 20, 1, relativePathname);
+        mp = new MapModel(1, relativePathname);
     }
 
     @Test

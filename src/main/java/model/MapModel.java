@@ -1,6 +1,10 @@
 package model;
 
+import controller.GameController;
+import controller.action.ActionEvent;
+import model.entities.Enemy;
 import model.entities.EnemyFactory;
+import model.entities.EntityModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -104,5 +108,13 @@ public class MapModel {
     public boolean isEnemyChunk(int id){
         for (int x : ENEMY_CHUNKS) if (x==id) return true;
         return false;
+    }
+
+    public ArrayList<ActionEvent> updateEntities(GameController controller) { //TODO instaceof??
+        ArrayList<ActionEvent> result = new ArrayList<>();
+        for (EntityModel entity : thisChunk().getEntities())
+            if (entity instanceof Enemy)
+                result.add(((Enemy) entity).tryMoving(controller));
+        return result;
     }
 }

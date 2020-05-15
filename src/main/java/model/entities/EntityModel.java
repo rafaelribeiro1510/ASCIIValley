@@ -34,6 +34,8 @@ public abstract class EntityModel {
 
     public TextColor getColor() { return color; }
 
+    public void setColor(TextColor color) { this.color = color; }
+
     public boolean hasCollision() { return collision; }
 
     public Drop getRandomDrop(){

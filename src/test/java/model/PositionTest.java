@@ -65,4 +65,10 @@ public class PositionTest {
         this.position.left();
         this.position.checkLeft(width);
     }
+
+    @Test
+    public void distanceTest() {
+        Position otherPosition = new Position(0,0);
+        assertEquals(position.distanceTo(otherPosition), Math.sqrt(2), 0.001);
+    }
 }

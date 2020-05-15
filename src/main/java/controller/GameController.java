@@ -11,6 +11,7 @@ import com.googlecode.lanterna.screen.Screen;
 import controller.action.*;
 import model.InventoryModel;
 import model.MapModel;
+import model.entities.EntityModel;
 import model.entities.Player;
 import model.Position;
 import view.EntityView;
@@ -38,7 +39,7 @@ public class GameController {
     public GameController() {
         this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
-        this.mapModel = new MapModel(5,  "resources/temp.csv");
+        this.mapModel = new MapModel(8,  "resources/temp.csv");
         this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 2);
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
@@ -52,7 +53,8 @@ public class GameController {
             inventoryView.draw(inventoryModel);
             entityView.draw(player, mapModel.thisChunk());
             try {
-                processKey(getActionEvent());
+                processPlayerAction(getActionEventFromKeyboard());
+                for (ActionEvent action : mapModel.updateEntities(this)) processEntityAction(action);
                 mapView.getScreen().refresh();
                 Thread.sleep(1000/ frameRate);
             } catch (IOException | InterruptedException e) {
@@ -61,7 +63,14 @@ public class GameController {
         }
     }
 
-    public void processKey(ActionEvent event){
+    public void processEntityAction(ActionEvent event){
+        if (event == null) return;
+        try {
+            event.execute();
+        } catch (IOException | CrossedRight | CrossedDown | CrossedLeft | CrossedUp ignored) { }
+    }
+
+    public void processPlayerAction(ActionEvent event){
         if (event == null) return;
         try {
             event.execute();
@@ -83,7 +92,7 @@ public class GameController {
         }
     }
 
-    public ActionEvent getActionEvent() throws IOException{
+    public ActionEvent getActionEventFromKeyboard() throws IOException{
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
         if (key == null) return null;
@@ -95,10 +104,10 @@ public class GameController {
 
         if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
 
-        if (key.getCharacter() == 'w') return new MoveUp(this);
-        if (key.getCharacter() == 'd') return new MoveRight(this);
-        if (key.getCharacter() == 's') return new MoveDown(this);
-        if (key.getCharacter() == 'a') return new MoveLeft(this);
+        if (key.getCharacter() == 'w') return new MoveUp(this, player);
+        if (key.getCharacter() == 'd') return new MoveRight(this, player);
+        if (key.getCharacter() == 's') return new MoveDown(this, player);
+        if (key.getCharacter() == 'a') return new MoveLeft(this, player);
         return null;
     }
 

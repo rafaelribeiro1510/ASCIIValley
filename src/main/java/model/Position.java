@@ -14,7 +14,13 @@ public class Position {
         this.y = y;
     }
 
-    public boolean equals(Position position){ return (this.x == position.x && this.y == position.y); }
+    public boolean equals(Position position) { return (this.x == position.x && this.y == position.y); }
+
+    public double distanceTo(Position that) { return Math.sqrt(Math.pow(this.getX() - that.getX(), 2) + Math.pow(this.getY() - that.getY(), 2)); }
+
+    public boolean leftOf(Position that) { return this.getX() < that.getX(); }
+
+    public boolean upOf(Position that) { return this.getY() < that.getY(); }
 
     public int getX() {
         return x;
