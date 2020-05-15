@@ -1,9 +1,6 @@
 package controller.action;
 
-import exceptions.CrossedDown;
-import exceptions.CrossedLeft;
-import exceptions.CrossedRight;
-import exceptions.CrossedUp;
+import exceptions.*;
 
 import java.io.IOException;
 

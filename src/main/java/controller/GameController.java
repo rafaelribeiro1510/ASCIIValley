@@ -1,9 +1,6 @@
 package controller;
 
-import exceptions.CrossedDown;
-import exceptions.CrossedLeft;
-import exceptions.CrossedRight;
-import exceptions.CrossedUp;
+import exceptions.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -11,7 +8,6 @@ import com.googlecode.lanterna.screen.Screen;
 import controller.action.*;
 import model.InventoryModel;
 import model.MapModel;
-import model.entities.EntityModel;
 import model.entities.Player;
 import model.Position;
 import view.EntityView;
@@ -40,7 +36,7 @@ public class GameController {
         this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
         this.mapModel = new MapModel(5,  "resources/temp.csv");
-        this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 2);
+        this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 3);
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
@@ -50,7 +46,7 @@ public class GameController {
         while (running){
             mapView.draw(mapModel);
             inventoryModel.cleanup();
-            inventoryView.draw(inventoryModel);
+            inventoryView.draw(inventoryModel, player.getCurrentHealth());
             entityView.draw(player, mapModel.thisChunk());
             try {
                 processPlayerAction(getActionEventFromKeyboard());

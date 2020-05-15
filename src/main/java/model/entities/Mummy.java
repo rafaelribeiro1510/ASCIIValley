@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Mummy extends Enemy {
     public Mummy(Position position) {
-        super(position, "M", new TextColor.RGB(255,255,255), true, new Drop[] {new HealthConsumableDrop()}, 10);
+        super(position, "M", new TextColor.RGB(255,255,255), true, new Drop[] {new HealthConsumableDrop()}, 10, 5);
     }
 
     @Override

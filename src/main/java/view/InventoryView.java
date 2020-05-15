@@ -12,7 +12,7 @@ public class InventoryView {
 
     public InventoryView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(InventoryModel inventory){
+    public void draw(InventoryModel inventory, int playerHealth){
         for (int i = 0 ; i < inventory.getItems().size() ; i++){
             Item item = inventory.getItems().get(i);
             if (i == inventory.getSelectedIndex()) {
@@ -26,5 +26,7 @@ public class InventoryView {
             graphics.putString(i * 5, GameController.MAP_HEIGHT, item.getName());
             graphics.putString(i * 5, GameController.MAP_HEIGHT + 1, String.valueOf(item.getValue()));
         }
+        graphics.setBackgroundColor(new TextColor.RGB(255,0,0));
+        for (int j = 0 ; j < playerHealth ; j++) graphics.putString(j, GameController.MAP_HEIGHT + 2, " ");
     }
 }

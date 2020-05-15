@@ -2,7 +2,10 @@ package controller.action;
 
 import exceptions.CrossedLeft;
 import controller.GameController;
+import exceptions.Died;
+import model.entities.Enemy;
 import model.entities.EntityModel;
+import model.entities.Player;
 import model.entities.map.NullEntity;
 
 public class MoveLeft implements ActionEvent {
@@ -17,6 +20,17 @@ public class MoveLeft implements ActionEvent {
     @Override
     public void execute() throws CrossedLeft {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkLeft(GameController.MAP_WIDTH));
+
+        if (this.entity instanceof Enemy && target instanceof Player) {
+            try {
+                target.reduceHealth(((Enemy) this.entity).getAttackValue());
+                return;
+            } catch (Died died) {
+                //GAME OVER
+                died.printStackTrace();
+            }
+        }
+
         if (!target.hasCollision() || target.getClass() == NullEntity.class) entity.getPosition().left();
     }
 }

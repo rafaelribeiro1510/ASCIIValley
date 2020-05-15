@@ -13,10 +13,13 @@ public abstract class Enemy extends EntityModel {
     boolean aggroed;
     int movementCooldown;
 
-    public Enemy(Position position, String string, TextColor color, boolean collision, Drop[] drops, int maxHealth) {
+    int attackValue;
+
+    public Enemy(Position position, String string, TextColor color, boolean collision, Drop[] drops, int maxHealth, int attackValue) {
         super(position, string, color, collision, drops, maxHealth);
         this.aggroed = false;
         this.movementCooldown = NOT_AGGROED_COOLDOWN;
+        this.attackValue = attackValue;
     }
 
     public abstract ActionEvent move(GameController controller);
@@ -24,4 +27,8 @@ public abstract class Enemy extends EntityModel {
     public abstract void checkForPlayer(Player player);
 
     public abstract ActionEvent tryMoving(GameController controller);
+
+    public int getAttackValue() {
+        return attackValue;
+    }
 }

@@ -43,12 +43,16 @@ public abstract class EntityModel {
     }
 
     public void addHealth(int x){
-        currentHealth = currentHealth + x;
+        currentHealth += x;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
     }
 
     public void reduceHealth(int x) throws Died {
-        currentHealth = currentHealth - x;
+        currentHealth -= x;
         if (currentHealth <= 0) throw new Died();
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
     }
 }
