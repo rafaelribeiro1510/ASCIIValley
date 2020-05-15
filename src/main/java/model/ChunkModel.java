@@ -1,5 +1,6 @@
 package model;
 
+import model.entities.EntityModel;
 import model.entities.map.MapEntity;
 import model.entities.map.NullEntity;
 import model.terrain.MapTerrain;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class ChunkModel {
     private int id;
     private ArrayList<MapTerrain> terrain;
-    private ArrayList<MapEntity> entities;
+    private ArrayList<EntityModel> entities;
     private ArrayList<Integer> neighbours;
 
     public ChunkModel(){
@@ -24,15 +25,15 @@ public class ChunkModel {
 
     public int getId() { return id; }
 
-    public ArrayList<MapEntity> getEntities() { return entities; }
+    public ArrayList<EntityModel> getEntities() { return entities; }
 
     public MapTerrain getTerrainAt(Position position){
         for (MapTerrain value : terrain) if (value.getPosition().equals(position)) return value;
         return new NullTerrain(position);
     }
 
-    public MapEntity getEntityAt(Position position){
-        for (MapEntity value : entities) if (value.getPosition().equals(position)) return value;
+    public EntityModel getEntityAt(Position position){
+        for (EntityModel value : entities) if (value.getPosition().equals(position)) return value;
         return new NullEntity(position);
     }
 

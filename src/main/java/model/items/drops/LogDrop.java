@@ -2,6 +2,7 @@ package model.items.drops;
 
 import controller.GameController;
 import model.Position;
+import model.entities.EntityModel;
 import model.entities.map.MapEntity;
 import model.entities.map.NullEntity;
 import model.entities.map.TreeEntity;
@@ -16,7 +17,7 @@ public class LogDrop extends Drop {
 
     @Override
     public void use(GameController controller, Position position) {
-        MapEntity targetEntity = controller.getMapModel().thisChunk().getEntityAt(position);
+        EntityModel targetEntity = controller.getMapModel().thisChunk().getEntityAt(position);
         MapTerrain targetTerrain = controller.getMapModel().thisChunk().getTerrainAt(position);
         if (targetEntity.getClass() == NullEntity.class && targetTerrain.getClass() == GrassTerrain.class) {
             this.decrementAmount();

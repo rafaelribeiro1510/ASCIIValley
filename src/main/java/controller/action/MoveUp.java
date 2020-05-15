@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedUp;
 import controller.GameController;
-import model.entities.map.MapEntity;
+import model.entities.EntityModel;
 import model.entities.map.NullEntity;
 
 public class MoveUp implements ActionEvent {
@@ -12,7 +12,7 @@ public class MoveUp implements ActionEvent {
 
     @Override
     public void execute() throws CrossedUp {
-        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkUp(GameController.MAP_HEIGHT));
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkUp(GameController.MAP_HEIGHT));
         if (!target.hasCollision() || target.getClass() == NullEntity.class) controller.getPlayer().getPosition().up();
     }
 }

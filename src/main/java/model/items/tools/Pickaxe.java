@@ -3,7 +3,7 @@ package model.items.tools;
 import controller.GameController;
 import exceptions.Died;
 import model.Position;
-import model.entities.map.MapEntity;
+import model.entities.EntityModel;
 import model.entities.map.RockEntity;
 
 public class Pickaxe extends Tool {
@@ -15,7 +15,7 @@ public class Pickaxe extends Tool {
 
     @Override
     public void use(GameController controller, Position position) {
-        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(position);
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
         if(target.getClass() == RockEntity.class) {
             controller.getMapView().blink(position);
             this.decrementDurability();

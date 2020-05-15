@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedLeft;
 import controller.GameController;
-import model.entities.map.MapEntity;
+import model.entities.EntityModel;
 import model.entities.map.NullEntity;
 
 public class MoveLeft implements ActionEvent {
@@ -12,7 +12,7 @@ public class MoveLeft implements ActionEvent {
 
     @Override
     public void execute() throws CrossedLeft {
-        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkLeft(GameController.MAP_WIDTH));
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkLeft(GameController.MAP_WIDTH));
         if (!target.hasCollision() || target.getClass() == NullEntity.class) controller.getPlayer().getPosition().left();
     }
 }

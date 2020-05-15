@@ -2,7 +2,7 @@ package controller.action;
 
 import exceptions.CrossedDown;
 import controller.GameController;
-import model.entities.map.MapEntity;
+import model.entities.EntityModel;
 import model.entities.map.NullEntity;
 
 public class MoveDown implements ActionEvent {
@@ -12,7 +12,7 @@ public class MoveDown implements ActionEvent {
 
     @Override
     public void execute() throws CrossedDown {
-        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkDown(GameController.MAP_HEIGHT));
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(controller.getPlayer().getPosition().checkDown(GameController.MAP_HEIGHT));
         if (!target.hasCollision() || target.getClass() == NullEntity.class) controller.getPlayer().getPosition().down();
     }
 }

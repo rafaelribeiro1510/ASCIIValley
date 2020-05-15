@@ -1,12 +1,15 @@
 package model;
 
+import model.entities.EnemyFactory;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class MapModel {
+    static private final int[] ENEMY_CHUNKS = {8,11};
+
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
-
 
     public MapModel(int currentChunkID, String relativePathname) {
         this.chunks = new ArrayList<>();
@@ -31,15 +34,19 @@ public class MapModel {
 
     public void moveNorth(){
         if (findChunk(thisChunk().getNorthId()) != null) this.currentChunkID = thisChunk().getNorthId();
+        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
     }
     public void moveSouth(){
         if (findChunk(thisChunk().getSouthId()) != null) this.currentChunkID = thisChunk().getSouthId();
+        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
     }
     public void moveEast(){
         if (findChunk(thisChunk().getEastId()) != null) this.currentChunkID = thisChunk().getEastId();
+        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
     }
     public void moveWest(){
         if (findChunk(thisChunk().getWestId()) != null) this.currentChunkID = thisChunk().getWestId();
+        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
     }
 
     public void readMap(String relativePathname) {
@@ -93,4 +100,9 @@ public class MapModel {
     }
 
     public int getId(){ return this.currentChunkID; }
+
+    public boolean isEnemyChunk(int id){
+        for (int x : ENEMY_CHUNKS) if (x==id) return true;
+        return false;
+    }
 }
