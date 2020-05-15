@@ -6,7 +6,7 @@ import model.items.drops.Drop;
 import model.items.drops.TallGrassDrop;
 import model.items.drops.SeedDrop;
 
-public class TallGrassEntity extends MapEntity {
+public class TallGrassEntity extends PlantEntity {
     public TallGrassEntity(Position position){
         super(position, "y", new TextColor.RGB(0, 204, 0), false, new Drop[] {new SeedDrop(), new TallGrassDrop()}, 1);
     }

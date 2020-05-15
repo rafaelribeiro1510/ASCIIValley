@@ -3,7 +3,6 @@ package model.items.drops;
 import controller.GameController;
 import model.Position;
 import model.entities.EntityModel;
-import model.entities.map.MapEntity;
 import model.entities.map.NullEntity;
 import model.entities.map.SeedEntity;
 import model.terrain.MapTerrain;

@@ -4,7 +4,6 @@ import controller.GameController;
 import model.Position;
 import model.entities.EntityModel;
 import model.entities.map.TallGrassEntity;
-import model.entities.map.MapEntity;
 import model.entities.map.NullEntity;
 import model.terrain.GrassTerrain;
 import model.terrain.MapTerrain;

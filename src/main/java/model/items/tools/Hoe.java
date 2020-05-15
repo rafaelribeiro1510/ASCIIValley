@@ -15,7 +15,7 @@ public class Hoe extends Tool {
     @Override
     public void use(GameController controller, Position position) {
         MapTerrain target = controller.getMapModel().thisChunk().getTerrainAt(position);
-        if(target.getClass() == GrassTerrain.class) {
+        if(target.getClass() == GrassTerrain.class) { //TODO getClass vs instaceof
             controller.getMapView().blink(position);
             this.decrementDurability();
             controller.getMapModel().thisChunk().getTerrain().remove(target);

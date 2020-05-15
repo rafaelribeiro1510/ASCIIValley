@@ -4,6 +4,7 @@ import controller.GameController;
 import exceptions.Died;
 import model.Position;
 import model.entities.EntityModel;
+import model.entities.map.PlantEntity;
 import model.entities.map.SeedEntity;
 import model.entities.map.TallGrassEntity;
 
@@ -17,7 +18,7 @@ public class Scythe extends Tool{
     @Override
     public void use(GameController controller, Position position){
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
-        if(target.getClass() == SeedEntity.class || target.getClass() == TallGrassEntity.class) { //TODO Ha forma de criar grupo de subclasses "Plant" ????
+        if(target instanceof PlantEntity) {
             controller.getMapView().blink(position);
             this.decrementDurability();
             try {

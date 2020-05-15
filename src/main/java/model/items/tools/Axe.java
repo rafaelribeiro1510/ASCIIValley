@@ -17,7 +17,7 @@ public class Axe extends Tool {
     @Override
     public void use(GameController controller, Position position){
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
-        if(target.getClass() == TreeEntity.class && this.durability > 0) {
+        if(target.getClass() == TreeEntity.class) {
             controller.getMapView().blink(position);
             this.decrementDurability();
             try {
