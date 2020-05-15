@@ -49,8 +49,8 @@ public class GameController {
             inventoryView.draw(inventoryModel, player.getCurrentHealth());
             entityView.draw(player, mapModel.thisChunk());
             try {
-                processPlayerAction(getActionEventFromKeyboard());
-                for (ActionEvent action : mapModel.updateEntities(this)) processEntityAction(action);
+                processPlayerAction(getActionEventFromKeyboard()); // Update player with keyboard actions
+                for (ActionEvent action : mapModel.updateEntities(this)) processEntityAction(action); // Update non-player entities with generated actions
                 mapView.getScreen().refresh();
                 Thread.sleep(1000/ frameRate);
             } catch (IOException | InterruptedException e) {

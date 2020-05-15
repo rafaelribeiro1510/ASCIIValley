@@ -110,7 +110,7 @@ public class MapModel {
         return false;
     }
 
-    public ArrayList<ActionEvent> updateEntities(GameController controller) { //TODO instaceof??
+    public ArrayList<ActionEvent> updateEntities(GameController controller) {
         ArrayList<ActionEvent> result = new ArrayList<>();
         for (EntityModel entity : thisChunk().getEntities())
             if (entity instanceof Enemy)
