@@ -45,7 +45,6 @@ public class GameController {
     public void start() {
         while (running){
             mapView.draw(mapModel);
-            inventoryModel.cleanup();
             inventoryView.draw(inventoryModel, player.getCurrentHealth());
             entityView.draw(player, mapModel.thisChunk());
             try {

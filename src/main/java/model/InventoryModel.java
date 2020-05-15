@@ -34,10 +34,6 @@ public class InventoryModel {
         this.selectedIndex = selectedIndex;
     }
 
-    public void cleanup(){
-        items.removeIf(item -> item.getValue() == 0);
-    }
-
     public void add(Item drop) {
         for (Item item : items) {
             if (item.getClass() == drop.getClass()) {

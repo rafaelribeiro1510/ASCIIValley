@@ -1,12 +1,11 @@
 package model.items.tools;
 
 import controller.GameController;
+import exceptions.Broke;
 import exceptions.Died;
 import model.Position;
 import model.entities.EntityModel;
 import model.entities.map.PlantEntity;
-import model.entities.map.SeedEntity;
-import model.entities.map.TallGrassEntity;
 
 public class Scythe extends Tool{
     public Scythe(){
@@ -20,10 +19,15 @@ public class Scythe extends Tool{
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
         if(target instanceof PlantEntity) {
             controller.getMapView().blink(position);
-            this.decrementDurability();
+
             try {
+                this.decrementDurability();
                 target.reduceHealth(this.hitValue);
-            } catch (Died died) {
+            }
+            catch (Broke broke) {
+                controller.getInventoryModel().getItems().remove(this);
+            }
+            catch (Died died) {
                 controller.getInventoryModel().add(target.getRandomDrop());
                 controller.getMapModel().thisChunk().getEntities().remove(target);
             }
