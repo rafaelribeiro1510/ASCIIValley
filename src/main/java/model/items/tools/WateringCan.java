@@ -10,7 +10,12 @@ public class WateringCan extends Tool{
     }
 
     @Override
-    public void use(GameController controller, Position position) {
+    public boolean canBeUsed(GameController controller, Position position) {
+        return false;
+    }
+
+    @Override
+    public void itemEffectsOnMap(GameController controller, Position position) {
 
     }
 }

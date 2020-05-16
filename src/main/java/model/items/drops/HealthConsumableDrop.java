@@ -9,7 +9,12 @@ public class HealthConsumableDrop extends Drop {
     }
 
     @Override
-    public void use(GameController controller, Position position) {
+    public boolean canBeUsed(GameController controller, Position position) {
+        return true;
+    }
+
+    @Override
+    public void itemEffectsOnMap(GameController controller, Position position) {
         controller.getPlayer().addHealth(10);
     }
 }

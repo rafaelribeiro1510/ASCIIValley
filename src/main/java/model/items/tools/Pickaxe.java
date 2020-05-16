@@ -1,7 +1,6 @@
 package model.items.tools;
 
 import controller.GameController;
-import exceptions.Broke;
 import exceptions.Died;
 import model.Position;
 import model.entities.EntityModel;
@@ -15,22 +14,19 @@ public class Pickaxe extends Tool {
     }
 
     @Override
-    public void use(GameController controller, Position position) {
+    public boolean canBeUsed(GameController controller, Position position) {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
-        if(target.getClass() == RockEntity.class) {
-            controller.getMapView().blink(position);
+        return (target instanceof RockEntity);
+    }
 
-            try {
-                this.decrementDurability();
-                target.reduceHealth(this.hitValue);
-            }
-            catch (Broke broke) {
-                controller.getInventoryModel().getItems().remove(this);
-            }
-            catch (Died died) {
-                controller.getInventoryModel().add(target.getRandomDrop());
-                controller.getMapModel().thisChunk().getEntities().remove(target);
-            }
+    @Override
+    public void itemEffectsOnMap(GameController controller, Position position) {
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
+        try{
+            target.reduceHealth(this.hitValue);
+        } catch (Died died) {
+            controller.getInventoryModel().add(target.getRandomDrop());
+            controller.getMapModel().thisChunk().getEntities().remove(target);
         }
     }
 }

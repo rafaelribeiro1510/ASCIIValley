@@ -14,11 +14,13 @@ public class RockDrop extends Drop {
     }
 
     @Override
-    public void use(GameController controller, Position position) {
+    public boolean canBeUsed(GameController controller, Position position) {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
-        if (target.getClass() == NullEntity.class) {
-            this.decrementAmount();
-            controller.getMapModel().thisChunk().getEntities().add(new RockEntity(position));
-        }
+        return (target instanceof NullEntity);
+    }
+
+    @Override
+    public void itemEffectsOnMap(GameController controller, Position position) {
+        controller.getMapModel().thisChunk().getEntities().add(new RockEntity(position));
     }
 }

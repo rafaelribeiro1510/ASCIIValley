@@ -1,5 +1,6 @@
 package model.items.drops;
 
+import exceptions.Broke;
 import model.items.Item;
 
 public abstract class Drop extends Item {
@@ -12,7 +13,10 @@ public abstract class Drop extends Item {
 
     public void incrementAmount(){ amount++; }
 
-    public void decrementAmount(){ if (amount > 0) amount--; }
+    public void decrementValue() throws Broke {
+        amount--;
+        if (amount <= 0) throw new Broke();
+    }
 
     public int getValue(){ return amount; }
 }
