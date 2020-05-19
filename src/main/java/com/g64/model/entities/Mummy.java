@@ -39,14 +39,15 @@ public class Mummy extends Enemy {
         }
     }
 
+    //TODO Atributo MummyMovementHumor -> Aggroed / Normal [state]
     @Override
     public ActionEvent move(GameController controller) {
         if (aggroed) {
             switch(new Random().nextInt(2)){
-                case 0:
+                case 0: //Horizontal
                     if (this.getPosition().leftOf(controller.getPlayer().getPosition())) return new MoveRight(controller, this);
                     else return new MoveLeft(controller, this);
-                case 1:
+                case 1: //Vertical
                     if (this.getPosition().upOf(controller.getPlayer().getPosition())) return new MoveDown(controller, this);
                     else return new MoveUp(controller, this);
             }
