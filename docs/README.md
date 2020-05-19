@@ -85,8 +85,8 @@ entities besides the player.)
 **Benefits:**
 - ease of working simultaneously in the same project without interfering with each other's work.
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
- files [ChunkView.java](../src/main/java/view/ChunkView.java), [MapView.java](../src/main/java/view/MapView.java) and [EntityView.java
- ](../src/main/java/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `view`.
+ files [ChunkView.java](../src/main/java/com.g64.view/ChunkView.java), [MapView.java](../src/main/java/com.g64.view/MapView.java) and [EntityView.java
+ ](../src/main/java/com.g64.view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `com.g64.view`.
 - possibly faster development speed in the long run due to the consistent organization.
 
 **Liabilities:**
@@ -107,7 +107,7 @@ This was done in the form of an **Action** interface and several commands that a
 ![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/action.iuml?token=AK5LFP4RSKI6DRLWYPNPMES6XAWG6)
 
 #### **Consequences**
-The code in the controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
+The code in the com.g64.controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
 
 
 [//]: # (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
@@ -140,7 +140,7 @@ mostly because of the mess of code in charge of opening and reading the file its
 #### **Problem in Context**
 On the map terrain interpretation process there is a switch case that is in charge of associating each integer in the save file
 with its corresponding, hardcoded color value. 
-[MapTerrainModel](../src/main/java/model/MapTerrainModel.java)
+[MapTerrainModel](../src/main/java/com.g64.model/MapTerrainModel.java)
 
 #### **Solution**
 This could be resolved by breaking up the rgb values into classes by using the **Replace Conditional with Polymorphism** method, which would make it more readable but also
@@ -150,7 +150,7 @@ easier to, if needed, add specific attributes to certain terrain types (though a
 ### 3. Dispensable - Data Class
 
 #### **Problem in Context**
-In the [MapEntityModel](../src/main/java/model/MapEntityModel.java) file there is an auxiliary class ``myPair`` (lines 10-18) that is only used to "group" data (data class).
+In the [MapEntityModel](../src/main/java/com.g64.model/MapEntityModel.java) file there is an auxiliary class ``myPair`` (lines 10-18) that is only used to "group" data (data class).
 Even though its existence is, in our opinion, justified by its usage in the ``MapEntityModel`` class (groups a ``TextColor`` and a ``boolean``), its implementation can be improved.
 
 #### **Solution**
@@ -160,19 +160,19 @@ In order to increase encapsulation, the auxiliary class could be declared as `fi
 ### 4. Bloater - Data Clump
 
 #### **Problem in Context**
-Both [ChunkModel](../src/main/java/model/ChunkModel.java) and [MapModel](../src/main/java/model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height``.
+Both [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) and [MapModel](../src/main/java/com.g64.model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height``.
 This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 24 and 28).
 
 #### **Solution**
-Therefore, they could be removed from [MapModel](../src/main/java/model/MapModel.java) which would reduce the number of parameters of this class's constructor.
-Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 22 and 23 of [GameController](../src/main/java/controller/GameController.java))
-those "constants" could be moved to [ChunkModel](../src/main/java/model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
+Therefore, they could be removed from [MapModel](../src/main/java/com.g64.model/MapModel.java) which would reduce the number of parameters of this class's constructor.
+Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 22 and 23 of [GameController](../src/main/java/com.g64.controller/GameController.java))
+those "constants" could be moved to [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
  
 
 ### 5. Dispensable - Duplicate Code
 
 #### **Problem in Context**
-In the [ChunkModel](../src/main/java/model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 36) and ``getTerrainColorAt(Position position)`` (line 40)
+In the [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 36) and ``getTerrainColorAt(Position position)`` (line 40)
 are essentially the same with the difference that in the first one the ``x`` and the ``y`` are passed directly while in the second one they are passed to the function inside a ``Position``
 object. The same applies to ``getEntityAt(int x, int y)`` (line 44) and ``getEntityAt(Position position)`` (line 48).
 This duplication of code could lead to time-consuming debugging caused for example by a small change only in one of the functions let's say "A1" (leaving "A2" unchanged) that could result in different outputs in situations apparently identical.

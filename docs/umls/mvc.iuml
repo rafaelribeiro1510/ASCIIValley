@@ -1,5 +1,5 @@
 @startuml
-class Game{
+class Application{
   main()
 }
 class GameController{
@@ -16,7 +16,7 @@ class MapView{
 class EntityView{
   draw(PlayerModel)
 }
-Game -> GameController : uses
+Application -> GameController : uses
 GameController -> MapView
 GameController --> EntityView
 @enduml
