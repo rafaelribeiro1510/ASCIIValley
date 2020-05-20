@@ -14,7 +14,7 @@ public class EnemyFactory {
         int n = 0;
         while(n < NUMBER_ENEMIES){
             Position target = new Position(new Random().nextInt(GameController.MAP_WIDTH), new Random().nextInt(GameController.MAP_HEIGHT));
-            if (chunk.getEntityAt(target).getClass() == NullEntity.class) { chunk.getEntities().add(new Mummy(target)); n++; }
+            if (chunk.getEntityAt(target) instanceof NullEntity) { chunk.getEntities().add(new Mummy(target)); n++; }
         }
     }
 }

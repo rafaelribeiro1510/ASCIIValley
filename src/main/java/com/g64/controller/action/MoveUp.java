@@ -30,6 +30,6 @@ public class MoveUp implements ActionEvent {
             }
         }
 
-        if (!target.hasCollision() || target.getClass() == NullEntity.class) entity.getPosition().up();
+        if (!target.hasCollision() || target instanceof NullEntity) entity.getPosition().up();
     }
 }
