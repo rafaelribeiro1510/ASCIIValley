@@ -16,6 +16,9 @@ public class InteractDown implements ActionEvent {
         Position target;
         try { target = controller.getPlayer().getPosition().checkDown(GameController.MAP_HEIGHT); }
         catch (CrossedDown ignored) { return; }
-        if (selectedItem != null) selectedItem.use(controller, target);
+        if (selectedItem != null) {
+            controller.getMapView().blink(target);
+            selectedItem.use(controller, target);
+        }
     }
 }

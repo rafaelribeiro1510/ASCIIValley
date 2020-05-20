@@ -9,7 +9,7 @@ public class InteractUp implements ActionEvent{
     private final GameController controller;
 
     public InteractUp(GameController controller) { this.controller = controller; }
-    //TODO Trocar Exceptions por returns
+
     @Override
     public void execute() {
         Item selectedItem = controller.getInventoryModel().getSelectedItem();

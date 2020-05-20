@@ -10,15 +10,22 @@ import java.util.ArrayList;
 
 public class ChunkModel {
     private int id;
+    private ArrayList<Integer> neighbours;
     private ArrayList<MapTerrain> terrain;
     private ArrayList<EntityModel> entities;
-    private ArrayList<Integer> neighbours;
 
     public ChunkModel(){
         this.id = 0;
+        this.neighbours = null;
         this.terrain = new ArrayList<>();
         this.entities = new ArrayList<>();
-        this.neighbours = null;
+    }
+
+    public ChunkModel(int id, ArrayList<Integer> neighbours, ArrayList<MapTerrain> terrain, ArrayList<EntityModel> entities){
+        this.id = id;
+        this.neighbours = neighbours;
+        this.terrain = terrain;
+        this.entities = entities;
     }
 
     public void setId(int id) { this.id = id; }

@@ -42,6 +42,6 @@ public class Mummy extends Enemy {
         }
     }
 
-    //TODO Atributo MummyMovementHumor -> Aggroed / Normal [state]
+    //TODO Atributo MummyMovementHumor -> Aggroed / Normal [state] no relatorio
 
 }

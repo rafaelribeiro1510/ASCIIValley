@@ -9,7 +9,6 @@ public abstract class Item {
 
     public void use(GameController controller, Position position){
         if (canBeUsed(controller, position)) {
-            controller.getMapView().blink(position);
             try { this.decrementValue(); }
             catch (Broke broke) { controller.getInventoryModel().getItems().remove(this); }
             itemEffectsOnMap(controller, position);

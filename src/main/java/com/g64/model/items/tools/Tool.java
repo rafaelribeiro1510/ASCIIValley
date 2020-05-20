@@ -13,4 +13,6 @@ public abstract class Tool extends Item {
     }
 
     public int getValue() { return durability; }
+
+    public int getHitValue() { return hitValue; }
 }

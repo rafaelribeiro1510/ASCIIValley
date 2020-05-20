@@ -8,3 +8,4 @@ public class Application {
     }
 }
 
+//TODO mudar instanceof todos https://dzone.com/articles/instanceof-considered-harmful
