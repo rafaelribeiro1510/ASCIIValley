@@ -13,7 +13,7 @@ public class Axe extends Tool {
         this.durability = 100;
         this.hitValue = 5;
     }
-
+    //Interface Interactable->MapTerrain, Entity : canInteract()
     @Override
     public boolean canBeUsed(GameController controller, Position position) {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);

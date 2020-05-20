@@ -15,6 +15,7 @@ import com.g64.view.InventoryView;
 import com.g64.view.MapView;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class GameController {
 
@@ -40,6 +41,15 @@ public class GameController {
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
+    }
+
+    public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
+        this.player = player;
+        this.mapModel = mapModel;
+        this.mapView = mapView;
+        this.entityView = entityView;
+        this.inventoryModel = inventoryModel;
+        this.inventoryView = inventoryView;
     }
 
     public void start() {

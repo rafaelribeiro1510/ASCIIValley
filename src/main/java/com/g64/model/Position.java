@@ -18,9 +18,9 @@ public class Position {
 
     public double distanceTo(Position that) { return Math.sqrt(Math.pow(this.getX() - that.getX(), 2) + Math.pow(this.getY() - that.getY(), 2)); }
 
-    public boolean leftOf(Position that) { return this.getX() < that.getX(); }
+    public double horizontalDifference(Position that) { return this.getX() - that.getX(); }
 
-    public boolean upOf(Position that) { return this.getY() < that.getY(); }
+    public double verticalDifference(Position that) { return this.getY() - that.getY(); }
 
     public int getX() {
         return x;

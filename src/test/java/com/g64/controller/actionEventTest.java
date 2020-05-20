@@ -1,53 +1,88 @@
 package com.g64.controller;
 
 import com.g64.controller.action.*;
+import com.g64.exceptions.CrossedDown;
+import com.g64.exceptions.CrossedLeft;
+import com.g64.exceptions.CrossedRight;
+import com.g64.exceptions.CrossedUp;
+import com.g64.model.ChunkModel;
+import com.g64.model.InventoryModel;
+import com.g64.model.MapModel;
 import com.g64.model.Position;
+import com.g64.model.entities.Player;
+import com.g64.model.items.tools.Tool;
+import com.g64.view.EntityView;
+import com.g64.view.InventoryView;
+import com.g64.view.MapView;
+import javafx.geometry.Pos;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import java.io.IOException;
 
 import static com.g64.controller.GameController.MAP_WIDTH;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
 
 
 public class actionEventTest {
-    private GameController gc;
-    private ActionEvent event;
-    private Position chunk1RightBorder = new Position(MAP_WIDTH - 1, 10);
+    private GameController controller;
+    private MapModel map;
+    private InventoryModel inventory;
+    private Player player;
+    private Tool tool;
+    private Position position;
 
     @Before
     public void initGameController() {
-        gc = new GameController();
+        map = Mockito.mock(MapModel.class);
+        inventory = Mockito.mock(InventoryModel.class);
+        player = Mockito.mock(Player.class);
+        tool = Mockito.mock(Tool.class);
+        position = Mockito.mock(Position.class);
+        controller = new GameController(player, map, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), inventory, Mockito.mock(InventoryView.class));
+        Mockito.when(map.thisChunk()).thenReturn(Mockito.mock(ChunkModel.class));
+        Mockito.when(inventory.getSelectedItem()).thenReturn(tool);
+        Mockito.when(player.getPosition()).thenReturn(Mockito.mock(Position.class));
     }
 
     @Test
-    public void actionRightNewChunk() {
-        gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveRight(gc, gc.getPlayer());
-        gc.processPlayerAction(event);
-
-        assertEquals(0, gc.getPlayer().getPosition().getX());
-        assertEquals(10, gc.getPlayer().getPosition().getY());
+    public void actionRightNewChunk() throws CrossedRight {
+        MoveRight move = Mockito.mock(MoveRight.class); doThrow(CrossedRight.class).when(move).execute();
+        controller.processPlayerAction(move);
+        verify(controller.getMapModel()).moveEast();
     }
 
     @Test
-    public void actionUpStoneCollision() {
-        gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveUp(gc, gc.getPlayer());
-        gc.processPlayerAction(event);
-
-        assertEquals(MAP_WIDTH - 1, gc.getPlayer().getPosition().getX());
-        assertEquals(10, gc.getPlayer().getPosition().getY());
+    public void actionLeftNewChunk() throws CrossedLeft {
+        MoveLeft move = Mockito.mock(MoveLeft.class); doThrow(CrossedLeft.class).when(move).execute();
+        controller.processPlayerAction(move);
+        verify(controller.getMapModel()).moveWest();
     }
 
     @Test
-    public void actionDownWaterCollision() {
-        gc.getPlayer().setPosition(chunk1RightBorder);
-        event = new MoveDown(gc, gc.getPlayer());
-        gc.processPlayerAction(event);
-        gc.processPlayerAction(event);
-
-        assertEquals(MAP_WIDTH - 1, gc.getPlayer().getPosition().getX());
-        assertEquals(11, gc.getPlayer().getPosition().getY());
+    public void actionUpNewChunk() throws CrossedUp {
+        MoveUp move = Mockito.mock(MoveUp.class); doThrow(CrossedUp.class).when(move).execute();
+        controller.processPlayerAction(move);
+        verify(controller.getMapModel()).moveNorth();
     }
+
+    @Test
+    public void actionDownNewChunk() throws CrossedDown {
+        MoveDown move = Mockito.mock(MoveDown.class); doThrow(CrossedDown.class).when(move).execute();
+        controller.processPlayerAction(move);
+        verify(controller.getMapModel()).moveSouth();
+    }
+
+    //@Test
+    //public void interactDownWithTool() {
+    //    InteractDown interact = new InteractDown(controller)
+    //    controller.processPlayerAction(interact);
+    //    verify(tool).use(controller, position);
+    //}
+
 
 }
