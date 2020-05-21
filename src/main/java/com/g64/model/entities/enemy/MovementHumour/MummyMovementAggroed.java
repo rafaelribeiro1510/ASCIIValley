@@ -1,7 +1,8 @@
-package com.g64.model.entities;
+package com.g64.model.entities.enemy.MovementHumour;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
+import com.g64.model.entities.enemy.Enemy;
 
 public class MummyMovementAggroed extends EnemyMovementHumour {
     public MummyMovementAggroed(Enemy me) {

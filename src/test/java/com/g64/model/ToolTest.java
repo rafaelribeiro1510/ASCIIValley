@@ -3,7 +3,7 @@ package com.g64.model;
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
-import com.g64.model.entities.Mummy;
+import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.map.TallGrassEntity;
 import com.g64.model.items.tools.Axe;
 import com.g64.model.items.tools.Tool;

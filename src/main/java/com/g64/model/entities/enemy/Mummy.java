@@ -1,13 +1,14 @@
-package com.g64.model.entities;
+package com.g64.model.entities.enemy;
 
+import com.g64.model.entities.Player;
+import com.g64.model.entities.enemy.MovementHumour.MummyMovementAggroed;
+import com.g64.model.entities.enemy.MovementHumour.MummyMovementNormal;
 import com.googlecode.lanterna.TextColor;
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.drops.HealthConsumableDrop;
-
-import java.util.Random;
 
 public class Mummy extends Enemy {
     public Mummy(Position position) {
@@ -17,7 +18,7 @@ public class Mummy extends Enemy {
 
     @Override
     public void checkForPlayer(Player player) {
-        if (this.position.distanceTo(player.position) <= 4) {
+        if (this.position.distanceTo(player.getPosition()) <= 4) {
             this.movementCooldown = AGGROED_COOLDOWN;
             this.setColor(new TextColor.RGB(182,0,0));
             movementHumour = new MummyMovementAggroed(this);

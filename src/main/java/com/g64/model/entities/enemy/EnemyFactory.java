@@ -1,4 +1,4 @@
-package com.g64.model.entities;
+package com.g64.model.entities.enemy;
 
 import com.g64.controller.GameController;
 import com.g64.model.ChunkModel;

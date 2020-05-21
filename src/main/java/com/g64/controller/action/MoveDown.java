@@ -3,7 +3,7 @@ package com.g64.controller.action;
 import com.g64.exceptions.CrossedDown;
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
-import com.g64.model.entities.Enemy;
+import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.map.NullEntity;
 
