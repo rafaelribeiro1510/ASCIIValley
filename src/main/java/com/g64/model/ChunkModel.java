@@ -1,6 +1,7 @@
 package com.g64.model;
 
 import com.g64.model.entities.EntityModel;
+import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.map.MapEntity;
 import com.g64.model.entities.map.NullEntity;
 import com.g64.model.terrain.MapTerrain;
@@ -56,4 +57,10 @@ public class ChunkModel {
     public void addEntityLine(ArrayList<MapEntity> line){ this.entities.addAll(line); }
 
     public ArrayList<MapTerrain> getTerrain() { return terrain; }
+
+    public int getNumberEnemies() {
+        int result = 0;
+        for(EntityModel entity : entities) if (entity instanceof Enemy) result++;
+        return result;
+    }
 }

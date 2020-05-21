@@ -13,7 +13,8 @@ public class Axe extends Tool {
         this.durability = 100;
         this.hitValue = 5;
     }
-    //Interface Interactable->MapTerrain, Entity : canInteract()
+    //TODO Interface Interactable->MapTerrain, Entity : canInteract()
+    //TODO there may be no pretty way of fixing this double dependency
     @Override
     public boolean canBeUsed(GameController controller, Position position) {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
