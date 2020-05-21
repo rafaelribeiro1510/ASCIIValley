@@ -1,10 +1,11 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
+import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
 import com.g64.model.entities.EntityModel;
+import com.g64.model.entities.plant.SeedEntity;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -110,11 +111,10 @@ public class MapModel {
         return false;
     }
 
-    public ArrayList<ActionEvent> updateEntities(GameController controller) {
-        ArrayList<ActionEvent> result = new ArrayList<>();
+    //TODO smell cast
+    public void updateEntities(GameController controller) {
         for (EntityModel entity : thisChunk().getEntities())
-            if (entity instanceof Enemy)
-                result.add(((Enemy) entity).tryMoving(controller));
-        return result;
+            if (entity instanceof UpdatableEntity)
+                ((UpdatableEntity) entity).update(controller);
     }
 }

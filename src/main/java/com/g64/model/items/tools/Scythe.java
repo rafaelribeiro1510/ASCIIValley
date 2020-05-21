@@ -4,7 +4,7 @@ import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
-import com.g64.model.entities.map.PlantEntity;
+import com.g64.model.entities.plant.PlantEntity;
 
 public class Scythe extends Tool{
     public Scythe(){

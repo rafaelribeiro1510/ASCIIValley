@@ -26,8 +26,6 @@ public abstract class Enemy extends EntityModel {
 
     public abstract void checkForPlayer(Player player);
 
-    public abstract ActionEvent tryMoving(GameController controller);
-
     public int getAttackValue() {
         return attackValue;
     }

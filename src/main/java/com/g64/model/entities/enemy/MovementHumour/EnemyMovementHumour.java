@@ -11,5 +11,5 @@ public abstract class EnemyMovementHumour {
         this.me = me;
     }
 
-    public abstract ActionEvent move(GameController controller);
+    public abstract void move(GameController controller);
 }
