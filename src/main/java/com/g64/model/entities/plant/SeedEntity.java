@@ -27,4 +27,8 @@ public abstract class SeedEntity extends PlantEntity implements UpdatableEntity 
         }
         return null;
     }
+
+    public void water(int value){
+        growth -= value;
+    }
 }

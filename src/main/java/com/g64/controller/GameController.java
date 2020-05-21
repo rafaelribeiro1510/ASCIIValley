@@ -68,13 +68,6 @@ public class GameController {
         }
     }
 
-    public void processEntityAction(ActionEvent event){
-        if (event == null) return;
-        try {
-            event.execute();
-        } catch (IOException | CrossedRight | CrossedDown | CrossedLeft | CrossedUp ignored) { }
-    }
-
     public void processPlayerAction(ActionEvent event){
         if (event == null) return;
         try {
