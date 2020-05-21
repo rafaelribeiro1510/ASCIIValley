@@ -15,6 +15,8 @@ public class MapEntityFactory {
                 return new TallGrassEntity(position);
             case "O": // Tree
                 return new TreeEntity(position);
+            case "#": // Invisible Wall
+                return new InvisibleWallEntity(position);
             default:
                 return null;
         }
