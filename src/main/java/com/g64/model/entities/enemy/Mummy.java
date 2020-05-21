@@ -11,7 +11,7 @@ import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.drops.HealthConsumableDrop;
 
-public class Mummy extends Enemy implements UpdatableEntity {
+public class Mummy extends Enemy {
     public Mummy(Position position) {
         super(position, "M", new TextColor.RGB(255,255,255), true, new Drop[] {new HealthConsumableDrop()}, 10, 5);
         this.movementHumour = new MummyMovementNormal(this);
@@ -31,16 +31,7 @@ public class Mummy extends Enemy implements UpdatableEntity {
         }
     }
 
-    @Override
-    public void update(GameController controller) {
-        if (movementCooldown == 0) {
-            checkForPlayer(controller.getPlayer());
-            movementHumour.move(controller);
-        }
-        else {
-            movementCooldown--;
-        }
-    }
+
 
     //TODO Atributo MummyMovementHumor -> Aggroed / Normal [state] no relatorio
 

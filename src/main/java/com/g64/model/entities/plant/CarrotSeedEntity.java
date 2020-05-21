@@ -12,7 +12,7 @@ public class CarrotSeedEntity extends SeedEntity {
     }
 
     @Override
-    public void grow(GameController controller) {
-        controller.getMapModel().thisChunk().getEntities().add(new GrownCarrotEntity(this.position));
+    public PlantEntity grow(GameController controller) {
+        return new GrownCarrotEntity(this.position);
     }
 }

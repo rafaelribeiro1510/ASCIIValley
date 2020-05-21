@@ -1,14 +1,16 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.exceptions.Died;
 import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
 import com.g64.model.entities.EntityModel;
-import com.g64.model.entities.plant.SeedEntity;
+import javafx.util.Pair;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MapModel {
     static private final int[] ENEMY_CHUNKS = {8,11};
@@ -104,17 +106,29 @@ public class MapModel {
 
     }
 
-    public int getId(){ return this.currentChunkID; }
-
     public boolean isEnemyChunk(int id){
         for (int x : ENEMY_CHUNKS) if (x==id) return true;
         return false;
     }
 
     //TODO smell cast
+    //TODO smell pair 
     public void updateEntities(GameController controller) {
-        for (EntityModel entity : thisChunk().getEntities())
-            if (entity instanceof UpdatableEntity)
-                ((UpdatableEntity) entity).update(controller);
+        ArrayList<EntityModel> toRemove = new ArrayList<>();
+        ArrayList<EntityModel> toAdd    = new ArrayList<>();
+
+        for (EntityModel entity : thisChunk().getEntities()) {
+            if (entity instanceof UpdatableEntity) {
+                Pair<EntityModel, EntityModel> changesToEntityArray = ((UpdatableEntity) entity).update(controller);
+                if (changesToEntityArray != null) {
+                    toAdd.add(changesToEntityArray.getKey());
+                    toRemove.add(changesToEntityArray.getValue());
+                }
+            }
+        }
+        thisChunk().getEntities().addAll(toAdd);
+        thisChunk().getEntities().removeAll(toRemove);
     }
+
+
 }
