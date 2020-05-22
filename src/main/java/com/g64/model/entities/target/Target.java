@@ -111,3 +111,5 @@ public class Target {
         }
     }
 }
+
+//TODO ADD VISITOR PATTERN TO REPORT
