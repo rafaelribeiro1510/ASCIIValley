@@ -1,5 +1,9 @@
 package com.g64.model.entities.target;
 
+import com.g64.controller.GameController;
+import com.g64.exceptions.Died;
+import com.g64.exceptions.RemoveFromInventory;
+import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.map.NullEntity;
@@ -14,52 +18,96 @@ import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
 public class Target {
+    GameController controller;
+    Position position;
     EntityModel entity;
     MapTerrain terrain;
 
-    public Target(EntityModel entity, MapTerrain terrain) {
-        this.entity = entity;
-        this.terrain = terrain;
+    public Target(GameController controller, Position position) {
+        this.controller = controller;
+        this.position = position;
+        this.entity = controller.getMapModel().thisChunk().getEntityAt(position);
+        this.terrain = controller.getMapModel().thisChunk().getTerrainAt(position);
     }
 
-    public boolean allowUsage(SeedDrop item) {
-        return (entity instanceof NullEntity && terrain instanceof SoilTerrain);
+    public void allowUsage(SeedDrop item) throws RemoveFromInventory {
+        if (entity instanceof NullEntity && terrain instanceof SoilTerrain){
+            controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(ConsumableDrop item) {
-        return true;
+    public void allowUsage(ConsumableDrop item) throws RemoveFromInventory {
+        controller.getPlayer().addHealth(item.getHealthUpValue());
+        item.decrementValue();
     }
 
-    public boolean allowUsage(LogDrop item) {
-        return (entity instanceof NullEntity && terrain instanceof GrassTerrain);
+    public void allowUsage(LogDrop item) throws RemoveFromInventory {
+        if  (entity instanceof NullEntity && terrain instanceof GrassTerrain){
+            controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(RockDrop item) {
-        return (entity instanceof NullEntity);
+    public void allowUsage(RockDrop item) throws RemoveFromInventory {
+        if (entity instanceof NullEntity){
+            controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(TallGrassDrop item) {
-        return (entity instanceof NullEntity && terrain instanceof GrassTerrain);
+    public void allowUsage(TallGrassDrop item) throws RemoveFromInventory {
+        if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
+            controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(Axe item) {
-        return (entity instanceof TreeEntity || entity instanceof Enemy);
+    public void allowUsage(Axe item) throws RemoveFromInventory {
+        if (entity instanceof TreeEntity || entity instanceof Enemy){
+            try { entity.reduceHealth(item.getHitValue()); }
+            catch (Died died) {
+                controller.getInventoryModel().add(entity.getRandomDrop());
+                controller.getMapModel().thisChunk().getEntities().remove(entity);
+            }
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(Hoe item) {
-        return (terrain instanceof GrassTerrain);
+    public void allowUsage(Hoe item) throws RemoveFromInventory {
+        if (terrain instanceof GrassTerrain){
+            controller.getMapModel().thisChunk().getTerrain().remove(terrain);
+            controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(Pickaxe item) {
-        return (entity instanceof RockEntity);
+    public void allowUsage(Pickaxe item) throws RemoveFromInventory {
+        if (entity instanceof RockEntity){
+            try { entity.reduceHealth(item.getHitValue()); }
+            catch (Died died) {
+                controller.getInventoryModel().add(entity.getRandomDrop());
+                controller.getMapModel().thisChunk().getEntities().remove(entity);
+            }
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(Scythe item) {
-        return (entity instanceof PlantEntity);
+    public void allowUsage(Scythe item) throws RemoveFromInventory {
+        if (entity instanceof PlantEntity){
+            try { entity.reduceHealth(item.getHitValue()); }
+            catch (Died died) {
+                controller.getInventoryModel().add(entity.getRandomDrop());
+                controller.getMapModel().thisChunk().getEntities().remove(entity);
+            }
+            item.decrementValue();
+        }
     }
 
-    public boolean allowUsage(WateringCan item) {
-        return (entity instanceof SeedEntity);
+    public void allowUsage(WateringCan item) throws RemoveFromInventory {
+        if (entity instanceof SeedEntity){
+            ((SeedEntity)entity).water(item.getHitValue());
+            item.decrementValue();
+        }
     }
-
 }

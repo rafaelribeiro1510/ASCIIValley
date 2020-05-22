@@ -4,6 +4,7 @@ import com.g64.controller.GameController;
 import com.g64.exceptions.CrossedDown;
 import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
+import com.g64.model.entities.target.Target;
 import com.g64.model.items.Item;
 
 public class InteractDown implements ActionEvent {
@@ -19,7 +20,7 @@ public class InteractDown implements ActionEvent {
         catch (CrossedDown ignored) { return; }
         if (selectedItem != null) {
             controller.getMapView().blink(target);
-            try { selectedItem.use(controller, target); }
+            try { selectedItem.accept(new Target(controller, target)); }
             catch (RemoveFromInventory removeFromInventory) { controller.getInventoryModel().getItems().remove(selectedItem); }
         }
     }

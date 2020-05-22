@@ -1,6 +1,8 @@
 package com.g64.model.items.drops;
 
 import com.g64.exceptions.RemoveFromInventory;
+import com.g64.model.Position;
+import com.g64.model.entities.EntityModel;
 import com.g64.model.items.Item;
 
 public abstract class Drop implements Item {
@@ -22,4 +24,7 @@ public abstract class Drop implements Item {
     }
 
     public int getValue(){ return amount; }
+
+    public abstract EntityModel getEntityFromDrop(Position position);
+
 }
