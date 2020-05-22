@@ -2,6 +2,7 @@ package com.g64.controller.action;
 
 import com.g64.controller.GameController;
 import com.g64.exceptions.CrossedRight;
+import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
 import com.g64.model.items.Item;
 
@@ -16,6 +17,10 @@ public class InteractRight implements ActionEvent {
         Position target;
         try { target = controller.getPlayer().getPosition().checkRight(GameController.MAP_WIDTH); }
         catch (CrossedRight ignored) { return; }
-        if (selectedItem != null) selectedItem.use(controller, target);
+        if (selectedItem != null) {
+            controller.getMapView().blink(target);
+            try { selectedItem.use(controller, target); }
+            catch (RemoveFromInventory removeFromInventory) { controller.getInventoryModel().getItems().remove(selectedItem); }
+        }
     }
 }

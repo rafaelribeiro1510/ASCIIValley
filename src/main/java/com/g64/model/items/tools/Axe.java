@@ -2,10 +2,10 @@ package com.g64.model.items.tools;
 
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
+import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
-import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.EntityModel;
-import com.g64.model.entities.map.TreeEntity;
+import com.g64.model.entities.target.Target;
 
 public class Axe extends Tool {
     public Axe() {
@@ -13,12 +13,12 @@ public class Axe extends Tool {
         this.durability = 100;
         this.hitValue = 5;
     }
-    //TODO Interface Interactable->MapTerrain, Entity : canInteract()
-    //TODO there may be no pretty way of fixing this double dependency
-    @Override
-    public boolean canBeUsed(GameController controller, Position position) {
-        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(position);
-        return (target instanceof TreeEntity || target instanceof Enemy);
+
+    public void use(GameController controller, Position position) throws RemoveFromInventory {
+        if (new Target(controller.getMapModel().thisChunk().getEntityAt(position), controller.getMapModel().thisChunk().getTerrainAt(position)).allowUsage(this)) {
+            itemEffectsOnMap(controller, position);
+            this.decrementValue();
+        }
     }
 
     @Override

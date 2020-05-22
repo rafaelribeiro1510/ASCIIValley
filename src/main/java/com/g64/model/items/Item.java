@@ -1,28 +1,18 @@
 package com.g64.model.items;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Broke;
+import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
 
-public abstract class Item {
-    protected String name;
+public interface Item {
+    void use(GameController controller, Position position) throws RemoveFromInventory;
 
-    public void use(GameController controller, Position position){
-        if (canBeUsed(controller, position)) {
-            itemEffectsOnMap(controller, position);
-            try { this.decrementValue(); }
-            catch (Broke broke) { controller.getInventoryModel().getItems().remove(this); }
-        }
-    }
+    String getName();
 
-    public String getName(){ return this.name; }
+    int getValue();
 
-    public abstract int getValue();
+    void decrementValue() throws RemoveFromInventory;
 
-    public abstract void decrementValue() throws Broke;
-
-    public abstract boolean canBeUsed(GameController controller, Position position);
-
-    public abstract void itemEffectsOnMap(GameController controller, Position position);
+    void itemEffectsOnMap(GameController controller, Position position);
 
 }

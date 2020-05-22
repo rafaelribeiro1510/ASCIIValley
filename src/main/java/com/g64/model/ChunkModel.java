@@ -8,7 +8,6 @@ import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.NullTerrain;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class ChunkModel {
     private int id;

@@ -1,21 +1,24 @@
 package com.g64.model.items.drops;
 
-import com.g64.exceptions.Broke;
+import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.items.Item;
 
-public abstract class Drop extends Item {
-    int amount;
+public abstract class Drop implements Item {
+    protected String name;
+    protected int amount;
 
     public Drop(String name){
         amount = 1;
         this.name = name;
     }
 
+    public String getName(){ return this.name; }
+
     public void incrementAmount(){ amount++; }
 
-    public void decrementValue() throws Broke {
+    public void decrementValue() throws RemoveFromInventory {
         amount--;
-        if (amount <= 0) throw new Broke();
+        if (amount <= 0) throw new RemoveFromInventory();
     }
 
     public int getValue(){ return amount; }
