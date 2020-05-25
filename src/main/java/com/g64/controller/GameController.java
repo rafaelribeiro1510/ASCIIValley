@@ -64,6 +64,9 @@ public class GameController {
                 Thread.sleep(1000/ frameRate);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
+            } catch (Died died) {
+                //GAME OVER
+                died.printStackTrace();
             }
         }
     }
@@ -87,6 +90,9 @@ public class GameController {
         } catch (CrossedRight crossedRight) {
             mapModel.moveEast();
             player.setPosition(new Position(0, player.getPosition().getY()));
+        } catch (Died died) {
+            //GAME OVER
+            died.printStackTrace();
         }
     }
 

@@ -2,10 +2,7 @@ package com.g64.model.entities.enemy.MovementHumour;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
+import com.g64.exceptions.*;
 import com.g64.model.entities.enemy.Enemy;
 
 public class MummyMovementAggroed extends EnemyMovementHumour {
@@ -14,7 +11,7 @@ public class MummyMovementAggroed extends EnemyMovementHumour {
     }
 
     @Override
-    public void move(GameController controller) {
+    public void move(GameController controller) throws Died {
         double verticalDifference   = me.getPosition().verticalDifference(controller.getPlayer().getPosition());
         double horizontalDifference = me.getPosition().horizontalDifference(controller.getPlayer().getPosition());
 

@@ -17,17 +17,11 @@ public class MoveRight implements ActionEvent {
     }
 
     @Override
-    public void execute() throws CrossedRight {
+    public void execute() throws CrossedRight, Died {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkRight(GameController.MAP_WIDTH));
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
-            try {
-                controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
-                return;
-            } catch (Died died) {
-                //GAME OVER
-                died.printStackTrace();
-            }
+            controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
         }
 
         if (!target.hasCollision()) entity.getPosition().right();

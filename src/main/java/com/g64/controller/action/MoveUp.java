@@ -17,17 +17,11 @@ public class MoveUp implements ActionEvent {
     }
 
     @Override
-    public void execute() throws CrossedUp {
+    public void execute() throws CrossedUp, Died {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkUp(GameController.MAP_HEIGHT));
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
-            try {
-                controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
-                return;
-            } catch (Died died) {
-                //GAME OVER
-                died.printStackTrace();
-            }
+            controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
         }
 
         if (!target.hasCollision()) entity.getPosition().up();

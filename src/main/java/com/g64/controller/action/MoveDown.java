@@ -17,17 +17,11 @@ public class MoveDown implements ActionEvent {
     }
 
     @Override
-    public void execute() throws CrossedDown {
+    public void execute() throws CrossedDown, Died{
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkDown(GameController.MAP_HEIGHT));
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
-            try {
-                controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
-                return;
-            } catch (Died died) {
-                //GAME OVER
-                died.printStackTrace();
-            }
+            controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
         }
 
         if (!target.hasCollision()) entity.getPosition().down();

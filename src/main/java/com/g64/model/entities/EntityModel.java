@@ -49,7 +49,7 @@ public abstract class EntityModel {
 
     public void reduceHealth(int x) throws Died {
         currentHealth -= x;
-        if (currentHealth <= 0) throw new Died();
+        if (currentHealth <= 0) throw new Died(this);
     }
 
     public int getCurrentHealth() {

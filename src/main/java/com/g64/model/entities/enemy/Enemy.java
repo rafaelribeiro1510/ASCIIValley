@@ -1,5 +1,6 @@
 package com.g64.model.entities.enemy;
 
+import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.entities.UpdatableEntity;
@@ -31,7 +32,7 @@ public abstract class Enemy extends EntityModel implements UpdatableEntity {
     }
 
     @Override
-    public void update(GameController controller) {
+    public void update(GameController controller) throws Died {
         if (movementCooldown == 0) {
             checkForPlayer(controller.getPlayer());
             movementHumour.move(controller);
