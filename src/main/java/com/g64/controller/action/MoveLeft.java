@@ -30,6 +30,6 @@ public class MoveLeft implements ActionEvent {
             }
         }
 
-        if (!target.hasCollision() || target instanceof NullEntity) entity.getPosition().left();
+        if (!target.hasCollision()) entity.getPosition().left();
     }
 }

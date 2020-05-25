@@ -30,6 +30,6 @@ public class MoveRight implements ActionEvent {
             }
         }
 
-        if (!target.hasCollision() || target instanceof NullEntity) entity.getPosition().right();
+        if (!target.hasCollision()) entity.getPosition().right();
     }
 }

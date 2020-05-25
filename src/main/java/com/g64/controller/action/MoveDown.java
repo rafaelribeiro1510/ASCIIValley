@@ -30,6 +30,6 @@ public class MoveDown implements ActionEvent {
             }
         }
 
-        if (!target.hasCollision() || target instanceof NullEntity) entity.getPosition().down();
+        if (!target.hasCollision()) entity.getPosition().down();
     }
 }

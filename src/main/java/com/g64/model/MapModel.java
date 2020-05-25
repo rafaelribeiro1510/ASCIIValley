@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MapModel {
-    static private final int[] ENEMY_CHUNKS = {8,11};
+    static private final int[] ENEMY_CHUNKS = {4, 8,11};
 
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
@@ -109,7 +109,6 @@ public class MapModel {
     }
 
     //TODO smell cast
-    //TODO smell pair 
     public void updateEntities(GameController controller) {
         ArrayList<EntityModel> toRemove = new ArrayList<>();
         ArrayList<EntityModel> toAdd    = new ArrayList<>();
