@@ -1,7 +1,8 @@
 package com.g64.controller;
 
 import com.g64.exceptions.*;
-import com.g64.view.Display;
+import com.g64.model.MenuModel;
+import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -11,9 +12,6 @@ import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.entities.Player;
 import com.g64.model.Position;
-import com.g64.view.EntityView;
-import com.g64.view.InventoryView;
-import com.g64.view.MapView;
 
 import java.io.IOException;
 
@@ -38,6 +36,8 @@ public class GameController {
     private boolean running;
     private Display display;
     private gameStates gameState;
+    private MenuModel menuModel;
+    private MenuView menuView;
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -49,6 +49,8 @@ public class GameController {
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
         this.gameState = gameStates.MAIN_MENU;
+        this.menuModel = new MenuModel();
+        this.menuView = new MenuView(display.getScreen());
     }
 
     public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
@@ -61,10 +63,12 @@ public class GameController {
     }
 
     public void start() {
-        while (running){
+        while (running) {
 
             switch (gameState) {
                 case MAIN_MENU:
+                    menuView.draw(menuModel);
+                    menuModel.getSelectedOption();
                     break;
 
                 case CONTROLS:
@@ -114,8 +118,14 @@ public class GameController {
         KeyStroke key = screen.pollInput();
         if (key == null) return null;
         if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
-        if (key.getKeyType() == KeyType.ArrowUp) return new InteractUp(this);
-        if (key.getKeyType() == KeyType.ArrowDown) return new InteractDown(this);
+        if (key.getKeyType() == KeyType.ArrowUp) {
+            if (gameState == gameStates.MAIN_MENU) return new MenuUp(this.menuModel);
+            else return new InteractUp(this);
+        }
+        if (key.getKeyType() == KeyType.ArrowDown) {
+            if (gameState == gameStates.MAIN_MENU) return new MenuDown(this.menuModel);
+            else return new InteractDown(this);
+        }
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
 
@@ -137,4 +147,6 @@ public class GameController {
     public MapView getMapView() { return mapView; }
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
+
+    public gameStates getGameState() { return gameState; }
 }
