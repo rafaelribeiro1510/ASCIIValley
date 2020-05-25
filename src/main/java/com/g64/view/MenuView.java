@@ -26,11 +26,11 @@ public class MenuView {
         for (int i = 0; i < menuModel.getMenuItems().size(); i++) {
             if (i == menuModel.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);
-                graphics.putString(40 - menuModel.getMenuItems().get(i).length() / 2, row += 2, menuModel.getMenuItems().get(i));
+                graphics.putString((40 - menuModel.getMenuItems().get(i).length()) / 2, row += 2, menuModel.getMenuItems().get(i));
                 graphics.disableModifiers(SGR.BLINK);
             }
             else {
-                graphics.putString(40 - menuModel.getMenuItems().get(i).length() / 2, row += 2, menuModel.getMenuItems().get(i));
+                graphics.putString((40 - menuModel.getMenuItems().get(i).length()) / 2, row += 2, menuModel.getMenuItems().get(i));
             }
         }
     }

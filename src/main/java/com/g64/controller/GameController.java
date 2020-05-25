@@ -15,11 +15,11 @@ import com.g64.model.Position;
 
 import java.io.IOException;
 
-enum gameStates {
-    MAIN_MENU, CONTROLS, IN_GAME;
-}
-
 public class GameController {
+
+    public enum gameStates {
+        IN_GAME, CONTROLS, MAIN_MENU;
+    }
 
     public static final int MAP_WIDTH = 40;
     public static final int MAP_HEIGHT = 15;
@@ -68,7 +68,14 @@ public class GameController {
             switch (gameState) {
                 case MAIN_MENU:
                     menuView.draw(menuModel);
-                    menuModel.getSelectedOption();
+
+                    try {
+                        processPlayerAction(getActionEventFromKeyboard());
+                        mapView.getScreen().refresh();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case CONTROLS:
@@ -129,6 +136,8 @@ public class GameController {
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
 
+        if (key.getKeyType() == KeyType.Enter && gameState == gameStates.MAIN_MENU) return new SelectMenuOption(this.menuModel, this);
+
         if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
 
         if (key.getCharacter() == 'w') return new MoveUp(this, player);
@@ -149,4 +158,6 @@ public class GameController {
     public InventoryModel getInventoryModel() { return inventoryModel; }
 
     public gameStates getGameState() { return gameState; }
+
+    public void setGameState(gameStates gameState) {  this.gameState = gameState; }
 }
