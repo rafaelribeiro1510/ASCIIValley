@@ -73,16 +73,6 @@ public class MapModel {
         } catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
-
-
-        // just here to test the writeMap function
-        /*
-        try {
-            writeMap(relativePathname);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
 

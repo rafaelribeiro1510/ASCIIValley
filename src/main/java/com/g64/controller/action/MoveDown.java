@@ -18,6 +18,7 @@ public class MoveDown implements ActionEvent {
 
     @Override
     public void execute() throws CrossedDown, Died{
+        //TODO this smell vv
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkDown(GameController.MAP_HEIGHT));
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {

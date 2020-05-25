@@ -105,13 +105,13 @@ public class GameController {
         if (key.getKeyType() == KeyType.ArrowDown) return new InteractDown(this);
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
-
-        if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
-
-        if (key.getCharacter() == 'w') return new MoveUp(this, player);
-        if (key.getCharacter() == 'd') return new MoveRight(this, player);
-        if (key.getCharacter() == 's') return new MoveDown(this, player);
-        if (key.getCharacter() == 'a') return new MoveLeft(this, player);
+        if (key.getKeyType() == KeyType.Character) {
+            if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
+            if (key.getCharacter() == 'w') return new MoveUp(this, player);
+            if (key.getCharacter() == 'd') return new MoveRight(this, player);
+            if (key.getCharacter() == 's') return new MoveDown(this, player);
+            if (key.getCharacter() == 'a') return new MoveLeft(this, player);
+        }
         return null;
     }
 
