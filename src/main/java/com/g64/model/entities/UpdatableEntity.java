@@ -1,8 +1,8 @@
 package com.g64.model.entities;
 
 import com.g64.controller.GameController;
-import javafx.util.Pair;
+import com.g64.exceptions.Grew;
 
 public interface UpdatableEntity {
-    Pair<EntityModel, EntityModel> update(GameController controller);
+    void update(GameController controller) throws Grew;
 }

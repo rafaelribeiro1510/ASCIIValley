@@ -14,16 +14,10 @@ import com.g64.model.items.tools.Tool;
 import com.g64.view.EntityView;
 import com.g64.view.InventoryView;
 import com.g64.view.MapView;
-import javafx.geometry.Pos;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.io.IOException;
-
-import static com.g64.controller.GameController.MAP_WIDTH;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 

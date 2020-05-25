@@ -6,10 +6,8 @@ import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.MovementHumour.EnemyMovementHumour;
 import com.googlecode.lanterna.TextColor;
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
-import javafx.util.Pair;
 
 public abstract class Enemy extends EntityModel implements UpdatableEntity {
     protected static final int AGGROED_COOLDOWN = 30;
@@ -33,7 +31,7 @@ public abstract class Enemy extends EntityModel implements UpdatableEntity {
     }
 
     @Override
-    public Pair<EntityModel, EntityModel> update(GameController controller) {
+    public void update(GameController controller) {
         if (movementCooldown == 0) {
             checkForPlayer(controller.getPlayer());
             movementHumour.move(controller);
@@ -41,6 +39,5 @@ public abstract class Enemy extends EntityModel implements UpdatableEntity {
         else {
             movementCooldown--;
         }
-        return null;
     }
 }

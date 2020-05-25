@@ -1,11 +1,11 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.exceptions.Grew;
 import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.EnemyFactory;
 import com.g64.model.entities.EntityModel;
 
-import javafx.util.Pair;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -116,16 +116,15 @@ public class MapModel {
 
         for (EntityModel entity : thisChunk().getEntities()) {
             if (entity instanceof UpdatableEntity) {
-                Pair<EntityModel, EntityModel> changesToEntityArray = ((UpdatableEntity) entity).update(controller);
-                if (changesToEntityArray != null) {
-                    toAdd.add(changesToEntityArray.getKey());
-                    toRemove.add(changesToEntityArray.getValue());
+                try {
+                    ((UpdatableEntity) entity).update(controller);
+                } catch (Grew grew) {
+                    toAdd.add(grew.getGrownEntity());
+                    toRemove.add(entity);
                 }
             }
         }
         thisChunk().getEntities().addAll(toAdd);
         thisChunk().getEntities().removeAll(toRemove);
     }
-
-
 }
