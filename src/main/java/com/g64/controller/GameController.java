@@ -1,6 +1,7 @@
 package com.g64.controller;
 
 import com.g64.exceptions.*;
+import com.g64.view.Display;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -15,7 +16,10 @@ import com.g64.view.InventoryView;
 import com.g64.view.MapView;
 
 import java.io.IOException;
-import java.util.Map;
+
+enum gameStates {
+    MAIN_MENU, CONTROLS, IN_GAME;
+}
 
 public class GameController {
 
@@ -32,15 +36,19 @@ public class GameController {
     private InventoryView inventoryView;
 
     private boolean running;
+    private Display display;
+    private gameStates gameState;
 
     public GameController() {
+        this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
         this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
         this.mapModel = new MapModel(5,  "resources/chunks.csv");
-        this.mapView = new MapView(MAP_WIDTH, MAP_HEIGHT + 3);
+        this.mapView = new MapView(display.getScreen());
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
+        this.gameState = gameStates.MAIN_MENU;
     }
 
     public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
@@ -54,16 +62,27 @@ public class GameController {
 
     public void start() {
         while (running){
-            mapView.draw(mapModel);
-            inventoryView.draw(inventoryModel, player.getCurrentHealth());
-            entityView.draw(player, mapModel.thisChunk());
-            try {
-                processPlayerAction(getActionEventFromKeyboard());    // Update player with keyboard actions
-                mapModel.updateEntities(this);              // Update non-player entities with generated actions
-                mapView.getScreen().refresh();
-                Thread.sleep(1000/ frameRate);
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+
+            switch (gameState) {
+                case MAIN_MENU:
+                    break;
+
+                case CONTROLS:
+                    break;
+
+                case IN_GAME:
+                    mapView.draw(mapModel);
+                    inventoryView.draw(inventoryModel, player.getCurrentHealth());
+                    entityView.draw(player, mapModel.thisChunk());
+                    try {
+                        processPlayerAction(getActionEventFromKeyboard());    // Update player with keyboard actions
+                        mapModel.updateEntities(this);              // Update non-player entities with generated actions
+                        mapView.getScreen().refresh();
+                        Thread.sleep(1000/ frameRate);
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
         }
     }
