@@ -38,6 +38,7 @@ public class GameController {
     private gameStates gameState;
     private MenuModel menuModel;
     private MenuView menuView;
+    private ControlsView controlsView;
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -51,6 +52,7 @@ public class GameController {
         this.gameState = gameStates.MAIN_MENU;
         this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
+        this.controlsView = new ControlsView(display.getScreen());
     }
 
     public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
@@ -73,12 +75,16 @@ public class GameController {
                         processPlayerAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
                     }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    catch (IOException e) { e.printStackTrace(); }
                     break;
 
                 case CONTROLS:
+                    controlsView.draw();
+                    try {
+                        processPlayerAction(getActionEventFromKeyboard());
+                        mapView.getScreen().refresh();
+                    }
+                    catch (IOException e) { e.printStackTrace(); }
                     break;
 
                 case IN_GAME:
@@ -124,6 +130,7 @@ public class GameController {
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
         if (key == null) return null;
+        if (gameState == gameStates.CONTROLS) return new ExitControls(this);
         if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
         if (key.getKeyType() == KeyType.ArrowUp) {
             if (gameState == gameStates.MAIN_MENU) return new MenuUp(this.menuModel);
