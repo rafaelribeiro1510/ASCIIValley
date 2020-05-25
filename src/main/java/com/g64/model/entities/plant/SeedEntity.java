@@ -1,13 +1,11 @@
 package com.g64.model.entities.plant;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Died;
-import com.g64.model.entities.EntityModel;
+import com.g64.exceptions.Grew;
 import com.g64.model.entities.UpdatableEntity;
 import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
-import javafx.util.Pair;
 
 public abstract class SeedEntity extends PlantEntity implements UpdatableEntity {
     int growth;
@@ -20,12 +18,11 @@ public abstract class SeedEntity extends PlantEntity implements UpdatableEntity 
     }
 
     @Override
-    public Pair<EntityModel, EntityModel> update(GameController controller) {
+    public void update(GameController controller) throws Grew {
         growth--;
         if (growth <= 0) {
-            return new Pair<> (this.grow(controller), this);
+            throw new Grew(this.grow(controller));
         }
-        return null;
     }
 
     public void water(int value){
