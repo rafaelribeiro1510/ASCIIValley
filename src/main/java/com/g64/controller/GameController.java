@@ -74,8 +74,9 @@ public class GameController {
                     try {
                         processPlayerAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
+                        Thread.sleep(1000/ frameRate);
                     }
-                    catch (IOException e) { e.printStackTrace(); }
+                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
                     break;
 
                 case CONTROLS:
@@ -83,8 +84,9 @@ public class GameController {
                     try {
                         processPlayerAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
+                        Thread.sleep(1000/ frameRate);
                     }
-                    catch (IOException e) { e.printStackTrace(); }
+                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
                     break;
 
                 case IN_GAME:
