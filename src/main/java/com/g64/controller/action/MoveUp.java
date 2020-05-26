@@ -22,6 +22,7 @@ public class MoveUp implements ActionEvent {
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
             controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
+            return;
         }
 
         if (!target.hasCollision()) entity.getPosition().up();
