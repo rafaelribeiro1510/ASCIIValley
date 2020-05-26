@@ -124,6 +124,14 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 
 ## Known Code Smells And Refactoring Suggestions
 
+SMELLS
+- Metodos na position que recebem width e height
+(- Pair Enemy.java / SeedEntity.java / UpdatableEntity.java / MapModel.java not defined)
+- Mummy.java State for Mummmy humor
+(- Switch in MapEntityFactory/MapTerrainFactory due to the factory design pattern)
+- Target.java - metodos muito parecidos repetidos?
+- Position.java 
+
 ### 1. Bloater - Long Method
 
 #### **Problem in Context**
@@ -134,51 +142,28 @@ in charge of porting the map information from the .csv file to the Map object.
 Even after multiple uses of the **Extract Method**, it can still be considered too long,
 mostly because of the mess of code in charge of opening and reading the file itself.
 
-
-### 2. OOP Abuser - Switch statements
-
-#### **Problem in Context**
-On the map terrain interpretation process there is a switch case that is in charge of associating each integer in the save file
-with its corresponding, hardcoded color value. 
-[MapTerrainModel](../src/main/java/com.g64.model/MapTerrainModel.java)
-
-#### **Solution**
-This could be resolved by breaking up the rgb values into classes by using the **Replace Conditional with Polymorphism** method, which would make it more readable but also
-easier to, if needed, add specific attributes to certain terrain types (though as of now we do not see this happening).
-
-
-### 3. Dispensable - Data Class
+### 2. Object-Orientation Abuser - Switch Statement
 
 #### **Problem in Context**
-In the [MapEntityModel](../src/main/java/com.g64.model/MapEntityModel.java) file there is an auxiliary class ``myPair`` (lines 10-18) that is only used to "group" data (data class).
-Even though its existence is, in our opinion, justified by its usage in the ``MapEntityModel`` class (groups a ``TextColor`` and a ``boolean``), its implementation can be improved.
+In the [GameController](../src/main/java/com.g64.controller/GameController.java) file, in function ``start``,
+there is a Switch statement for the variable ```gameState``` that differentiates what to display on the screen,
+implementing a basic State Machine.
 
 #### **Solution**
-In order to increase encapsulation, the auxiliary class could be declared as `final`, all its fields as `private final` and by adding getters, or even maybe by nesting the class inside ``MapEntityModel``.  
+Using the **State Design Pattern**, each different game state could be a class that implements the ``GameState`` interface,
+simplifying the code of the ``start`` function and improving readability.
 
-
-### 4. Bloater - Data Clump
+### 3. Dispensable - Duplicate Code
 
 #### **Problem in Context**
-Both [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) and [MapModel](../src/main/java/com.g64.model/MapModel.java) classes have two fields in common: ``private int width`` and ``private int height``.
-This situation is unnecessary due to the fact that both fields are only used outside of the class constructor in the class ChunkModel (getter of width and height - lines 24 and 28).
+In the same file and function, there is a Switch statement for the variable GameState that differentiates what to display on the screen.
+On each case, there are calls for the functions `processPlayerAction()` (and `getActionEventFromKeyboard())`),
+``mapView.getScreen().refresh()`` and `Thread.sleep()`.
 
 #### **Solution**
-Therefore, they could be removed from [MapModel](../src/main/java/com.g64.model/MapModel.java) which would reduce the number of parameters of this class's constructor.
-Furthermore, because the ``width``and ``height`` fields have constant values (the only values that are passed to them are ``MAP_WIDTH``and `MAP_HEIGHT` present in lines 22 and 23 of [GameController](../src/main/java/com.g64.controller/GameController.java))
-those "constants" could be moved to [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) and passed directly to the private field, eliminating in the class as well the need to have them in the constructor.
- 
+Creating a method that calls that set of functions or just moving those function calls to after the end of the Switch statement
+should reduce considerably the size of the function without introducing any bugs.
 
-### 5. Dispensable - Duplicate Code
-
-#### **Problem in Context**
-In the [ChunkModel](../src/main/java/com.g64.model/ChunkModel.java) class there are in two occasions of two functions which have different parameters and do the same task: ``getTerrainColorAt(int x, int y)`` (line 36) and ``getTerrainColorAt(Position position)`` (line 40)
-are essentially the same with the difference that in the first one the ``x`` and the ``y`` are passed directly while in the second one they are passed to the function inside a ``Position``
-object. The same applies to ``getEntityAt(int x, int y)`` (line 44) and ``getEntityAt(Position position)`` (line 48).
-This duplication of code could lead to time-consuming debugging caused for example by a small change only in one of the functions let's say "A1" (leaving "A2" unchanged) that could result in different outputs in situations apparently identical.
-
-#### **Solution**
-To fix this repetition of code one could delete the version of each function that has 2 parameters and where those specific "2-parameter" functions were called, pass as the argument ``new Position(x,y)``.
 
 ## Testing
 ![Coverage1](screenshots/lpoo_code_coverage1.png)
