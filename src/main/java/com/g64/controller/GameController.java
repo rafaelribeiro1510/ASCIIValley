@@ -18,7 +18,7 @@ import java.io.IOException;
 public class GameController {
 
     public enum gameStates {
-        IN_GAME, CONTROLS, MAIN_MENU;
+        IN_GAME, CONTROLS, MAIN_MENU, DEAD;
     }
 
     public static final int MAP_WIDTH = 40;
@@ -39,6 +39,7 @@ public class GameController {
     private MenuModel menuModel;
     private MenuView menuView;
     private ControlsView controlsView;
+    private DeadView deadView;
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -53,6 +54,7 @@ public class GameController {
         this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
         this.controlsView = new ControlsView(display.getScreen());
+        this.deadView = new DeadView(display.getScreen());
     }
 
     public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
@@ -102,9 +104,20 @@ public class GameController {
                         e.printStackTrace();
                     }
                     catch (Died died) {
-                        //GAME OVER
-                        died.printStackTrace();
+                        // GAME OVER
+                        getMapView().getScreen().clear();
+                        gameState = gameStates.DEAD;
                     }
+                    break;
+
+                case DEAD:
+                    deadView.draw();
+                    try {
+                        processPlayerAction(getActionEventFromKeyboard());
+                        mapView.getScreen().refresh();
+                        Thread.sleep(1000/ frameRate);
+                    }
+                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
                     break;
             }
         }
@@ -131,7 +144,8 @@ public class GameController {
             player.setPosition(new Position(0, player.getPosition().getY()));
         } catch (Died died) {
             //GAME OVER
-            died.printStackTrace();
+            getMapView().getScreen().clear();
+            gameState = gameStates.DEAD;
         }
     }
 
@@ -139,6 +153,10 @@ public class GameController {
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
         if (key == null) return null;
+        if (gameState == gameStates.DEAD) {
+            this = new GameController();
+            return new ExitControls(this);
+        }
         if (gameState == gameStates.CONTROLS) return new ExitControls(this);
         if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
         if (key.getKeyType() == KeyType.ArrowUp) {
