@@ -100,6 +100,9 @@ public class MapModel {
     }
 
     //TODO smell cast
+
+    //TODO (List of updatable entities)
+    // Command Pattern ?
     public void updateEntities(GameController controller) throws Died {
         ArrayList<EntityModel> toRemove = new ArrayList<>();
         ArrayList<EntityModel> toAdd    = new ArrayList<>();
