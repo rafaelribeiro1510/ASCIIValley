@@ -30,23 +30,23 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 
 ![Chunk Transition Previous - figure 2](./screenshots/movement.gif)
 
-
-## Planned Features
-
-### Other Entities and their "behaviour".
-The game needs more ways of interacting with the player and this will be achieved with enemy entities (Mummies, for example)
-that present simple aggressive behaviour.
+### Enemies and their "behaviour".
+The enemy entities (Mummies) have different behaviour depending on how close they are to the player,
+determining their next movement based on it.
 
 ### Combat 
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
 
 ### Main menu
-The starting point of the game will be a menu that presents the player with options to load the game and see game controls - ![Main menu Mock-up - figure 3](./screenshots/mainMenuMockup.png)
+The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit - ![Main menu Mock-up - figure 3](./screenshots/mainMenuMockup.png)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
 and also the items collected through said interactions. ![GUI Mock-up - figure 4](./screenshots/guiMockup.png)
 
+## Planned Features
+
+All Planned Features have been implemented.
 
 ## Desired Features
 This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
@@ -55,6 +55,7 @@ not be achieved in the time frame we have.
 ### Day-night Cycle, that visually alters the map.
 
 ### Simple NPC system with item delivery missions.
+
 
 ## Design
 
