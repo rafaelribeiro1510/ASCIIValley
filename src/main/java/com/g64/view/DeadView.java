@@ -16,7 +16,7 @@ public class DeadView {
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
 
-        graphics.enableModifiers(SGR.BOLD, SGR.BLINK);
+        graphics.enableModifiers(SGR.BOLD);
 
         graphics.putString((40 - 9) / 2, 8, "GAME OVER");
     }
