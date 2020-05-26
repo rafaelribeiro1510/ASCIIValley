@@ -153,10 +153,7 @@ public class GameController {
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
         if (key == null) return null;
-        if (gameState == gameStates.DEAD) {
-            this = new GameController();
-            return new ExitControls(this);
-        }
+        if (gameState == gameStates.DEAD) return new QuitGame(this);
         if (gameState == gameStates.CONTROLS) return new ExitControls(this);
         if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
         if (key.getKeyType() == KeyType.ArrowUp) {
