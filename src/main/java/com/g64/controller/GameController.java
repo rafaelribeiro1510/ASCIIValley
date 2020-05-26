@@ -101,6 +101,10 @@ public class GameController {
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
+                    catch (Died died) {
+                        //GAME OVER
+                        died.printStackTrace();
+                    }
                     break;
             }
         }
@@ -125,6 +129,9 @@ public class GameController {
         } catch (CrossedRight crossedRight) {
             mapModel.moveEast();
             player.setPosition(new Position(0, player.getPosition().getY()));
+        } catch (Died died) {
+            //GAME OVER
+            died.printStackTrace();
         }
     }
 
@@ -147,12 +154,13 @@ public class GameController {
 
         if (key.getKeyType() == KeyType.Enter && gameState == gameStates.MAIN_MENU) return new SelectMenuOption(this.menuModel, this);
 
-        if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
-
-        if (key.getCharacter() == 'w') return new MoveUp(this, player);
-        if (key.getCharacter() == 'd') return new MoveRight(this, player);
-        if (key.getCharacter() == 's') return new MoveDown(this, player);
-        if (key.getCharacter() == 'a') return new MoveLeft(this, player);
+        if (key.getKeyType() == KeyType.Character) {
+            if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
+            if (key.getCharacter() == 'w') return new MoveUp(this, player);
+            if (key.getCharacter() == 'd') return new MoveRight(this, player);
+            if (key.getCharacter() == 's') return new MoveDown(this, player);
+            if (key.getCharacter() == 'a') return new MoveLeft(this, player);
+        }
         return null;
     }
 

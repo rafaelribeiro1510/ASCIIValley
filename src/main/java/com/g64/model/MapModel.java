@@ -1,6 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.exceptions.Died;
 import com.g64.exceptions.Grew;
 import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.EnemyFactory;
@@ -10,7 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MapModel {
-    static private final int[] ENEMY_CHUNKS = {8,11};
+    static private final int[] ENEMY_CHUNKS = {4, 8,11};
 
     private int currentChunkID;
     private ArrayList<ChunkModel> chunks;
@@ -72,16 +73,6 @@ public class MapModel {
         } catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
-
-
-        // just here to test the writeMap function
-        /*
-        try {
-            writeMap(relativePathname);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
 
@@ -109,8 +100,7 @@ public class MapModel {
     }
 
     //TODO smell cast
-    //TODO smell pair 
-    public void updateEntities(GameController controller) {
+    public void updateEntities(GameController controller) throws Died {
         ArrayList<EntityModel> toRemove = new ArrayList<>();
         ArrayList<EntityModel> toAdd    = new ArrayList<>();
 

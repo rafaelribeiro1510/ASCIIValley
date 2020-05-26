@@ -8,4 +8,5 @@ public class Application {
     }
 }
 
-//TODO mudar instanceof todos https://dzone.com/articles/instanceof-considered-harmful
+//TODO Smell: some instanceof still
+//TODO Smell: use of exceptions to controll flow (corssed e afins)
