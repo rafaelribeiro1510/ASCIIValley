@@ -1,10 +1,7 @@
 package com.g64.controller;
 
 import com.g64.controller.action.*;
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
+import com.g64.exceptions.*;
 import com.g64.model.ChunkModel;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
@@ -44,28 +41,28 @@ public class actionEventTest {
     }
 
     @Test
-    public void actionRightNewChunk() throws CrossedRight {
+    public void actionRightNewChunk() throws CrossedRight, Died {
         MoveRight move = Mockito.mock(MoveRight.class); doThrow(CrossedRight.class).when(move).execute();
         controller.processPlayerAction(move);
         verify(controller.getMapModel()).moveEast();
     }
 
     @Test
-    public void actionLeftNewChunk() throws CrossedLeft {
+    public void actionLeftNewChunk() throws CrossedLeft, Died {
         MoveLeft move = Mockito.mock(MoveLeft.class); doThrow(CrossedLeft.class).when(move).execute();
         controller.processPlayerAction(move);
         verify(controller.getMapModel()).moveWest();
     }
 
     @Test
-    public void actionUpNewChunk() throws CrossedUp {
+    public void actionUpNewChunk() throws CrossedUp, Died {
         MoveUp move = Mockito.mock(MoveUp.class); doThrow(CrossedUp.class).when(move).execute();
         controller.processPlayerAction(move);
         verify(controller.getMapModel()).moveNorth();
     }
 
     @Test
-    public void actionDownNewChunk() throws CrossedDown {
+    public void actionDownNewChunk() throws CrossedDown, Died {
         MoveDown move = Mockito.mock(MoveDown.class); doThrow(CrossedDown.class).when(move).execute();
         controller.processPlayerAction(move);
         verify(controller.getMapModel()).moveSouth();
