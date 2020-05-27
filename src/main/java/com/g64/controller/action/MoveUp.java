@@ -25,4 +25,9 @@ public class MoveUp implements ActionEvent {
 
         if (!target.hasCollision()) entity.getPosition().moveUp();
     }
+
+    @Override
+    public EntityModel getEntity() {
+        return entity;
+    }
 }

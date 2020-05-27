@@ -1,6 +1,7 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
+import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.plant.PlantEntity;
 import com.g64.model.entities.plant.SeedEntity;
 
@@ -21,5 +22,10 @@ public class Grew implements ActionEvent {
     public void execute() {
         controller.getMapModel().thisChunk().getEntities().remove(seed);
         controller.getMapModel().thisChunk().getEntities().add(plant);
+    }
+
+    @Override
+    public EntityModel getEntity() {
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package com.g64.controller;
 
 import com.g64.exceptions.*;
 import com.g64.model.MenuModel;
+import com.g64.model.entities.EntityModel;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -122,7 +123,8 @@ public class GameController {
         if (event==null) return;
         try {
             event.execute();
-            mapModel.handleMapCrossing(event.getEntity(), checkBoundaries(event.getEntity().getPosition()));
+            EntityModel entity = event.getEntity();
+            if (entity != null) mapModel.handleMapCrossing(entity, checkBoundaries(entity.getPosition()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Died died) {
@@ -170,6 +172,28 @@ public class GameController {
         if (position.getX() >= MAP_WIDTH) return Crossing.CROSS_RIGHT;
         else if (position.getX() < 0) return Crossing.CROSS_LEFT;
         return Crossing.NO_CROSS;
+    }
+
+    public void handleMapCrossing(Crossing crossing){
+        switch (crossing){
+            case NO_CROSS: break;
+            case CROSS_DOWN:
+                mapModel.moveSouth();
+                player.setPosition(new Position(player.getPosition().getX(), 0));
+                break;
+            case CROSS_UP:
+                mapModel.moveNorth();
+                player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
+                break;
+            case CROSS_LEFT:
+                mapModel.moveWest();
+                player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
+                break;
+            case CROSS_RIGHT:
+                mapModel.moveEast();
+                player.setPosition(new Position(0, player.getPosition().getY()));
+                break;
+        }
     }
 
     public void setRunning(boolean running){ this.running = running; }

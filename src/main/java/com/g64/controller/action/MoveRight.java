@@ -25,4 +25,9 @@ public class MoveRight implements ActionEvent {
 
         if (!target.hasCollision()) entity.getPosition().moveRight();
     }
+
+    @Override
+    public EntityModel getEntity() {
+        return entity;
+    }
 }

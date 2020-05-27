@@ -26,4 +26,9 @@ public class MoveDown implements ActionEvent {
 
         if (!target.hasCollision()) entity.getPosition().moveDown();
     }
+
+    @Override
+    public EntityModel getEntity() {
+        return entity;
+    }
 }

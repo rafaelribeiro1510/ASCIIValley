@@ -1,6 +1,7 @@
 package com.g64.controller.action;
 
 import com.g64.model.MenuModel;
+import com.g64.model.entities.EntityModel;
 
 import java.io.IOException;
 
@@ -16,5 +17,10 @@ public class MenuUp implements ActionEvent {
                 menuModel.getSelectedOption() : menuModel.getSelectedOption() - 1;
 
         menuModel.setSelectedOption(newSelected);
+    }
+
+    @Override
+    public EntityModel getEntity() {
+        return null;
     }
 }

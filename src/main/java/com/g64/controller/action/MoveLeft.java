@@ -25,4 +25,9 @@ public class MoveLeft implements ActionEvent {
 
         if (!target.hasCollision()) entity.getPosition().moveLeft();
     }
+
+    @Override
+    public EntityModel getEntity() {
+        return entity;
+    }
 }

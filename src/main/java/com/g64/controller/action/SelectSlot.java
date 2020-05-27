@@ -1,6 +1,7 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
+import com.g64.model.entities.EntityModel;
 
 public class SelectSlot implements ActionEvent {
     private final GameController controller;
@@ -14,5 +15,10 @@ public class SelectSlot implements ActionEvent {
     @Override
     public void execute(){
         controller.getInventoryModel().setSelectedItem(slot);
+    }
+
+    @Override
+    public EntityModel getEntity() {
+        return null;
     }
 }
