@@ -7,7 +7,7 @@ import com.g64.model.items.drops.Drop;
 
 import java.util.Random;
 
-public abstract class EntityModel {
+public abstract class EntityModel  extends UpdatableEntity{
     protected Position position;
     protected String string;
     protected TextColor color;

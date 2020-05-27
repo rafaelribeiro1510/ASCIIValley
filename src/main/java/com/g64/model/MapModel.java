@@ -99,22 +99,16 @@ public class MapModel {
         return false;
     }
 
-    //TODO smell cast
-
-    //TODO (List of updatable entities)
-    // Command Pattern ?
     public void updateEntities(GameController controller) throws Died {
         ArrayList<EntityModel> toRemove = new ArrayList<>();
         ArrayList<EntityModel> toAdd    = new ArrayList<>();
 
         for (EntityModel entity : thisChunk().getEntities()) {
-            if (entity instanceof UpdatableEntity) {
                 try {
-                    ((UpdatableEntity) entity).update(controller);
+                    entity.update(controller);
                 } catch (Grew grew) {
                     toAdd.add(grew.getGrownEntity());
                     toRemove.add(entity);
-                }
             }
         }
         thisChunk().getEntities().addAll(toAdd);

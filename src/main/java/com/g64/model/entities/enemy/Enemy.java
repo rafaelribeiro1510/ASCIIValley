@@ -3,14 +3,13 @@ package com.g64.model.entities.enemy;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
-import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.MovementHumour.EnemyMovementHumour;
 import com.googlecode.lanterna.TextColor;
 import com.g64.controller.GameController;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 
-public abstract class Enemy extends EntityModel implements UpdatableEntity {
+public abstract class Enemy extends EntityModel {
     protected static final int AGGROED_COOLDOWN = 30;
     protected static final int NOT_AGGROED_COOLDOWN = 60;
 

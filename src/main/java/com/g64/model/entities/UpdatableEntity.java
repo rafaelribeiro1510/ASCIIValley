@@ -4,6 +4,6 @@ import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
 import com.g64.exceptions.Grew;
 
-public interface UpdatableEntity {
-    void update(GameController controller) throws Grew, Died;
+public abstract class UpdatableEntity {
+    public void update(GameController controller) throws Grew, Died{}
 }
