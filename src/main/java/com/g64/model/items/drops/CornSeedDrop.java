@@ -4,7 +4,7 @@ import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.plant.CornSeedEntity;
-import com.g64.model.entities.target.Target;
+import com.g64.model.entities.visitors.TargetVisitor;
 
 public class CornSeedDrop extends SeedDrop {
 
@@ -14,7 +14,7 @@ public class CornSeedDrop extends SeedDrop {
     }
 
     @Override
-    public void accept(Target target) throws RemoveFromInventory {
-        target.allowUsage(this);
+    public void accept(TargetVisitor targetVisitor) throws RemoveFromInventory {
+        targetVisitor.allowUsage(this);
     }
 }

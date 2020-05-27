@@ -1,4 +1,4 @@
-package com.g64.model.entities.target;
+package com.g64.model.entities.visitors;
 
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
@@ -18,13 +18,13 @@ import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.NullTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
-public class Target {
+public class TargetVisitor {
     GameController controller;
     Position position;
     EntityModel entity;
     MapTerrain terrain;
 
-    public Target(GameController controller, Position position) {
+    public TargetVisitor(GameController controller, Position position) {
         this.controller = controller;
         this.position = position;
         this.entity = controller.getMapModel().thisChunk().getEntityAt(position);

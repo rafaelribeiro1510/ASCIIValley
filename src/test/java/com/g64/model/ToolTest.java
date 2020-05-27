@@ -6,7 +6,7 @@ import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.plant.TallGrassEntity;
-import com.g64.model.entities.target.Target;
+import com.g64.model.entities.visitors.TargetVisitor;
 import com.g64.model.items.tools.Axe;
 import com.g64.model.items.tools.Tool;
 import com.g64.model.terrain.NullTerrain;
@@ -53,16 +53,16 @@ public class ToolTest {
     @Test
     public void successfulUsage() throws Died, RemoveFromInventory {
         Tool tool = new Axe();
-        tool.accept(new Target(controller, new Position(1,1)));
+        tool.accept(new TargetVisitor(controller, new Position(1,1)));
         verify(mummySpy).reduceHealth(tool.getHitValue());
     }
 
     @Test
     public void successfulItemDrop() throws Died, RemoveFromInventory {
         Tool tool = new Axe();
-        tool.accept(new Target(controller, new Position(1,1)));
+        tool.accept(new TargetVisitor(controller, new Position(1,1)));
 
-        tool.accept(new Target(controller, new Position(1,1)));
+        tool.accept(new TargetVisitor(controller, new Position(1,1)));
         verify(mummySpy, Mockito.times(2)).reduceHealth(tool.getHitValue());
         verify(inventorySpy).add(mummySpy.getRandomDrop());
     }
@@ -70,7 +70,7 @@ public class ToolTest {
     @Test
     public void failedUsage() throws RemoveFromInventory {
         Tool tool = new Axe();
-        tool.accept(new Target(controller, new Position(0,0)));
+        tool.accept(new TargetVisitor(controller, new Position(0,0)));
         assertEquals(chunkSpy.getEntities().get(0), grass);
     }
 }

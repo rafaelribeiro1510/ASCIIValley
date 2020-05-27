@@ -14,7 +14,6 @@ import com.g64.model.entities.Player;
 import com.g64.model.Position;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GameController {
 
@@ -75,7 +74,7 @@ public class GameController {
                     menuView.draw(menuModel);
 
                     try {
-                        processPlayerAction(getActionEventFromKeyboard());
+                        processAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
                         Thread.sleep(1000/ frameRate);
                     }
@@ -85,7 +84,7 @@ public class GameController {
                 case CONTROLS:
                     controlsView.draw();
                     try {
-                        processPlayerAction(getActionEventFromKeyboard());
+                        processAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
                         Thread.sleep(1000/ frameRate);
                     }
@@ -97,8 +96,8 @@ public class GameController {
                     inventoryView.draw(inventoryModel, player.getCurrentHealth());
                     entityView.draw(player, mapModel.thisChunk());
                     try {
-                        processPlayerAction(getActionEventFromKeyboard());              // Update player with keyboard actions
-                        processEntityActions(mapModel.updateEntities(this));   // Update non-player entities with generated actions
+                        processAction(getActionEventFromKeyboard());              // Update player with keyboard actions
+                        for (ActionEvent event: mapModel.updateEntities(this)) processAction(event);   // Update non-player entities with generated actions
                         mapView.getScreen().refresh();
                         Thread.sleep(1000/ frameRate);
                     } catch (IOException | InterruptedException e) {
@@ -109,7 +108,7 @@ public class GameController {
                 case DEAD:
                     deadView.draw();
                     try {
-                        processPlayerAction(getActionEventFromKeyboard());
+                        processAction(getActionEventFromKeyboard());
                         mapView.getScreen().refresh();
                         Thread.sleep(1000/ frameRate);
                     }
@@ -119,30 +118,15 @@ public class GameController {
         }
     }
 
-    public void processEntityActions(ArrayList<ActionEvent> events){
-        for (ActionEvent event : events){
-            try {
-                event.execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Died died) {
-                // GAME OVER
-                getMapView().getScreen().clear();
-                gameState = gameStates.DEAD;
-            }
-        }
-    }
-
-    public void processPlayerAction(ActionEvent event){
-        if (event == null) return;
+    public void processAction(ActionEvent event){
+        if (event==null) return;
         try {
             event.execute();
-            handleMapCrossing(checkBoundaries(player.getPosition()));
-        }
-        catch (IOException e){
+            mapModel.handleMapCrossing(event.getEntity(), checkBoundaries(event.getEntity().getPosition()));
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (Died died) {
-            //GAME OVER
+            // GAME OVER
             getMapView().getScreen().clear();
             gameState = gameStates.DEAD;
         }
@@ -186,28 +170,6 @@ public class GameController {
         if (position.getX() >= MAP_WIDTH) return Crossing.CROSS_RIGHT;
         else if (position.getX() < 0) return Crossing.CROSS_LEFT;
         return Crossing.NO_CROSS;
-    }
-
-    public void handleMapCrossing(Crossing crossing){
-        switch (crossing){
-            case NO_CROSS: break;
-            case CROSS_DOWN:
-                mapModel.moveSouth();
-                player.setPosition(new Position(player.getPosition().getX(), 0));
-                break;
-            case CROSS_UP:
-                mapModel.moveNorth();
-                player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
-                break;
-            case CROSS_LEFT:
-                mapModel.moveWest();
-                player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
-                break;
-            case CROSS_RIGHT:
-                mapModel.moveEast();
-                player.setPosition(new Position(0, player.getPosition().getY()));
-                break;
-        }
     }
 
     public void setRunning(boolean running){ this.running = running; }

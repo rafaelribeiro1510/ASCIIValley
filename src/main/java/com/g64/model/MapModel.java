@@ -3,11 +3,16 @@ package com.g64.model;
 import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;
 import com.g64.exceptions.Died;
+import com.g64.model.entities.Player;
+import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
 import com.g64.model.entities.EntityModel;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import static com.g64.controller.GameController.MAP_HEIGHT;
+import static com.g64.controller.GameController.MAP_WIDTH;
 
 public class MapModel {
     static private final int[] ENEMY_CHUNKS = {4, 8,11};
@@ -105,5 +110,47 @@ public class MapModel {
             result.add(entity.update(controller));
         }
         return result;
+    }
+
+    public void handleMapCrossing(EntityModel entity, GameController.Crossing crossing){
+        if (entity instanceof Player) {
+            switch (crossing) {
+                case NO_CROSS:
+                    break;
+                case CROSS_DOWN:
+                    moveSouth();
+                    entity.setPosition(new Position(entity.getPosition().getX(), 0));
+                    break;
+                case CROSS_UP:
+                    moveNorth();
+                    entity.setPosition(new Position(entity.getPosition().getX(), MAP_HEIGHT - 1));
+                    break;
+                case CROSS_LEFT:
+                    moveWest();
+                    entity.setPosition(new Position(MAP_WIDTH - 1, entity.getPosition().getY()));
+                    break;
+                case CROSS_RIGHT:
+                    moveEast();
+                    entity.setPosition(new Position(0, entity.getPosition().getY()));
+                    break;
+            }
+        }
+        else if (entity instanceof Enemy){
+            switch (crossing){
+                case NO_CROSS: break;
+                case CROSS_DOWN:
+                    entity.setPosition(new Position(entity.getPosition().getX(), MAP_HEIGHT - 1));
+                    break;
+                case CROSS_UP:
+                    entity.setPosition(new Position(entity.getPosition().getX(), 0));
+                    break;
+                case CROSS_LEFT:
+                    entity.setPosition(new Position(0, entity.getPosition().getY()));
+                    break;
+                case CROSS_RIGHT:
+                    entity.setPosition(new Position(MAP_WIDTH - 1, entity.getPosition().getY()));
+                    break;
+            }
+        }
     }
 }
