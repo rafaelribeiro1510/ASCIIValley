@@ -1,9 +1,9 @@
 package com.g64.model.entities;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Died;
-import com.g64.exceptions.Grew;
+import com.g64.controller.action.ActionEvent;
+import com.g64.controller.action.NullAction;
 
 public abstract class UpdatableEntity {
-    public void update(GameController controller) throws Grew, Died{}
+    public ActionEvent update(GameController controller) { return new NullAction(); }
 }

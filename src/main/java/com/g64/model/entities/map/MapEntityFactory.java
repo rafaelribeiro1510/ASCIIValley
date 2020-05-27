@@ -6,15 +6,15 @@ import com.g64.model.entities.plant.TallGrassEntity;
 public class MapEntityFactory {
     public static MapEntity get(Position position, String string){
         switch (string){
-            case "^": // Rock
+            case "^":
                 return new RockEntity(position);
-            case "~": // Water
+            case "~":
                 return new WaterEntity(position);
-            case "y": // Grass
+            case "y":
                 return new TallGrassEntity(position);
-            case "O": // Tree
+            case "O":
                 return new TreeEntity(position);
-            case "#": // Invisible Wall
+            case "#":
                 return new InvisibleWallEntity(position);
             default:
                 return null;

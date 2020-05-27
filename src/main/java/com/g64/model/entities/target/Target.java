@@ -15,6 +15,7 @@ import com.g64.model.items.drops.*;
 import com.g64.model.items.tools.*;
 import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
+import com.g64.model.terrain.NullTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
 public class Target {
@@ -50,7 +51,7 @@ public class Target {
     }
 
     public void allowUsage(RockDrop item) throws RemoveFromInventory {
-        if (entity instanceof NullEntity){
+        if (entity instanceof NullEntity && !(terrain instanceof NullTerrain)){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             item.decrementValue();
         }
@@ -75,7 +76,7 @@ public class Target {
     }
 
     public void allowUsage(Hoe item) throws RemoveFromInventory {
-        if (terrain instanceof GrassTerrain){
+        if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getTerrain().remove(terrain);
             controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
             item.decrementValue();

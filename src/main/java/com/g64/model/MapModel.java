@@ -1,9 +1,8 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.controller.action.ActionEvent;
 import com.g64.exceptions.Died;
-import com.g64.exceptions.Grew;
-import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.EnemyFactory;
 import com.g64.model.entities.EntityModel;
 
@@ -99,19 +98,12 @@ public class MapModel {
         return false;
     }
 
-    public void updateEntities(GameController controller) throws Died {
-        ArrayList<EntityModel> toRemove = new ArrayList<>();
-        ArrayList<EntityModel> toAdd    = new ArrayList<>();
+    public  ArrayList<ActionEvent> updateEntities(GameController controller) {
+        ArrayList<ActionEvent> result = new ArrayList<>();
 
         for (EntityModel entity : thisChunk().getEntities()) {
-                try {
-                    entity.update(controller);
-                } catch (Grew grew) {
-                    toAdd.add(grew.getGrownEntity());
-                    toRemove.add(entity);
-            }
+            result.add(entity.update(controller));
         }
-        thisChunk().getEntities().addAll(toAdd);
-        thisChunk().getEntities().removeAll(toRemove);
+        return result;
     }
 }

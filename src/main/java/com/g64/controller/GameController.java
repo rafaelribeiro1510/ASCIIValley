@@ -14,6 +14,7 @@ import com.g64.model.entities.Player;
 import com.g64.model.Position;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameController {
 
@@ -45,7 +46,7 @@ public class GameController {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
         this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
-        this.mapModel = new MapModel(5,  "resources/chunks.csv");
+        this.mapModel = new MapModel(6,  "resources/chunks.csv");
         this.mapView = new MapView(display.getScreen());
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
@@ -96,17 +97,12 @@ public class GameController {
                     inventoryView.draw(inventoryModel, player.getCurrentHealth());
                     entityView.draw(player, mapModel.thisChunk());
                     try {
-                        processPlayerAction(getActionEventFromKeyboard());    // Update player with keyboard actions
-                        mapModel.updateEntities(this);              // Update non-player entities with generated actions
+                        processPlayerAction(getActionEventFromKeyboard());              // Update player with keyboard actions
+                        processEntityActions(mapModel.updateEntities(this));   // Update non-player entities with generated actions
                         mapView.getScreen().refresh();
                         Thread.sleep(1000/ frameRate);
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
-                    }
-                    catch (Died died) {
-                        // GAME OVER
-                        getMapView().getScreen().clear();
-                        gameState = gameStates.DEAD;
                     }
                     break;
 
@@ -123,25 +119,28 @@ public class GameController {
         }
     }
 
+    public void processEntityActions(ArrayList<ActionEvent> events){
+        for (ActionEvent event : events){
+            try {
+                event.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Died died) {
+                // GAME OVER
+                getMapView().getScreen().clear();
+                gameState = gameStates.DEAD;
+            }
+        }
+    }
+
     public void processPlayerAction(ActionEvent event){
         if (event == null) return;
         try {
             event.execute();
+            handleMapCrossing(checkBoundaries(player.getPosition()));
         }
         catch (IOException e){
             e.printStackTrace();
-        } catch (CrossedUp crossedUp) {
-            mapModel.moveNorth();
-            player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
-        } catch (CrossedLeft crossedLeft) {
-            mapModel.moveWest();
-            player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
-        } catch (CrossedDown crossedDown) {
-            mapModel.moveSouth();
-            player.setPosition(new Position(player.getPosition().getX(), 0));
-        } catch (CrossedRight crossedRight) {
-            mapModel.moveEast();
-            player.setPosition(new Position(0, player.getPosition().getY()));
         } catch (Died died) {
             //GAME OVER
             getMapView().getScreen().clear();
@@ -176,7 +175,39 @@ public class GameController {
             if (key.getCharacter() == 's') return new MoveDown(this, player);
             if (key.getCharacter() == 'a') return new MoveLeft(this, player);
         }
-        return null;
+        return new NullAction();
+    }
+
+    public enum Crossing{NO_CROSS, CROSS_UP, CROSS_DOWN, CROSS_LEFT, CROSS_RIGHT};
+
+    public Crossing checkBoundaries(Position position) {
+        if (position.getY() >= MAP_HEIGHT) return Crossing.CROSS_DOWN;
+        else if (position.getY() < 0) return Crossing.CROSS_UP;
+        if (position.getX() >= MAP_WIDTH) return Crossing.CROSS_RIGHT;
+        else if (position.getX() < 0) return Crossing.CROSS_LEFT;
+        return Crossing.NO_CROSS;
+    }
+
+    public void handleMapCrossing(Crossing crossing){
+        switch (crossing){
+            case NO_CROSS: break;
+            case CROSS_DOWN:
+                mapModel.moveSouth();
+                player.setPosition(new Position(player.getPosition().getX(), 0));
+                break;
+            case CROSS_UP:
+                mapModel.moveNorth();
+                player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
+                break;
+            case CROSS_LEFT:
+                mapModel.moveWest();
+                player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
+                break;
+            case CROSS_RIGHT:
+                mapModel.moveEast();
+                player.setPosition(new Position(0, player.getPosition().getY()));
+                break;
+        }
     }
 
     public void setRunning(boolean running){ this.running = running; }
@@ -188,8 +219,6 @@ public class GameController {
     public MapView getMapView() { return mapView; }
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
-
-    public gameStates getGameState() { return gameState; }
 
     public void setGameState(gameStates gameState) {  this.gameState = gameState; }
 }

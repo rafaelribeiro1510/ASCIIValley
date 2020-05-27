@@ -12,7 +12,7 @@ public class CarrotSeedEntity extends SeedEntity {
     }
 
     @Override
-    public PlantEntity grow(GameController controller) {
+    public PlantEntity getGrownEntity() {
         return new GrownCarrotEntity(this.position);
     }
 }
