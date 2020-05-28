@@ -3,6 +3,7 @@ package com.g64.controller;
 import com.g64.exceptions.*;
 import com.g64.model.MenuModel;
 import com.g64.model.gameState.GameState;
+import com.g64.model.gameState.menuGameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -46,7 +47,7 @@ public class GameController {
     private DeadView deadView;
 
 
-    private GameState gameState_;
+    private GameState gameState = new menuGameState();
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -75,7 +76,16 @@ public class GameController {
 
     public void start() {
         while (running) {
+            // processPlayerAction(getActionEventFromKeyboard());
+            gameState.execute(this);
+            try {
+                mapView.getScreen().refresh();
+                Thread.sleep(1000/ frameRate);
+            }
+            catch (IOException | InterruptedException e) { e.printStackTrace(); }
 
+            // ---------------------------
+            /*
             switch (gameState) {
                 case MAIN_MENU:
                     menuView.draw(menuModel);
@@ -127,9 +137,13 @@ public class GameController {
                     catch (IOException | InterruptedException e) { e.printStackTrace(); }
                     break;
             }
+            */
+            // ---------------------------
+
         }
     }
 
+    /*
     public void processPlayerAction(ActionEvent event){
         if (event == null) return;
         try {
@@ -186,6 +200,8 @@ public class GameController {
         return null;
     }
 
+    */
+
     public void setRunning(boolean running){ this.running = running; }
 
     public Player getPlayer(){ return player; }
@@ -196,7 +212,11 @@ public class GameController {
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
 
-    public gameStates getGameState() { return gameState; }
+    // public gameStates getGameState() { return gameState; }
 
-    public void setGameState(gameStates gameState) {  this.gameState = gameState; }
+    // public void setGameState(gameStates gameState) {  this.gameState = gameState; }
+
+    public MenuView getMenuView() {
+        return menuView;
+    }
 }

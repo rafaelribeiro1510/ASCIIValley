@@ -1,6 +1,8 @@
 package com.g64.view;
 
 import com.g64.model.MenuModel;
+import com.g64.model.gameState.menuGameState;
+import com.g64.model.menu.menuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -12,7 +14,7 @@ public class MenuView {
 
     public MenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(MenuModel menuModel) {
+    public void draw(menuGameState menuGameState_) {
         int row = 4;
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -23,14 +25,16 @@ public class MenuView {
 
         row += 3;
 
-        for (int i = 0; i < menuModel.getMenuItems().size(); i++) {
-            if (i == menuModel.getSelectedOption()) {
+        for (int i = 0; i < menuGameState_.getMenuOptions().size(); i++) {
+            menuOption option = menuGameState_.getMenuOptions().get(i);
+
+            if (i == menuGameState_.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);
-                graphics.putString((40 - menuModel.getMenuItems().get(i).length()) / 2, row += 2, menuModel.getMenuItems().get(i));
+                graphics.putString((40 - option.getOptionText().length()) / 2, row += 2, option.getOptionText());
                 graphics.disableModifiers(SGR.BLINK);
             }
             else {
-                graphics.putString((40 - menuModel.getMenuItems().get(i).length()) / 2, row += 2, menuModel.getMenuItems().get(i));
+                graphics.putString((40 - option.getOptionText().length()) / 2, row += 2, option.getOptionText());
             }
         }
     }

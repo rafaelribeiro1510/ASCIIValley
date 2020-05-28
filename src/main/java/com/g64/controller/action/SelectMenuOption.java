@@ -21,7 +21,7 @@ public class SelectMenuOption implements ActionEvent {
 
     @Override
     public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
-
+        /*
         switch(menuModel.getSelectedOption()) {
             case 0:
                 gameController.getMapView().getScreen().clear();
@@ -36,5 +36,6 @@ public class SelectMenuOption implements ActionEvent {
                 gameController.setRunning(false);
                 break;
         }
+        */
     }
 }

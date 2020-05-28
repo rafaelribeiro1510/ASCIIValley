@@ -1,5 +1,6 @@
 package com.g64.model.gameState;
 
+import com.g64.controller.GameController;
 import com.g64.model.menu.controlsCommand;
 import com.g64.model.menu.menuOption;
 import com.g64.model.menu.playCommand;
@@ -18,15 +19,29 @@ public class menuGameState implements GameState {
             )
     );
 
-    private int selectedOption
+    private int selectedOption;
+
+    public menuGameState() {
+        this.selectedOption = 0;
+    }
 
     @Override
-    public void execute() {
+    public void execute(GameController gameController) {
         // draw menu
-        // something else
+        gameController.getMenuView().draw(this);
+
+        // something else?
     }
 
     public ArrayList<menuOption> getMenuOptions() {
         return menuOptions;
+    }
+
+    public int getSelectedOption() {
+        return selectedOption;
+    }
+
+    public void setSelectedOption(int selectedOption) {
+        this.selectedOption = selectedOption;
     }
 }

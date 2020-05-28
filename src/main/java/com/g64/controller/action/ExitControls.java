@@ -19,6 +19,6 @@ public class ExitControls implements ActionEvent {
     @Override
     public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
         gameController.getMapView().getScreen().clear();
-        gameController.setGameState(GameController.gameStates.MAIN_MENU);
+        // gameController.setGameState(GameController.gameStates.MAIN_MENU);
     }
 }
