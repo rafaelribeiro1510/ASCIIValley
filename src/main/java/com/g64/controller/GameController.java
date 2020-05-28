@@ -2,6 +2,7 @@ package com.g64.controller;
 
 import com.g64.exceptions.*;
 import com.g64.model.MenuModel;
+import com.g64.model.gameState.GameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -17,9 +18,12 @@ import java.io.IOException;
 
 public class GameController {
 
+    /*
     public enum gameStates {
         IN_GAME, CONTROLS, MAIN_MENU, DEAD;
     }
+
+    */
 
     public static final int MAP_WIDTH = 40;
     public static final int MAP_HEIGHT = 15;
@@ -35,11 +39,14 @@ public class GameController {
 
     private boolean running;
     private Display display;
-    private gameStates gameState;
+    // private gameStates gameState;
     private MenuModel menuModel;
     private MenuView menuView;
     private ControlsView controlsView;
     private DeadView deadView;
+
+
+    private GameState gameState_;
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -50,7 +57,7 @@ public class GameController {
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
-        this.gameState = gameStates.MAIN_MENU;
+        // this.gameState = gameStates.MAIN_MENU;
         this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
         this.controlsView = new ControlsView(display.getScreen());
