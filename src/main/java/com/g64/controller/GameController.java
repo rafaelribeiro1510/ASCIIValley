@@ -1,6 +1,5 @@
 package com.g64.controller;
 
-import com.g64.exceptions.*;
 import com.g64.model.MenuModel;
 import com.g64.model.gameState.GameState;
 import com.g64.model.gameState.menuGameState;
@@ -47,7 +46,7 @@ public class GameController {
     private DeadView deadView;
 
 
-    private GameState gameState = new menuGameState();
+    private GameState gameState = new menuGameState(this);
 
     public GameController() {
         this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
@@ -76,10 +75,11 @@ public class GameController {
 
     public void start() {
         while (running) {
-            // processPlayerAction(getActionEventFromKeyboard());
-            gameState.execute(this);
             try {
                 mapView.getScreen().refresh();
+                ActionEvent actionEvent = getActionEventFromKeyboard();
+                gameState.execute(this, actionEvent);
+
                 Thread.sleep(1000/ frameRate);
             }
             catch (IOException | InterruptedException e) { e.printStackTrace(); }
@@ -169,10 +169,14 @@ public class GameController {
             gameState = gameStates.DEAD;
         }
     }
-
+    */
     public ActionEvent getActionEventFromKeyboard() throws IOException{
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
+
+        return gameState.processKey(key);
+
+        /*
         if (key == null) return null;
         if (gameState == gameStates.DEAD) return new QuitGame(this);
         if (gameState == gameStates.CONTROLS) return new ExitControls(this);
@@ -188,7 +192,7 @@ public class GameController {
         if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
         if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
 
-        if (key.getKeyType() == KeyType.Enter && gameState == gameStates.MAIN_MENU) return new SelectMenuOption(this.menuModel, this);
+        if (key.getKeyType() == KeyType.EnterPressed && gameState == gameStates.MAIN_MENU) return new EnterPressed(this.menuModel, this);
 
         if (key.getKeyType() == KeyType.Character) {
             if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
@@ -198,9 +202,11 @@ public class GameController {
             if (key.getCharacter() == 'a') return new MoveLeft(this, player);
         }
         return null;
+
+        */
     }
 
-    */
+
 
     public void setRunning(boolean running){ this.running = running; }
 

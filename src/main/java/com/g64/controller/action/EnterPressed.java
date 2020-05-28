@@ -6,21 +6,24 @@ import com.g64.exceptions.CrossedLeft;
 import com.g64.exceptions.CrossedRight;
 import com.g64.exceptions.CrossedUp;
 import com.g64.model.MenuModel;
+import com.g64.model.gameState.menuGameState;
 
 import java.io.IOException;
 
-public class SelectMenuOption implements ActionEvent {
+public class EnterPressed implements ActionEvent {
 
-    MenuModel menuModel;
-    GameController gameController;
+    private menuGameState state;
+    private GameController gameController;
 
-    public SelectMenuOption(MenuModel menuModel, GameController gameController) {
-        this.menuModel = menuModel;
+    public EnterPressed(menuGameState state, GameController gameController) {
+        this.state = state;
         this.gameController = gameController;
     }
 
     @Override
     public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
+
+        this.state.getMenuOptions().get(this.state.getSelectedOption()).getMenuCommand().execute();
         /*
         switch(menuModel.getSelectedOption()) {
             case 0:

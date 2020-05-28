@@ -5,20 +5,21 @@ import com.g64.exceptions.CrossedLeft;
 import com.g64.exceptions.CrossedRight;
 import com.g64.exceptions.CrossedUp;
 import com.g64.model.MenuModel;
+import com.g64.model.gameState.menuGameState;
 
 import java.io.IOException;
 
 public class MenuUp implements ActionEvent {
 
-    MenuModel menuModel;
+    private menuGameState state;
 
-    public MenuUp(MenuModel menuModel) { this.menuModel = menuModel; }
+    public MenuUp(menuGameState state) { this.state = state; }
 
     @Override
     public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
-        int newSelected = menuModel.getSelectedOption() - 1 < 0 ?
-                menuModel.getSelectedOption() : menuModel.getSelectedOption() - 1;
+        int newSelected = state.getSelectedOption() - 1 < 0 ?
+                state.getSelectedOption() : state.getSelectedOption() - 1;
 
-        menuModel.setSelectedOption(newSelected);
+        state.setSelectedOption(newSelected);
     }
 }
