@@ -18,24 +18,7 @@ public class EnterPressed implements ActionEvent {
     }
 
     @Override
-    public void execute() throws IOException {
-
+    public void execute() {
         this.state.getMenuOptions().get(this.state.getSelectedOption()).getMenuCommand().execute();
-        /*
-        switch(menuModel.getSelectedOption()) {
-            case 0:
-                gameController.getMapView().getScreen().clear();
-                gameController.setGameState(GameController.gameStates.IN_GAME);
-                break;
-            case 1:
-                gameController.getMapView().getScreen().clear();
-                gameController.setGameState(GameController.gameStates.CONTROLS);
-                break;
-            case 2:
-                gameController.getMapView().getScreen().close();
-                gameController.setRunning(false);
-                break;
-        }
-        */
     }
 }

@@ -15,6 +15,5 @@ public class ExitToMainMenu implements ActionEvent {
     public void execute() {
         gameController.getMapView().getScreen().clear();
         gameController.setGameState(new menuGameState(gameController));
-        // gameController.setGameState(GameController.gameStates.MAIN_MENU);
     }
 }
