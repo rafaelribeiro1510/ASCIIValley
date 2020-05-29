@@ -4,7 +4,6 @@ import com.g64.controller.GameController;
 import com.g64.model.gameState.menuGameState;
 
 public class ExitToMainMenu implements ActionEvent {
-
     GameController gameController;
 
     public ExitToMainMenu(GameController gameController) {

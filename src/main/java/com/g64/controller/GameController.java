@@ -69,9 +69,6 @@ public class GameController {
         try {
             actionEvent.execute();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
         catch (Died died) {
             setGameState(new deadPlayerState(this));
         }

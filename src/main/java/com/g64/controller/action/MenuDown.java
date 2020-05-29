@@ -3,7 +3,6 @@ package com.g64.controller.action;
 import com.g64.model.gameState.menuGameState;
 
 public class MenuDown implements ActionEvent {
-
     private menuGameState state;
 
     public MenuDown(menuGameState state) { this.state = state; }
@@ -14,11 +13,5 @@ public class MenuDown implements ActionEvent {
                 state.getSelectedOption() : state.getSelectedOption() + 1;
 
         state.setSelectedOption(newSelected);
-        /*
-        int newSelected = menuModel.getSelectedOption() + 1 > menuModel.getMenuItems().size() - 1 ?
-                menuModel.getSelectedOption() : menuModel.getSelectedOption() + 1;
-
-        menuModel.setSelectedOption(newSelected);
-        */
     }
 }

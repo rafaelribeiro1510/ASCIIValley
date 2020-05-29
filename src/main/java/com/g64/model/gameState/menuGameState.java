@@ -44,7 +44,7 @@ public class menuGameState implements GameState {
         if (key == null)                            return new NullAction();
         if (key.getKeyType() == KeyType.ArrowUp)    return new MenuUp(this);
         if (key.getKeyType() == KeyType.ArrowDown)  return new MenuDown(this);
-        if (key.getKeyType() == KeyType.Enter)      return new EnterPressed(this, gameController);
+        if (key.getKeyType() == KeyType.Enter)      return new EnterPressed(this);
 
         return new NullAction();
     }
