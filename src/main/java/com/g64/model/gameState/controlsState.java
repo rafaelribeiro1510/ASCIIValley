@@ -8,7 +8,6 @@ import com.googlecode.lanterna.input.KeyStroke;
 
 
 public class controlsState implements GameState {
-
     GameController gameController;
 
     public controlsState(GameController gameController) {
@@ -16,7 +15,7 @@ public class controlsState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController) {
+    public void execute() {
         // draw control menu
         gameController.getControlsView().draw();
     }

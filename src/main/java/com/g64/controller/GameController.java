@@ -4,7 +4,6 @@ import com.g64.controller.action.ActionEvent;
 import com.g64.exceptions.Died;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
-import com.g64.model.MenuModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.GameState;
@@ -57,7 +56,7 @@ public class GameController {
             try {
                 mapView.getScreen().refresh();
                 processAction(getActionEventFromKeyboard());
-                gameState.execute(this);
+                gameState.execute();
 
                 Thread.sleep(1000/ frameRate);
             }
@@ -66,12 +65,8 @@ public class GameController {
     }
 
     public void processAction(ActionEvent actionEvent){
-        try {
-            actionEvent.execute();
-        }
-        catch (Died died) {
-            setGameState(new deadPlayerState(this));
-        }
+        try { actionEvent.execute(); }
+        catch (Died died) { setGameState(new deadPlayerState(this)); }
     }
 
     public ActionEvent getActionEventFromKeyboard() throws IOException{

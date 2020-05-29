@@ -4,11 +4,8 @@ import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;
 import com.g64.controller.action.NullAction;
 import com.g64.controller.action.QuitGame;
-import com.g64.exceptions.Died;
 import com.g64.view.DeadView;
 import com.googlecode.lanterna.input.KeyStroke;
-
-import java.io.IOException;
 
 public class deadPlayerState implements GameState {
 
@@ -21,7 +18,7 @@ public class deadPlayerState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController) {
+    public void execute() {
         // draw game over screen
         deadView.draw();
     }

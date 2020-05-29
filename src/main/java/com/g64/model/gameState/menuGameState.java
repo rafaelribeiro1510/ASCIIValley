@@ -2,7 +2,6 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.exceptions.*;
 import com.g64.model.menu.controlsCommand;
 import com.g64.model.menu.menuOption;
 import com.g64.model.menu.playCommand;
@@ -10,7 +9,6 @@ import com.g64.model.menu.quitCommand;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,7 +21,7 @@ public class menuGameState implements GameState {
     public menuGameState(GameController gameController) {
         this.selectedOption = 0;
         this.gameController = gameController;
-        menuOptions = new ArrayList<menuOption>(
+        menuOptions = new ArrayList<>(
                 Arrays.asList(
                         new menuOption("Play",      new playCommand(gameController)),
                         new menuOption("Controls",  new controlsCommand(gameController)),
@@ -33,7 +31,7 @@ public class menuGameState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController) {
+    public void execute() {
         // draw menu
         gameController.getMenuView().draw(this);
     }
