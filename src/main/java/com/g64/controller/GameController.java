@@ -26,7 +26,6 @@ public class GameController {
 
     private boolean running;
     private Display display;
-    private MenuModel menuModel;
     private MenuView menuView;
     private ControlsView controlsView;
 
@@ -40,7 +39,6 @@ public class GameController {
         this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
         this.running = true;
-        this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
         this.controlsView = new ControlsView(display.getScreen());
     }
