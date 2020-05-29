@@ -1,5 +1,9 @@
 package com.g64.controller;
 
+import com.g64.exceptions.CrossedDown;
+import com.g64.exceptions.CrossedLeft;
+import com.g64.exceptions.CrossedRight;
+import com.g64.exceptions.CrossedUp;
 import com.g64.model.MenuModel;
 import com.g64.model.gameState.GameState;
 import com.g64.model.gameState.menuGameState;
@@ -225,4 +229,10 @@ public class GameController {
     public MenuView getMenuView() {
         return menuView;
     }
+
+    public void setGameState(GameState gameState) { this.gameState = gameState; }
+
+    public EntityView getEntityView() { return entityView; }
+
+    public InventoryView getInventoryView() { return inventoryView; }
 }

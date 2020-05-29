@@ -14,7 +14,6 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,7 +28,7 @@ public class menuGameState implements GameState {
         this.gameController = gameController;
         menuOptions = new ArrayList<menuOption>(
                 Arrays.asList(
-                        new menuOption("Play",      new playCommand()),
+                        new menuOption("Play",      new playCommand(gameController)),
                         new menuOption("Controls",  new controlsCommand()),
                         new menuOption("Quit",      new quitCommand(gameController))
                 )
@@ -41,7 +40,7 @@ public class menuGameState implements GameState {
         // draw menu
         gameController.getMenuView().draw(this);
 
-        // process key
+        // process action
         try {
             if (actionEvent != null) actionEvent.execute();
         }
@@ -61,16 +60,10 @@ public class menuGameState implements GameState {
         return null;
     }
 
-    public ArrayList<menuOption> getMenuOptions() {
-        return menuOptions;
-    }
+    public ArrayList<menuOption> getMenuOptions() { return menuOptions; }
 
-    public int getSelectedOption() {
-        return selectedOption;
-    }
+    public int getSelectedOption() { return selectedOption; }
 
-    public void setSelectedOption(int selectedOption) {
-        this.selectedOption = selectedOption;
-    }
+    public void setSelectedOption(int selectedOption) { this.selectedOption = selectedOption; }
 
 }
