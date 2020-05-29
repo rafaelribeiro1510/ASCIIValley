@@ -41,7 +41,7 @@ public class PlantGrowingTest {
         MapModel map = new MapModel(1, chunks);
         mapSpy = Mockito.spy(map);
 
-        controller = new GameController(Mockito.mock(Player.class), mapSpy, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), Mockito.mock(InventoryModel.class), Mockito.mock(InventoryView.class));
+        controller = new GameController(Mockito.mock(Player.class), mapSpy, Mockito.mock(MapView.class), Mockito.mock(InventoryModel.class));
     }
 
     @Test
