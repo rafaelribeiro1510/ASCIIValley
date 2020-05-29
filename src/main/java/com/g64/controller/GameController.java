@@ -1,32 +1,21 @@
 package com.g64.controller;
 
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
+import com.g64.controller.action.ActionEvent;
+import com.g64.model.InventoryModel;
+import com.g64.model.MapModel;
 import com.g64.model.MenuModel;
+import com.g64.model.Position;
+import com.g64.model.entities.Player;
 import com.g64.model.gameState.GameState;
 import com.g64.model.gameState.menuGameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.g64.controller.action.*;
-import com.g64.model.InventoryModel;
-import com.g64.model.MapModel;
-import com.g64.model.entities.Player;
-import com.g64.model.Position;
 
 import java.io.IOException;
 
 public class GameController {
-
-    /*
-    public enum gameStates {
-        IN_GAME, CONTROLS, MAIN_MENU, DEAD;
-    }
-    */
 
     private static final int frameRate = 60;
 
@@ -39,11 +28,9 @@ public class GameController {
 
     private boolean running;
     private Display display;
-    // private gameStates gameState;
     private MenuModel menuModel;
     private MenuView menuView;
     private ControlsView controlsView;
-    private DeadView deadView;
 
 
     private GameState gameState = new menuGameState(this);
@@ -57,11 +44,9 @@ public class GameController {
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
-        // this.gameState = gameStates.MAIN_MENU;
         this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
         this.controlsView = new ControlsView(display.getScreen());
-        this.deadView = new DeadView(display.getScreen());
     }
 
     public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
@@ -86,54 +71,12 @@ public class GameController {
         }
     }
 
-    /*
-    public void processPlayerAction(ActionEvent event){
-        if (event == null) return;
-        try {
-            event.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Died died) {
-            // GAME OVER
-            getMapView().getScreen().clear();
-            gameState = gameStates.DEAD;
-        }
-    }
-    */
+
     public ActionEvent getActionEventFromKeyboard() throws IOException{
         Screen screen = mapView.getScreen();
         KeyStroke key = screen.pollInput();
 
         return gameState.processKey(key);
-
-        /*
-        if (key == null) return null;
-        if (gameState == gameStates.DEAD) return new QuitGame(this);
-        if (gameState == gameStates.CONTROLS) return new ExitControls(this);
-        if (key.getKeyType() == KeyType.Escape) return new QuitGame(this);
-        if (key.getKeyType() == KeyType.ArrowUp) {
-            if (gameState == gameStates.MAIN_MENU) return new MenuUp(this.menuModel);
-            else return new InteractUp(this);
-        }
-        if (key.getKeyType() == KeyType.ArrowDown) {
-            if (gameState == gameStates.MAIN_MENU) return new MenuDown(this.menuModel);
-            else return new InteractDown(this);
-        }
-        if (key.getKeyType() == KeyType.ArrowLeft) return new InteractLeft(this);
-        if (key.getKeyType() == KeyType.ArrowRight) return new InteractRight(this);
-
-        if (key.getKeyType() == KeyType.EnterPressed && gameState == gameStates.MAIN_MENU) return new EnterPressed(this.menuModel, this);
-
-        if (key.getKeyType() == KeyType.Character) {
-            if (key.getCharacter() >= '0' && key.getCharacter() <= '9') return new SelectSlot(this, (Character.getNumericValue(key.getCharacter()) - 1) % 10);
-            if (key.getCharacter() == 'w') return new MoveUp(this, player);
-            if (key.getCharacter() == 'd') return new MoveRight(this, player);
-            if (key.getCharacter() == 's') return new MoveDown(this, player);
-            if (key.getCharacter() == 'a') return new MoveLeft(this, player);
-        }
-        return null;
-
-        */
     }
 
 
@@ -148,13 +91,7 @@ public class GameController {
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
 
-    // public gameStates getGameState() { return gameState; }
-
-    // public void setGameState(gameStates gameState) {  this.gameState = gameState; }
-
-    public MenuView getMenuView() {
-        return menuView;
-    }
+    public MenuView getMenuView() { return menuView; }
 
     public void setGameState(GameState gameState) { this.gameState = gameState; }
 
@@ -164,5 +101,5 @@ public class GameController {
 
     public ControlsView getControlsView() { return controlsView; }
 
-    public DeadView getDeadView() { return deadView; }
+    public Display getDisplay() { return display; }
 }

@@ -44,7 +44,7 @@ public class menuGameState implements GameState {
         try {
             if (actionEvent != null) actionEvent.execute();
         }
-        catch (IOException | Died | CrossedRight | CrossedDown | CrossedLeft | CrossedUp e) {
+        catch (IOException | Died e) {
             e.printStackTrace();
         }
     }

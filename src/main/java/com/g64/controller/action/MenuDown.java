@@ -1,10 +1,6 @@
 package com.g64.controller.action;
 
-import com.g64.model.MenuModel;
 import com.g64.model.gameState.menuGameState;
-import com.g64.model.entities.EntityModel;
-
-import java.io.IOException;
 
 public class MenuDown implements ActionEvent {
 
@@ -13,7 +9,7 @@ public class MenuDown implements ActionEvent {
     public MenuDown(menuGameState state) { this.state = state; }
 
     @Override
-    public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
+    public void execute() {
         int newSelected = state.getSelectedOption() + 1 > state.getMenuOptions().size() - 1 ?
                 state.getSelectedOption() : state.getSelectedOption() + 1;
 

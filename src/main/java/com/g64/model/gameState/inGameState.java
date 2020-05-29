@@ -3,14 +3,10 @@ package com.g64.model.gameState;
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.exceptions.*;
-import com.g64.model.Position;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
-
-import static com.g64.controller.GameController.MAP_HEIGHT;
-import static com.g64.controller.GameController.MAP_WIDTH;
 
 public class inGameState implements GameState {
 
@@ -26,34 +22,24 @@ public class inGameState implements GameState {
         gameController.getMapView().draw(gameController.getMapModel());
 
         // draw inventory
-        gameController.getInventoryView().draw(gameController.getInventoryModel(), gameController.getPlayer().getCurrentHealth());
+        gameController.getInventoryView().draw(gameController.getInventoryModel(),
+                gameController.getPlayer().getCurrentHealth(),
+                gameController.getMapModel().thisChunk().getHeight()
+        );
 
         // draw player
         gameController.getEntityView().draw(gameController.getPlayer(), gameController.getMapModel().thisChunk());
 
         try {
             if (actionEvent != null) actionEvent.execute();
-            gameController.getMapModel().updateEntities(gameController);
+            for (ActionEvent event : gameController.getMapModel().updateEntities(gameController)) {
+                event.execute();
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        catch (CrossedUp crossedUp) {
-            gameController.getMapModel().moveNorth();
-            gameController.getPlayer().setPosition(new Position(gameController.getPlayer().getPosition().getX(), MAP_HEIGHT - 1));
-        }
-        catch (CrossedLeft crossedLeft) {
-            gameController.getMapModel().moveWest();
-            gameController.getPlayer().setPosition(new Position(MAP_WIDTH - 1, gameController.getPlayer().getPosition().getY()));
-        }
-        catch (CrossedDown crossedDown) {
-            gameController.getMapModel().moveSouth();
-            gameController.getPlayer().setPosition(new Position(gameController.getPlayer().getPosition().getX(), 0));
-        }
-        catch (CrossedRight crossedRight) {
-            gameController.getMapModel().moveEast();
-            gameController.getPlayer().setPosition(new Position(0, gameController.getPlayer().getPosition().getY()));
-        } catch (Died died) {
+        catch (Died died) {
             gameController.setGameState(new deadPlayerState(gameController));
         }
     }
@@ -74,6 +60,8 @@ public class inGameState implements GameState {
             if (key.getCharacter() == 's')          return new MoveDown(gameController, gameController.getPlayer());
             if (key.getCharacter() == 'a')          return new MoveLeft(gameController, gameController.getPlayer());
         }
+
+        if (key.getKeyType() == KeyType.Escape)     return new ExitToMainMenu(gameController);
 
         return null;
     }
