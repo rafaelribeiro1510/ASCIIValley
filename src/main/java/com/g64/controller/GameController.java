@@ -237,4 +237,6 @@ public class GameController {
     public InventoryView getInventoryView() { return inventoryView; }
 
     public ControlsView getControlsView() { return controlsView; }
+
+    public DeadView getDeadView() { return deadView; }
 }

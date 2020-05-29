@@ -54,8 +54,7 @@ public class inGameState implements GameState {
             gameController.getMapModel().moveEast();
             gameController.getPlayer().setPosition(new Position(0, gameController.getPlayer().getPosition().getY()));
         } catch (Died died) {
-            System.out.println("Died");
-            died.printStackTrace();
+            gameController.setGameState(new deadPlayerState(gameController));
         }
     }
 
