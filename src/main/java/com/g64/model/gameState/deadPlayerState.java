@@ -20,16 +20,9 @@ public class deadPlayerState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController, ActionEvent actionEvent) {
+    public void execute(GameController gameController) {
         // draw game over screen
         deadView.draw();
-
-        try {
-            if (actionEvent != null) actionEvent.execute();
-        }
-        catch (IOException | Died e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

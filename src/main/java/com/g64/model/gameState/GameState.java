@@ -6,7 +6,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 
 public interface GameState {
 
-    void execute(GameController gameController, ActionEvent actionEvent);
+    void execute(GameController gameController);
 
     ActionEvent processKey(KeyStroke key);
 }

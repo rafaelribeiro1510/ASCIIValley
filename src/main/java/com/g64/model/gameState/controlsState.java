@@ -3,10 +3,8 @@ package com.g64.model.gameState;
 import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;
 import com.g64.controller.action.ExitToMainMenu;
-import com.g64.exceptions.*;
 import com.googlecode.lanterna.input.KeyStroke;
 
-import java.io.IOException;
 
 public class controlsState implements GameState {
 
@@ -17,17 +15,9 @@ public class controlsState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController, ActionEvent actionEvent) {
+    public void execute(GameController gameController) {
         // draw control menu
         gameController.getControlsView().draw();
-
-        // process action
-        try {
-            if (actionEvent != null) actionEvent.execute();
-        }
-        catch (IOException | Died e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

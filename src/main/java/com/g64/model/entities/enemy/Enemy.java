@@ -13,7 +13,7 @@ import com.g64.model.items.drops.Drop;
 
 public abstract class Enemy extends EntityModel {
     protected static final int AGGROED_COOLDOWN = 30;
-    protected static final int NOT_AGGROED_COOLDOWN = 60;
+    protected static final int NOT_AGGROED_COOLDOWN = 45;
 
     EnemyMovementHumour movementHumour;
     int movementCooldown;

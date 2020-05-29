@@ -36,17 +36,9 @@ public class menuGameState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController, ActionEvent actionEvent) {
+    public void execute(GameController gameController) {
         // draw menu
         gameController.getMenuView().draw(this);
-
-        // process action
-        try {
-            if (actionEvent != null) actionEvent.execute();
-        }
-        catch (IOException | Died e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

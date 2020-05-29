@@ -23,7 +23,7 @@ public class inGameState implements GameState {
     }
 
     @Override
-    public void execute(GameController gameController, ActionEvent actionEvent) {
+    public void execute(GameController gameController) {
         // draw map
         gameController.getMapView().draw(gameController.getMapModel());
 
@@ -35,19 +35,6 @@ public class inGameState implements GameState {
 
         // draw player
         entityView.draw(gameController.getPlayer(), gameController.getMapModel().thisChunk());
-
-        try {
-            if (actionEvent != null) actionEvent.execute();
-            for (ActionEvent event : gameController.getMapModel().updateEntities(gameController)) {
-                event.execute();
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (Died died) {
-            gameController.setGameState(new deadPlayerState(gameController));
-        }
     }
 
     @Override

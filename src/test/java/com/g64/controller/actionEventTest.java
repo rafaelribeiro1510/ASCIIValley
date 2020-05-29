@@ -18,8 +18,6 @@ import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.SoilTerrain;
 import com.g64.model.terrain.StoneTerrain;
-import com.g64.view.EntityView;
-import com.g64.view.InventoryView;
 import com.g64.view.MapView;
 import com.googlecode.lanterna.TextColor;
 import org.junit.Before;
@@ -62,7 +60,7 @@ public class actionEventTest {
         ArrayList<Item> items = new ArrayList<>(); items.add(new Scythe(10)); items.add(new Pickaxe(1));
         inventory = new InventoryModel(items);
 
-        controller = new GameController(playerSpy, mapSpy, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), inventory, Mockito.mock(InventoryView.class));
+        controller = new GameController(playerSpy, mapSpy, Mockito.mock(MapView.class), inventory);
     }
 
     @Test
