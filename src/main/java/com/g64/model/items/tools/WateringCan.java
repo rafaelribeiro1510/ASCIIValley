@@ -4,9 +4,9 @@ import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 
 public class WateringCan extends Tool{
-    public WateringCan() {
+    public WateringCan(int durability) {
         this.name = "CAN";
-        this.durability = 100;
+        this.durability = durability;
         this.hitValue = 60;
     }
 

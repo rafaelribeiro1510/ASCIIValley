@@ -52,14 +52,14 @@ public class ToolTest {
 
     @Test
     public void successfulUsage() throws Died, RemoveFromInventory {
-        Tool tool = new Axe();
+        Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
         verify(mummySpy).reduceHealth(tool.getHitValue());
     }
 
     @Test
     public void successfulItemDrop() throws Died, RemoveFromInventory {
-        Tool tool = new Axe();
+        Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
 
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
@@ -69,7 +69,7 @@ public class ToolTest {
 
     @Test
     public void failedUsage() throws RemoveFromInventory {
-        Tool tool = new Axe();
+        Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(0,0)));
         assertEquals(chunkSpy.getEntities().get(0), grass);
     }

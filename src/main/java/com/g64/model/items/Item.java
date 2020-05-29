@@ -8,6 +8,8 @@ public interface Item {
 
     int getValue();
 
+    void setValue(int value);
+
     void decrementValue() throws RemoveFromInventory;
 
     void accept(TargetVisitor targetVisitor) throws RemoveFromInventory;

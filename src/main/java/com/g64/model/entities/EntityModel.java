@@ -55,4 +55,5 @@ public abstract class EntityModel extends Updatable{
     public int getCurrentHealth() {
         return currentHealth;
     }
+
 }

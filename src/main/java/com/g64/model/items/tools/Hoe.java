@@ -4,9 +4,9 @@ import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 
 public class Hoe extends Tool {
-    public Hoe(){
+    public Hoe(int durability){
         this.name = "HOE";
-        this.durability = 100;
+        this.durability = durability;
     }
 
     @Override

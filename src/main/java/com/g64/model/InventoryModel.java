@@ -12,12 +12,17 @@ public class InventoryModel {
 
     public InventoryModel() {
         this.items = new ArrayList<>();
-        items.add(new Axe());
-        items.add(new Hoe());
-        items.add(new Scythe());
-        items.add(new Pickaxe());
-        items.add(new WateringCan());
+        items.add(new Axe(100));
+        items.add(new Hoe(100));
+        items.add(new Scythe(100));
+        items.add(new Pickaxe(100));
+        items.add(new WateringCan(100));
         selectedIndex = 0;
+    }
+
+    public InventoryModel(ArrayList<Item> items){
+        this.items = items;
+        this.selectedIndex = 0;
     }
 
     public ArrayList<Item> getItems() { return items; }

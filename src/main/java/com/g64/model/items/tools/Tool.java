@@ -17,5 +17,7 @@ public abstract class Tool implements Item {
 
     public int getValue() { return durability; }
 
+    public void setValue(int value) { this.durability = value; }
+
     public int getHitValue() { return hitValue; }
 }

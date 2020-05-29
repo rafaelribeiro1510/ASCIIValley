@@ -4,9 +4,9 @@ import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 
 public class Pickaxe extends Tool {
-    public Pickaxe(){
+    public Pickaxe(int durability){
         this.name = "PICK";
-        this.durability = 100;
+        this.durability = durability;
         this.hitValue = 5;
     }
 

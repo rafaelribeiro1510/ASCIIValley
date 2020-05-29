@@ -11,6 +11,9 @@ import com.g64.model.entities.Player;
 import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.map.RockEntity;
 import com.g64.model.entities.plant.TallGrassEntity;
+import com.g64.model.items.Item;
+import com.g64.model.items.tools.Pickaxe;
+import com.g64.model.items.tools.Scythe;
 import com.g64.model.items.tools.Tool;
 import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
@@ -22,11 +25,11 @@ import com.g64.view.MapView;
 import com.googlecode.lanterna.TextColor;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 
@@ -36,7 +39,6 @@ public class actionEventTest {
     private ChunkModel chunk;
     private InventoryModel inventory;
     private Player playerSpy;
-    private Tool tool;
 
     @Before
     public void initGameController() {
@@ -55,12 +57,13 @@ public class actionEventTest {
         MapModel map = new MapModel(1, chunks);
         mapSpy = Mockito.spy(map);
 
-        inventory = Mockito.mock(InventoryModel.class);
         Player player = new Player(new Position(0,0)," ", Mockito.mock(TextColor.class));
         playerSpy = Mockito.spy(player);
-        tool = Mockito.mock(Tool.class);
+
+        ArrayList<Item> items = new ArrayList<>(); items.add(new Scythe(10)); items.add(new Pickaxe(1));
+        inventory = new InventoryModel(items);
+
         controller = new GameController(playerSpy, mapSpy, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), inventory, Mockito.mock(InventoryView.class));
-        Mockito.when(inventory.getSelectedItem()).thenReturn(tool);
     }
 
     @Test
@@ -116,6 +119,33 @@ public class actionEventTest {
         controller.processAction(left);
         verify(playerSpy).reduceHealth(mummy.getAttackValue());
     }
-    
 
+    @Test
+    public void interactSuccessfulTest(){
+        assertTrue(chunk.getEntityAt(new Position(1, 0)) instanceof TallGrassEntity);
+        InteractRight right = new InteractRight(controller);
+        controller.processAction(right);
+        assertFalse(chunk.getEntityAt(new Position(1, 0)) instanceof TallGrassEntity);
+    }
+
+    @Test
+    public void interactFailTest(){
+        assertTrue(chunk.getEntityAt(new Position(1,1)) instanceof RockEntity);
+        playerSpy.setPosition(new Position(0,1));
+        InteractRight right = new InteractRight(controller);
+        controller.processAction(right);
+        assertTrue(chunk.getEntityAt(new Position(1,1)) instanceof RockEntity);
+    }
+
+    @Test
+    public void toolBreakTest(){
+        playerSpy.setPosition(new Position(0,1));
+
+        inventory.setSelectedItem(1);
+        assertTrue(inventory.getSelectedItem() instanceof Pickaxe);
+
+        InteractRight right = new InteractRight(controller);
+        controller.processAction(right);
+        assertFalse(inventory.getSelectedItem() instanceof Pickaxe);
+    }
 }
