@@ -5,6 +5,7 @@ import com.g64.exceptions.CrossedDown;
 import com.g64.exceptions.CrossedLeft;
 import com.g64.exceptions.CrossedRight;
 import com.g64.exceptions.CrossedUp;
+import com.g64.model.gameState.menuGameState;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ public class ExitControls implements ActionEvent {
     @Override
     public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
         gameController.getMapView().getScreen().clear();
+        gameController.setGameState(new menuGameState(gameController));
         // gameController.setGameState(GameController.gameStates.MAIN_MENU);
     }
 }

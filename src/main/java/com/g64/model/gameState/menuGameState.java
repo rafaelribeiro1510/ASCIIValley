@@ -29,7 +29,7 @@ public class menuGameState implements GameState {
         menuOptions = new ArrayList<menuOption>(
                 Arrays.asList(
                         new menuOption("Play",      new playCommand(gameController)),
-                        new menuOption("Controls",  new controlsCommand()),
+                        new menuOption("Controls",  new controlsCommand(gameController)),
                         new menuOption("Quit",      new quitCommand(gameController))
                 )
         );

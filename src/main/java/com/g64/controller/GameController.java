@@ -235,4 +235,6 @@ public class GameController {
     public EntityView getEntityView() { return entityView; }
 
     public InventoryView getInventoryView() { return inventoryView; }
+
+    public ControlsView getControlsView() { return controlsView; }
 }
