@@ -2,7 +2,9 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.exceptions.*;
+import com.g64.exceptions.Died;
+import com.g64.view.EntityView;
+import com.g64.view.InventoryView;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -11,9 +13,13 @@ import java.io.IOException;
 public class inGameState implements GameState {
 
     private GameController gameController;
+    private EntityView entityView;
+    private InventoryView inventoryView;
 
     public inGameState(GameController gameController) {
         this.gameController = gameController;
+        this.entityView = new EntityView(gameController.getDisplay().getScreen());
+        this.inventoryView = new InventoryView(gameController.getDisplay().getScreen());
     }
 
     @Override
@@ -22,13 +28,13 @@ public class inGameState implements GameState {
         gameController.getMapView().draw(gameController.getMapModel());
 
         // draw inventory
-        gameController.getInventoryView().draw(gameController.getInventoryModel(),
+        inventoryView.draw(gameController.getInventoryModel(),
                 gameController.getPlayer().getCurrentHealth(),
                 gameController.getMapModel().thisChunk().getHeight()
         );
 
         // draw player
-        gameController.getEntityView().draw(gameController.getPlayer(), gameController.getMapModel().thisChunk());
+        entityView.draw(gameController.getPlayer(), gameController.getMapModel().thisChunk());
 
         try {
             if (actionEvent != null) actionEvent.execute();

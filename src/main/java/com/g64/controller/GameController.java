@@ -23,8 +23,6 @@ public class GameController {
     private MapView mapView;
     private Player player;
     private InventoryModel inventoryModel;
-    private EntityView entityView;
-    private InventoryView inventoryView;
 
     private boolean running;
     private Display display;
@@ -41,21 +39,19 @@ public class GameController {
         this.mapView = new MapView(display.getScreen());
         this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
-        this.entityView = new EntityView(mapView.getScreen());
-        this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
         this.menuModel = new MenuModel();
         this.menuView = new MenuView(display.getScreen());
         this.controlsView = new ControlsView(display.getScreen());
     }
 
-    public GameController(Player player, MapModel mapModel, MapView mapView, EntityView entityView,  InventoryModel inventoryModel, InventoryView inventoryView){
+    public GameController(Player player, MapModel mapModel, MapView mapView, InventoryModel inventoryModel){
         this.player = player;
         this.mapModel = mapModel;
         this.mapView = mapView;
-        this.entityView = entityView;
+        // this.entityView = entityView;
         this.inventoryModel = inventoryModel;
-        this.inventoryView = inventoryView;
+        // this.inventoryView = inventoryView;
     }
 
     public void start() {
@@ -94,10 +90,6 @@ public class GameController {
     public MenuView getMenuView() { return menuView; }
 
     public void setGameState(GameState gameState) { this.gameState = gameState; }
-
-    public EntityView getEntityView() { return entityView; }
-
-    public InventoryView getInventoryView() { return inventoryView; }
 
     public ControlsView getControlsView() { return controlsView; }
 
