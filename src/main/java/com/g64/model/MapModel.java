@@ -2,7 +2,6 @@ package com.g64.model;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;
-import com.g64.exceptions.Died;
 import com.g64.model.entities.Player;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
@@ -10,9 +9,6 @@ import com.g64.model.entities.EntityModel;
 
 import java.io.*;
 import java.util.ArrayList;
-
-import static com.g64.controller.GameController.MAP_HEIGHT;
-import static com.g64.controller.GameController.MAP_WIDTH;
 
 public class MapModel {
     static private final int[] ENEMY_CHUNKS = {4, 8,11};
@@ -24,6 +20,11 @@ public class MapModel {
         this.chunks = new ArrayList<>();
         this.currentChunkID = currentChunkID;
         this.readMap(relativePathname);
+    }
+
+    public MapModel(int currentChunkID, ArrayList<ChunkModel> chunks){
+        this.currentChunkID = currentChunkID;
+        this.chunks = chunks;
     }
 
     public ChunkModel findChunk(int id){
@@ -59,7 +60,7 @@ public class MapModel {
     }
 
     public void readMap(String relativePathname) {
-        ChunkModel newChunk = new ChunkModel();
+        ChunkModel newChunk = new ChunkModel(ChunkModel.DEFAULT_WIDTH, ChunkModel.DEFAULT_HEIGHT);
         String line = "";
         String filePath = new File(relativePathname).getAbsolutePath();
         System.out.println("Path: " + filePath);
@@ -71,7 +72,7 @@ public class MapModel {
                 if (Utils.parseCSVLineIntoObject(line, rowCounter, newChunk)) {
                     this.addChunk(newChunk);
                     rowCounter = 0;
-                    newChunk = new ChunkModel();
+                    newChunk = new ChunkModel(ChunkModel.DEFAULT_WIDTH, ChunkModel.DEFAULT_HEIGHT);
                 }
             }
         } catch (IOException | NullPointerException e){
@@ -81,7 +82,7 @@ public class MapModel {
 
 
     public void writeMap(String relativePathname) throws IOException {
-        ChunkModel newChunk = new ChunkModel();
+        ChunkModel newChunk = new ChunkModel(ChunkModel.DEFAULT_WIDTH, ChunkModel.DEFAULT_HEIGHT);
         String filePath = new File(relativePathname).getAbsolutePath();
         // filePath = "/Users/joaosousa/Documents/GitHub/lpoo-2020-g64/resources/chunks2.csv";
 
@@ -112,7 +113,18 @@ public class MapModel {
         return result;
     }
 
-    public void handleMapCrossing(EntityModel entity, GameController.Crossing crossing){
+    public Crossing checkBoundaries(Position position) {
+        if (position.getY() >= thisChunk().getHeight()) return Crossing.CROSS_DOWN;
+        else if (position.getY() < 0) return Crossing.CROSS_UP;
+        if (position.getX() >= thisChunk().getWidth()) return Crossing.CROSS_RIGHT;
+        else if (position.getX() < 0) return Crossing.CROSS_LEFT;
+        return Crossing.NO_CROSS;
+    }
+
+    public enum Crossing{NO_CROSS, CROSS_UP, CROSS_DOWN, CROSS_LEFT, CROSS_RIGHT};
+
+    public void handleMapCrossing(EntityModel entity){
+        Crossing crossing = checkBoundaries(entity.getPosition());
         if (entity instanceof Player) {
             switch (crossing) {
                 case NO_CROSS:
@@ -123,11 +135,11 @@ public class MapModel {
                     break;
                 case CROSS_UP:
                     moveNorth();
-                    entity.setPosition(new Position(entity.getPosition().getX(), MAP_HEIGHT - 1));
+                    entity.setPosition(new Position(entity.getPosition().getX(), thisChunk().getHeight() - 1));
                     break;
                 case CROSS_LEFT:
                     moveWest();
-                    entity.setPosition(new Position(MAP_WIDTH - 1, entity.getPosition().getY()));
+                    entity.setPosition(new Position(thisChunk().getWidth() - 1, entity.getPosition().getY()));
                     break;
                 case CROSS_RIGHT:
                     moveEast();
@@ -139,7 +151,7 @@ public class MapModel {
             switch (crossing){
                 case NO_CROSS: break;
                 case CROSS_DOWN:
-                    entity.setPosition(new Position(entity.getPosition().getX(), MAP_HEIGHT - 1));
+                    entity.setPosition(new Position(entity.getPosition().getX(), thisChunk().getHeight() - 1));
                     break;
                 case CROSS_UP:
                     entity.setPosition(new Position(entity.getPosition().getX(), 0));
@@ -148,7 +160,7 @@ public class MapModel {
                     entity.setPosition(new Position(0, entity.getPosition().getY()));
                     break;
                 case CROSS_RIGHT:
-                    entity.setPosition(new Position(MAP_WIDTH - 1, entity.getPosition().getY()));
+                    entity.setPosition(new Position(thisChunk().getWidth() - 1, entity.getPosition().getY()));
                     break;
             }
         }

@@ -10,19 +10,35 @@ import com.g64.model.terrain.NullTerrain;
 import java.util.ArrayList;
 
 public class ChunkModel {
+    public static final int DEFAULT_WIDTH = 40;
+    public static final int DEFAULT_HEIGHT = 15;
+
+    private int chunkWidth;
+    private int chunkHeight;
+    public int getWidth() {
+        return chunkWidth;
+    }
+    public int getHeight() {
+        return chunkHeight;
+    }
+
     private int id;
     private ArrayList<Integer> neighbours;
     private ArrayList<MapTerrain> terrain;
     private ArrayList<EntityModel> entities;
 
-    public ChunkModel(){
+    public ChunkModel(int chunkWidth, int chunkHeight){
+        this.chunkWidth = chunkWidth;
+        this.chunkHeight = chunkHeight;
         this.id = 0;
         this.neighbours = null;
         this.terrain = new ArrayList<>();
         this.entities = new ArrayList<>();
     }
 
-    public ChunkModel(int id, ArrayList<Integer> neighbours, ArrayList<MapTerrain> terrain, ArrayList<EntityModel> entities){
+    public ChunkModel(int chunkWidth, int chunkHeight, int id, ArrayList<Integer> neighbours, ArrayList<MapTerrain> terrain, ArrayList<EntityModel> entities){
+        this.chunkWidth = chunkWidth;
+        this.chunkHeight = chunkHeight;
         this.id = id;
         this.neighbours = neighbours;
         this.terrain = terrain;

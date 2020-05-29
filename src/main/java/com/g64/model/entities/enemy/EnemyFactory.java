@@ -12,7 +12,7 @@ public class EnemyFactory {
 
     public static void generate(ChunkModel chunk){
         while(chunk.getNumberEnemies() < NUMBER_ENEMIES){
-            Position target = new Position(new Random().nextInt(GameController.MAP_WIDTH), new Random().nextInt(GameController.MAP_HEIGHT));
+            Position target = new Position(new Random().nextInt(chunk.getWidth()), new Random().nextInt(chunk.getHeight()));
             if (chunk.getEntityAt(target) instanceof NullEntity) { chunk.getEntities().add(new Mummy(target)); }
         }
     }

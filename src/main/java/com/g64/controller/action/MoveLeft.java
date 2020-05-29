@@ -24,6 +24,7 @@ public class MoveLeft implements ActionEvent {
         }
 
         if (!target.hasCollision()) entity.getPosition().moveLeft();
+        controller.getMapModel().handleMapCrossing(entity);
     }
 
     @Override

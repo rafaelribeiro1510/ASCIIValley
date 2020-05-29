@@ -40,7 +40,7 @@ public class ToolTest {
         inventorySpy = Mockito.spy(inventory);
 
         ArrayList<EntityModel> entities = new ArrayList<>(); entities.add(grass); entities.add(mummySpy);
-        ChunkModel chunk = new ChunkModel(1, Mockito.mock(ArrayList.class), Mockito.mock(ArrayList.class), entities);
+        ChunkModel chunk = new ChunkModel(2,2,1, Mockito.mock(ArrayList.class), Mockito.mock(ArrayList.class), entities);
         chunkSpy = Mockito.spy(chunk);
         doReturn(new NullTerrain(new Position(0,0))).when(chunkSpy).getTerrainAt(any(Position.class));
 

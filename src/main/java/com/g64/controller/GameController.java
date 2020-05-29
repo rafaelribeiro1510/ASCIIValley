@@ -2,7 +2,6 @@ package com.g64.controller;
 
 import com.g64.exceptions.*;
 import com.g64.model.MenuModel;
-import com.g64.model.entities.EntityModel;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -22,9 +21,6 @@ public class GameController {
         IN_GAME, CONTROLS, MAIN_MENU, DEAD;
     }
 
-    public static final int MAP_WIDTH = 40;
-    public static final int MAP_HEIGHT = 15;
-
     private static final int frameRate = 60;
 
     private MapModel mapModel;
@@ -43,11 +39,11 @@ public class GameController {
     private DeadView deadView;
 
     public GameController() {
-        this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
-        this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
-        this.inventoryModel = new InventoryModel();
         this.mapModel = new MapModel(6,  "resources/chunks.csv");
+        this.display = new Display(mapModel.thisChunk().getWidth(), mapModel.thisChunk().getHeight() + 3);
         this.mapView = new MapView(display.getScreen());
+        this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
+        this.inventoryModel = new InventoryModel();
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
@@ -94,7 +90,7 @@ public class GameController {
 
                 case IN_GAME:
                     mapView.draw(mapModel);
-                    inventoryView.draw(inventoryModel, player.getCurrentHealth());
+                    inventoryView.draw(inventoryModel, player.getCurrentHealth(), mapModel.thisChunk().getHeight());
                     entityView.draw(player, mapModel.thisChunk());
                     try {
                         processAction(getActionEventFromKeyboard());              // Update player with keyboard actions
@@ -123,8 +119,6 @@ public class GameController {
         if (event==null) return;
         try {
             event.execute();
-            EntityModel entity = event.getEntity();
-            if (entity != null) mapModel.handleMapCrossing(entity, checkBoundaries(entity.getPosition()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Died died) {
@@ -162,16 +156,6 @@ public class GameController {
             if (key.getCharacter() == 'a') return new MoveLeft(this, player);
         }
         return new NullAction();
-    }
-
-    public enum Crossing{NO_CROSS, CROSS_UP, CROSS_DOWN, CROSS_LEFT, CROSS_RIGHT};
-
-    public Crossing checkBoundaries(Position position) {
-        if (position.getY() >= MAP_HEIGHT) return Crossing.CROSS_DOWN;
-        else if (position.getY() < 0) return Crossing.CROSS_UP;
-        if (position.getX() >= MAP_WIDTH) return Crossing.CROSS_RIGHT;
-        else if (position.getX() < 0) return Crossing.CROSS_LEFT;
-        return Crossing.NO_CROSS;
     }
 
     public void setRunning(boolean running){ this.running = running; }
