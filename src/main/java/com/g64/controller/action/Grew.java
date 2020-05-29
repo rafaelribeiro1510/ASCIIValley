@@ -23,9 +23,4 @@ public class Grew implements ActionEvent {
         controller.getMapModel().thisChunk().getEntities().remove(seed);
         controller.getMapModel().thisChunk().getEntities().add(plant);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

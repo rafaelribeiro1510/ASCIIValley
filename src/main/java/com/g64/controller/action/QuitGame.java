@@ -16,9 +16,4 @@ public class QuitGame implements ActionEvent {
         controller.setRunning(false);
         System.out.println("\nQuitting");
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

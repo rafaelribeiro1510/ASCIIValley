@@ -21,9 +21,4 @@ public class InteractRight implements ActionEvent {
             catch (RemoveFromInventory removeFromInventory) { controller.getInventoryModel().getItems().remove(selectedItem); }
         }
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

@@ -18,9 +18,4 @@ public class ExitControls implements ActionEvent {
         gameController.getMapView().getScreen().clear();
         gameController.setGameState(GameController.gameStates.MAIN_MENU);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

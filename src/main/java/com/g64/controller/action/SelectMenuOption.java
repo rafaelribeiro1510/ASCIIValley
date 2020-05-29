@@ -34,9 +34,4 @@ public class SelectMenuOption implements ActionEvent {
                 break;
         }
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

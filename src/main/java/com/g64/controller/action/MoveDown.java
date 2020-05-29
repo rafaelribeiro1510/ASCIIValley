@@ -27,9 +27,4 @@ public class MoveDown implements ActionEvent {
         if (!target.hasCollision()) entity.getPosition().moveDown();
         controller.getMapModel().handleMapCrossing(entity);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return entity;
-    }
 }

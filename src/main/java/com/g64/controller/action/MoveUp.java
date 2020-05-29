@@ -26,9 +26,4 @@ public class MoveUp implements ActionEvent {
         if (!target.hasCollision()) entity.getPosition().moveUp();
         controller.getMapModel().handleMapCrossing(entity);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return entity;
-    }
 }

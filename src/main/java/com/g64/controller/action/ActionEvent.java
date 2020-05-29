@@ -7,5 +7,4 @@ import java.io.IOException;
 
 public interface ActionEvent {
     void execute() throws IOException, Died;
-    EntityModel getEntity();
 }

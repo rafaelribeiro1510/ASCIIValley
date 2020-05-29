@@ -18,9 +18,4 @@ public class MenuUp implements ActionEvent {
 
         menuModel.setSelectedOption(newSelected);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

@@ -16,9 +16,4 @@ public class SelectSlot implements ActionEvent {
     public void execute(){
         controller.getInventoryModel().setSelectedItem(slot);
     }
-
-    @Override
-    public EntityModel getEntity() {
-        return null;
-    }
 }

@@ -9,7 +9,13 @@ public class Position {
         this.y = y;
     }
 
-    public boolean equals(Position position) { return (this.x == position.x && this.y == position.y); }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Position)) return false;
+        Position that = (Position) o;
+        return (this.x == that.x && this.y == that.y);
+    }
 
     public double distanceTo(Position that) { return Math.sqrt(Math.pow(this.getX() - that.getX(), 2) + Math.pow(this.getY() - that.getY(), 2)); }
 
