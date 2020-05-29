@@ -1,11 +1,8 @@
 package com.g64.controller.action;
 
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
 import com.g64.model.MenuModel;
 import com.g64.model.gameState.menuGameState;
+import com.g64.model.entities.EntityModel;
 
 import java.io.IOException;
 

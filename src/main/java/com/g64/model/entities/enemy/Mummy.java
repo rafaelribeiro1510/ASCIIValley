@@ -1,12 +1,9 @@
 package com.g64.model.entities.enemy;
 
 import com.g64.model.entities.Player;
-import com.g64.model.entities.UpdatableEntity;
 import com.g64.model.entities.enemy.MovementHumour.MummyMovementAggroed;
 import com.g64.model.entities.enemy.MovementHumour.MummyMovementNormal;
 import com.googlecode.lanterna.TextColor;
-import com.g64.controller.GameController;
-import com.g64.controller.action.*;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.drops.HealthConsumableDrop;

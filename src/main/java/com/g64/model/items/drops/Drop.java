@@ -25,6 +25,8 @@ public abstract class Drop implements Item {
 
     public int getValue(){ return amount; }
 
+    public void setValue(int value){ this.amount = value; }
+
     public abstract EntityModel getEntityFromDrop(Position position);
 
 }

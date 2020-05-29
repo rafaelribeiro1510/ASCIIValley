@@ -71,7 +71,6 @@ public class Utils {
 
 
     public static void parseObjectIntoCSVLine(BufferedWriter bw, ChunkModel chunk) {
-
         try {
             writeIdLine(bw, chunk);
             writeNeighboursLine(bw, chunk);

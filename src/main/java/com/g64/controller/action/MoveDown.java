@@ -1,11 +1,9 @@
 package com.g64.controller.action;
 
-import com.g64.exceptions.CrossedDown;
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.EntityModel;
-import com.g64.model.entities.map.NullEntity;
 
 public class MoveDown implements ActionEvent {
     private final GameController controller;
@@ -17,15 +15,16 @@ public class MoveDown implements ActionEvent {
     }
 
     @Override
-    public void execute() throws CrossedDown, Died{
+    public void execute() throws Died{
         //TODO this smell vv
-        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().checkDown(GameController.MAP_HEIGHT));
+        EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookDown());
 
         if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
             controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
             return;
         }
 
-        if (!target.hasCollision()) entity.getPosition().down();
+        if (!target.hasCollision()) entity.getPosition().moveDown();
+        controller.getMapModel().handleMapCrossing(entity);
     }
 }

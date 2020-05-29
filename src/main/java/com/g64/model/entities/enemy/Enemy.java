@@ -1,5 +1,7 @@
 package com.g64.model.entities.enemy;
 
+import com.g64.controller.action.ActionEvent;
+import com.g64.controller.action.NullAction;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
@@ -31,13 +33,14 @@ public abstract class Enemy extends EntityModel {
     }
 
     @Override
-    public void update(GameController controller) throws Died {
+    public ActionEvent update(GameController controller) {
         if (movementCooldown == 0) {
             checkForPlayer(controller.getPlayer());
-            movementHumour.move(controller);
+            return movementHumour.move(controller);
         }
         else {
             movementCooldown--;
+            return new NullAction();
         }
     }
 }

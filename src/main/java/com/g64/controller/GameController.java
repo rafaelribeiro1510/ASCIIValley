@@ -26,11 +26,7 @@ public class GameController {
     public enum gameStates {
         IN_GAME, CONTROLS, MAIN_MENU, DEAD;
     }
-
     */
-
-    public static final int MAP_WIDTH = 40;
-    public static final int MAP_HEIGHT = 15;
 
     private static final int frameRate = 60;
 
@@ -53,11 +49,11 @@ public class GameController {
     private GameState gameState = new menuGameState(this);
 
     public GameController() {
-        this.display = new Display(MAP_WIDTH, MAP_HEIGHT + 3);
-        this.player = new Player(new Position(MAP_WIDTH/2, MAP_HEIGHT/2), "\u263B", TextColor.ANSI.BLACK);
-        this.inventoryModel = new InventoryModel();
-        this.mapModel = new MapModel(5,  "resources/chunks.csv");
+        this.mapModel = new MapModel(6,  "resources/chunks.csv");
+        this.display = new Display(mapModel.thisChunk().getWidth(), mapModel.thisChunk().getHeight() + 3);
         this.mapView = new MapView(display.getScreen());
+        this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
+        this.inventoryModel = new InventoryModel();
         this.entityView = new EntityView(mapView.getScreen());
         this.inventoryView = new InventoryView(mapView.getScreen());
         this.running = true;
@@ -87,63 +83,6 @@ public class GameController {
                 Thread.sleep(1000/ frameRate);
             }
             catch (IOException | InterruptedException e) { e.printStackTrace(); }
-
-            // ---------------------------
-            /*
-            switch (gameState) {
-                case MAIN_MENU:
-                    menuView.draw(menuModel);
-
-                    try {
-                        processPlayerAction(getActionEventFromKeyboard());
-                        mapView.getScreen().refresh();
-                        Thread.sleep(1000/ frameRate);
-                    }
-                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
-                    break;
-
-                case CONTROLS:
-                    controlsView.draw();
-                    try {
-                        processPlayerAction(getActionEventFromKeyboard());
-                        mapView.getScreen().refresh();
-                        Thread.sleep(1000/ frameRate);
-                    }
-                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
-                    break;
-
-                case IN_GAME:
-                    mapView.draw(mapModel);
-                    inventoryView.draw(inventoryModel, player.getCurrentHealth());
-                    entityView.draw(player, mapModel.thisChunk());
-                    try {
-                        processPlayerAction(getActionEventFromKeyboard());    // Update player with keyboard actions
-                        mapModel.updateEntities(this);              // Update non-player entities with generated actions
-                        mapView.getScreen().refresh();
-                        Thread.sleep(1000/ frameRate);
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    catch (Died died) {
-                        // GAME OVER
-                        getMapView().getScreen().clear();
-                        gameState = gameStates.DEAD;
-                    }
-                    break;
-
-                case DEAD:
-                    deadView.draw();
-                    try {
-                        processPlayerAction(getActionEventFromKeyboard());
-                        mapView.getScreen().refresh();
-                        Thread.sleep(1000/ frameRate);
-                    }
-                    catch (IOException | InterruptedException e) { e.printStackTrace(); }
-                    break;
-            }
-            */
-            // ---------------------------
-
         }
     }
 
@@ -152,23 +91,10 @@ public class GameController {
         if (event == null) return;
         try {
             event.execute();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (CrossedUp crossedUp) {
-            mapModel.moveNorth();
-            player.setPosition(new Position(player.getPosition().getX(), MAP_HEIGHT - 1));
-        } catch (CrossedLeft crossedLeft) {
-            mapModel.moveWest();
-            player.setPosition(new Position(MAP_WIDTH - 1, player.getPosition().getY()));
-        } catch (CrossedDown crossedDown) {
-            mapModel.moveSouth();
-            player.setPosition(new Position(player.getPosition().getX(), 0));
-        } catch (CrossedRight crossedRight) {
-            mapModel.moveEast();
-            player.setPosition(new Position(0, player.getPosition().getY()));
         } catch (Died died) {
-            //GAME OVER
+            // GAME OVER
             getMapView().getScreen().clear();
             gameState = gameStates.DEAD;
         }

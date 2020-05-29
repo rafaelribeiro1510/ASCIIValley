@@ -1,12 +1,9 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
 import com.g64.model.MenuModel;
 import com.g64.model.gameState.menuGameState;
+import com.g64.model.entities.EntityModel;
 
 import java.io.IOException;
 
@@ -21,7 +18,7 @@ public class EnterPressed implements ActionEvent {
     }
 
     @Override
-    public void execute() throws IOException, CrossedDown, CrossedUp, CrossedRight, CrossedLeft {
+    public void execute() throws IOException {
 
         this.state.getMenuOptions().get(this.state.getSelectedOption()).getMenuCommand().execute();
         /*

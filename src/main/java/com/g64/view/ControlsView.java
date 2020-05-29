@@ -28,7 +28,7 @@ public class ControlsView {
         graphics.putString(4, row += 2, "Arrow Keys To Interact With");
         graphics.putString(6, row += 1, "The Surroundings Using");
         graphics.putString(6, row += 1, "The Selected Item");
-        graphics.putString(4, row += 2, "0 To 9 To Select An Item");
+        graphics.putString(4, row += 2, "Number Row To Select An Item");
         graphics.putString(6, row += 1, "From The Inventory");
         graphics.putString(4, row += 2, "[Press Any Key To Go Back");
         graphics.putString(6, row += 1, "To The Main Menu]");

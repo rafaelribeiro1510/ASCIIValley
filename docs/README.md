@@ -130,8 +130,7 @@ SMELLS
 (- Pair Enemy.java / SeedEntity.java / UpdatableEntity.java / MapModel.java not defined)
 - Mummy.java State for Mummmy humor
 (- Switch in MapEntityFactory/MapTerrainFactory due to the factory design pattern)
-- Target.java - metodos muito parecidos repetidos?
-- Position.java 
+- Position.java using width 
 
 ### 1. Bloater - Long Method
 

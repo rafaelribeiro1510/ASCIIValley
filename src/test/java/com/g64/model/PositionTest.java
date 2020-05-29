@@ -1,69 +1,28 @@
 package com.g64.model;
 
-import com.g64.exceptions.CrossedLeft;
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
-import com.g64.exceptions.CrossedDown;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
 public class PositionTest {
     private Position position;
-    private int width;
-    private int height;
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void initialize(){
         position = new Position(1, 1);
-        width = 2;
-        height = 2;
     }
 
     @Test
     public void testMovements(){
-        this.position.down();
+        this.position.moveDown();
         assertEquals(2, this.position.getY());
-        this.position.up();
+        this.position.moveUp();
         assertEquals(1, this.position.getY());
-        this.position.right();
+        this.position.moveRight();
         assertEquals(2, this.position.getX());
-        this.position.left();
+        this.position.moveLeft();
         assertEquals(1, this.position.getX());
-    }
-
-    @Test
-    public void crossedNorth() throws CrossedUp {
-        thrown.expect(CrossedUp.class);
-        this.position.up();
-        this.position.checkUp(height);
-    }
-
-    @Test
-    public void crossedSouth() throws CrossedDown {
-        thrown.expect(CrossedDown.class);
-        this.position.down();
-        this.position.checkDown(height);
-    }
-
-    @Test
-    public void crossedEast() throws CrossedRight {
-        thrown.expect(CrossedRight.class);
-        this.position.right();
-        this.position.checkRight(width);
-    }
-
-    @Test
-    public void crossedWest() throws CrossedLeft {
-        thrown.expect(CrossedLeft.class);
-        this.position.left();
-        this.position.checkLeft(width);
     }
 
     @Test

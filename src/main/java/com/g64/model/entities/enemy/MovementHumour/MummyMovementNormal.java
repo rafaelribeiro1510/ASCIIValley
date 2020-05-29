@@ -2,7 +2,6 @@ package com.g64.model.entities.enemy.MovementHumour;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.exceptions.*;
 import com.g64.model.entities.enemy.Enemy;
 
 import java.util.Random;
@@ -13,19 +12,17 @@ public class MummyMovementNormal extends EnemyMovementHumour {
     }
 
     @Override
-    public void move(GameController controller) throws Died {
-        try {
-            switch (new Random().nextInt(4)) {
-                case 0:
-                    new MoveDown(controller, me).execute();
-                case 1:
-                    new MoveUp(controller, me).execute();
-                case 2:
-                    new MoveLeft(controller, me).execute();
-                case 3:
-                    new MoveRight(controller, me).execute();
-            }
+    public ActionEvent move(GameController controller) {
+        switch (new Random().nextInt(4)) {
+            case 0:
+                return new MoveDown(controller, me);
+            case 1:
+                return new MoveUp(controller, me);
+            case 2:
+                return new MoveLeft(controller, me);
+            case 3:
+                return new MoveRight(controller, me);
         }
-        catch (CrossedDown | CrossedLeft | CrossedRight | CrossedUp ignored){}
+        return new NullAction();
     }
 }

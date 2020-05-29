@@ -8,5 +8,6 @@ public class Application {
     }
 }
 
+
 //TODO Smell: some instanceof still
 //TODO Smell: use of exceptions to controll flow (crossed e afins)

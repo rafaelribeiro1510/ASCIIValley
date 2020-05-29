@@ -1,10 +1,9 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.CrossedDown;
 import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
-import com.g64.model.entities.target.Target;
+import com.g64.model.entities.visitors.TargetVisitor;
 import com.g64.model.items.Item;
 
 public class InteractDown implements ActionEvent {
@@ -15,12 +14,9 @@ public class InteractDown implements ActionEvent {
     @Override
     public void execute() {
         Item selectedItem = controller.getInventoryModel().getSelectedItem();
-        Position target;
-        try { target = controller.getPlayer().getPosition().checkDown(GameController.MAP_HEIGHT); }
-        catch (CrossedDown ignored) { return; }
+        Position target = controller.getPlayer().getPosition().lookDown();
         if (selectedItem != null) {
-            controller.getMapView().blink(target);
-            try { selectedItem.accept(new Target(controller, target)); }
+            try { selectedItem.accept(new TargetVisitor(controller, target)); }
             catch (RemoveFromInventory removeFromInventory) { controller.getInventoryModel().getItems().remove(selectedItem); }
         }
     }

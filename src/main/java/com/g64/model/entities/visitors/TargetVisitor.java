@@ -1,4 +1,4 @@
-package com.g64.model.entities.target;
+package com.g64.model.entities.visitors;
 
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
@@ -15,15 +15,16 @@ import com.g64.model.items.drops.*;
 import com.g64.model.items.tools.*;
 import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
+import com.g64.model.terrain.NullTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
-public class Target {
+public class TargetVisitor {
     GameController controller;
     Position position;
     EntityModel entity;
     MapTerrain terrain;
 
-    public Target(GameController controller, Position position) {
+    public TargetVisitor(GameController controller, Position position) {
         this.controller = controller;
         this.position = position;
         this.entity = controller.getMapModel().thisChunk().getEntityAt(position);
@@ -50,7 +51,7 @@ public class Target {
     }
 
     public void allowUsage(RockDrop item) throws RemoveFromInventory {
-        if (entity instanceof NullEntity){
+        if (entity instanceof NullEntity && !(terrain instanceof NullTerrain)){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             item.decrementValue();
         }
@@ -75,7 +76,7 @@ public class Target {
     }
 
     public void allowUsage(Hoe item) throws RemoveFromInventory {
-        if (terrain instanceof GrassTerrain){
+        if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getTerrain().remove(terrain);
             controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
             item.decrementValue();

@@ -1,10 +1,5 @@
 package com.g64.model;
 
-import com.g64.exceptions.CrossedRight;
-import com.g64.exceptions.CrossedUp;
-import com.g64.exceptions.CrossedDown;
-import com.g64.exceptions.CrossedLeft;
-
 public class Position {
     private int x;
     private int y;
@@ -14,7 +9,13 @@ public class Position {
         this.y = y;
     }
 
-    public boolean equals(Position position) { return (this.x == position.x && this.y == position.y); }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Position)) return false;
+        Position that = (Position) o;
+        return (this.x == that.x && this.y == that.y);
+    }
 
     public double distanceTo(Position that) { return Math.sqrt(Math.pow(this.getX() - that.getX(), 2) + Math.pow(this.getY() - that.getY(), 2)); }
 
@@ -30,40 +31,27 @@ public class Position {
         return y;
     }
 
-    public void up() {
+    public void moveUp() {
         this.y--;
     }
 
-    public void down() {
+    public void moveDown() {
         this.y++;
     }
 
-    public void left() {
+    public void moveLeft() {
         this.x--;
     }
 
-    public void right() {
+    public void moveRight() {
         this.x++;
     }
 
-    public Position checkDown(int height) throws CrossedDown {
-        if (this.y + 1 < height) return new Position(this.x, this.y + 1);
-        else throw new CrossedDown();
-    }
+    public Position lookUp() { return new Position(this.x, this.y - 1); }
 
-    public Position checkUp(int height) throws CrossedUp {
-        if (this.y - 1 >= 0) return new Position(this.x, this.y - 1);
-        else throw new CrossedUp();
-    }
+    public Position lookDown() { return new Position(this.x, this.y + 1); }
 
-    public Position checkLeft(int width) throws CrossedLeft {
-        if (this.x - 1 >= 0) return new Position(this.x - 1, this.y);
-        else throw new CrossedLeft();
-    }
+    public Position lookLeft() { return new Position(this.x - 1, this.y); }
 
-    public Position checkRight(int width) throws CrossedRight {
-        if (this.x + 1 < width) return new Position(this.x + 1, this.y);
-        else throw new CrossedRight();
-    }
-
+    public Position lookRight() { return new Position(this.x + 1, this.y); }
 }
