@@ -24,6 +24,8 @@ public class inGameState implements GameState {
 
     @Override
     public void execute(GameController gameController) {
+        for (ActionEvent event : gameController.getMapModel().updateEntities(gameController)) gameController.processAction(event);
+
         // draw map
         gameController.getMapView().draw(gameController.getMapModel());
 

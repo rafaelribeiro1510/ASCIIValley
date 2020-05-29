@@ -68,9 +68,6 @@ public class GameController {
     public void processAction(ActionEvent actionEvent){
         try {
             actionEvent.execute();
-            for (ActionEvent event : mapModel.updateEntities(this)) {
-                event.execute();
-            }
         }
         catch (IOException e) {
             e.printStackTrace();
