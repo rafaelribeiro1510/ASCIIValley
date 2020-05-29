@@ -1,10 +1,7 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
-import com.g64.controller.action.EnterPressed;
-import com.g64.controller.action.MenuDown;
-import com.g64.controller.action.MenuUp;
+import com.g64.controller.action.*;
 import com.g64.exceptions.*;
 import com.g64.model.menu.controlsCommand;
 import com.g64.model.menu.menuOption;
@@ -44,12 +41,12 @@ public class menuGameState implements GameState {
     @Override
     public ActionEvent processKey(KeyStroke key) {
 
-        if (key == null)                            return null;
+        if (key == null)                            return new NullAction();
         if (key.getKeyType() == KeyType.ArrowUp)    return new MenuUp(this);
         if (key.getKeyType() == KeyType.ArrowDown)  return new MenuDown(this);
         if (key.getKeyType() == KeyType.Enter)      return new EnterPressed(this, gameController);
 
-        return null;
+        return new NullAction();
     }
 
     public ArrayList<menuOption> getMenuOptions() { return menuOptions; }

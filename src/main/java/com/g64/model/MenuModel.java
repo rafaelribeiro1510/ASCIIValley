@@ -12,15 +12,4 @@ public class MenuModel {
         this.selectedOption = 0;
     }
 
-    public ArrayList<String> getMenuItems() {
-        return menuItems;
-    }
-
-    public int getSelectedOption() {
-        return selectedOption;
-    }
-
-    public void setSelectedOption(int selectedOption) {
-        this.selectedOption = selectedOption;
-    }
 }

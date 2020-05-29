@@ -67,7 +67,7 @@ public class GameController {
 
     public void processAction(ActionEvent actionEvent){
         try {
-            if (actionEvent != null) actionEvent.execute();
+            actionEvent.execute();
             for (ActionEvent event : mapModel.updateEntities(this)) {
                 event.execute();
             }

@@ -15,13 +15,8 @@ public class MoveLeft implements ActionEvent {
     }
 
     @Override
-    public void execute() throws Died {
+    public void execute() {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookLeft());
-
-        if (this.entity instanceof Enemy && target.getPosition().equals(controller.getPlayer().getPosition())) {
-            controller.getPlayer().reduceHealth(((Enemy) this.entity).getAttackValue());
-            return;
-        }
 
         if (!target.hasCollision()) entity.getPosition().moveLeft();
         controller.getMapModel().handleMapCrossing(entity);

@@ -40,7 +40,8 @@ public class inGameState implements GameState {
     @Override
     public ActionEvent processKey(KeyStroke key) {
 
-        if (key == null)                            return null;
+        if (key == null)                            return new NullAction();
+
         if (key.getKeyType() == KeyType.ArrowUp)    return new InteractUp(gameController);
         if (key.getKeyType() == KeyType.ArrowDown)  return new InteractDown(gameController);
         if (key.getKeyType() == KeyType.ArrowLeft)  return new InteractLeft(gameController);
@@ -56,6 +57,6 @@ public class inGameState implements GameState {
 
         if (key.getKeyType() == KeyType.Escape)     return new ExitToMainMenu(gameController);
 
-        return null;
+        return new NullAction();
     }
 }

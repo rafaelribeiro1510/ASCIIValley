@@ -1,5 +1,7 @@
 package com.g64.model;
 
+import static java.lang.Math.abs;
+
 public class Position {
     private int x;
     private int y;
@@ -22,6 +24,13 @@ public class Position {
     public double horizontalDifference(Position that) { return this.getX() - that.getX(); }
 
     public double verticalDifference(Position that) { return this.getY() - that.getY(); }
+
+    public boolean adjacent(Position that) {
+        return (
+                (this.getX() == that.getX() && abs(verticalDifference(that)) == 1) ||
+                (this.getY() == that.getY() && abs(horizontalDifference(that)) == 1)
+        );
+    }
 
     public int getX() {
         return x;

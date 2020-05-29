@@ -2,6 +2,7 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;
+import com.g64.controller.action.NullAction;
 import com.g64.controller.action.QuitGame;
 import com.g64.exceptions.Died;
 import com.g64.view.DeadView;
@@ -32,6 +33,6 @@ public class deadPlayerState implements GameState {
         // any key works
         if (key != null) return new QuitGame(gameController);
 
-        return null;
+        return new NullAction();
     }
 }
