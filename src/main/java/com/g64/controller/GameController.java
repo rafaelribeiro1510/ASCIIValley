@@ -1,12 +1,14 @@
 package com.g64.controller;
 
 import com.g64.controller.action.ActionEvent;
+import com.g64.exceptions.Died;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.MenuModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.GameState;
+import com.g64.model.gameState.deadPlayerState;
 import com.g64.model.gameState.menuGameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
@@ -47,17 +49,15 @@ public class GameController {
         this.player = player;
         this.mapModel = mapModel;
         this.mapView = mapView;
-        // this.entityView = entityView;
         this.inventoryModel = inventoryModel;
-        // this.inventoryView = inventoryView;
     }
 
     public void start() {
         while (running) {
             try {
                 mapView.getScreen().refresh();
-                ActionEvent actionEvent = getActionEventFromKeyboard();
-                gameState.execute(this, actionEvent);
+                processAction(getActionEventFromKeyboard());
+                gameState.execute(this);
 
                 Thread.sleep(1000/ frameRate);
             }
@@ -65,6 +65,20 @@ public class GameController {
         }
     }
 
+    public void processAction(ActionEvent actionEvent){
+        try {
+            if (actionEvent != null) actionEvent.execute();
+            for (ActionEvent event : mapModel.updateEntities(this)) {
+                event.execute();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Died died) {
+            setGameState(new deadPlayerState(this));
+        }
+    }
 
     public ActionEvent getActionEventFromKeyboard() throws IOException{
         Screen screen = mapView.getScreen();
@@ -72,7 +86,6 @@ public class GameController {
 
         return gameState.processKey(key);
     }
-
 
 
     public void setRunning(boolean running){ this.running = running; }
