@@ -1,6 +1,7 @@
 package com.g64.controller;
 
 import com.g64.controller.action.*;
+import com.g64.exceptions.Died;
 import com.g64.model.ChunkModel;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
@@ -34,7 +35,7 @@ public class actionEventTest {
     private MapModel mapSpy;
     private ChunkModel chunk;
     private InventoryModel inventory;
-    private Player player;
+    private Player playerSpy;
     private Tool tool;
 
     @Before
@@ -55,61 +56,66 @@ public class actionEventTest {
         mapSpy = Mockito.spy(map);
 
         inventory = Mockito.mock(InventoryModel.class);
-        player = new Player(new Position(0,0)," ", Mockito.mock(TextColor.class));
+        Player player = new Player(new Position(0,0)," ", Mockito.mock(TextColor.class));
+        playerSpy = Mockito.spy(player);
         tool = Mockito.mock(Tool.class);
-        controller = new GameController(player, mapSpy, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), inventory, Mockito.mock(InventoryView.class));
+        controller = new GameController(playerSpy, mapSpy, Mockito.mock(MapView.class), Mockito.mock(EntityView.class), inventory, Mockito.mock(InventoryView.class));
         Mockito.when(inventory.getSelectedItem()).thenReturn(tool);
     }
 
     @Test
     public void moveRightNewChunk() {
-        player.setPosition(new Position(1,0));
-        MoveRight move = new MoveRight(controller, player);
+        playerSpy.setPosition(new Position(1,0));
+        MoveRight move = new MoveRight(controller, playerSpy);
         controller.processAction(move);
         verify(controller.getMapModel()).moveEast();
     }
 
     @Test
     public void moveLeftNewChunk() {
-        player.setPosition(new Position(0,0));
-        MoveLeft move = new MoveLeft(controller, player);
+        playerSpy.setPosition(new Position(0,0));
+        MoveLeft move = new MoveLeft(controller, playerSpy);
         controller.processAction(move);
         verify(controller.getMapModel()).moveWest();
     }
 
     @Test
     public void moveUpNewChunk() {
-        player.setPosition(new Position(0,0));
-        MoveUp move = new MoveUp(controller, player);
+        playerSpy.setPosition(new Position(0,0));
+        MoveUp move = new MoveUp(controller, playerSpy);
         controller.processAction(move);
         verify(controller.getMapModel()).moveNorth();
     }
 
     @Test
     public void moveDownNewChunk() {
-        player.setPosition(new Position(0,1));
-        MoveDown move = new MoveDown(controller, player);
+        playerSpy.setPosition(new Position(0,1));
+        MoveDown move = new MoveDown(controller, playerSpy);
         controller.processAction(move);
         verify(controller.getMapModel()).moveSouth();
     }
 
     @Test
     public void moveTestCollision(){
-        player.setPosition(new Position(0,0));
-        MoveLeft left = new MoveLeft(controller, player);
+        playerSpy.setPosition(new Position(0,0));
+        MoveLeft left = new MoveLeft(controller, playerSpy);
         controller.processAction(left);
-        assertEquals(new Position(1,0), player.getPosition());
+        assertEquals(new Position(1,0), playerSpy.getPosition());
 
-        MoveDown down = new MoveDown(controller,player);
+        MoveDown down = new MoveDown(controller,playerSpy);
         controller.processAction(down);
-        assertEquals(new Position(1,0), player.getPosition());
+        assertEquals(new Position(1,0), playerSpy.getPosition());
     }
 
     @Test
-    public void moveTestDamage(){
-        player.setPosition(new Position(0,0));
-        mapSpy.thisChunk().getEntities().add(new Mummy(new Position(0,1)));
-
+    public void moveTestDamage() throws Died {
+        playerSpy.setPosition(new Position(0,0));
+        Mummy mummy = new Mummy(new Position(1,0));
+        mapSpy.thisChunk().getEntities().add(mummy);
+        MoveLeft left = new MoveLeft(controller, mummy);
+        controller.processAction(left);
+        verify(playerSpy).reduceHealth(mummy.getAttackValue());
     }
+    
 
 }
