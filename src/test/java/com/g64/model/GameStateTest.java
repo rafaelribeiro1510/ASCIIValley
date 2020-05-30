@@ -4,6 +4,7 @@ import com.g64.controller.GameController;
 import com.g64.controller.action.EnterPressed;
 import com.g64.controller.action.ExitToMainMenu;
 import com.g64.controller.action.MenuDown;
+import com.g64.controller.action.QuitGame;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.controlsState;
@@ -100,7 +101,9 @@ public class GameStateTest {
 
     @Test
     public void inGameToDeadStateTest() {
-        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
+        Screen mocked = Mockito.mock(Screen.class);
+        when(controller.getMapView().getScreen()).thenReturn(mocked);
+        when(controller.getDisplay().getScreen()).thenReturn(mocked);
 
         try {
             doThrow(Died.class)
@@ -117,6 +120,13 @@ public class GameStateTest {
         }
 
         assertEquals(deadPlayerState.class, controller.getGameState().getClass());
+
+
+        controller.processAction(new QuitGame(controller));
+
+        // checks if the close screen method was called (once)
+        try { verify(mocked).close(); }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
 }
