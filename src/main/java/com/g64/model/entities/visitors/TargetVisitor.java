@@ -18,7 +18,7 @@ import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.NullTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
-public class TargetVisitor {
+public class TargetVisitor implements Visitor{
     GameController controller;
     Position position;
     EntityModel entity;
@@ -31,6 +31,7 @@ public class TargetVisitor {
         this.terrain = controller.getMapModel().thisChunk().getTerrainAt(position);
     }
 
+    @Override
     public void allowUsage(SeedDrop item) throws RemoveFromInventory {
         if (entity instanceof NullEntity && terrain instanceof SoilTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
@@ -38,11 +39,13 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(ConsumableDrop item) throws RemoveFromInventory {
         controller.getPlayer().addHealth(item.getHealthUpValue());
         item.decrementValue();
     }
 
+    @Override
     public void allowUsage(LogDrop item) throws RemoveFromInventory {
         if  (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
@@ -50,6 +53,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(RockDrop item) throws RemoveFromInventory {
         if (entity instanceof NullEntity && !(terrain instanceof NullTerrain)){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
@@ -57,6 +61,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(TallGrassDrop item) throws RemoveFromInventory {
         if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
@@ -64,6 +69,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(Axe item) throws RemoveFromInventory {
         if (entity instanceof TreeEntity || entity instanceof Enemy){
             try { entity.reduceHealth(item.getHitValue()); }
@@ -75,6 +81,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(Hoe item) throws RemoveFromInventory {
         if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getTerrain().remove(terrain);
@@ -83,6 +90,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(Pickaxe item) throws RemoveFromInventory {
         if (entity instanceof RockEntity){
             try { entity.reduceHealth(item.getHitValue()); }
@@ -94,6 +102,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(Scythe item) throws RemoveFromInventory {
         if (entity instanceof PlantEntity){
             try { entity.reduceHealth(item.getHitValue()); }
@@ -105,6 +114,7 @@ public class TargetVisitor {
         }
     }
 
+    @Override
     public void allowUsage(WateringCan item) throws RemoveFromInventory {
         if (entity instanceof SeedEntity){
             ((SeedEntity)entity).water(item.getHitValue());
