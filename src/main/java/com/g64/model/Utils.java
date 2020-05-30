@@ -96,16 +96,6 @@ public class Utils {
     }
 
     private static void writeTerrainLines(BufferedWriter bw, ChunkModel chunk) throws IOException {
-        /*
-        Map<Color, Integer> tMapInverted = new HashMap<Color, Integer>() {{
-            put(new TextColor.RGB(0, 0, 0).toColor(),         0); // Null
-            put(new TextColor.RGB(0, 102, 0).toColor(),       1); //Grass
-            put(new TextColor.RGB(204, 153, 0).toColor(),     2); //Sand
-            put(new TextColor.RGB(102, 51, 0).toColor(),      3); //Dirt
-            put(new TextColor.RGB(0, 153, 255).toColor(),     4); //Water
-            put(new TextColor.RGB(105, 105, 105).toColor(),   5); //Stone
-        }};
-        */
 
         StringBuilder terrainLine = new StringBuilder();
 
@@ -114,7 +104,6 @@ public class Utils {
 
                 if (col != 0) terrainLine.append(",");
 
-                // TextColor posColor = chunk.getTerrainAt(new Position(col,row)).getColor();
                 MapTerrain terrain = chunk.getTerrainAt(new Position(col,row));
                 terrainLine.append(terrain.getId());
             }
@@ -129,31 +118,12 @@ public class Utils {
 
     private static void writeEntityLines(BufferedWriter bw, ChunkModel chunk) throws IOException {
 
-        /*
-        Map<Color, String> eMapInverted = new HashMap<Color, String>() {{
-            put(new TextColor.RGB(40,40,40).toColor(),      "^"); // Stone
-            put(new TextColor.RGB(0, 204, 255).toColor(),   "~"); // Water
-            put(new TextColor.RGB(26, 12, 0).toColor(),     ":"); // Dirt
-            put(new TextColor.RGB(0, 204, 0).toColor(),     "y"); // Grass patch
-        }};
-        */
-
         StringBuilder entityLine = new StringBuilder();
 
         for (int row = 0; row < 15; row++) {
             for (int col = 0; col < 40; col++) {
 
                 if (col != 0) entityLine.append(",");
-
-                /*
-                TextColor entityColor = chunk.getEntityAt(new Position(col, row)).getColor();
-
-                String entityString;
-                if ( (entityString = eMapInverted.get(entityColor.toColor())) != null) {
-                    entityLine.append(entityString);
-                }
-                else { entityLine.append(" "); }
-                */
 
                 EntityModel mapEntity = chunk.getEntityAt(new Position(col, row));
                 entityLine.append(mapEntity.getString());
