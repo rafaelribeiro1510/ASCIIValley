@@ -1,0 +1,41 @@
+@startuml Command
+skinparam linetype ortho
+
+note "Concrete Visitor" as n1
+note "Concrete Item" as n2
+
+class GameController{
+}
+
+interface Visitor{
+  void allowUsage(SeedDrop item)
+  void allowUsage(Hoe item)
+}
+
+class TargetVisitor{
+  void allowUsage(SeedDrop item)
+  void allowUsage(Hoe item)
+}
+
+interface Item{
+  void accept(TargetVisitor targetVisitor)
+}
+
+class Hoe{
+  void accept(TargetVisitor targetVisitor)
+}
+
+class SeedDrop{
+  void accept(TargetVisitor targetVisitor)
+}
+
+n1 . TargetVisitor
+n2 . Hoe
+SeedDrop . n2
+Visitor <|--TargetVisitor
+Item <|-- Hoe
+Item <|-- SeedDrop
+GameController->Visitor
+GameController-->Item
+
+@enduml

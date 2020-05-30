@@ -9,7 +9,7 @@ This project was developed by Joao Sousa (up201806613@fe.up.pt)
 
 and Rafael Ribeiro (up201806330@fe.up.pt)
  
- for LPOO 2019⁄20
+for LPOO 2019⁄20
  
  
 ## Implemented Features
@@ -44,13 +44,10 @@ The starting point of the game is a menu that presents the player with options t
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
 and also the items collected through said interactions. ![GUI Mock-up - figure 4](./screenshots/guiMockup.png)
 
-## Planned Features
-
-All Planned Features have been implemented.
 
 ## Desired Features
-This section, unlike the last one, lists functionalities that were thought up in the start of the project but realistically will 
-not be achieved in the time frame we have.
+This section lists functionalities that were thought up in the start of the project and were
+not be achieved in the time frame we had.
 
 ### Day-night Cycle, that visually alters the map.
 
@@ -97,18 +94,45 @@ entities besides the player.)
 ### 2. Actions
 #### **Problem in Context**
 After initially writing in the reading of keyboard inputs, it was clear the "switch" approach was messy and 
-did not scale properly.
+did not scale properly. Also the need for enemies with behaviour similar to the players' made this pattern fit very well.
 
 #### **The Pattern**
-Thus, the **Command** pattern was implemented, since it parametrizes clients with different requests, in our case, the player actions.  
+The **Command** pattern consists of parameterizing clients with different requests, in our case, the player, enemy and menu actions.  
 
 #### **Implementation**
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
+Namely, the [Move](../src/main/java/com/g64/controller/action/MoveDown.java) family of actions, responsible for movement and collision checking of the "invoker" entity.
 
 ![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/action.iuml?token=AK5LFP4RSKI6DRLWYPNPMES6XAWG6)
 
 #### **Consequences**
-The code in the com.g64.controller is much easier to read and it is also now easy to scale the input interface with new key inputs and subsequent actions.
+The code in the com.g64.controller is much easier to read and also proved to make the scaling of the inputs easier, 
+especially alongisde the pattern next described.
+
+
+### 3. State
+
+### 4. Visitor
+#### **Problem in Context**
+When implementing the usage of different tools and items by the player, we soon realized that these
+varied a lot depending on the parts of the map they interacted with ([Axe](../src/main/java/com/g64/model/items/tools/Axe.java) 
+interacts with both [Enemies](../src/main/java/com/g64/model/entities/enemy/Enemy.java) and [MapEntities](../src/main/java/com/g64/model/entities/map/MapEntity.java) ; 
+[Hoe](../src/main/java/com/g64/model/items/tools/Hoe.java) interacts with [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java)).
+In an initial phase, this led to the use of **instanceof** operations to quickly determine if the action would be accepted on said "Target", something that clearly goes against polymorphism. 
+
+#### **The Pattern**
+Thus the use of the visitor pattern was a solution we found, since it consists of separating the actions done by the items from their classes, following the open/closed principle.
+
+#### **Implementation**
+By creating a class [TargetVisitor](../src/main/java/com/g64/model/entities/visitors/TargetVisitor.java) with functions 
+[allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/TargetVisitor.java) accepting all possible "interactable" items.
+Alongside these, all items also implement an [accept(TargetVisitor targetVisitor)](../src/main/java/com/g64/model/items/tools/Hoe.java) method, which consists of calling the visitor's method corresponding to itself.
+The process of getting the map objects from the position that was interacted with, deciding which objects to evaluate and effectively cause changes to these are all handled by the visitor. 
+
+#### **Consequences**
+This makes the code on the the [Interact](../src/main/java/com/g64/controller/action/InteractDown.java) actions more readable, since the handling of the item is done entirely by this new class.
+However, this also has its' downsides: the creation of new items is less intuitive, and in a game like ours would, in the long run, be hindering.
+Despite helping us remove a lot of the smelly **instanceof** calls, we were not able to completely rid this part of our code from them.  
 
 
 [//]: # (This section should be organized in different subsections, each describing a different design problem that you had to solve during the
@@ -126,11 +150,9 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 ## Known Code Smells And Refactoring Suggestions
 
 SMELLS
-- Metodos na position que recebem width e height
 (- Pair Enemy.java / SeedEntity.java / UpdatableEntity.java / MapModel.java not defined)
 - Mummy.java State for Mummmy humor
 (- Switch in MapEntityFactory/MapTerrainFactory due to the factory design pattern)
-- Position.java using width 
 
 ### 1. Bloater - Long Method
 

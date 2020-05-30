@@ -3,20 +3,19 @@ class Application{
   main()
 }
 class GameController{
-  MapModel
-  PlayerModel
   start()
-  processKey()
+  processAction()
 }
 class MapView{
   Screen
   ChunkView
   drawMap(MapModel)
 }
-class EntityView{
+class MapModel{
+  chunks
   draw(PlayerModel)
 }
 Application -> GameController : uses
 GameController -> MapView
-GameController --> EntityView
+GameController --> MapModel
 @enduml

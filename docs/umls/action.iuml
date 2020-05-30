@@ -1,18 +1,30 @@
 @startuml Command
-interface ActionEvent{
+skinparam linetype ortho
+
+note "Command" as n1
+note "Concrete commands" as n2
+note "Receiver" as n3
+note "Invoker" as n4
+interface ActionEvent {
   execute()
 }
-class MoveDown{
-  execute()
-}
-class MoveRight{
-  execute()
-}
-class QuitGame{
+class InteractDown{
   execute()
 }
 
-ActionEvent <|-- MoveDown
-ActionEvent <|-- MoveRight
-ActionEvent <|-- QuitGame
+class GameController{
+  processAction()
+}
+
+class GameState{
+  processKey()
+}
+
+n1 .. ActionEvent
+n2 .. InteractDown
+n3 .. GameController
+GameState o-- ActionEvent
+GameState . n4
+ActionEvent <|- InteractDown
+GameController <-- InteractDown : receiver
 @enduml
