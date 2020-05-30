@@ -9,6 +9,7 @@ import com.g64.model.gameState.inGameState;
 import com.g64.model.gameState.menuGameState;
 import com.g64.view.Display;
 import com.g64.view.MapView;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -55,6 +56,8 @@ public class GameStateTest {
 
     @Test
     public void menuToControlsStateTest() {
+        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
+
         // checks if gameState is initially menuGameState (in menu)
         assertEquals(menuGameState.class, controller.getGameState().getClass());
 
@@ -67,7 +70,7 @@ public class GameStateTest {
 
     @Test
     public void controlsToMenuStateTest() {
-
+        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
         when(controller.getMapView().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
         // to "start" at the controls menu
