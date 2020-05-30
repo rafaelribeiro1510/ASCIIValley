@@ -5,23 +5,23 @@ import com.g64.model.items.drops.*;
 import com.g64.model.items.tools.*;
 
 public interface Visitor {
-    Item.itemValue allowUsage(SeedDrop item);
+    Item.usageValue allowUsage(SeedDrop item);
 
-    Item.itemValue allowUsage(ConsumableDrop item);
+    Item.usageValue allowUsage(ConsumableDrop item);
 
-    Item.itemValue allowUsage(LogDrop item);
+    Item.usageValue allowUsage(LogDrop item);
 
-    Item.itemValue allowUsage(RockDrop item);
+    Item.usageValue allowUsage(RockDrop item);
 
-    Item.itemValue allowUsage(TallGrassDrop item);
+    Item.usageValue allowUsage(TallGrassDrop item);
 
-    Item.itemValue allowUsage(Axe item);
+    Item.usageValue allowUsage(Axe item);
 
-    Item.itemValue allowUsage(Hoe item);
+    Item.usageValue allowUsage(Hoe item);
 
-    Item.itemValue allowUsage(Pickaxe item);
+    Item.usageValue allowUsage(Pickaxe item);
 
-    Item.itemValue allowUsage(Scythe item);
+    Item.usageValue allowUsage(Scythe item);
 
-    Item.itemValue allowUsage(WateringCan item);
+    Item.usageValue allowUsage(WateringCan item);
 }

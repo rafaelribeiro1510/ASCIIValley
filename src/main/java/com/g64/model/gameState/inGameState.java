@@ -2,13 +2,10 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.exceptions.Died;
 import com.g64.view.EntityView;
 import com.g64.view.InventoryView;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-
-import java.io.IOException;
 
 public class inGameState implements GameState {
 

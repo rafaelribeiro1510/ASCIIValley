@@ -5,7 +5,6 @@ import com.g64.controller.action.EnterPressed;
 import com.g64.controller.action.ExitToMainMenu;
 import com.g64.controller.action.MenuDown;
 import com.g64.controller.action.QuitGame;
-import com.g64.exceptions.Died;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.controlsState;
 import com.g64.model.gameState.deadPlayerState;

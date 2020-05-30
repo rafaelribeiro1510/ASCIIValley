@@ -9,10 +9,10 @@ public abstract class Tool implements Item {
 
     public String getName(){ return this.name; }
 
-    public itemValue decrementValue() {
+    public usageValue decrementValue() {
         durability--;
-        if (durability <= 0) return itemValue.BROKEN;
-        return itemValue.NOT_BROKEN;
+        if (durability <= 0) return usageValue.BROKEN;
+        return usageValue.NOT_BROKEN;
     }
 
     public int getValue() { return durability; }

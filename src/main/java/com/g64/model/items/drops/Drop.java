@@ -17,10 +17,10 @@ public abstract class Drop implements Item {
 
     public void incrementAmount(){ amount++; }
 
-    public itemValue decrementValue() {
+    public usageValue decrementValue() {
         amount--;
-        if (amount <= 0) return itemValue.BROKEN;
-        return itemValue.NOT_BROKEN;
+        if (amount <= 0) return usageValue.BROKEN;
+        return usageValue.NOT_BROKEN;
     }
 
     public int getValue(){ return amount; }

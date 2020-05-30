@@ -1,7 +1,6 @@
 package com.g64.model.entities.visitors;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Died;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Enemy;
@@ -32,102 +31,99 @@ public class TargetVisitor implements Visitor{
     }
 
     @Override
-    public Item.itemValue allowUsage(SeedDrop item) {
+    public Item.usageValue allowUsage(SeedDrop item) {
         if (entity instanceof NullEntity && terrain instanceof SoilTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(ConsumableDrop item) {
+    public Item.usageValue allowUsage(ConsumableDrop item) {
         controller.getPlayer().addHealth(item.getHealthUpValue());
         return item.decrementValue();
     }
 
     @Override
-    public Item.itemValue allowUsage(LogDrop item) {
+    public Item.usageValue allowUsage(LogDrop item) {
         if  (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(RockDrop item) {
+    public Item.usageValue allowUsage(RockDrop item) {
         if (entity instanceof NullEntity && !(terrain instanceof NullTerrain)){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(TallGrassDrop item) {
+    public Item.usageValue allowUsage(TallGrassDrop item) {
         if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getEntities().add(item.getEntityFromDrop(position));
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(Axe item) {
+    public Item.usageValue allowUsage(Axe item) {
         if (entity instanceof TreeEntity || entity instanceof Enemy){
-            try { entity.reduceHealth(item.getHitValue()); }
-            catch (Died died) {
+            if (entity.reduceHealth(item.getHitValue()) == EntityModel.healthReduction.DIED){
                 controller.getInventoryModel().add(entity.getRandomDrop());
                 controller.getMapModel().thisChunk().getEntities().remove(entity);
             }
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(Hoe item) {
+    public Item.usageValue allowUsage(Hoe item) {
         if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getTerrain().remove(terrain);
             controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(Pickaxe item) {
+    public Item.usageValue allowUsage(Pickaxe item) {
         if (entity instanceof RockEntity){
-            try { entity.reduceHealth(item.getHitValue()); }
-            catch (Died died) {
+            if (entity.reduceHealth(item.getHitValue()) == EntityModel.healthReduction.DIED){
                 controller.getInventoryModel().add(entity.getRandomDrop());
                 controller.getMapModel().thisChunk().getEntities().remove(entity);
             }
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(Scythe item) {
+    public Item.usageValue allowUsage(Scythe item) {
         if (entity instanceof PlantEntity){
-            try { entity.reduceHealth(item.getHitValue()); }
-            catch (Died died) {
+            if (entity.reduceHealth(item.getHitValue()) == EntityModel.healthReduction.DIED){
                 controller.getInventoryModel().add(entity.getRandomDrop());
                 controller.getMapModel().thisChunk().getEntities().remove(entity);
             }
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 
     @Override
-    public Item.itemValue allowUsage(WateringCan item) {
+    public Item.usageValue allowUsage(WateringCan item) {
         if (entity instanceof SeedEntity){
             ((SeedEntity)entity).water(item.getHitValue());
             return item.decrementValue();
         }
-        else return Item.itemValue.UNUSED;
+        else return Item.usageValue.UNUSED;
     }
 }

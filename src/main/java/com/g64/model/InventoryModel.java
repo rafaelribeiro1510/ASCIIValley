@@ -52,6 +52,6 @@ public class InventoryModel {
 
     public void useItem(Item item, TargetVisitor targetVisitor){
         if (item == null) return;
-        if (item.accept(targetVisitor) == Item.itemValue.BROKEN) items.remove(item);
+        if (item.accept(targetVisitor) == Item.usageValue.BROKEN) items.remove(item);
     }
 }

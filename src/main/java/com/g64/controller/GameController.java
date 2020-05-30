@@ -1,13 +1,11 @@
 package com.g64.controller;
 
 import com.g64.controller.action.ActionEvent;
-import com.g64.exceptions.Died;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.GameState;
-import com.g64.model.gameState.deadPlayerState;
 import com.g64.model.gameState.menuGameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
@@ -64,8 +62,7 @@ public class GameController {
     }
 
     public void processAction(ActionEvent actionEvent){
-        try { actionEvent.execute(); }
-        catch (Died died) { setGameState(new deadPlayerState(this)); }
+        actionEvent.execute();
     }
 
     public ActionEvent getActionEventFromKeyboard() throws IOException{

@@ -8,7 +8,7 @@ public class GrownCarrotDrop extends ConsumableDrop {
     }
 
     @Override
-    public itemValue accept(TargetVisitor targetVisitor) {
+    public usageValue accept(TargetVisitor targetVisitor) {
         return targetVisitor.allowUsage(this);
     }
 

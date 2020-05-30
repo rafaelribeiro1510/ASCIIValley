@@ -2,7 +2,6 @@ package com.g64.model.entities.enemy;
 
 import com.g64.controller.action.ActionEvent;
 import com.g64.controller.action.NullAction;
-import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.entities.enemy.MovementHumour.EnemyMovementHumour;

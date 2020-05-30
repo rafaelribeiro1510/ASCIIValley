@@ -1,7 +1,6 @@
 package com.g64.model.entities;
 
 import com.googlecode.lanterna.TextColor;
-import com.g64.exceptions.Died;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 
@@ -47,9 +46,14 @@ public abstract class EntityModel extends Updatable{
         if (currentHealth > maxHealth) currentHealth = maxHealth;
     }
 
-    public void reduceHealth(int x) throws Died {
+    public enum healthReduction{
+        SURVIVED,
+        DIED
+    }
+    public healthReduction reduceHealth(int x) {
         currentHealth -= x;
-        if (currentHealth <= 0) throw new Died(this);
+        if (currentHealth <= 0) return healthReduction.DIED;
+        return healthReduction.SURVIVED;
     }
 
     public int getCurrentHealth() {

@@ -1,7 +1,6 @@
 package com.g64.controller;
 
 import com.g64.controller.action.*;
-import com.g64.exceptions.Died;
 import com.g64.model.ChunkModel;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
@@ -109,7 +108,7 @@ public class actionEventTest {
     }
 
     @Test
-    public void moveTestDamage() throws Died {
+    public void moveTestDamage() {
         playerSpy.setPosition(new Position(0,0));
         Mummy mummy = new Mummy(new Position(1,0));
         mapSpy.thisChunk().getEntities().add(mummy);

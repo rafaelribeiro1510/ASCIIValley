@@ -10,7 +10,7 @@ public class Pickaxe extends Tool {
     }
 
     @Override
-    public itemValue accept(TargetVisitor targetVisitor) {
+    public usageValue accept(TargetVisitor targetVisitor) {
         return targetVisitor.allowUsage(this);
     }
 }

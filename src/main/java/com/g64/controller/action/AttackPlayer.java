@@ -1,7 +1,8 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Died;
+import com.g64.model.entities.EntityModel;
+import com.g64.model.gameState.deadPlayerState;
 
 public class AttackPlayer implements ActionEvent {
     private final GameController controller;
@@ -13,7 +14,7 @@ public class AttackPlayer implements ActionEvent {
     }
 
     @Override
-    public void execute() throws Died {
-        controller.getPlayer().reduceHealth(damage);
+    public void execute() {
+        if (controller.getPlayer().reduceHealth(damage) == EntityModel.healthReduction.DIED) controller.setGameState(new deadPlayerState(controller));
     }
 }

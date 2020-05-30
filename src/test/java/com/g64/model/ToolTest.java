@@ -1,7 +1,6 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.exceptions.Died;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.plant.TallGrassEntity;
@@ -50,14 +49,14 @@ public class ToolTest {
     }
 
     @Test
-    public void successfulUsage() throws Died {
+    public void successfulUsage() {
         Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
         verify(mummySpy).reduceHealth(tool.getHitValue());
     }
 
     @Test
-    public void successfulItemDrop() throws Died {
+    public void successfulItemDrop() {
         Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
 

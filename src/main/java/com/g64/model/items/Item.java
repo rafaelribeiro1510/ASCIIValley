@@ -7,12 +7,12 @@ public interface Item {
 
     int getValue();
 
-    enum itemValue{
+    enum usageValue {
         UNUSED,
         NOT_BROKEN,
         BROKEN
     }
-    itemValue decrementValue();
+    usageValue decrementValue();
 
-    itemValue accept(TargetVisitor targetVisitor);
+    usageValue accept(TargetVisitor targetVisitor);
 }
