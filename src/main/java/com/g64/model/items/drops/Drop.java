@@ -1,6 +1,5 @@
 package com.g64.model.items.drops;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.items.Item;
@@ -18,14 +17,13 @@ public abstract class Drop implements Item {
 
     public void incrementAmount(){ amount++; }
 
-    public void decrementValue() throws RemoveFromInventory {
+    public itemValue decrementValue() {
         amount--;
-        if (amount <= 0) throw new RemoveFromInventory();
+        if (amount <= 0) return itemValue.BROKEN;
+        return itemValue.NOT_BROKEN;
     }
 
     public int getValue(){ return amount; }
-
-    public void setValue(int value){ this.amount = value; }
 
     public abstract EntityModel getEntityFromDrop(Position position);
 

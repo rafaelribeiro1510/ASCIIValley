@@ -9,7 +9,7 @@ public class HealthConsumableDrop extends ConsumableDrop {
     }
 
     @Override
-    public void accept(TargetVisitor targetVisitor) throws RemoveFromInventory {
-        targetVisitor.allowUsage(this);
+    public itemValue accept(TargetVisitor targetVisitor) {
+        return targetVisitor.allowUsage(this);
     }
 }

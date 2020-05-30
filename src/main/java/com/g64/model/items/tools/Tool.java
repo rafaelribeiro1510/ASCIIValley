@@ -1,6 +1,5 @@
 package com.g64.model.items.tools;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.items.Item;
 
 public abstract class Tool implements Item {
@@ -10,9 +9,10 @@ public abstract class Tool implements Item {
 
     public String getName(){ return this.name; }
 
-    public void decrementValue() throws RemoveFromInventory {
+    public itemValue decrementValue() {
         durability--;
-        if (durability <= 0) throw new RemoveFromInventory();
+        if (durability <= 0) return itemValue.BROKEN;
+        return itemValue.NOT_BROKEN;
     }
 
     public int getValue() { return durability; }

@@ -1,6 +1,5 @@
 package com.g64.model.items;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 
 public interface Item {
@@ -8,7 +7,12 @@ public interface Item {
 
     int getValue();
 
-    void decrementValue() throws RemoveFromInventory;
+    enum itemValue{
+        UNUSED,
+        NOT_BROKEN,
+        BROKEN
+    }
+    itemValue decrementValue();
 
-    void accept(TargetVisitor targetVisitor) throws RemoveFromInventory;
+    itemValue accept(TargetVisitor targetVisitor);
 }

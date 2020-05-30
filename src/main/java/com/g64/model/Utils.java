@@ -107,11 +107,10 @@ public class Utils {
                 MapTerrain terrain = chunk.getTerrainAt(new Position(col,row));
                 terrainLine.append(terrain.getId());
             }
-            // if (row + 1 < 15)
             terrainLine.append("\n");
             bw.write(terrainLine.toString());
 
-            terrainLine = new StringBuilder(); // "clearing" the StringBuilder
+            terrainLine = new StringBuilder();
         }
 
     }
@@ -132,7 +131,7 @@ public class Utils {
             if (row + 1 < 15) entityLine.append("\n");
             bw.write(entityLine.toString());
 
-            entityLine = new StringBuilder(); // "clearing" the StringBuilder
+            entityLine = new StringBuilder();
         }
     }
 }

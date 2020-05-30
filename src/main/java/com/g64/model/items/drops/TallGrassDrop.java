@@ -1,6 +1,5 @@
 package com.g64.model.items.drops;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.plant.TallGrassEntity;
@@ -18,7 +17,7 @@ public class TallGrassDrop extends Drop {
     }
 
     @Override
-    public void accept(TargetVisitor targetVisitor) throws RemoveFromInventory {
-        targetVisitor.allowUsage(this);
+    public itemValue accept(TargetVisitor targetVisitor) {
+        return targetVisitor.allowUsage(this);
     }
 }

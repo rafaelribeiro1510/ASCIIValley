@@ -14,7 +14,7 @@ public class CornSeedDrop extends SeedDrop {
     }
 
     @Override
-    public void accept(TargetVisitor targetVisitor) throws RemoveFromInventory {
-        targetVisitor.allowUsage(this);
+    public itemValue accept(TargetVisitor targetVisitor) {
+        return targetVisitor.allowUsage(this);
     }
 }

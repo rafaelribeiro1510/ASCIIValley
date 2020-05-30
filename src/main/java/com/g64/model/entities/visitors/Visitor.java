@@ -1,27 +1,28 @@
 package com.g64.model.entities.visitors;
 
 import com.g64.exceptions.RemoveFromInventory;
+import com.g64.model.items.Item;
 import com.g64.model.items.drops.*;
 import com.g64.model.items.tools.*;
 
 public interface Visitor {
-    void allowUsage(SeedDrop item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(SeedDrop item);
 
-    void allowUsage(ConsumableDrop item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(ConsumableDrop item);
 
-    void allowUsage(LogDrop item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(LogDrop item);
 
-    void allowUsage(RockDrop item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(RockDrop item);
 
-    void allowUsage(TallGrassDrop item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(TallGrassDrop item);
 
-    void allowUsage(Axe item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(Axe item);
 
-    void allowUsage(Hoe item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(Hoe item);
 
-    void allowUsage(Pickaxe item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(Pickaxe item);
 
-    void allowUsage(Scythe item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(Scythe item);
 
-    void allowUsage(WateringCan item) throws RemoveFromInventory;
+    Item.itemValue allowUsage(WateringCan item);
 }
