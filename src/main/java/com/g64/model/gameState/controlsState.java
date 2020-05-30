@@ -17,6 +17,12 @@ public class controlsState implements GameState {
         this.controlsView = new ControlsView(gameController.getDisplay().getScreen());
     }
 
+    public controlsState(GameController gameController, ControlsView controlsView) {
+        this.gameController = gameController;
+        this.controlsView = controlsView;
+    }
+
+
     @Override
     public void execute() {
         // draw control menu

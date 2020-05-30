@@ -17,6 +17,11 @@ public class deadPlayerState implements GameState {
         this.deadView = new DeadView(gameController.getDisplay().getScreen());
     }
 
+    public deadPlayerState(GameController gameController, DeadView deadView) {
+        this.gameController = gameController;
+        this.deadView = deadView;
+    }
+
     @Override
     public void execute() {
         // draw game over screen

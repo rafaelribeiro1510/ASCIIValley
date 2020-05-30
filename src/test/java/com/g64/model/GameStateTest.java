@@ -1,29 +1,24 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.*;
+import com.g64.controller.action.EnterPressed;
+import com.g64.controller.action.ExitToMainMenu;
+import com.g64.controller.action.MenuDown;
 import com.g64.exceptions.Died;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.controlsState;
+import com.g64.model.gameState.deadPlayerState;
 import com.g64.model.gameState.inGameState;
 import com.g64.model.gameState.menuGameState;
-import com.g64.view.Display;
-import com.g64.view.MapView;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
+import com.g64.view.*;
 import com.googlecode.lanterna.screen.Screen;
-import net.bytebuddy.asm.Advice;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.configuration.injection.MockInjection;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class GameStateTest {
@@ -101,6 +96,27 @@ public class GameStateTest {
         // checks if the close screen method was called (once)
         try { verify(mocked).close(); }
         catch (IOException e) { e.printStackTrace(); }
+    }
+
+    @Test
+    public void inGameToDeadStateTest() {
+        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
+
+        try {
+            doThrow(Died.class)
+                    .when(controller.getPlayer())
+                    .reduceHealth(anyInt());
+
+            // to "start" in game
+            controller.setGameState(new inGameState(controller));
+
+            controller.getPlayer().reduceHealth(anyInt());
+        }
+        catch(Died d) {
+            controller.setGameState(new deadPlayerState(controller));
+        }
+
+        assertEquals(deadPlayerState.class, controller.getGameState().getClass());
     }
 
 }

@@ -22,6 +22,13 @@ public class inGameState implements GameState {
         this.inventoryView = new InventoryView(gameController.getDisplay().getScreen());
     }
 
+    public inGameState(GameController gameController, EntityView entityView, InventoryView inventoryView) {
+        this.gameController = gameController;
+        this.entityView = entityView;
+        this.inventoryView = inventoryView;
+    }
+
+
     @Override
     public void execute() {
         for (ActionEvent event : gameController.getMapModel().updateEntities(gameController)) gameController.processAction(event);
