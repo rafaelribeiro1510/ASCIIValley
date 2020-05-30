@@ -21,7 +21,7 @@ The interpretation of these values is intentionally hardcoded, since these save 
 ### Map visualization
 Displaying of the chunk where the player is located, terrain and map entities included.
 
-![Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
+![Basic Map and Player Drawing - figure 1](./screenshots/mapVisualization.png)
 
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
@@ -34,15 +34,23 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 The enemy entities (Mummies) have different behaviour depending on how close they are to the player,
 determining their next movement based on it.
 
+![Mummy Behaviour Passive - figure 3](./screenshots/mummyBehaviour1.png)
+
+![Mummy Behaviour Passive - figure 4](./screenshots/mummyBehaviour2.png)
+
 ### Combat 
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
 
 ### Main menu
-The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit - ![Main menu Mock-up - figure 3](./screenshots/mainMenuMockup.png)
+The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit.
+
+![Main menu Mock-up - figure 5](./screenshots/mainMenuMockup.png)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
-and also the items collected through said interactions. ![GUI Mock-up - figure 4](./screenshots/guiMockup.png)
+and also the items collected through said interactions.
+
+![GUI Mock-up - figure 6](./screenshots/guiMockup.png)
 
 
 ## Desired Features
