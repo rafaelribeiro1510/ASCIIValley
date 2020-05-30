@@ -8,6 +8,7 @@ import com.g64.model.entities.plant.CarrotSeedEntity;
 import com.g64.model.entities.plant.CornSeedEntity;
 import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.SoilTerrain;
+import com.g64.view.Display;
 import com.g64.view.EntityView;
 import com.g64.view.InventoryView;
 import com.g64.view.MapView;
@@ -41,7 +42,7 @@ public class PlantGrowingTest {
         MapModel map = new MapModel(1, chunks);
         mapSpy = Mockito.spy(map);
 
-        controller = new GameController(Mockito.mock(Player.class), mapSpy, Mockito.mock(MapView.class), Mockito.mock(InventoryModel.class));
+        controller = new GameController(Mockito.mock(Player.class), Mockito.mock(Display.class), mapSpy, Mockito.mock(MapView.class), Mockito.mock(InventoryModel.class));
     }
 
     @Test

@@ -44,8 +44,9 @@ public class GameController {
         this.controlsView = new ControlsView(display.getScreen());
     }
 
-    public GameController(Player player, MapModel mapModel, MapView mapView, InventoryModel inventoryModel){
+    public GameController(Player player, Display display, MapModel mapModel, MapView mapView, InventoryModel inventoryModel){
         this.player = player;
+        this.display = display;
         this.mapModel = mapModel;
         this.mapView = mapView;
         this.inventoryModel = inventoryModel;
