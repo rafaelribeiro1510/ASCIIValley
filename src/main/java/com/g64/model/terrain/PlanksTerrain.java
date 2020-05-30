@@ -5,6 +5,6 @@ import com.g64.model.Position;
 
 public class PlanksTerrain extends MapTerrain{
     public PlanksTerrain(Position position){
-        super(position, new TextColor.RGB(46,27,7));
+        super(position, new TextColor.RGB(46,27,7), 6);
     }
 }

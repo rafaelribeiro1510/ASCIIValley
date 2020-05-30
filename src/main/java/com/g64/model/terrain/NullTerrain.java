@@ -5,6 +5,6 @@ import com.g64.model.Position;
 
 public class NullTerrain extends MapTerrain {
     public NullTerrain(Position position){
-        super(position, new TextColor.RGB(255,255,255));
+        super(position, new TextColor.RGB(255,255,255), 0);
     }
 }
