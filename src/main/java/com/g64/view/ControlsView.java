@@ -13,7 +13,7 @@ public class ControlsView {
 
     public void draw() {
 
-        int row = 3;
+        int row = 2;
 
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -24,12 +24,13 @@ public class ControlsView {
 
         graphics.disableModifiers(SGR.BOLD);
 
-        graphics.putString(4, row += 3, "W, A, S, D To Move The Character");
+        graphics.putString(4, row += 2, "W, A, S, D To Move The Character");
         graphics.putString(4, row += 2, "Arrow Keys To Interact With");
         graphics.putString(6, row += 1, "The Surroundings Using");
         graphics.putString(6, row += 1, "The Selected Item");
         graphics.putString(4, row += 2, "Number Row To Select An Item");
         graphics.putString(6, row += 1, "From The Inventory");
+        graphics.putString(4, row += 2, "Escape Key to Pause");
         graphics.putString(4, row += 2, "[Press Any Key To Go Back");
         graphics.putString(6, row += 1, "To The Main Menu]");
     }
