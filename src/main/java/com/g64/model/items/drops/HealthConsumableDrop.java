@@ -1,6 +1,5 @@
 package com.g64.model.items.drops;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 
 public class HealthConsumableDrop extends ConsumableDrop {

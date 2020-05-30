@@ -1,6 +1,5 @@
 package com.g64.model;
 
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.visitors.TargetVisitor;
 import com.g64.model.items.*;
 import com.g64.model.items.drops.Drop;

@@ -2,7 +2,6 @@ package com.g64.model;
 
 import com.g64.controller.GameController;
 import com.g64.exceptions.Died;
-import com.g64.exceptions.RemoveFromInventory;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.plant.TallGrassEntity;
@@ -51,14 +50,14 @@ public class ToolTest {
     }
 
     @Test
-    public void successfulUsage() throws Died, RemoveFromInventory {
+    public void successfulUsage() throws Died {
         Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
         verify(mummySpy).reduceHealth(tool.getHitValue());
     }
 
     @Test
-    public void successfulItemDrop() throws Died, RemoveFromInventory {
+    public void successfulItemDrop() throws Died {
         Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(1,1)));
 
@@ -68,7 +67,7 @@ public class ToolTest {
     }
 
     @Test
-    public void failedUsage() throws RemoveFromInventory {
+    public void failedUsage() {
         Tool tool = new Axe(10);
         tool.accept(new TargetVisitor(controller, new Position(0,0)));
         assertEquals(chunkSpy.getEntities().get(0), grass);
