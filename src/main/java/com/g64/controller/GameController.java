@@ -28,7 +28,6 @@ public class GameController {
     private boolean running;
     private Display display;
     private MenuView menuView;
-    private ControlsView controlsView;
 
 
     private GameState gameState = new menuGameState(this);
@@ -41,7 +40,6 @@ public class GameController {
         this.inventoryModel = new InventoryModel();
         this.running = true;
         this.menuView = new MenuView(display.getScreen());
-        this.controlsView = new ControlsView(display.getScreen());
     }
 
     public GameController(Player player, Display display, MapModel mapModel, MapView mapView, InventoryModel inventoryModel){
@@ -91,8 +89,6 @@ public class GameController {
     public MenuView getMenuView() { return menuView; }
 
     public void setGameState(GameState gameState) { this.gameState = gameState; }
-
-    public ControlsView getControlsView() { return controlsView; }
 
     public Display getDisplay() { return display; }
 
