@@ -94,4 +94,6 @@ public class GameController {
     public ControlsView getControlsView() { return controlsView; }
 
     public Display getDisplay() { return display; }
+
+    public GameState getGameState() { return gameState; }
 }
