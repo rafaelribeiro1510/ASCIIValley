@@ -73,7 +73,7 @@ allowing for separation in groups of functions according to their role and by ex
 We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
 From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
-![mvc](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/mvc.iuml?token=AK5LFP5ZIWNVWUXW5O6BNEK6XAWHI)
+![mvc](umls/mvc.png)
 
 [//]: # (This uml represents the current primitve setup, it will be altered along the line, especially on the subject of
 entities besides the player.)
@@ -103,7 +103,7 @@ The **Command** pattern consists of parameterizing clients with different reques
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
 Namely, the [Move](../src/main/java/com/g64/controller/action/MoveDown.java) family of actions, responsible for movement and collision checking of the "invoker" entity.
 
-![action](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/FEUP-LPOO/lpoo-2020-g64/master/docs/umls/action.iuml?token=AK5LFP4RSKI6DRLWYPNPMES6XAWG6)
+![action](umls/action.png)
 
 #### **Consequences**
 The code in the com.g64.controller is much easier to read and also proved to make the scaling of the inputs easier, 
@@ -128,6 +128,8 @@ By creating a class [TargetVisitor](../src/main/java/com/g64/model/entities/visi
 [allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/TargetVisitor.java) accepting all possible "interactable" items.
 Alongside these, all items also implement an [accept(TargetVisitor targetVisitor)](../src/main/java/com/g64/model/items/tools/Hoe.java) method, which consists of calling the visitor's method corresponding to itself.
 The process of getting the map objects from the position that was interacted with, deciding which objects to evaluate and effectively cause changes to these are all handled by the visitor. 
+
+![visitor](umls/visitor.png)
 
 #### **Consequences**
 This makes the code on the the [Interact](../src/main/java/com/g64/controller/action/InteractDown.java) actions more readable, since the handling of the item is done entirely by this new class.
