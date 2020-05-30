@@ -84,7 +84,6 @@ public class MapModel {
     public void writeMap(String relativePathname) throws IOException {
         ChunkModel newChunk = new ChunkModel(ChunkModel.DEFAULT_WIDTH, ChunkModel.DEFAULT_HEIGHT);
         String filePath = new File(relativePathname).getAbsolutePath();
-        // filePath = "/Users/joaosousa/Documents/GitHub/lpoo-2020-g64/resources/chunks2.csv";
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
 

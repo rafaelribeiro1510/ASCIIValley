@@ -14,7 +14,6 @@ public class MoveDown implements ActionEvent {
 
     @Override
     public void execute() {
-        //TODO this smell vv
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookDown());
 
         if (!target.hasCollision()) entity.getPosition().moveDown();
