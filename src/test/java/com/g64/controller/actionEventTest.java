@@ -54,7 +54,7 @@ public class actionEventTest {
         MapModel map = new MapModel(1, chunks);
         mapSpy = Mockito.spy(map);
 
-        Player player = new Player(new Position(0,0)," ", Mockito.mock(TextColor.class));
+        Player player = new Player(new Position(0,0));
         playerSpy = Mockito.spy(player);
 
         ArrayList<Item> items = new ArrayList<>(); items.add(new Scythe(10)); items.add(new Pickaxe(1));
@@ -112,7 +112,7 @@ public class actionEventTest {
         playerSpy.setPosition(new Position(0,0));
         Mummy mummy = new Mummy(new Position(1,0));
         mapSpy.thisChunk().getEntities().add(mummy);
-        Controls.AttackPlayer attack = new Controls.AttackPlayer(controller, mummy.getAttackValue());
+        AttackPlayer attack = new AttackPlayer(controller, mummy.getAttackValue());
         controller.processAction(attack);
         verify(playerSpy).reduceHealth(mummy.getAttackValue());
     }

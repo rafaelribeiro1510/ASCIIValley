@@ -1,9 +1,14 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.controller.commands.*;
 import com.g64.model.entities.EntityModel;
+import com.g64.model.entities.Player;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
+import com.g64.model.entities.enemy.Ghost;
+import com.g64.model.entities.enemy.Mummy;
+import com.g64.model.entities.enemy.humours.GhostAggroed;
 import com.g64.model.entities.plant.TallGrassEntity;
 import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
@@ -15,48 +20,102 @@ import java.util.Arrays;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class EnemyTest {
-    private GameController gameController;
-    private ArrayList<MapTerrain> terrain;
-    private ArrayList<EntityModel> entity;
-    private ArrayList<Integer> neighbors;
-    private ChunkModel chunkModel;
+    private GameController controller;
+    private MapModel map;
+    private ChunkModel chunk;
+    private Player player;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void init() {
 
-        terrain = new ArrayList<>(
-                Arrays.asList(new GrassTerrain(new Position(0,0), 1))
+        ArrayList<MapTerrain> terrain = new ArrayList<>(
+                Arrays.asList(
+                        new GrassTerrain(new Position(0,0), 1),
+                        new GrassTerrain(new Position(0,1), 1),
+                        new GrassTerrain(new Position(1,0), 1),
+                        new GrassTerrain(new Position(1,1), 1))
         );
 
-        entity = new ArrayList<>(
-                Arrays.asList(new TallGrassEntity(new Position(0,0)))
-        );
+        chunk = new ChunkModel(
+                2, 2, 1, Mockito.mock(ArrayList.class), terrain, Mockito.mock(ArrayList.class));
 
-        neighbors = new ArrayList<>(); neighbors.add(2); neighbors.add(3); neighbors.add(4); neighbors.add(5);
-
-
-        chunkModel = new ChunkModel(
-                1, 1, 1, neighbors, terrain, entity);
-
-        gameController = new GameController();
+        player = new Player(new Position(10,10));
+        controller = Mockito.mock(GameController.class);
+        map = Mockito.mock(MapModel.class); when(map.thisChunk()).thenReturn(chunk);
+        when(controller.getMapModel()).thenReturn(map);
+        when(controller.getPlayer()).thenReturn(player);
     }
 
     @Test
     public void enemyFactoryTest() {
-        assertThat(EnemyFactory.generate(chunkModel), instanceOf(Enemy.class));
+        assertThat(EnemyFactory.generate(chunk), instanceOf(Enemy.class));
     }
 
-    /*
+
     @Test
-    public void ghostState() {
-        Ghost ghost = new Ghost(new Position(0,0));
-        when(gameController.getPlayer().getPosition()).thenReturn(new Position(0,1));
-        when(ghost.getPosition().verticalDifference(gameController.getPlayer().getPosition())).thenReturn((double) 1);
-        when(ghost.getPosition().horizontalDifference(gameController.getPlayer().getPosition())).thenReturn((double) 0);
-        assertThat( .enemyAction(gameController), instanceOf(Command.class));
-    }
-    */
+    public void testMummyAggroing(){
+        Mummy mummy = new Mummy(new Position(0,0));
+        assertEquals(mummy.getActiveHumour(), mummy.getNormalHumour());
 
+        player.setPosition(new Position(1,0));
+        mummy.updateState(player.getPosition());
+        assertEquals(mummy.getActiveHumour(), mummy.getAggroedHumour());
+
+        player.setPosition(new Position(10,10));
+        mummy.updateState(player.getPosition());
+        assertEquals(mummy.getActiveHumour(), mummy.getNormalHumour());
+    }
+
+    @Test
+    public void testGhostAggroing(){
+        Ghost ghost = new Ghost(new Position(0,0));
+        assertEquals(ghost.getActiveHumour(), ghost.getNormalHumour());
+
+        player.setPosition(new Position(1,0));
+        ghost.updateState(player.getPosition());
+        assertEquals(ghost.getActiveHumour(), ghost.getAggroedHumour());
+
+        player.setPosition(new Position(10,10));
+        ghost.updateState(player.getPosition());
+        assertEquals(ghost.getActiveHumour(), ghost.getNormalHumour());
+    }
+
+    @Test
+    public void testAggroMovement(){
+        Mummy enemy = new Mummy(new Position(0,0));
+
+        enemy.updateState(new Position(2,0));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveRight);
+
+
+        enemy.updateState(new Position(-2,0));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveLeft);
+
+
+        enemy.updateState(new Position(0,2));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveDown);
+
+
+        enemy.updateState(new Position(0,-2));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveUp);
+
+
+        enemy.updateState(new Position(0,1));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof AttackPlayer);
+    }
+
+    @Test
+    public void testNormalMovement(){
+
+    }
 }

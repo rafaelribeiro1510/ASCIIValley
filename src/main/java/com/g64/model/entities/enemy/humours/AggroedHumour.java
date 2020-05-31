@@ -17,7 +17,7 @@ public abstract class AggroedHumour extends EnemyHumour {
         double verticalDifference = mummyPosition.verticalDifference(controller.getPlayer().getPosition());
         double horizontalDifference = mummyPosition.horizontalDifference(controller.getPlayer().getPosition());
 
-        if      (mummyPosition.adjacent(playerPosition))    return new Controls.AttackPlayer(controller, me.getAttackValue());
+        if      (mummyPosition.adjacent(playerPosition))    return new AttackPlayer(controller, me.getAttackValue());
         if      (verticalDifference   < 0)                  return new MoveDown(controller, me);
         else if (verticalDifference   > 0)                  return new MoveUp(controller, me);
         if      (horizontalDifference < 0)                  return new MoveRight(controller, me);

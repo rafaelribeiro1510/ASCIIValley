@@ -5,8 +5,8 @@ import com.g64.model.Position;
 import com.googlecode.lanterna.TextColor;
 
 public class Player extends EntityModel {
-    public Player(Position position, String string, TextColor color) {
-        super(position, string, color, true, null, 40);
+    public Player(Position position) {
+        super(position, "\u263B", TextColor.ANSI.BLACK, true, null, 40);
     }
 
     @Override

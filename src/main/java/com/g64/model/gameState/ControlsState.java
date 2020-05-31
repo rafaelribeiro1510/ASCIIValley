@@ -3,6 +3,7 @@ package com.g64.model.gameState;
 import com.g64.controller.GameController;
 import com.g64.controller.commands.Command;
 import com.g64.controller.commands.Controls;
+import com.g64.controller.commands.ExitToMainMenu;
 import com.g64.controller.commands.Null;
 import com.g64.view.ControlsView;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -33,7 +34,7 @@ public class ControlsState implements GameState {
         gameController.getDisplay().getScreen().clear();
 
         // any key works
-        if (key != null) return new Controls.ExitToMainMenu(gameController);
+        if (key != null) return new ExitToMainMenu(gameController);
 
         return new Null();
     }

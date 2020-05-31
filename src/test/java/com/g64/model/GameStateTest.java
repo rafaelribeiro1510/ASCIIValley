@@ -84,7 +84,7 @@ public class GameStateTest {
 
         // checks "starting" state
         assertEquals(ControlsState.class, controller.getGameState().getClass());
-        controller.processAction(new Controls.ExitToMainMenu(controller));
+        controller.processAction(new ExitToMainMenu(controller));
 
         // checks if gameState changed from ControlsState to MainMenuGameState
         assertEquals(MainMenuGameState.class, controller.getGameState().getClass());
@@ -123,7 +123,7 @@ public class GameStateTest {
         controller.setGameState(controller.getInGameState());
 
         // controller.getPlayer().reduceHealth(anyInt());
-        controller.processAction(new Controls.AttackPlayer(controller, anyInt()));
+        controller.processAction(new AttackPlayer(controller, anyInt()));
 
         assertEquals(DeadPlayerState.class, controller.getGameState().getClass());
 
