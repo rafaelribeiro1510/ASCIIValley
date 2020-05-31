@@ -218,9 +218,9 @@ public class Axe extends Item {
 Thus the use of the visitor pattern was a solution we found, since it consists of separating the actions done by the items from their classes, following the open/closed principle.
 
 #### **Implementation**
-By creating a class [TargetVisitor](../src/main/java/com/g64/model/entities/visitors/TargetVisitor.java) with functions 
-[allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/TargetVisitor.java) accepting all possible "interactable" items.
-Alongside these, all items also implement an [accept(TargetVisitor targetVisitor)](../src/main/java/com/g64/model/items/tools/Hoe.java) method, which consists of calling the visitor's method corresponding to itself.
+By creating a class [ItemVisitor](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) with functions 
+[allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) overriden to accept all possible "interactable" items.
+Alongside these, all items also implement an [accept(ItemVisitor itemVisitor)](../src/main/java/com/g64/model/items/tools/Hoe.java) method, which consists of calling the visitor's method corresponding to itself.
 The process of getting the map objects from the position that was interacted with, deciding which objects to evaluate and effectively cause changes to these are all handled by the visitor. 
 
 ![visitor](umls/visitor.png)
@@ -282,6 +282,33 @@ On each case, there are calls for the functions `processPlayerAction()` (and `ge
 Creating a method that calls that set of functions or just moving those function calls to after the end of the Switch statement
 should reduce considerably the size of the function without introducing any bugs.
 
+### OOP Abuser - instanceof
+#### **Problem in Context**
+Despite using the **Visitor** pattern in [ItemVisitor](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) to remove most of the **instanceof** checks in our code,
+this only saved us from the checking the type of the `Tool` or `Drop` in question. There is still the need to check for the type of the targeted part of the map
+(`MapEntity` and `MapTerrain`) and act accordingly.
+
+```java
+    @Override
+    public Item.usageValue allowUsage(Axe item) {
+        if (entity instanceof TreeEntity || entity instanceof Enemy){
+           (..)
+        }
+    }
+```  
+
+#### **Solution** 
+To solve this smelly code, the **Visitor** pattern would be the best choice. An implementation of a `MapTerrainVisitor` and `MapEntityVisitor`, with overrides for every item would
+work.
+
+```java
+    @Override
+    public Item.usageValue allowUsage(Axe item) {
+        if (entity instanceof TreeEntity || entity instanceof Enemy){
+           (..)
+        }
+    }
+``` 
 
 ## Testing
 ![Coverage1](screenshots/lpoo_code_coverage1.png)

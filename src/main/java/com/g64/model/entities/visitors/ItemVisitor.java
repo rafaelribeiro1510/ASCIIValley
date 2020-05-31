@@ -17,13 +17,13 @@ import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.NullTerrain;
 import com.g64.model.terrain.SoilTerrain;
 
-public class TargetVisitor implements Visitor{
+public class ItemVisitor implements Visitor{
     GameController controller;
     Position position;
     EntityModel entity;
     MapTerrain terrain;
 
-    public TargetVisitor(GameController controller, Position position) {
+    public ItemVisitor(GameController controller, Position position) {
         this.controller = controller;
         this.position = position;
         this.entity = controller.getMapModel().thisChunk().getEntityAt(position);

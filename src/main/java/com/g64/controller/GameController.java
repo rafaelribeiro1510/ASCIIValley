@@ -31,7 +31,6 @@ public class GameController {
     private PauseMenuView pauseMenuView;
 
 
-    // private GameState gameState = new MainMenuGameState(this);
     private GameState gameState;
 
     private GameState controlsState;
@@ -71,7 +70,6 @@ public class GameController {
     public void start() {
         while (running) {
             try {
-                // mapView.getScreen().refresh();
                 display.getScreen().refresh();
                 processAction(getActionEventFromKeyboard());
                 gameState.execute();
