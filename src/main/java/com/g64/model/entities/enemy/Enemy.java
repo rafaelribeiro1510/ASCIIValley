@@ -15,7 +15,7 @@ public abstract class Enemy extends EntityModel {
 
     AggroedHumour aggroedHumour;
     NormalHumour normalHumour;
-    EnemyHumour movementHumour;
+    EnemyHumour activeHumour;
     int movementCooldown;
     int attackValue;
     int visionDistance;
@@ -39,8 +39,8 @@ public abstract class Enemy extends EntityModel {
     @Override
     public ActionEvent update(GameController controller) {
         if (movementCooldown == 0) {
-            this.movementCooldown = movementHumour.getMaxCooldown();
-            return movementHumour.move(controller);
+            this.movementCooldown = activeHumour.getMaxCooldown();
+            return activeHumour.enemyAction(controller);
         }
         else {
             updateState(controller.getPlayer().getPosition());
@@ -51,12 +51,12 @@ public abstract class Enemy extends EntityModel {
 
     public void setAggroedState(){
         this.setColor(aggroedHumour.getColor());
-        movementHumour = aggroedHumour;
+        activeHumour = aggroedHumour;
     }
 
     public void setNormalState(){
         this.setColor(normalHumour.getColor());
-        movementHumour = normalHumour;
+        activeHumour = normalHumour;
     }
 
 }

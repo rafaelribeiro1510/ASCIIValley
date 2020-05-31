@@ -13,7 +13,7 @@ public class MummyNormal extends NormalHumour{
     }
 
     @Override
-    public ActionEvent move(GameController controller) {
+    public ActionEvent enemyAction(GameController controller) {
         switch (new Random().nextInt(4)) {
             case 0:
                 return new MoveDown(controller, me);

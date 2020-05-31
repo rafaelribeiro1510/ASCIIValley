@@ -16,7 +16,7 @@ public abstract class EnemyHumour {
         this.color = color;
     }
 
-    public abstract ActionEvent move(GameController controller);
+    public abstract ActionEvent enemyAction(GameController controller);
 
     public int getMaxCooldown() { return maxCooldown; }
 

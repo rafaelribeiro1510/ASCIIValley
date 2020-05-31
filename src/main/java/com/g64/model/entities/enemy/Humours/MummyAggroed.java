@@ -12,17 +12,17 @@ public class MummyAggroed extends AggroedHumour{
     }
 
     @Override
-    public ActionEvent move(GameController controller) {
+    public ActionEvent enemyAction(GameController controller) {
         Position mummyPosition = me.getPosition();
         Position playerPosition = controller.getPlayer().getPosition();
         double verticalDifference = mummyPosition.verticalDifference(controller.getPlayer().getPosition());
         double horizontalDifference = mummyPosition.horizontalDifference(controller.getPlayer().getPosition());
 
-        if      (mummyPosition.adjacent(playerPosition)) return new AttackPlayer(controller, me.getAttackValue());
-        if      (verticalDifference   < 0) return new MoveDown(controller, me);
-        else if (verticalDifference   > 0) return new MoveUp(controller, me);
-        if      (horizontalDifference < 0) return new MoveRight(controller, me);
-        else if (horizontalDifference > 0) return new MoveLeft(controller, me);
-        return new NullAction();
+        if      (mummyPosition.adjacent(playerPosition))    return new AttackPlayer(controller, me.getAttackValue());
+        if      (verticalDifference   < 0)                  return new MoveDown(controller, me);
+        else if (verticalDifference   > 0)                  return new MoveUp(controller, me);
+        if      (horizontalDifference < 0)                  return new MoveRight(controller, me);
+        else if (horizontalDifference > 0)                  return new MoveLeft(controller, me);
+                                                            return new NullAction();
     }
 }
