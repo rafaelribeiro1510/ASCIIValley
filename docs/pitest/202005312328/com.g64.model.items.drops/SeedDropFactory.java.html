@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SeedDropFactory.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.g64.model.items.drops;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Random;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public class SeedDropFactory {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static SeedDrop getRandomSeed(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        SeedDrop[] seeds = {new CornSeedDrop(), new CarrotSeedDrop()};</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_8'/>
+8
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_8'>1</a>
+<span>
+
+1. getRandomSeed : mutated return of Object value for com/g64/model/items/drops/SeedDropFactory::getRandomSeed to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return seeds[new Random().nextInt(seeds.length)];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@45c10678_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@45c10678_8'>8</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@45c10678_8'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getRandomSeed<br/><b>Killed by : </b>com.g64.model.VisitorTest.scytheWork(com.g64.model.VisitorTest)</span></span> mutated return of Object value for com/g64/model/items/drops/SeedDropFactory::getRandomSeed to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.g64.model.VisitorTest.axeWork(com.g64.model.VisitorTest) (15 ms)</li><li>com.g64.model.VisitorTest.logDoesntWork(com.g64.model.VisitorTest) (2 ms)</li><li>com.g64.model.VisitorTest.pickDoesntWork(com.g64.model.VisitorTest) (3 ms)</li><li>com.g64.model.VisitorTest.seedWork(com.g64.model.VisitorTest) (4 ms)</li><li>com.g64.controller.actionEventTest.moveTestDamage(com.g64.controller.actionEventTest) (3 ms)</li><li>com.g64.model.VisitorTest.seedDoesntWork(com.g64.model.VisitorTest) (6 ms)</li><li>com.g64.model.VisitorTest.tallGrassWork(com.g64.model.VisitorTest) (2 ms)</li><li>com.g64.model.VisitorTest.rockWork(com.g64.model.VisitorTest) (4 ms)</li><li>com.g64.controller.actionEventTest.moveDownNewChunk(com.g64.controller.actionEventTest) (14 ms)</li><li>com.g64.controller.actionEventTest.interactFailTest(com.g64.controller.actionEventTest) (1058 ms)</li><li>com.g64.model.VisitorTest.canDoesntWork(com.g64.model.VisitorTest) (5 ms)</li><li>com.g64.model.VisitorTest.scytheDoesntWork(com.g64.model.VisitorTest) (11 ms)</li><li>com.g64.controller.actionEventTest.moveRightNewChunk(com.g64.controller.actionEventTest) (9 ms)</li><li>com.g64.controller.actionEventTest.moveUpNewChunk(com.g64.controller.actionEventTest) (3 ms)</li><li>com.g64.model.ToolTest.successfulItemDrop(com.g64.model.ToolTest) (10 ms)</li><li>com.g64.controller.actionEventTest.moveLeftNewChunk(com.g64.controller.actionEventTest) (3 ms)</li><li>com.g64.controller.actionEventTest.moveTestCollision(com.g64.controller.actionEventTest) (7 ms)</li><li>com.g64.view.MapViewTest.chunkViewTest(com.g64.view.MapViewTest) (1 ms)</li><li>com.g64.model.VisitorTest.pickWork(com.g64.model.VisitorTest) (3 ms)</li><li>com.g64.model.VisitorTest.hoeDoesntWork(com.g64.model.VisitorTest) (5 ms)</li><li>com.g64.model.VisitorTest.axeDoesntWork(com.g64.model.VisitorTest) (3 ms)</li><li>com.g64.model.VisitorTest.logWork(com.g64.model.VisitorTest) (3 ms)</li><li>com.g64.controller.actionEventTest.interactSuccessfulTest(com.g64.controller.actionEventTest) (2 ms)</li><li>com.g64.model.MapEntityTest.testFactory(com.g64.model.MapEntityTest) (3 ms)</li><li>com.g64.model.ToolTest.successfulUsage(com.g64.model.ToolTest) (5 ms)</li><li>com.g64.model.ToolTest.failedUsage(com.g64.model.ToolTest) (436 ms)</li><li>com.g64.model.VisitorTest.canWork(com.g64.model.VisitorTest) (8 ms)</li><li>com.g64.model.VisitorTest.tallDoesntGrassWork(com.g64.model.VisitorTest) (6 ms)</li><li>com.g64.model.VisitorTest.rockDoesntWork(com.g64.model.VisitorTest) (2 ms)</li><li>com.g64.controller.actionEventTest.toolBreakTest(com.g64.controller.actionEventTest) (1 ms)</li><li>com.g64.view.MapViewTest.mapViewTest(com.g64.view.MapViewTest) (17 ms)</li><li>com.g64.model.VisitorTest.hoeWork(com.g64.model.VisitorTest) (3 ms)</li><li>com.g64.model.VisitorTest.scytheWork(com.g64.model.VisitorTest) (4 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.4.10
+
+</body>
+</html>

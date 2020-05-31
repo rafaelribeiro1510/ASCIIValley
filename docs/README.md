@@ -360,7 +360,9 @@ work.
 ## Testing
 ![Coverage1](screenshots/lpoo_code_coverage1.png)
 
-![Coverage2](screenshots/lpoo_code_coverage2.png)
+![Coverage2](screenshots/pitest.png)
+
+[Pitest report](pitest/202005312328/index.html)
 
 ## SELF-EVALUATION
 
