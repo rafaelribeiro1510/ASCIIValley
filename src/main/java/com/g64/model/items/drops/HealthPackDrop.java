@@ -2,8 +2,8 @@ package com.g64.model.items.drops;
 
 import com.g64.model.entities.visitors.ItemVisitor;
 
-public class HealthConsumableDrop extends ConsumableDrop {
-    public HealthConsumableDrop(){
+public class HealthPackDrop extends ConsumableDrop {
+    public HealthPackDrop(){
         super("HLTH", 10);
     }
 
