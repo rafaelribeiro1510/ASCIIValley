@@ -65,7 +65,8 @@ public class GameController {
     public void start() {
         while (running) {
             try {
-                mapView.getScreen().refresh();
+                // mapView.getScreen().refresh();
+                display.getScreen().refresh();
                 processAction(getActionEventFromKeyboard());
                 gameState.execute();
 
@@ -80,7 +81,7 @@ public class GameController {
     }
 
     public ActionEvent getActionEventFromKeyboard() throws IOException{
-        Screen screen = mapView.getScreen();
+        Screen screen = display.getScreen();
         KeyStroke key = screen.pollInput();
 
         return gameState.processKey(key);

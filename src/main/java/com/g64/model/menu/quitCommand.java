@@ -14,7 +14,8 @@ public class quitCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        try { gameController.getMapView().getScreen().close(); }
+        // try { gameController.getMapView().getScreen().close(); }
+        try { gameController.getDisplay().getScreen().close(); }
         catch (IOException e) { e.printStackTrace(); }
 
         gameController.setRunning(false);

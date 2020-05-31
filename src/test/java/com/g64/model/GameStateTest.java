@@ -72,7 +72,7 @@ public class GameStateTest {
     @Test
     public void controlsToMenuStateTest() {
         when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
-        when(controller.getMapView().getScreen()).thenReturn(Mockito.mock(Screen.class));
+        // when(controller.getMapView().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
         // to "start" at the controls menu
         // controller.setGameState(new ControlsState(controller));
@@ -89,7 +89,8 @@ public class GameStateTest {
     @Test
     public void menuToQuitStateTest() {
         Screen mocked = Mockito.mock(Screen.class);
-        when(controller.getMapView().getScreen()).thenReturn(mocked);
+        // when(controller.getMapView().getScreen()).thenReturn(mocked);
+        when(controller.getDisplay().getScreen()).thenReturn(mocked);
 
         // checks "starting" state
         assertEquals(MenuGameState.class, controller.getGameState().getClass());
@@ -108,7 +109,7 @@ public class GameStateTest {
     @Test
     public void inGameToDeadStateTest() {
         Screen mocked = Mockito.mock(Screen.class);
-        when(controller.getMapView().getScreen()).thenReturn(mocked);
+        // when(controller.getMapView().getScreen()).thenReturn(mocked);
         when(controller.getDisplay().getScreen()).thenReturn(mocked);
 
         when(controller.getPlayer().reduceHealth(anyInt())).thenReturn(EntityModel.healthReduction.DIED);

@@ -30,7 +30,8 @@ public class DeadPlayerState implements GameState {
 
     @Override
     public ActionEvent processKey(KeyStroke key) {
-        gameController.getMapView().getScreen().clear();
+        // gameController.getMapView().getScreen().clear();
+        gameController.getDisplay().getScreen().clear();
 
         // any key works
         if (key != null) return new QuitGame(gameController);
