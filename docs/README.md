@@ -44,13 +44,13 @@ Melee combat based on the hero project of the practical classes will be the way 
 ### Main menu
 The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit.
 
-![Main menu Mock-up - figure 5](./screenshots/mainMenuMockup.png)
+![Main menu Mock-up - figure 5](./screenshots/menu.gif)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
 and also the items collected through said interactions.
 
-![GUI Mock-up - figure 6](./screenshots/guiMockup.png)
+![GUI Mock-up - figure 6](./screenshots/toolInteraction.gif)
 
 
 ## Desired Features
