@@ -121,7 +121,7 @@ Each ``menuOption`` has a String associated with it as well as a ``MenuCommand``
 
 #### **Consequences**
 The code in the com.g64.controller is much easier to read and also proved to make the scaling of the inputs easier, 
-especially alongside the pattern next described.
+especially alongside the **State** pattern next described.
 
 
 ### 3. State
@@ -202,6 +202,17 @@ varied a lot depending on the parts of the map they interacted with ([Axe](../sr
 interacts with both [Enemies](../src/main/java/com/g64/model/entities/enemy/Enemy.java) and [MapEntities](../src/main/java/com/g64/model/entities/map/MapEntity.java) ; 
 [Hoe](../src/main/java/com/g64/model/items/tools/Hoe.java) interacts with [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java)).
 In an initial phase, this led to the use of **instanceof** operations to quickly determine if the action would be accepted on said "Target", something that clearly goes against polymorphism. 
+
+```java
+public class Axe extends Item {
+
+    @Override
+    public void use(GameController controller, Position position){
+        MapEntity target = controller.getMapModel().thisChunk().getEntityAt(position);
+        if(target instanceof TreeEntity) target.remove();
+    }
+}
+```
 
 #### **The Pattern**
 Thus the use of the visitor pattern was a solution we found, since it consists of separating the actions done by the items from their classes, following the open/closed principle.
