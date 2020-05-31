@@ -1,7 +1,7 @@
 package com.g64.view;
 
-import com.g64.model.gameState.PauseState;
-import com.g64.model.menu.menuOption;
+import com.g64.model.gameState.PauseMenuState;
+import com.g64.model.menuCommands.MenuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -13,7 +13,7 @@ public class PauseMenuView {
 
     public PauseMenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(PauseState pauseState) {
+    public void draw(PauseMenuState pauseMenuState) {
         int row = 6;
 
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -21,10 +21,10 @@ public class PauseMenuView {
 
         graphics.enableModifiers(SGR.BOLD);
 
-        for (int i = 0; i < pauseState.getMenuOptions().size(); i++) {
-            menuOption option = pauseState.getMenuOptions().get(i);
+        for (int i = 0; i < pauseMenuState.getMenuOptions().size(); i++) {
+            MenuOption option = pauseMenuState.getMenuOptions().get(i);
 
-            if (i == pauseState.getSelectedOption()) {
+            if (i == pauseMenuState.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);
                 graphics.putString((40 - option.getOptionText().length()) / 2, row += 2, option.getOptionText());
                 graphics.disableModifiers(SGR.BLINK);

@@ -1,11 +1,11 @@
-package com.g64.model.menu;
+package com.g64.model.menuCommands;
 
-public class menuOption {
+public class MenuOption {
 
     private String optionText;
     private MenuCommand menuCommand;
 
-    public menuOption(String optionText, MenuCommand menuCommand) {
+    public MenuOption(String optionText, MenuCommand menuCommand) {
         this.optionText = optionText;
         this.menuCommand = menuCommand;
     }

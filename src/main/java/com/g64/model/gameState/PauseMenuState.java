@@ -2,26 +2,26 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.model.menu.*;
+import com.g64.model.menuCommands.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PauseState implements GameState {
+public class PauseMenuState implements GameState {
 
     private int selectedOption;
     private GameController gameController;
-    private ArrayList<menuOption> pauseOptions;
+    private ArrayList<MenuOption> pauseOptions;
 
-    public PauseState(GameController gameController) {
+    public PauseMenuState(GameController gameController) {
         this.gameController = gameController;
         pauseOptions = new ArrayList<>(
                 Arrays.asList(
-                        new menuOption("Resume",    new playCommand(gameController)),
-                        new menuOption("Save Map",  new SaveMapCommand(gameController)),
-                        new menuOption("Quit",      new quitCommand(gameController))
+                        new MenuOption("Resume",    new PlayCommand(gameController)),
+                        new MenuOption("Save Map",  new SaveMapCommand(gameController)),
+                        new MenuOption("Quit",      new QuitCommand(gameController))
                 )
         );
     }
@@ -43,7 +43,7 @@ public class PauseState implements GameState {
         return new NullAction();
     }
 
-    public ArrayList<menuOption> getMenuOptions() { return pauseOptions; }
+    public ArrayList<MenuOption> getMenuOptions() { return pauseOptions; }
 
     public int getSelectedOption() { return selectedOption; }
 

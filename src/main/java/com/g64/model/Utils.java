@@ -1,19 +1,15 @@
 package com.g64.model;
 
 import com.g64.model.entities.EntityModel;
-import com.googlecode.lanterna.TextColor;
-import com.g64.model.entities.map.MapEntityFactory;
 import com.g64.model.entities.map.MapEntity;
+import com.g64.model.entities.map.MapEntityFactory;
 import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.MapTerrainFactory;
 
-import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Utils {
     private static final String CSV_DELIMITER = ",";

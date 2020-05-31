@@ -5,14 +5,13 @@ import com.g64.controller.action.*;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
+import com.g64.model.gameState.DeadPlayerState;
 import com.g64.model.gameState.InGameState;
 import com.g64.model.gameState.MenuGameState;
-import com.g64.model.gameState.DeadPlayerState;
 import com.g64.view.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.IOException;

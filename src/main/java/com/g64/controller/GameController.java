@@ -6,12 +6,14 @@ import com.g64.model.MapModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.*;
-import com.g64.view.*;
+import com.g64.view.Display;
+import com.g64.view.MapView;
+import com.g64.view.MenuView;
+import com.g64.view.PauseMenuView;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class GameController {
@@ -53,7 +55,7 @@ public class GameController {
         this.deadPlayerState = new DeadPlayerState(this);
         this.inGameState = new InGameState(this);
         this.menuGameState = new MenuGameState(this);
-        this.pauseState = new PauseState(this);
+        this.pauseState = new PauseMenuState(this);
 
         gameState = menuGameState;
     }

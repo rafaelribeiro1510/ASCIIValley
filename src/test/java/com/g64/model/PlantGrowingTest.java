@@ -9,16 +9,15 @@ import com.g64.model.entities.plant.CornSeedEntity;
 import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.SoilTerrain;
 import com.g64.view.Display;
-import com.g64.view.EntityView;
-import com.g64.view.InventoryView;
 import com.g64.view.MapView;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PlantGrowingTest {
     private GameController controller;

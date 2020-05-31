@@ -1,4 +1,4 @@
-package com.g64.model.menu;
+package com.g64.model.menuCommands;
 
 public interface MenuCommand {
 

@@ -1,4 +1,4 @@
-package com.g64.model.menu;
+package com.g64.model.menuCommands;
 
 import com.g64.controller.GameController;
 

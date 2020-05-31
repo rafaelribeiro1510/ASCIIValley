@@ -1,12 +1,10 @@
 package com.g64.view;
 
-import com.g64.model.MapModel;
+import com.g64.model.InventoryModel;
+import com.g64.model.items.Item;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import com.g64.controller.GameController;
-import com.g64.model.InventoryModel;
-import com.g64.model.items.Item;
 
 public class InventoryView {
     private TextGraphics graphics;

@@ -1,13 +1,12 @@
-package com.g64.model.menu;
+package com.g64.model.menuCommands;
 
 import com.g64.controller.GameController;
-import com.g64.model.gameState.InGameState;
 
-public class playCommand implements MenuCommand {
+public class PlayCommand implements MenuCommand {
 
     GameController gameController;
 
-    public playCommand(GameController gameController) {
+    public PlayCommand(GameController gameController) {
         this.gameController = gameController;
     }
 

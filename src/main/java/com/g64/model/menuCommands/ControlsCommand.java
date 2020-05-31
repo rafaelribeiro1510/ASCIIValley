@@ -1,13 +1,12 @@
-package com.g64.model.menu;
+package com.g64.model.menuCommands;
 
 import com.g64.controller.GameController;
-import com.g64.model.gameState.ControlsState;
 
-public class controlsCommand implements MenuCommand {
+public class ControlsCommand implements MenuCommand {
 
     GameController gameController;
 
-    public controlsCommand(GameController gameController) { this.gameController = gameController; }
+    public ControlsCommand(GameController gameController) { this.gameController = gameController; }
 
     @Override
     public void execute() {

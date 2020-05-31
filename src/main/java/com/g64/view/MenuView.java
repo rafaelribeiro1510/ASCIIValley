@@ -1,7 +1,7 @@
 package com.g64.view;
 
 import com.g64.model.gameState.MenuGameState;
-import com.g64.model.menu.menuOption;
+import com.g64.model.menuCommands.MenuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -25,7 +25,7 @@ public class MenuView {
         row += 3;
 
         for (int i = 0; i < menuGameState_.getMenuOptions().size(); i++) {
-            menuOption option = menuGameState_.getMenuOptions().get(i);
+            MenuOption option = menuGameState_.getMenuOptions().get(i);
 
             if (i == menuGameState_.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);

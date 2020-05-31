@@ -3,14 +3,12 @@ package com.g64.model;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
-import com.g64.model.entities.enemy.Mummy;
 import com.g64.model.entities.map.MapEntity;
 import com.g64.model.entities.map.NullEntity;
 import com.g64.model.terrain.MapTerrain;
 import com.g64.model.terrain.NullTerrain;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ChunkModel {
     public static final int DEFAULT_WIDTH = 40;

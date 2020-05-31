@@ -2,10 +2,10 @@ package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
-import com.g64.model.menu.controlsCommand;
-import com.g64.model.menu.menuOption;
-import com.g64.model.menu.playCommand;
-import com.g64.model.menu.quitCommand;
+import com.g64.model.menuCommands.ControlsCommand;
+import com.g64.model.menuCommands.MenuOption;
+import com.g64.model.menuCommands.PlayCommand;
+import com.g64.model.menuCommands.QuitCommand;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -16,16 +16,16 @@ public class MenuGameState implements GameState {
 
     private int selectedOption;
     private GameController gameController;
-    private ArrayList<menuOption> menuOptions;
+    private ArrayList<MenuOption> menuOptions;
 
     public MenuGameState(GameController gameController) {
         this.selectedOption = 0;
         this.gameController = gameController;
         menuOptions = new ArrayList<>(
                 Arrays.asList(
-                        new menuOption("Play",      new playCommand(gameController)),
-                        new menuOption("Controls",  new controlsCommand(gameController)),
-                        new menuOption("Quit",      new quitCommand(gameController))
+                        new MenuOption("Play",      new PlayCommand(gameController)),
+                        new MenuOption("Controls",  new ControlsCommand(gameController)),
+                        new MenuOption("Quit",      new QuitCommand(gameController))
                 )
         );
     }
@@ -47,7 +47,7 @@ public class MenuGameState implements GameState {
         return new NullAction();
     }
 
-    public ArrayList<menuOption> getMenuOptions() { return menuOptions; }
+    public ArrayList<MenuOption> getMenuOptions() { return menuOptions; }
 
     public int getSelectedOption() { return selectedOption; }
 
