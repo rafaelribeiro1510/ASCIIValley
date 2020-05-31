@@ -34,12 +34,12 @@ public class stateViewTest {
     public void mainMenuExecute() {
         when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
         when(controller.getDisplay().getScreen().newTextGraphics()).thenReturn(Mockito.mock(TextGraphics.class));
-        MenuView menuView = Mockito.mock(MenuView.class);
-        MainMenuGameState mainMenu = new MainMenuGameState(controller, menuView);
+        MainMenuView mainMenuView = Mockito.mock(MainMenuView.class);
+        MainMenuGameState mainMenu = new MainMenuGameState(controller, mainMenuView);
 
         mainMenu.execute();
 
-        verify(menuView).draw(mainMenu);
+        verify(mainMenuView).draw(mainMenu);
     }
 
     @Test

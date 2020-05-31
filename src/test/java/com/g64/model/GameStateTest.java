@@ -35,12 +35,12 @@ public class GameStateTest {
                 Mockito.mock(MapView.class),
                 Mockito.mock(InventoryModel.class)
         );
-        MenuView menuView = Mockito.mock(MenuView.class);
+        MainMenuView mainMenuView = Mockito.mock(MainMenuView.class);
 
         controller.setControlsState(new ControlsState(controller, Mockito.mock(ControlsView.class)));
         controller.setDeadPlayerState(new DeadPlayerState(controller, Mockito.mock(DeadView.class)));
         controller.setInGameState(new InGameState(controller, Mockito.mock(EntityView.class), Mockito.mock(InventoryView.class)));
-        controller.setMenuGameState(new MainMenuGameState(controller, menuView));
+        controller.setMenuGameState(new MainMenuGameState(controller, mainMenuView));
 
         controller.setGameState(controller.getMenuGameState());
     }

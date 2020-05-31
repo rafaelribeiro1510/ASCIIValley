@@ -324,13 +324,12 @@ method by making the `Crossing` enum an abstract class with subclasses `CrossRig
 
 ### 3. Dispensable - Duplicate Code
 #### **Problem in Context**
-In the same file and function, there is a Switch statement for the variable GameState that differentiates what to display on the screen.
-On each case, there are calls for the functions `processPlayerAction()` (and `getActionEventFromKeyboard())`),
-``mapView.getScreen().refresh()`` and `Thread.sleep()`.
+The [MainMenuView](../src/main/java/com/g64/view/MainMenuView.java) and [PauseMenuView](../src/main/java/com/g64/view/PauseMenuView.java) classes act very similarly and thus 
+their `draw()` methods have a lot of duplicate code.
 
 #### **Solution**
-Creating a method that calls that set of functions or just moving those function calls to after the end of the Switch statement
-should reduce considerably the size of the function without introducing any bugs.
+By using the **Extract superclass** method the duplicate code can be stored in a
+superclass `MenuView` 
 
 ### 4. OOP Abuser - instanceof
 #### **Problem in Context**

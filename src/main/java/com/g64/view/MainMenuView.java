@@ -7,11 +7,11 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
-public class MenuView {
+public class MainMenuView {
 
     private TextGraphics graphics;
 
-    public MenuView(Screen screen) { graphics = screen.newTextGraphics(); }
+    public MainMenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
     public void draw(MainMenuGameState mainMenuGameState) {
         int row = 4;
