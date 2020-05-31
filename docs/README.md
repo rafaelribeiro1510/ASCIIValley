@@ -157,8 +157,10 @@ public void start() {
 This first solution was obviously not optimal: the function was becoming unnecessarily long and in case of a new possible game state the enum gameStates 
 and the function start would need to be changed (adding another case to the switch statement), for example.
 
+Another part of our code that soon started to become problematic was the behaviour of the enemies, which heavily depended on the distance the enemy was to the player.
+
 #### **The Pattern**
-The pattern **State** was the chosen one. It lets an object change its behavior depending on its internal state and is a way of 
+The pattern **State** was chosen for both cases. It lets an object change its behavior depending on its internal state and is a way of 
 implementing a finite-state machine making it highly appropriate for the situation.
 
 #### **Implementation**
@@ -167,12 +169,19 @@ Each possible ``GameState`` implements an ``execute`` (which calls the necessary
 functions (which processes the player's key presses), allowing different funcionalities for a same key press depending on the context
 and transitions between states.
 
-![action](umls/stateGame.png)
+![stateGame](umls/stateGame.png)
+
+The enemies hold the active "humour", which can be either an [AggroedHumour](../src/main/java/com/g64/model/entities/enemy/humours/AggroedHumour.java) or a [NormalHumour](../src/main/java/com/g64/model/entities/enemy/humours/NormalHumour.java), 
+and change between these two according to the distance to the player, which is checked on every game cycle by the function `updateState()` [here](../src/main/java/com/g64/model/entities/enemy/Enemy.java). 
+ 
+ ![stateEnemt](umls/stateEnemy.png)
+
 
 #### **Consequences**
 This pattern helped reducing the clutter and size of ``start`` function of [GameController](../src/main/java/com/g64/controller/GameController.java) (it is now about 5 times smaller than previously) 
 and made it possible to easily add afterwards a [DeadPlayerState](../src/main/java/com/g64/model/gameState/DeadPlayerState.java) 
 (for when the player dies), improving consequentially the maintainability and readability of the code.
+It also simplified the creation of new and varied enemies, as was the case of the [Ghost](../src/main/java/com/g64/model/entities/enemy/Ghost.java), implemented much later than the [Mummy](../src/main/java/com/g64/model/entities/enemy/Mummy.java). 
 
 ### 4. Factory
 #### **Problem in Context**

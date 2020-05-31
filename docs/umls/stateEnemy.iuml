@@ -1,0 +1,42 @@
+@startuml
+
+abstract class Enemy{
+  EnemyHumour activeHumour
+  void setAggroedState()
+  void setNormalState()
+}
+
+abstract class EnemyHumour{
+  Enemy me;
+  int maxCooldown;
+  TextColor color;
+  Command enemyAction()
+}
+
+abstract class AggroedHumour{
+}
+abstract class NormalHumour{
+}
+
+class GhostAggroed{
+  Command enemyAction()
+}
+class GhostNormal{
+  Command enemyAction()
+}
+
+class MummyAggroed{
+  Command enemyAction()
+}
+class MummyNormal{
+  Command enemyAction()
+}
+
+Enemy o- EnemyHumour
+EnemyHumour <|-- AggroedHumour
+EnemyHumour <|-- NormalHumour
+AggroedHumour <|-- MummyAggroed
+AggroedHumour <|-- GhostAggroed
+NormalHumour <|-- MummyNormal
+NormalHumour <|-- GhostNormal
+@enduml
