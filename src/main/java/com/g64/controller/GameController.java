@@ -1,6 +1,6 @@
 package com.g64.controller;
 
-import com.g64.controller.Commands.Command;
+import com.g64.controller.commands.Command;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.Position;

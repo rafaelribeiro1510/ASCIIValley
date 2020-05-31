@@ -1,8 +1,8 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.MenuDown;
-import com.g64.controller.Commands.MenuUp;
+import com.g64.controller.commands.MenuDown;
+import com.g64.controller.commands.MenuUp;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.MainMenuGameState;
 import com.g64.view.Display;

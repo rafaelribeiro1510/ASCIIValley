@@ -1,6 +1,6 @@
 package com.g64.model.gameState;
 
-import com.g64.controller.Commands.Command;
+import com.g64.controller.commands.Command;
 import com.googlecode.lanterna.input.KeyStroke;
 
 public interface GameState {

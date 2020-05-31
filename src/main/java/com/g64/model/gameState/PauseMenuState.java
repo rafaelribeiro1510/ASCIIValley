@@ -1,10 +1,10 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.MenuOption;
-import com.g64.controller.Commands.PlayCommand;
-import com.g64.controller.Commands.QuitCommand;
-import com.g64.controller.Commands.SaveMapCommand;
+import com.g64.controller.commands.MenuOption;
+import com.g64.controller.commands.Play;
+import com.g64.controller.commands.Quit;
+import com.g64.controller.commands.SaveMap;
 import com.g64.view.PauseMenuView;
 
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ public class PauseMenuState extends MenuGameState {
         this.gameController = gameController;
         menuOptions = new ArrayList<>(
                 Arrays.asList(
-                        new MenuOption("Resume",    new PlayCommand(gameController)),
-                        new MenuOption("Save Map",  new SaveMapCommand(gameController)),
-                        new MenuOption("Quit",      new QuitCommand(gameController))
+                        new MenuOption("Resume",    new Play(gameController)),
+                        new MenuOption("Save Map",  new SaveMap(gameController)),
+                        new MenuOption("Quit",      new Quit(gameController))
                 )
         );
         this.pauseMenuView = new PauseMenuView(gameController.getDisplay().getScreen());
@@ -32,9 +32,9 @@ public class PauseMenuState extends MenuGameState {
         this.gameController = gameController;
         menuOptions = new ArrayList<>(
                 Arrays.asList(
-                        new MenuOption("Resume",    new PlayCommand(gameController)),
-                        new MenuOption("Save Map",  new SaveMapCommand(gameController)),
-                        new MenuOption("Quit",      new QuitCommand(gameController))
+                        new MenuOption("Resume",    new Play(gameController)),
+                        new MenuOption("Save Map",  new SaveMap(gameController)),
+                        new MenuOption("Quit",      new Quit(gameController))
                 )
         );
         this.pauseMenuView = pauseMenuView;

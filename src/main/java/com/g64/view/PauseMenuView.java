@@ -1,7 +1,7 @@
 package com.g64.view;
 
 import com.g64.model.gameState.PauseMenuState;
-import com.g64.controller.Commands.MenuOption;
+import com.g64.controller.commands.MenuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;

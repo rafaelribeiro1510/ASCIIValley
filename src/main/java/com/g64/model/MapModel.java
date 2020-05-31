@@ -1,7 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.Command;
+import com.g64.controller.commands.Command;
 import com.g64.model.entities.EntityModel;
 
 import java.io.*;

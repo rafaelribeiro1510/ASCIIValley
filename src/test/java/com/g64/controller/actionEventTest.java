@@ -1,7 +1,7 @@
 package com.g64.controller;
 
 import com.g64.model.ChunkModel;
-import com.g64.controller.Commands.*;
+import com.g64.controller.commands.*;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.Position;
@@ -112,7 +112,7 @@ public class actionEventTest {
         playerSpy.setPosition(new Position(0,0));
         Mummy mummy = new Mummy(new Position(1,0));
         mapSpy.thisChunk().getEntities().add(mummy);
-        ControlsCommand.AttackPlayer attack = new ControlsCommand.AttackPlayer(controller, mummy.getAttackValue());
+        Controls.AttackPlayer attack = new Controls.AttackPlayer(controller, mummy.getAttackValue());
         controller.processAction(attack);
         verify(playerSpy).reduceHealth(mummy.getAttackValue());
     }

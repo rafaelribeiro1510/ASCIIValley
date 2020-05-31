@@ -1,14 +1,14 @@
-package com.g64.controller.Commands;
+package com.g64.controller.commands;
 
 import com.g64.controller.GameController;
 
 import java.io.IOException;
 
-public class SaveMapCommand implements Command {
+public class SaveMap implements Command {
 
     GameController gameController;
 
-    public SaveMapCommand(GameController gameController) {
+    public SaveMap(GameController gameController) {
         this.gameController = gameController;
     }
 

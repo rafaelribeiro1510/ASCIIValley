@@ -1,14 +1,14 @@
-package com.g64.controller.Commands;
+package com.g64.controller.commands;
 
 import com.g64.controller.GameController;
 
 import java.io.IOException;
 
-public class QuitCommand implements Command {
+public class Quit implements Command {
 
     GameController gameController;
 
-    public QuitCommand(GameController gameController) {
+    public Quit(GameController gameController) {
         this.gameController = gameController;
     }
 
