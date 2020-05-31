@@ -1,10 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.commands.Controls;
-import com.g64.controller.commands.EnterPressed;
-import com.g64.controller.commands.MenuDown;
-import com.g64.controller.commands.Quit;
+import com.g64.controller.commands.*;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
@@ -12,11 +9,15 @@ import com.g64.model.gameState.DeadPlayerState;
 import com.g64.model.gameState.InGameState;
 import com.g64.model.gameState.MainMenuGameState;
 import com.g64.view.*;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 
+import javax.swing.*;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
@@ -134,28 +135,9 @@ public class GameStateTest {
 
     }
 
-    /*
-    @Test
-    public void inGameProcessInput() {
-        Screen screen = Mockito.mock(Screen.class);
-        when(controller.getDisplay().getScreen()).thenReturn(screen);
-
-        InGameState inGameState = new InGameState(controller);
-
-        controller.setInGameState(inGameState);
-        try {
-            when(screen.pollInput()).thenReturn(new KeyStroke('w', false, false));
-
-            assertEquals(MoveUp.class,
-                    controller.getGameState().keyStrokeToActionEvent(controller.getKeyStroke()).getClass()
-            );
 
 
 
-        }
-        catch(IOException e) { e.printStackTrace(); }
-    }
-    */
 
 
 

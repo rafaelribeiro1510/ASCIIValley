@@ -1,26 +1,20 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.commands.Command;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.Enemy;
 import com.g64.model.entities.enemy.EnemyFactory;
-import com.g64.model.entities.enemy.Ghost;
-import com.g64.model.entities.enemy.humours.GhostAggroed;
 import com.g64.model.entities.plant.TallGrassEntity;
 import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
-import com.googlecode.lanterna.TextColor;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
 
 public class EnemyTest {
     private GameController gameController;
