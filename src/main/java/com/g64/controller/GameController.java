@@ -31,7 +31,7 @@ public class GameController {
     private GameState gameState = new MenuGameState(this);
 
     public GameController() {
-        this.mapModel = new MapModel(6,  "resources/chunks.csv");
+        this.mapModel = new MapModel(5,  "resources/chunks.csv");
         this.display = new Display(mapModel.thisChunk().getWidth(), mapModel.thisChunk().getHeight() + 3);
         this.mapView = new MapView(display.getScreen());
         this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);

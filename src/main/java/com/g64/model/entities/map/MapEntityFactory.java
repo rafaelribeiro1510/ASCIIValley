@@ -1,6 +1,8 @@
 package com.g64.model.entities.map;
 
 import com.g64.model.Position;
+import com.g64.model.entities.plant.GrownCarrotEntity;
+import com.g64.model.entities.plant.GrownCornEntity;
 import com.g64.model.entities.plant.TallGrassEntity;
 
 public class MapEntityFactory {
@@ -16,6 +18,10 @@ public class MapEntityFactory {
                 return new TreeEntity(position);
             case "#":
                 return new InvisibleWallEntity(position);
+            case "i":
+                return new GrownCornEntity(position);
+            case "j":
+                return new GrownCarrotEntity(position);
             default:
                 return null;
         }
