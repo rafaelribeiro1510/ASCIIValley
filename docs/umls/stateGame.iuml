@@ -1,0 +1,41 @@
+@startuml
+skinparam linetype ortho
+
+class GameController{
+  GameState state
+  void setGameState()
+}
+
+interface GameState{
+  void execute()
+  ActionEvent processKey(KeyStroke key)
+}
+
+class MenuGameState{
+  void execute()
+  ActionEvent processKey(KeyStroke key)
+}
+
+class InGameState{
+  void execute()
+  ActionEvent processKey(KeyStroke key)
+}
+
+class DeadPlayerState{
+  void execute()
+  ActionEvent processKey(KeyStroke key)
+}
+
+class ControlsState{
+  void execute()
+  ActionEvent processKey(KeyStroke key)
+}
+
+GameController o-- GameState
+
+GameState <|-- MenuGameState
+GameState <|--- InGameState
+GameState <|--- DeadPlayerState
+GameState <|-- ControlsState
+
+@enduml
