@@ -1,13 +1,13 @@
-package com.g64.controller.Commands;
+package com.g64.controller.commands;
 
 import com.g64.controller.GameController;
 import com.g64.model.entities.EntityModel;
 
-public class ControlsCommand implements Command {
+public class Controls implements Command {
 
     GameController gameController;
 
-    public ControlsCommand(GameController gameController) { this.gameController = gameController; }
+    public Controls(GameController gameController) { this.gameController = gameController; }
 
     @Override
     public void execute() {

@@ -1,8 +1,8 @@
 package com.g64.model.entities.enemy;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.Command;
-import com.g64.controller.Commands.NullAction;
+import com.g64.controller.commands.Command;
+import com.g64.controller.commands.Null;
 import com.g64.model.MapModel;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
@@ -46,7 +46,7 @@ public abstract class Enemy extends EntityModel {
         else {
             updateState(controller.getPlayer().getPosition());
             movementCooldown--;
-            return new NullAction();
+            return new Null();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.g64.controller.Commands;
+package com.g64.controller.commands;
 
 import com.g64.controller.GameController;
 

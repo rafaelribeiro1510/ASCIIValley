@@ -1,12 +1,12 @@
-package com.g64.controller.Commands;
+package com.g64.controller.commands;
 
 import com.g64.controller.GameController;
 
-public class PlayCommand implements Command {
+public class Play implements Command {
 
     GameController gameController;
 
-    public PlayCommand(GameController gameController) {
+    public Play(GameController gameController) {
         this.gameController = gameController;
     }
 

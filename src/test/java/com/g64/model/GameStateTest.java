@@ -1,10 +1,10 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.ControlsCommand;
-import com.g64.controller.Commands.EnterPressed;
-import com.g64.controller.Commands.MenuDown;
-import com.g64.controller.Commands.QuitCommand;
+import com.g64.controller.commands.Controls;
+import com.g64.controller.commands.EnterPressed;
+import com.g64.controller.commands.MenuDown;
+import com.g64.controller.commands.Quit;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
@@ -83,7 +83,7 @@ public class GameStateTest {
 
         // checks "starting" state
         assertEquals(ControlsState.class, controller.getGameState().getClass());
-        controller.processAction(new ControlsCommand.ExitToMainMenu(controller));
+        controller.processAction(new Controls.ExitToMainMenu(controller));
 
         // checks if gameState changed from ControlsState to MainMenuGameState
         assertEquals(MainMenuGameState.class, controller.getGameState().getClass());
@@ -122,11 +122,11 @@ public class GameStateTest {
         controller.setGameState(controller.getInGameState());
 
         // controller.getPlayer().reduceHealth(anyInt());
-        controller.processAction(new ControlsCommand.AttackPlayer(controller, anyInt()));
+        controller.processAction(new Controls.AttackPlayer(controller, anyInt()));
 
         assertEquals(DeadPlayerState.class, controller.getGameState().getClass());
 
-        controller.processAction(new QuitCommand(controller));
+        controller.processAction(new Quit(controller));
 
         // checks if the close screen method was called (once)
         try { verify(mocked).close(); }

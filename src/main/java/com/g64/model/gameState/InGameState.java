@@ -1,7 +1,7 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.*;
+import com.g64.controller.commands.*;
 import com.g64.view.EntityView;
 import com.g64.view.InventoryView;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -46,7 +46,7 @@ public class InGameState implements GameState {
     @Override
     public Command keyStrokeToActionEvent(KeyStroke key) {
 
-        if (key == null)                            return new NullAction();
+        if (key == null)                            return new Null();
 
         if (key.getKeyType() == KeyType.ArrowUp)    return new InteractUp(gameController);
         if (key.getKeyType() == KeyType.ArrowDown)  return new InteractDown(gameController);
@@ -63,6 +63,6 @@ public class InGameState implements GameState {
 
         if (key.getKeyType() == KeyType.Escape)     return new GoToPauseMenu(gameController);
 
-        return new NullAction();
+        return new Null();
     }
 }

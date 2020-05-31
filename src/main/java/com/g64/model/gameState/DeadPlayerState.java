@@ -1,9 +1,9 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.Commands.Command;
-import com.g64.controller.Commands.NullAction;
-import com.g64.controller.Commands.QuitCommand;
+import com.g64.controller.commands.Command;
+import com.g64.controller.commands.Null;
+import com.g64.controller.commands.Quit;
 import com.g64.view.DeadView;
 import com.googlecode.lanterna.input.KeyStroke;
 
@@ -32,8 +32,8 @@ public class DeadPlayerState implements GameState {
         gameController.getDisplay().getScreen().clear();
 
         // any key works
-        if (key != null) return new QuitCommand(gameController);
+        if (key != null) return new Quit(gameController);
 
-        return new NullAction();
+        return new Null();
     }
 }
