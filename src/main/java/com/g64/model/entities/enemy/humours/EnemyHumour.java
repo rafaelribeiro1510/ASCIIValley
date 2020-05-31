@@ -1,4 +1,4 @@
-package com.g64.model.entities.enemy.Humours;
+package com.g64.model.entities.enemy.humours;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.ActionEvent;

@@ -1,15 +1,15 @@
-package com.g64.model.entities.enemy.Humours;
+package com.g64.model.entities.enemy.humours;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.model.entities.enemy.Enemy;
 import com.googlecode.lanterna.TextColor;
 
-public class MummyAggroed extends AggroedHumour{
-    private static final int maxCooldown = 30;
-    private static final TextColor color = new TextColor.RGB(182,0,0);
+public class GhostNormal extends NormalHumour{
+    private static final int maxCooldown = 50;
+    private static final TextColor color = new TextColor.RGB(0, 178, 182);
 
-    public MummyAggroed(Enemy me) {
+    public GhostNormal(Enemy me) {
         super(me, maxCooldown, color);
     }
 

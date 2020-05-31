@@ -1,7 +1,7 @@
 package com.g64.model.entities.enemy;
 
-import com.g64.model.entities.enemy.Humours.GhostAggroed;
-import com.g64.model.entities.enemy.Humours.GhostNormal;
+import com.g64.model.entities.enemy.humours.GhostAggroed;
+import com.g64.model.entities.enemy.humours.GhostNormal;
 import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;

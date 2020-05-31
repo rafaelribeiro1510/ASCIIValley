@@ -57,9 +57,9 @@ and also the items collected through said interactions.
 This section lists functionalities that were thought up in the start of the project and were
 not be achieved in the time frame we had.
 
-### Day-night Cycle, that visually alters the map.
+- #### Day-night Cycle, that visually alters the map.
 
-### Simple NPC system with item delivery missions.
+- #### Simple NPC system with item delivery missions.
 
 
 ## Design
