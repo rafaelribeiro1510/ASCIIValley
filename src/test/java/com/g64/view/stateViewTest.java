@@ -91,7 +91,7 @@ public class stateViewTest {
 
         verify(controller.getMapModel()).updateEntities(controller);
         verify(controller.getMapView()).draw(controller.getMapModel());
-        verify(inventoryView).draw(controller.getInventoryModel(), controller.getPlayer().getCurrentHealth(), controller.getMapModel().thisChunk().getHeight());
+        verify(inventoryView).draw(controller.getInventoryModel(), controller.getPlayer().getCurrentHealth());
         verify(entityView).draw(controller.getPlayer(), controller.getMapModel().thisChunk());
     }
 
