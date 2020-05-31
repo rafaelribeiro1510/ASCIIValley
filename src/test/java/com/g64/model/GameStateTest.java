@@ -1,10 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.commands.Controls;
-import com.g64.controller.commands.EnterPressed;
-import com.g64.controller.commands.MenuDown;
-import com.g64.controller.commands.Quit;
+import com.g64.controller.commands.*;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
@@ -83,7 +80,7 @@ public class GameStateTest {
 
         // checks "starting" state
         assertEquals(ControlsState.class, controller.getGameState().getClass());
-        controller.processAction(new Controls.ExitToMainMenu(controller));
+        controller.processAction(new ExitToMainMenu(controller));
 
         // checks if gameState changed from ControlsState to MainMenuGameState
         assertEquals(MainMenuGameState.class, controller.getGameState().getClass());
@@ -122,7 +119,7 @@ public class GameStateTest {
         controller.setGameState(controller.getInGameState());
 
         // controller.getPlayer().reduceHealth(anyInt());
-        controller.processAction(new Controls.AttackPlayer(controller, anyInt()));
+        controller.processAction(new AttackPlayer(controller, anyInt()));
 
         assertEquals(DeadPlayerState.class, controller.getGameState().getClass());
 

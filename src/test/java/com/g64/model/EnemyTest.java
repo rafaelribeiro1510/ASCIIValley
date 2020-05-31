@@ -1,6 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
+import com.g64.controller.commands.*;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.entities.enemy.Enemy;
@@ -19,8 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 public class EnemyTest {
@@ -86,5 +86,36 @@ public class EnemyTest {
     }
 
     @Test
-    public void test
+    public void testAggroMovement(){
+        Mummy enemy = new Mummy(new Position(0,0));
+
+        enemy.updateState(new Position(2,0));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveRight);
+
+
+        enemy.updateState(new Position(-2,0));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveLeft);
+
+
+        enemy.updateState(new Position(0,2));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveDown);
+
+
+        enemy.updateState(new Position(0,-2));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof MoveUp);
+
+
+        enemy.updateState(new Position(0,1));
+        enemy.setMovementCooldown(0);
+        assertTrue(enemy.update(controller) instanceof AttackPlayer);
+    }
+
+    @Test
+    public void testNormalMovement(){
+
+    }
 }

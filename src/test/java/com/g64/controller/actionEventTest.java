@@ -112,7 +112,7 @@ public class actionEventTest {
         playerSpy.setPosition(new Position(0,0));
         Mummy mummy = new Mummy(new Position(1,0));
         mapSpy.thisChunk().getEntities().add(mummy);
-        Controls.AttackPlayer attack = new Controls.AttackPlayer(controller, mummy.getAttackValue());
+        AttackPlayer attack = new AttackPlayer(controller, mummy.getAttackValue());
         controller.processAction(attack);
         verify(playerSpy).reduceHealth(mummy.getAttackValue());
     }

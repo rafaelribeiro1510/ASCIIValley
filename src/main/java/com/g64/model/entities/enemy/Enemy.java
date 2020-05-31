@@ -64,6 +64,10 @@ public abstract class Enemy extends EntityModel {
     public AggroedHumour getAggroedHumour() { return aggroedHumour; }
     public NormalHumour getNormalHumour() { return normalHumour; }
 
+    public void setMovementCooldown(int movementCooldown) {
+        this.movementCooldown = movementCooldown;
+    }
+
     @Override
     public void handleBoundaryCrossing(MapModel map){
         MapModel.Crossing crossing = map.checkBoundaries(position);
