@@ -258,11 +258,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 
 ## Known Code Smells And Refactoring Suggestions
 
-SMELLS
-- Mummy.java State for Mummy humor
-
 ### 1. Bloater - Long Method
-
 #### **Problem in Context**
 Evidently, the function that sticks out the most as being too long is the readMap method,
 in charge of porting the map information from the .csv file to the Map object.
@@ -275,7 +271,7 @@ mostly because of the mess of code in charge of opening and reading the file its
 #### **Problem in Context**
 There are various places in our project where switch statements are still present. Namely, in the [MapEntityFactory](../src/main/java/com/g64/model/entities/map/MapEntityFactory.java) and
 [MapTerrainFactory](../src/main/java/com/g64/model/terrain/MapTerrainFactory.java), in charge of creating [MapEntity](../src/main/java/com/g64/model/entities/map/MapEntity.java) and [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java) 
-objects from the characters saved in the [save file](../resources/chunks.csv). 
+objects from the characters saved in the [save file](../resources/chunks.csv) 
 ```java
 public static MapEntity get(Position position, String string){
         switch (string){
@@ -326,9 +322,7 @@ When it comes to the presence of the switch on the **Factory** classes, since th
 On the other hand, the switch in the `handleBoundaryCrossing()` functions could be extracted with the **Replace type code with subclasses**
 method by making the `Crossing` enum an abstract class with subclasses `CrossRight`, `CrossUp`, ... with an overridden method `handle()`. 
 
-
 ### 3. Dispensable - Duplicate Code
-
 #### **Problem in Context**
 In the same file and function, there is a Switch statement for the variable GameState that differentiates what to display on the screen.
 On each case, there are calls for the functions `processPlayerAction()` (and `getActionEventFromKeyboard())`),
@@ -338,12 +332,11 @@ On each case, there are calls for the functions `processPlayerAction()` (and `ge
 Creating a method that calls that set of functions or just moving those function calls to after the end of the Switch statement
 should reduce considerably the size of the function without introducing any bugs.
 
-### OOP Abuser - instanceof
+### 4. OOP Abuser - instanceof
 #### **Problem in Context**
 Despite using the **Visitor** pattern in [ItemVisitor](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) to remove most of the **instanceof** checks in our code,
 this only saved us from the checking the type of the `Tool` or `Drop` in question. There is still the need to check for the type of the targeted part of the map
 (`MapEntity` and `MapTerrain`) and act accordingly.
-
 ```java
     @Override
     public Item.usageValue allowUsage(Axe item) {
@@ -356,7 +349,6 @@ this only saved us from the checking the type of the `Tool` or `Drop` in questio
 #### **Solution** 
 To solve this smelly code, the **Visitor** pattern would be the best choice. An implementation of a `MapTerrainVisitor` and `MapEntityVisitor`, with overrides for every item would
 work.
-
 ```java
     @Override
     public Item.usageValue allowUsage(Axe item) {
