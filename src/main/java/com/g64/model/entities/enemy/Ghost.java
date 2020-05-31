@@ -16,6 +16,4 @@ public class Ghost extends Enemy {
         this.activeHumour = normalHumour;
     }
 
-    //TODO Atributo MummyMovementHumor -> Aggroed / Normal [state] no relatorio
-
 }

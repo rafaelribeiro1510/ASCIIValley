@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -68,6 +67,18 @@ public class MapViewTest {
         verify(chunkView).draw(chunkModel);
     }
 
+    /*
+    @Test
+    public void chunkViewTest() {
+        // ChunkView chunkView =  Mockito.mock(ChunkView.class);
+        EntityView entityView = Mockito.mock(EntityView.class);
+        ChunkView chunkView = new ChunkView(entityView);
+
+        ChunkModel chunkModel = Mockito.mock(ChunkModel.class);
+        when(chunkModel.getEntityAt(Mockito.mock(Position.class))).thenReturn(Mockito.mock(EntityModel.class));
+        chunkView.draw(chunkModel);
+        verify(entityView).draw(chunkModel.getEntityAt(Mockito.mock(Position.class)), chunkModel);
+    }*/
 
 
 }
