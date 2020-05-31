@@ -5,10 +5,7 @@ import com.g64.model.ChunkModel;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.entities.Player;
-import com.g64.model.gameState.ControlsState;
-import com.g64.model.gameState.DeadPlayerState;
-import com.g64.model.gameState.InGameState;
-import com.g64.model.gameState.MainMenuGameState;
+import com.g64.model.gameState.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
@@ -46,6 +43,19 @@ public class stateViewTest {
     }
 
     @Test
+    public void pauseMenuExecute() {
+        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
+        when(controller.getDisplay().getScreen().newTextGraphics()).thenReturn(Mockito.mock(TextGraphics.class));
+
+        PauseMenuView pauseMenuView = Mockito.mock(PauseMenuView.class);
+        PauseMenuState pauseMenu = new PauseMenuState(controller, pauseMenuView);
+
+        pauseMenu.execute();
+
+        verify(pauseMenuView).draw(pauseMenu);
+    }
+
+    @Test
     public void controlsExecuteView() {
 
         ControlsView controlsView = Mockito.mock(ControlsView.class);
@@ -78,6 +88,11 @@ public class stateViewTest {
         InGameState game = new InGameState(controller, entityView, inventoryView);
 
         game.execute();
+
+        verify(controller.getMapModel()).updateEntities(controller);
+        verify(controller.getMapView()).draw(controller.getMapModel());
+        verify(inventoryView).draw(controller.getInventoryModel(), controller.getPlayer().getCurrentHealth(), controller.getMapModel().thisChunk().getHeight());
+        verify(entityView).draw(controller.getPlayer(), controller.getMapModel().thisChunk());
     }
 
 }
