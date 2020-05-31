@@ -8,6 +8,9 @@ import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
 import com.g64.model.gameState.DeadPlayerState;
 import com.g64.model.gameState.InGameState;
+import com.g64.model.gameState.MainMenuGameState;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -28,6 +31,18 @@ public class stateViewTest {
                 Mockito.mock(MapView.class),
                 Mockito.mock(InventoryModel.class)
         );
+    }
+
+    @Test
+    public void mainMenuExecute() {
+        when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
+        when(controller.getDisplay().getScreen().newTextGraphics()).thenReturn(Mockito.mock(TextGraphics.class));
+        MenuView menuView = Mockito.mock(MenuView.class);
+        MainMenuGameState mainMenu = new MainMenuGameState(controller, menuView);
+
+        mainMenu.execute();
+
+        verify(menuView).draw(mainMenu);
     }
 
     @Test

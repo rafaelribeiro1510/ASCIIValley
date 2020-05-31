@@ -7,6 +7,7 @@ import com.g64.model.entities.Player;
 import com.g64.model.gameState.MainMenuGameState;
 import com.g64.view.Display;
 import com.g64.view.MapView;
+import com.g64.view.MenuView;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -26,8 +27,8 @@ public class MenuOptionsTest {
                 Mockito.mock(MapView.class),
                 Mockito.mock(InventoryModel.class)
         );
-
-        controller.setGameState(new MainMenuGameState(controller));
+        MenuView menuView = Mockito.mock(MenuView.class);
+        controller.setGameState(new MainMenuGameState(controller, menuView));
     }
 
     @Test

@@ -27,7 +27,7 @@ public class GameController {
 
     private boolean running;
     private Display display;
-    private MenuView menuView;
+    // private MenuView menuView;
     private PauseMenuView pauseMenuView;
 
 
@@ -48,7 +48,7 @@ public class GameController {
         this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
         this.running = true;
-        this.menuView = new MenuView(display.getScreen());
+        // this.menuView = new MenuView(display.getScreen());
         this.pauseMenuView = new PauseMenuView(display.getScreen());
 
         this.controlsState = new ControlsState(this);
@@ -104,7 +104,7 @@ public class GameController {
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
 
-    public MenuView getMenuView() { return menuView; }
+    // public MenuView getMenuView() { return menuView; }
 
     public PauseMenuView getPauseMenuView() { return pauseMenuView; }
 

@@ -13,7 +13,7 @@ public class MenuView {
 
     public MenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(MainMenuGameState mainMenuGameState_) {
+    public void draw(MainMenuGameState mainMenuGameState) {
         int row = 4;
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -24,10 +24,10 @@ public class MenuView {
 
         row += 3;
 
-        for (int i = 0; i < mainMenuGameState_.getMenuOptions().size(); i++) {
-            MenuOption option = mainMenuGameState_.getMenuOptions().get(i);
+        for (int i = 0; i < mainMenuGameState.getMenuOptions().size(); i++) {
+            MenuOption option = mainMenuGameState.getMenuOptions().get(i);
 
-            if (i == mainMenuGameState_.getSelectedOption()) {
+            if (i == mainMenuGameState.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);
                 graphics.putString((40 - option.getOptionText().length()) / 2, row += 2, option.getOptionText());
                 graphics.disableModifiers(SGR.BLINK);
