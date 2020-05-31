@@ -10,7 +10,7 @@ public class Player extends EntityModel {
     }
 
     @Override
-    public void handleMapCrossing(MapModel map){
+    public void handleBoundaryCrossing(MapModel map){
         MapModel.Crossing crossing = map.checkBoundaries(position);
         switch (crossing) {
             case NO_CROSS:

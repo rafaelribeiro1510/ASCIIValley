@@ -17,6 +17,6 @@ public class MoveRight implements ActionEvent {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookRight());
 
         if (!target.hasCollision()) entity.getPosition().moveRight();
-        entity.handleMapCrossing(controller.getMapModel());
+        entity.handleBoundaryCrossing(controller.getMapModel());
     }
 }

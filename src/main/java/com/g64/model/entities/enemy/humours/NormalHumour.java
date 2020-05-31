@@ -13,16 +13,7 @@ public abstract class NormalHumour extends EnemyHumour {
     }
 
     public ActionEvent defaultMovement(GameController controller){
-        switch (new Random().nextInt(4)) {
-            case 0:
-                return new MoveDown(controller, me);
-            case 1:
-                return new MoveUp(controller, me);
-            case 2:
-                return new MoveLeft(controller, me);
-            case 3:
-                return new MoveRight(controller, me);
-        }
-        return new NullAction();
+        ActionEvent[] movements = {new MoveDown(controller, me), new MoveUp(controller, me), new MoveLeft(controller, me), new MoveRight(controller, me)};
+        return movements[new Random().nextInt(movements.length)];
     }
 }

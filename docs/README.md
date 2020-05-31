@@ -219,7 +219,7 @@ Thus the use of the visitor pattern was a solution we found, since it consists o
 
 #### **Implementation**
 By creating a class [ItemVisitor](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) with functions 
-[allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) overriden to accept all possible "interactable" items.
+[allowUsage(Item item)](../src/main/java/com/g64/model/entities/visitors/ItemVisitor.java) overridden to accept all possible "interactable" items.
 Alongside these, all items also implement an [accept(ItemVisitor itemVisitor)](../src/main/java/com/g64/model/items/tools/Hoe.java) method, which consists of calling the visitor's method corresponding to itself.
 The process of getting the map objects from the position that was interacted with, deciding which objects to evaluate and effectively cause changes to these are all handled by the visitor. 
 
@@ -261,15 +261,60 @@ Even after multiple uses of the **Extract Method**, it can still be considered t
 mostly because of the mess of code in charge of opening and reading the file itself.
 
 ### 2. Object-Orientation Abuser - Switch Statement
-
 #### **Problem in Context**
-In the [GameController](../src/main/java/com.g64.controller/GameController.java) file, in function ``start``,
-there is a Switch statement for the variable ```gameState``` that differentiates what to display on the screen,
-implementing a basic State Machine.
+There are various places in our project where switch statements are still present. Namely, in the [MapEntityFactory](../src/main/java/com/g64/model/entities/map/MapEntityFactory.java) and
+[MapTerrainFactory](../src/main/java/com/g64/model/terrain/MapTerrainFactory.java), in charge of creating [MapEntity](../src/main/java/com/g64/model/entities/map/MapEntity.java) and [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java) 
+objects from the characters saved in the [save file](../resources/chunks.csv). 
+```java
+public static MapEntity get(Position position, String string){
+        switch (string){
+            case "^":
+                return new RockEntity(position);
+            case "~":
+                return new WaterEntity(position);
+            case "y":
+                return new TallGrassEntity(position);
+            case "O":
+                return new TreeEntity(position);
+            case "#":
+                return new UnpassableWallEntity(position);
+            case "i":
+                return new GrownCornEntity(position);
+            case "j":
+                return new GrownCarrotEntity(position);
+            default:
+                return null;
+        }
+    }
+```
+
+Other places where the switch smell is present are in the `handleBoundaryCrossing()` functions on movable entities ([Player](../src/main/java/com/g64/model/entities/Player.java) and [Enemies](../src/main/java/com/g64/model/entities/enemy/Enemy.java))
+which move the player between chunks and keep the enemies from leaving their current chunk.
+```java
+    @Override
+    public void handleBoundaryCrossing(MapModel map){
+        MapModel.Crossing crossing = map.checkBoundaries(position);
+        switch (crossing) {
+            case NO_CROSS:
+                (...)
+            case CROSS_DOWN:
+                (...)
+            case CROSS_UP:
+                (...)
+            case CROSS_LEFT:
+                (...)
+            case CROSS_RIGHT:
+                (...)
+        }
+    }
+```
 
 #### **Solution**
-Using the **State Design Pattern**, each different game state could be a class that implements the ``GameState`` interface,
-simplifying the code of the ``start`` function and improving readability.
+When it comes to the presence of the switch on the **Factory** classes, since the cases are simple and easy to update with the creation of new
+**Map** objects, we think the smell can be ignored.
+On the other hand, the switch in the `handleBoundaryCrossing()` functions could be extracted with the **Replace type code with subclasses**
+method by making the `Crossing` enum an abstract class with subclasses `CrossRight`, `CrossUp`, ... with an overridden method `handle()`. 
+
 
 ### 3. Dispensable - Duplicate Code
 
