@@ -61,7 +61,7 @@ public class InGameState implements GameState {
             if (key.getCharacter() == 'a')          return new MoveLeft(gameController, gameController.getPlayer());
         }
 
-        if (key.getKeyType() == KeyType.Escape)     return new ExitToMainMenu(gameController);
+        if (key.getKeyType() == KeyType.Escape)     return new GoToPauseMenu(gameController);
 
         return new NullAction();
     }

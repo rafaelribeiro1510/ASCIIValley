@@ -26,6 +26,7 @@ public class GameController {
     private boolean running;
     private Display display;
     private MenuView menuView;
+    private PauseMenuView pauseMenuView;
 
 
     // private GameState gameState = new MenuGameState(this);
@@ -35,6 +36,7 @@ public class GameController {
     private GameState deadPlayerState;
     private GameState inGameState;
     private GameState menuGameState;
+    private GameState pauseState;
 
 
     public GameController() {
@@ -45,11 +47,13 @@ public class GameController {
         this.inventoryModel = new InventoryModel();
         this.running = true;
         this.menuView = new MenuView(display.getScreen());
+        this.pauseMenuView = new PauseMenuView(display.getScreen());
 
         this.controlsState = new ControlsState(this);
         this.deadPlayerState = new DeadPlayerState(this);
         this.inGameState = new InGameState(this);
         this.menuGameState = new MenuGameState(this);
+        this.pauseState = new PauseState(this);
 
         gameState = menuGameState;
     }
@@ -100,6 +104,8 @@ public class GameController {
 
     public MenuView getMenuView() { return menuView; }
 
+    public PauseMenuView getPauseMenuView() { return pauseMenuView; }
+
     public void setGameState(GameState gameState) { this.gameState = gameState; }
 
     public Display getDisplay() { return display; }
@@ -113,6 +119,8 @@ public class GameController {
     public GameState getInGameState() { return inGameState; }
 
     public GameState getMenuGameState() { return menuGameState; }
+
+    public GameState getPauseState() { return pauseState; }
 
     public void setControlsState(GameState controlsState) {
         this.controlsState = controlsState;
