@@ -26,6 +26,8 @@ public class MenuOptionsTest {
                 Mockito.mock(MapView.class),
                 Mockito.mock(InventoryModel.class)
         );
+
+        controller.setGameState(new MenuGameState(controller));
     }
 
     @Test

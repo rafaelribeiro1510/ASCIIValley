@@ -5,13 +5,13 @@ import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
-import com.g64.model.gameState.GameState;
-import com.g64.model.gameState.MenuGameState;
+import com.g64.model.gameState.*;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GameController {
@@ -28,7 +28,14 @@ public class GameController {
     private MenuView menuView;
 
 
-    private GameState gameState = new MenuGameState(this);
+    // private GameState gameState = new MenuGameState(this);
+    private GameState gameState;
+
+    private GameState controlsState;
+    private GameState deadPlayerState;
+    private GameState inGameState;
+    private GameState menuGameState;
+
 
     public GameController() {
         this.mapModel = new MapModel(5,  "resources/chunks.csv");
@@ -38,6 +45,13 @@ public class GameController {
         this.inventoryModel = new InventoryModel();
         this.running = true;
         this.menuView = new MenuView(display.getScreen());
+
+        this.controlsState = new ControlsState(this);
+        this.deadPlayerState = new DeadPlayerState(this);
+        this.inGameState = new InGameState(this);
+        this.menuGameState = new MenuGameState(this);
+
+        gameState = menuGameState;
     }
 
     public GameController(Player player, Display display, MapModel mapModel, MapView mapView, InventoryModel inventoryModel){
@@ -90,4 +104,28 @@ public class GameController {
     public Display getDisplay() { return display; }
 
     public GameState getGameState() { return gameState; }
+
+    public GameState getControlsState() { return controlsState; }
+
+    public GameState getDeadPlayerState() { return deadPlayerState; }
+
+    public GameState getInGameState() { return inGameState; }
+
+    public GameState getMenuGameState() { return menuGameState; }
+
+    public void setControlsState(GameState controlsState) {
+        this.controlsState = controlsState;
+    }
+
+    public void setDeadPlayerState(GameState deadPlayerState) {
+        this.deadPlayerState = deadPlayerState;
+    }
+
+    public void setInGameState(GameState inGameState) {
+        this.inGameState = inGameState;
+    }
+
+    public void setMenuGameState(GameState menuGameState) {
+        this.menuGameState = menuGameState;
+    }
 }

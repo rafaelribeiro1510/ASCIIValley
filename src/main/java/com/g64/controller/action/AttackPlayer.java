@@ -15,6 +15,7 @@ public class AttackPlayer implements ActionEvent {
 
     @Override
     public void execute() {
-        if (controller.getPlayer().reduceHealth(damage) == EntityModel.healthReduction.DIED) controller.setGameState(new DeadPlayerState(controller));
+        // if (controller.getPlayer().reduceHealth(damage) == EntityModel.healthReduction.DIED) controller.setGameState(new DeadPlayerState(controller));
+        if (controller.getPlayer().reduceHealth(damage) == EntityModel.healthReduction.DIED) controller.setGameState(controller.getDeadPlayerState());
     }
 }

@@ -12,6 +12,7 @@ import com.g64.view.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.IOException;
@@ -32,6 +33,13 @@ public class GameStateTest {
                 Mockito.mock(MapView.class),
                 Mockito.mock(InventoryModel.class)
         );
+
+        controller.setControlsState(new ControlsState(controller, Mockito.mock(ControlsView.class)));
+        controller.setDeadPlayerState(new DeadPlayerState(controller, Mockito.mock(DeadView.class)));
+        controller.setInGameState(new InGameState(controller, Mockito.mock(EntityView.class), Mockito.mock(InventoryView.class)));
+        controller.setMenuGameState(new MenuGameState(controller));
+
+        controller.setGameState(controller.getMenuGameState());
     }
 
     @Test
@@ -67,7 +75,8 @@ public class GameStateTest {
         when(controller.getMapView().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
         // to "start" at the controls menu
-        controller.setGameState(new ControlsState(controller));
+        // controller.setGameState(new ControlsState(controller));
+        controller.setGameState(controller.getControlsState());
 
         // checks "starting" state
         assertEquals(ControlsState.class, controller.getGameState().getClass());
@@ -105,7 +114,8 @@ public class GameStateTest {
         when(controller.getPlayer().reduceHealth(anyInt())).thenReturn(EntityModel.healthReduction.DIED);
 
         // to "start" in game
-        controller.setGameState(new InGameState(controller));
+        // controller.setGameState(new InGameState(controller));
+        controller.setGameState(controller.getInGameState());
 
         // controller.getPlayer().reduceHealth(anyInt());
         controller.processAction(new AttackPlayer(controller, anyInt()));

@@ -13,6 +13,7 @@ public class ExitToMainMenu implements ActionEvent {
     @Override
     public void execute() {
         gameController.getMapView().getScreen().clear();
-        gameController.setGameState(new MenuGameState(gameController));
+        // gameController.setGameState(new MenuGameState(gameController));
+        gameController.setGameState(gameController.getMenuGameState());
     }
 }
