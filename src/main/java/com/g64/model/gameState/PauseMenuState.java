@@ -34,17 +34,18 @@ public class PauseMenuState extends MenuGameState {
         // draw pause menu
         gameController.getPauseMenuView().draw(this);
     }
-
+    /*
     @Override
     public ActionEvent processKey(KeyStroke key) {
 
         if (key == null)                            return new NullAction();
-        if (key.getKeyType() == KeyType.ArrowUp)    return new PauseMenuUp(this);
-        if (key.getKeyType() == KeyType.ArrowDown)  return new PauseMenuDown(this);
+        if (key.getKeyType() == KeyType.ArrowUp)    return new MenuUp(this);
+        if (key.getKeyType() == KeyType.ArrowDown)  return new MenuDown(this);
         if (key.getKeyType() == KeyType.Enter)      return new EnterPressed(this);
 
         return new NullAction();
     }
+    */
     /*
     public ArrayList<MenuOption> getMenuOptions() { return menuOptions; }
     */

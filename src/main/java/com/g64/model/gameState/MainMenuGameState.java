@@ -36,7 +36,7 @@ public class MainMenuGameState extends MenuGameState {
         // draw menu
         gameController.getMenuView().draw(this);
     }
-
+    /*
     @Override
     public ActionEvent processKey(KeyStroke key) {
 
@@ -47,6 +47,7 @@ public class MainMenuGameState extends MenuGameState {
 
         return new NullAction();
     }
+    */
     /*
     public ArrayList<MenuOption> getMenuOptions() { return menuOptions; }
 
