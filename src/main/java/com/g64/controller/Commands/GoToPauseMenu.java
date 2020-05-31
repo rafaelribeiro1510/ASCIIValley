@@ -1,8 +1,8 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 
-public class GoToPauseMenu implements ActionEvent {
+public class GoToPauseMenu implements Command {
 
     GameController gameController;
 

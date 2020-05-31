@@ -1,8 +1,8 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 
-public class SelectSlot implements ActionEvent {
+public class SelectSlot implements Command {
     private final GameController controller;
     private final int slot;
 

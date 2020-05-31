@@ -1,7 +1,7 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.*;
+import com.g64.controller.Commands.*;
 import com.g64.view.EntityView;
 import com.g64.view.InventoryView;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -28,7 +28,7 @@ public class InGameState implements GameState {
 
     @Override
     public void execute() {
-        for (ActionEvent event : gameController.getMapModel().updateEntities(gameController)) gameController.processAction(event);
+        for (Command event : gameController.getMapModel().updateEntities(gameController)) gameController.processAction(event);
 
         // draw map
         gameController.getMapView().draw(gameController.getMapModel());
@@ -43,9 +43,7 @@ public class InGameState implements GameState {
     }
 
     @Override
-    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
-        System.out.println("hi");
-        System.out.println(key.getKeyType());
+    public Command keyStrokeToActionEvent(KeyStroke key) {
 
         if (key == null)                            return new NullAction();
 

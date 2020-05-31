@@ -1,9 +1,8 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
-import com.g64.model.gameState.MainMenuGameState;
 import com.g64.model.gameState.MenuGameState;
 
-public class MenuUp implements ActionEvent {
+public class MenuUp implements Command {
     private MenuGameState state;
 
     public MenuUp(MenuGameState state) { this.state = state; }

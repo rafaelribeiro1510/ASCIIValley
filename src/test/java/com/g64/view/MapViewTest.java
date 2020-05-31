@@ -1,11 +1,5 @@
 package com.g64.view;
 
-import com.g64.model.MapModel;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.io.IOException;
-
 public class MapViewTest {
     /*
     @Test

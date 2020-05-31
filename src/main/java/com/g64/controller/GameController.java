@@ -1,6 +1,6 @@
 package com.g64.controller;
 
-import com.g64.controller.action.ActionEvent;
+import com.g64.controller.Commands.Command;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.Position;
@@ -64,7 +64,7 @@ public class GameController {
         while (running) {
             try {
                 display.getScreen().refresh();
-                ActionEvent event = gameState.keyStrokeToActionEvent(getKeyStroke());
+                Command event = gameState.keyStrokeToActionEvent(getKeyStroke());
                 processAction(event);
                 gameState.execute();
 
@@ -74,7 +74,7 @@ public class GameController {
         }
     }
 
-    public void processAction(ActionEvent actionEvent){
+    public void processAction(Command actionEvent){
         actionEvent.execute();
     }
 

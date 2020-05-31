@@ -1,7 +1,7 @@
 package com.g64.model.entities.enemy.humours;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
+import com.g64.controller.Commands.Command;
 import com.g64.model.entities.enemy.Enemy;
 import com.googlecode.lanterna.TextColor;
 
@@ -16,7 +16,7 @@ public abstract class EnemyHumour {
         this.color = color;
     }
 
-    public abstract ActionEvent enemyAction(GameController controller);
+    public abstract Command enemyAction(GameController controller);
 
     public int getMaxCooldown() { return maxCooldown; }
 

@@ -1,8 +1,8 @@
 package com.g64.model.entities;
 
 import com.g64.model.MapModel;
-import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
+import com.googlecode.lanterna.TextColor;
 
 public class Player extends EntityModel {
     public Player(Position position, String string, TextColor color) {

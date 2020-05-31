@@ -1,7 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
+import com.g64.controller.Commands.Command;
 import com.g64.model.entities.EntityModel;
 
 import java.io.*;
@@ -101,8 +101,8 @@ public class MapModel {
         return false;
     }
 
-    public  ArrayList<ActionEvent> updateEntities(GameController controller) {
-        ArrayList<ActionEvent> result = new ArrayList<>();
+    public  ArrayList<Command> updateEntities(GameController controller) {
+        ArrayList<Command> result = new ArrayList<>();
 
         for (EntityModel entity : thisChunk().getEntities()) {
             result.add(entity.update(controller));

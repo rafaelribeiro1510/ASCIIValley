@@ -1,8 +1,8 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
 import com.g64.model.gameState.MenuGameState;
 
-public class EnterPressed implements ActionEvent {
+public class EnterPressed implements Command {
 
     private MenuGameState state;
 
@@ -12,6 +12,6 @@ public class EnterPressed implements ActionEvent {
 
     @Override
     public void execute() {
-        this.state.getMenuOptions().get(this.state.getSelectedOption()).getMenuCommand().execute();
+        this.state.getMenuOptions().get(this.state.getSelectedOption()).getCommand().execute();
     }
 }

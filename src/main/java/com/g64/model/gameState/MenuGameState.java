@@ -1,8 +1,7 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.*;
-import com.g64.model.menuCommands.MenuOption;
+import com.g64.controller.Commands.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -16,7 +15,7 @@ abstract public class MenuGameState implements GameState {
 
     abstract public void execute();
 
-    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
+    public Command keyStrokeToActionEvent(KeyStroke key) {
 
         if (key == null)                            return new NullAction();
         if (key.getKeyType() == KeyType.ArrowUp)    return new MenuUp(this);
