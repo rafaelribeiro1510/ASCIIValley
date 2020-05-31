@@ -4,7 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
 
 public class GrassTerrain extends MapTerrain {
-    public GrassTerrain(Position position){
-        super(position, new TextColor.RGB(0, 102, 0), 1);
+    public GrassTerrain(Position position, Integer id){
+        super(position, new TextColor.RGB(0, 102, 0), id);
     }
 }

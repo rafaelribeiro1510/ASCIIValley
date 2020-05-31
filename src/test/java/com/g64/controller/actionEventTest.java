@@ -40,10 +40,10 @@ public class actionEventTest {
     @Before
     public void initGameController() {
         ArrayList<MapTerrain> terrain = new ArrayList<>();
-            terrain.add(new GrassTerrain(new Position(0,0)));
-            terrain.add(new SoilTerrain(new Position(0,1)));
-            terrain.add(new GrassTerrain(new Position(1,0)));
-            terrain.add(new StoneTerrain(new Position(1,1)));
+            terrain.add(new GrassTerrain(new Position(0,0), 1));
+            terrain.add(new SoilTerrain(new Position(0,1), 3));
+            terrain.add(new GrassTerrain(new Position(1,0), 1));
+            terrain.add(new StoneTerrain(new Position(1,1), 5));
         ArrayList<EntityModel> entities = new ArrayList<>();
             entities.add(new TallGrassEntity(new Position(1,0)));
             entities.add(new RockEntity(new Position(1,1)));

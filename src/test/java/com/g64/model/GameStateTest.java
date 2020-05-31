@@ -1,10 +1,8 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.EnterPressed;
-import com.g64.controller.action.ExitToMainMenu;
-import com.g64.controller.action.MenuDown;
-import com.g64.controller.action.QuitGame;
+import com.g64.controller.action.*;
+import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.controlsState;
 import com.g64.model.gameState.deadPlayerState;
@@ -104,28 +102,22 @@ public class GameStateTest {
         when(controller.getMapView().getScreen()).thenReturn(mocked);
         when(controller.getDisplay().getScreen()).thenReturn(mocked);
 
-        try {
-            doThrow(Died.class)
-                    .when(controller.getPlayer())
-                    .reduceHealth(anyInt());
+        when(controller.getPlayer().reduceHealth(anyInt())).thenReturn(EntityModel.healthReduction.DIED);
 
-            // to "start" in game
-            controller.setGameState(new inGameState(controller));
+        // to "start" in game
+        controller.setGameState(new inGameState(controller));
 
-            controller.getPlayer().reduceHealth(anyInt());
-        }
-        catch(Died d) {
-            controller.setGameState(new deadPlayerState(controller));
-        }
+        // controller.getPlayer().reduceHealth(anyInt());
+        controller.processAction(new AttackPlayer(controller, anyInt()));
 
         assertEquals(deadPlayerState.class, controller.getGameState().getClass());
 
-
         controller.processAction(new QuitGame(controller));
-
+        /*
         // checks if the close screen method was called (once)
         try { verify(mocked).close(); }
         catch (IOException e) { e.printStackTrace(); }
+        */
     }
 
 }

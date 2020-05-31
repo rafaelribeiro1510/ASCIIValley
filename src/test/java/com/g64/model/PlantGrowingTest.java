@@ -28,10 +28,10 @@ public class PlantGrowingTest {
     @Before
     public void initGameController() {
         ArrayList<MapTerrain> terrain = new ArrayList<>();
-        terrain.add(new SoilTerrain(new Position(0,0)));
-        terrain.add(new SoilTerrain(new Position(0,1)));
-        terrain.add(new SoilTerrain(new Position(1,0)));
-        terrain.add(new SoilTerrain(new Position(1,1)));
+        terrain.add(new SoilTerrain(new Position(0,0), 1));
+        terrain.add(new SoilTerrain(new Position(0,1), 1));
+        terrain.add(new SoilTerrain(new Position(1,0), 1));
+        terrain.add(new SoilTerrain(new Position(1,1), 1));
         ArrayList<EntityModel> entities = new ArrayList<>();
         entities.add(new CarrotSeedEntity(new Position(0,0), 2));
         entities.add(new CornSeedEntity(new Position(1,1), 2));
