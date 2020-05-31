@@ -166,13 +166,15 @@ implementing a finite-state machine making it highly appropriate for the situati
 #### **Implementation**
 The game controller keeps track of the current state of the game which can be changed according to the player input.
 Each possible ``GameState`` implements an ``execute`` (which calls the necessary draw functions) and ``processKey`` 
-functions (which processes the player's key presses), allowing different funcionalities for a same key press depending on the context
+functions (which processes the player's key presses), allowing different functionalities for a same key press depending on the context
 and transitions between states.
 
 ![stateGame](umls/stateGame.png)
 
-The enemies hold the active "humour", which can be either an [AggroedHumour](../src/main/java/com/g64/model/entities/enemy/humours/AggroedHumour.java) or a [NormalHumour](../src/main/java/com/g64/model/entities/enemy/humours/NormalHumour.java), 
-and change between these two according to the distance to the player, which is checked on every game cycle by the function `updateState()` [here](../src/main/java/com/g64/model/entities/enemy/Enemy.java). 
+The enemies hold the active "humour", which can be either an [AggroedHumour](../src/main/java/com/g64/model/entities/enemy/humours/AggroedHumour.java) 
+or a [NormalHumour](../src/main/java/com/g64/model/entities/enemy/humours/NormalHumour.java), 
+and change between these two according to the distance to the player, 
+which is checked on every game cycle by the function `updateState()` [here](../src/main/java/com/g64/model/entities/enemy/Enemy.java). 
  
  ![stateEnemt](umls/stateEnemy.png)
 
@@ -239,7 +241,7 @@ The process of getting the map objects from the position that was interacted wit
 ![visitor](umls/visitor.png)
 
 #### **Consequences**
-This makes the code on the the [Interact](../src/main/java/com/g64/controller/action/InteractDown.java) actions more readable, since the handling of the item is done entirely by this new class.
+This makes the code on the the [Interact](../src/main/java/com/g64/controller/commands/InteractDown.java) actions more readable, since the handling of the item is done entirely by this new class.
 However, this also has its' downsides: the creation of new items is less intuitive, and in a game like ours would, in the long run, be hindering.
 Despite helping us remove a lot of the smelly **instanceof** calls, we were not able to completely rid this part of our code from them.  
 
