@@ -7,11 +7,11 @@ import com.googlecode.lanterna.TextColor;
 
 import java.util.Random;
 
-public class MummyNormal extends NormalHumour{
-    private static final int maxCooldown = 45;
-    private static final TextColor color = new TextColor.RGB(182, 172, 101);
+public class GhostNormal extends NormalHumour{
+    private static final int maxCooldown = 50;
+    private static final TextColor color = new TextColor.RGB(0, 178, 182);
 
-    public MummyNormal(Enemy me) {
+    public GhostNormal(Enemy me) {
         super(me, maxCooldown, color);
     }
 

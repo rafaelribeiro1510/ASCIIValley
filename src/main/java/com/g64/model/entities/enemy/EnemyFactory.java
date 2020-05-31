@@ -10,6 +10,7 @@ public class EnemyFactory {
 
     public static Enemy generate(ChunkModel chunk){
         Position target = new Position(new Random().nextInt(chunk.getWidth()), new Random().nextInt(chunk.getHeight()));
-        return new Mummy(target);
+        Enemy[] enemies = {new Mummy(target), new Ghost(target)};
+        return enemies[new Random().nextInt(enemies.length)];
     }
 }
