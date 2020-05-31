@@ -8,8 +8,6 @@ import com.g64.model.entities.Player;
 import com.g64.model.gameState.*;
 import com.g64.view.Display;
 import com.g64.view.MapView;
-import com.g64.view.MenuView;
-import com.g64.view.PauseMenuView;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
@@ -71,7 +69,8 @@ public class GameController {
         while (running) {
             try {
                 display.getScreen().refresh();
-                processAction(getActionEventFromKeyboard());
+                ActionEvent event = gameState.keyStrokeToActionEvent(getKeyStroke());
+                processAction(event);
                 gameState.execute();
 
                 Thread.sleep(1000/ frameRate);
@@ -84,13 +83,10 @@ public class GameController {
         actionEvent.execute();
     }
 
-    public ActionEvent getActionEventFromKeyboard() throws IOException{
+    public KeyStroke getKeyStroke() throws IOException {
         Screen screen = display.getScreen();
-        KeyStroke key = screen.pollInput();
-
-        return gameState.processKey(key);
+        return screen.pollInput();
     }
-
 
     public void setRunning(boolean running){ this.running = running; }
 

@@ -7,5 +7,5 @@ public interface GameState {
 
     void execute();
 
-    ActionEvent processKey(KeyStroke key);
+    ActionEvent keyStrokeToActionEvent(KeyStroke key);
 }

@@ -16,7 +16,7 @@ abstract public class MenuGameState implements GameState {
 
     abstract public void execute();
 
-    public ActionEvent processKey(KeyStroke key) {
+    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
 
         if (key == null)                            return new NullAction();
         if (key.getKeyType() == KeyType.ArrowUp)    return new MenuUp(this);

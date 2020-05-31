@@ -28,7 +28,7 @@ public class DeadPlayerState implements GameState {
     }
 
     @Override
-    public ActionEvent processKey(KeyStroke key) {
+    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
         gameController.getDisplay().getScreen().clear();
 
         // any key works

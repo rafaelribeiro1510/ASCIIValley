@@ -44,7 +44,9 @@ public class InGameState implements GameState {
     }
 
     @Override
-    public ActionEvent processKey(KeyStroke key) {
+    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
+        System.out.println("hi");
+        System.out.println(key.getKeyType());
 
         if (key == null)                            return new NullAction();
 
