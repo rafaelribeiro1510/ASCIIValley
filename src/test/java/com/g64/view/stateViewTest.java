@@ -1,16 +1,19 @@
 package com.g64.view;
 
 import com.g64.controller.GameController;
+import com.g64.model.ChunkModel;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.ControlsState;
 import com.g64.model.gameState.DeadPlayerState;
+import com.g64.model.gameState.InGameState;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class stateViewTest {
 
@@ -47,6 +50,19 @@ public class stateViewTest {
         deadPlayer.execute();
 
         verify(deadview).draw();
+    }
+
+
+    @Test
+    public void inGameExecute() {
+        when(controller.getMapModel().thisChunk()).thenReturn(Mockito.mock(ChunkModel.class));
+        // when(controller.getMapModel().updateEntities(controller)).thenReturn(new ArrayList<ActionEvent>());
+        EntityView entityView = Mockito.mock(EntityView.class);
+        InventoryView inventoryView = Mockito.mock(InventoryView.class);
+
+        InGameState game = new InGameState(controller, entityView, inventoryView);
+
+        game.execute();
     }
 
 }
