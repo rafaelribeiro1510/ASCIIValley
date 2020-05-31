@@ -120,7 +120,32 @@ especially alongisde the pattern next described.
 
 ### 3. State
 
-### 4. Visitor
+### 4. Factory
+#### **Problem in Context**
+Near the start of the project, while implementing the way the game translated the save file into the corresponding objects, it became clear that the lazy approach
+of just a switch was messy. Later, with the addition of enemies and the need for these to be created on demand by the specifi chunks,
+this method also fit well.
+
+#### **The Pattern**
+The **Factory** pattern, capable of creating objects of unspecified classes, saved us the use of messy constructors and unmaintainable switch cases.
+
+#### **Implementation**
+On the case of the [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java) objects, that hold the information of each ground type, the implementation of the [MapTerrainFactory](../src/main/java/com/g64/model/terrain/MapTerrainFactory.java) was straightforward,
+since the translation of save file to object is hard coded.
+
+![factoryTerrain](umls/factoryTerrain.png)
+
+Similarly, the [EnemyFactory](../src/main/java/com/g64/model/entities/enemy/EnemyFactory.java) simply constructs an enemy at a random position of the map, being called 
+by the ChunkModel whenever there is a need to add an enemy to a chunk. 
+
+![factoryEnemy](umls/factoryEnemy.png)
+
+#### **Consequences**
+This pattern helped by decoupling the creation of these entities from the classes that hold them, improving readability as well. 
+We didn't implement other types of enemies besides [Mummies](../src/main/java/com/g64/model/entities/enemy/Mummy.java)
+but this could easily be expanded on with this pattern.
+
+### 5. Visitor
 #### **Problem in Context**
 When implementing the usage of different tools and items by the player, we soon realized that these
 varied a lot depending on the parts of the map they interacted with ([Axe](../src/main/java/com/g64/model/items/tools/Axe.java) 

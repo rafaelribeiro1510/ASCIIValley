@@ -113,11 +113,11 @@ public class GameStateTest {
         assertEquals(deadPlayerState.class, controller.getGameState().getClass());
 
         controller.processAction(new QuitGame(controller));
-        /*
+
         // checks if the close screen method was called (once)
         try { verify(mocked).close(); }
         catch (IOException e) { e.printStackTrace(); }
-        */
+
     }
 
 }

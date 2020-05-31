@@ -1,0 +1,18 @@
+@startuml
+class EnemyFactory{
+  void generate()
+}
+
+abstract class Enemy{
+}
+
+class Mummy{
+}
+
+class ChunkModel{
+}
+
+ChunkModel .> EnemyFactory : uses
+EnemyFactory .> Enemy : creates
+Enemy -|> Mummy
+@enduml
