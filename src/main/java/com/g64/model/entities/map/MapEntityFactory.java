@@ -17,7 +17,7 @@ public class MapEntityFactory {
             case "O":
                 return new TreeEntity(position);
             case "#":
-                return new InvisibleWallEntity(position);
+                return new UnpassableWallEntity(position);
             case "i":
                 return new GrownCornEntity(position);
             case "j":
