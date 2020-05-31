@@ -89,33 +89,45 @@ public class EnemyTest {
     public void testAggroMovement(){
         Mummy enemy = new Mummy(new Position(0,0));
 
-        enemy.updateState(new Position(2,0));
+        player.setPosition(new Position(2,0));
+        enemy.updateState(player.getPosition());
         enemy.setMovementCooldown(0);
         assertTrue(enemy.update(controller) instanceof MoveRight);
 
 
-        enemy.updateState(new Position(-2,0));
+        player.setPosition(new Position(-2,0));
+        enemy.updateState(player.getPosition());
         enemy.setMovementCooldown(0);
         assertTrue(enemy.update(controller) instanceof MoveLeft);
 
 
-        enemy.updateState(new Position(0,2));
+        player.setPosition(new Position(0,2));
+        enemy.updateState(player.getPosition());
         enemy.setMovementCooldown(0);
         assertTrue(enemy.update(controller) instanceof MoveDown);
 
 
-        enemy.updateState(new Position(0,-2));
+        player.setPosition(new Position(0,-2));
+        enemy.updateState(player.getPosition());
         enemy.setMovementCooldown(0);
         assertTrue(enemy.update(controller) instanceof MoveUp);
 
 
-        enemy.updateState(new Position(0,1));
+        player.setPosition(new Position(1,0));
+        enemy.updateState(player.getPosition());
         enemy.setMovementCooldown(0);
         assertTrue(enemy.update(controller) instanceof AttackPlayer);
     }
 
     @Test
     public void testNormalMovement(){
+        Mummy enemy = new Mummy(new Position(0,0));
+
+        player.setPosition(new Position(10,0));
+        enemy.updateState(player.getPosition());
+        enemy.setMovementCooldown(0);
+        Command enemyAction = enemy.update(controller);
+        assertTrue(enemyAction instanceof MoveRight || enemyAction instanceof MoveUp || enemyAction instanceof MoveLeft || enemyAction instanceof MoveDown);
 
     }
 }
