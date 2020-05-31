@@ -99,10 +99,13 @@ entities besides the player.)
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
 
 
-### 2. Actions
+### 2. Command
 #### **Problem in Context**
 After initially writing in the reading of keyboard inputs, it was clear the "switch" approach was messy and 
 did not scale properly. Also the need for enemies with behaviour similar to the players' made this pattern fit very well.
+Later on, a game state related situation came up, more precisely related with the ``menuGameState``.
+The menu had three possible options: "Play", "Controls" and "Quit" and by selecting a certain option the player would get different outcomes and 
+implementing every outcome within the ``menuGameState`` didn't look like the best option.
 
 #### **The Pattern**
 The **Command** pattern consists of parameterizing clients with different requests, in our case, the player, enemy and menu actions.  
@@ -113,9 +116,12 @@ Namely, the [Move](../src/main/java/com/g64/controller/action/MoveDown.java) fam
 
 ![action](umls/action.png)
 
+In the [MenuGameState](../src/main/java/com/g64/model/gameState/MenuGameState.java) class, this pattern is present within the list of ``menuOptions``.
+Each ``menuOption`` has a String associated with it as well as a ``MenuCommand`` implementation, which is the element that effectively knows how to execute the ``menuOption``'s action.
+
 #### **Consequences**
 The code in the com.g64.controller is much easier to read and also proved to make the scaling of the inputs easier, 
-especially alongisde the pattern next described.
+especially alongside the pattern next described.
 
 
 ### 3. State
@@ -230,7 +236,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 
 SMELLS
 (- Pair Enemy.java / SeedEntity.java / UpdatableEntity.java / MapModel.java not defined)
-- Mummy.java State for Mummmy humor
+- Mummy.java State for Mummy humor
 (- Switch in MapEntityFactory/MapTerrainFactory due to the factory design pattern)
 
 ### 1. Bloater - Long Method

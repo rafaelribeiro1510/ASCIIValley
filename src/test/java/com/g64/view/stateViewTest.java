@@ -4,12 +4,10 @@ import com.g64.controller.GameController;
 import com.g64.model.InventoryModel;
 import com.g64.model.MapModel;
 import com.g64.model.entities.Player;
-import com.g64.model.gameState.controlsState;
-import com.g64.model.gameState.deadPlayerState;
-import com.g64.model.gameState.inGameState;
+import com.g64.model.gameState.ControlsState;
+import com.g64.model.gameState.DeadPlayerState;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.verify;
@@ -33,7 +31,7 @@ public class stateViewTest {
     public void controlsExecuteView() {
 
         ControlsView controlsView = Mockito.mock(ControlsView.class);
-        controlsState controls = new controlsState(controller, controlsView);
+        ControlsState controls = new ControlsState(controller, controlsView);
 
         controls.execute();
 
@@ -44,7 +42,7 @@ public class stateViewTest {
     public void deadPlayerExecute() {
 
         DeadView deadview = Mockito.mock(DeadView.class);
-        deadPlayerState deadPlayer = new deadPlayerState(controller, deadview);
+        DeadPlayerState deadPlayer = new DeadPlayerState(controller, deadview);
 
         deadPlayer.execute();
 
