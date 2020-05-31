@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.security.Key;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -35,6 +36,7 @@ public class InputTest {
     private KeyStroke zero;
     private KeyStroke nine;
     private KeyStroke escape;
+    private KeyStroke z;
 
     @Before
     public void initGameController() {
@@ -93,6 +95,10 @@ public class InputTest {
 
         escape = Mockito.mock(KeyStroke.class);
         when(escape.getKeyType()).thenReturn(KeyType.Escape);
+
+        z = Mockito.mock(KeyStroke.class);
+        when(z.getKeyType()).thenReturn(KeyType.Character);
+        when(z.getCharacter()).thenReturn('z');
     }
 
     @Test
@@ -135,6 +141,9 @@ public class InputTest {
 
             when(controller.getDisplay().getScreen().pollInput()).thenReturn(escape);
             assertEquals(GoToPauseMenu.class, controller.getGameState().keyStrokeToActionEvent(controller.getKeyStroke()).getClass());
+
+            when(controller.getDisplay().getScreen().pollInput()).thenReturn(z);
+            assertEquals(Null.class, controller.getGameState().keyStrokeToActionEvent(controller.getKeyStroke()).getClass());
 
         }
         catch(IOException e) { e.printStackTrace(); }
