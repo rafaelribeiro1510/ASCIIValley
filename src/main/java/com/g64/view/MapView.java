@@ -20,13 +20,4 @@ public class MapView {
         chunkView.draw(map.thisChunk());
     }
 
-    public void blink(Position position) {
-        screen.setCursorPosition(new TerminalPosition(position.getX(), position.getY()));
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        screen.setCursorPosition(null);
-    }
 }
