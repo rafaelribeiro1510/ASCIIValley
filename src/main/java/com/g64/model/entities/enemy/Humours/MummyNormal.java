@@ -1,14 +1,15 @@
-package com.g64.model.entities.enemy.MovementHumour;
+package com.g64.model.entities.enemy.Humours;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.model.entities.enemy.Enemy;
+import com.googlecode.lanterna.TextColor;
 
 import java.util.Random;
 
-public class MummyMovementNormal extends EnemyMovementHumour {
-    public MummyMovementNormal(Enemy me) {
-        super(me);
+public class MummyNormal extends NormalHumour{
+    public MummyNormal(Enemy me, int maxCooldown, TextColor color) {
+        super(me, maxCooldown, color);
     }
 
     @Override

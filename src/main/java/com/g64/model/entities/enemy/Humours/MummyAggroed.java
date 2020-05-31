@@ -1,13 +1,14 @@
-package com.g64.model.entities.enemy.MovementHumour;
+package com.g64.model.entities.enemy.Humours;
 
 import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.model.Position;
 import com.g64.model.entities.enemy.Enemy;
+import com.googlecode.lanterna.TextColor;
 
-public class MummyMovementAggroed extends EnemyMovementHumour {
-    public MummyMovementAggroed(Enemy me) {
-        super(me);
+public class MummyAggroed extends AggroedHumour{
+    public MummyAggroed(Enemy me, int maxCooldown, TextColor color) {
+        super(me, maxCooldown, color);
     }
 
     @Override
