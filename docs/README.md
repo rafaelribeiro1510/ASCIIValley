@@ -21,7 +21,7 @@ The interpretation of these values is intentionally hardcoded, since these save 
 ### Map visualization
 Displaying of the chunk where the player is located, terrain and map entities included.
 
-![Basic Map and Player Drawing - figure 1](./screenshots/basicMapAndPlayerDrawing.png)
+![Basic Map and Player Drawing - figure 1](./screenshots/mapVisualization.png)
 
 ### Movement
 As of now, the player can move around the current map chunk, colliding with the map entities that are supposed to be solid.
@@ -34,15 +34,23 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 The enemy entities (Mummies) have different behaviour depending on how close they are to the player,
 determining their next movement based on it.
 
+![Mummy Behaviour Passive - figure 3](./screenshots/mummyBehaviour1.png)
+
+![Mummy Behaviour Passive - figure 4](./screenshots/mummyBehaviour2.png)
+
 ### Combat 
 Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
 
 ### Main menu
-The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit - ![Main menu Mock-up - figure 3](./screenshots/mainMenuMockup.png)
+The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit.
+
+![Main menu Mock-up - figure 5](./screenshots/mainMenuMockup.png)
 
 ### GUI 
 In the form of a player toolbar that holds the players' tools, that allow the player to interact with specific parts of the game,
-and also the items collected through said interactions. ![GUI Mock-up - figure 4](./screenshots/guiMockup.png)
+and also the items collected through said interactions.
+
+![GUI Mock-up - figure 6](./screenshots/guiMockup.png)
 
 
 ## Desired Features
@@ -112,7 +120,32 @@ especially alongisde the pattern next described.
 
 ### 3. State
 
-### 4. Visitor
+### 4. Factory
+#### **Problem in Context**
+Near the start of the project, while implementing the way the game translated the save file into the corresponding objects, it became clear that the lazy approach
+of just a switch was messy. Later, with the addition of enemies and the need for these to be created on demand by the specifi chunks,
+this method also fit well.
+
+#### **The Pattern**
+The **Factory** pattern, capable of creating objects of unspecified classes, saved us the use of messy constructors and unmaintainable switch cases.
+
+#### **Implementation**
+On the case of the [MapTerrain](../src/main/java/com/g64/model/terrain/MapTerrain.java) objects, that hold the information of each ground type, the implementation of the [MapTerrainFactory](../src/main/java/com/g64/model/terrain/MapTerrainFactory.java) was straightforward,
+since the translation of save file to object is hard coded.
+
+![factoryTerrain](umls/factoryTerrain.png)
+
+Similarly, the [EnemyFactory](../src/main/java/com/g64/model/entities/enemy/EnemyFactory.java) simply constructs an enemy at a random position of the map, being called 
+by the ChunkModel whenever there is a need to add an enemy to a chunk. 
+
+![factoryEnemy](umls/factoryEnemy.png)
+
+#### **Consequences**
+This pattern helped by decoupling the creation of these entities from the classes that hold them, improving readability as well. 
+We didn't implement other types of enemies besides [Mummies](../src/main/java/com/g64/model/entities/enemy/Mummy.java)
+but this could easily be expanded on with this pattern.
+
+### 5. Visitor
 #### **Problem in Context**
 When implementing the usage of different tools and items by the player, we soon realized that these
 varied a lot depending on the parts of the map they interacted with ([Axe](../src/main/java/com/g64/model/items/tools/Axe.java) 

@@ -88,7 +88,7 @@ public class TargetVisitor implements Visitor{
     public Item.usageValue allowUsage(Hoe item) {
         if (entity instanceof NullEntity && terrain instanceof GrassTerrain){
             controller.getMapModel().thisChunk().getTerrain().remove(terrain);
-            controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position));
+            controller.getMapModel().thisChunk().getTerrain().add(new SoilTerrain(position, 3));
             return item.decrementValue();
         }
         else return Item.usageValue.UNUSED;

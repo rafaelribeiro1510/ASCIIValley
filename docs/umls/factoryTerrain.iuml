@@ -1,0 +1,20 @@
+@startuml
+class MapTerrainFactory{
+  MapTerrain get()
+}
+
+abstract class MapTerrain{
+  Position position
+  TextColor color
+}
+
+class SandTerrain{
+}
+
+class GrassTerrain{
+}
+
+MapTerrainFactory .> MapTerrain : creates
+SandTerrain --|> MapTerrain
+GrassTerrain --|> MapTerrain
+@enduml
