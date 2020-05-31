@@ -4,7 +4,7 @@ import com.g64.controller.GameController;
 import com.g64.controller.action.MenuDown;
 import com.g64.controller.action.MenuUp;
 import com.g64.model.entities.Player;
-import com.g64.model.gameState.MenuGameState;
+import com.g64.model.gameState.MainMenuGameState;
 import com.g64.view.Display;
 import com.g64.view.MapView;
 import org.junit.Before;
@@ -27,39 +27,39 @@ public class MenuOptionsTest {
                 Mockito.mock(InventoryModel.class)
         );
 
-        controller.setGameState(new MenuGameState(controller));
+        controller.setGameState(new MainMenuGameState(controller));
     }
 
     @Test
     public void playOptionTest() {
 
-        assertEquals(0, ((MenuGameState) controller.getGameState()).getSelectedOption());
+        assertEquals(0, ((MainMenuGameState) controller.getGameState()).getSelectedOption());
         assertEquals("Play",
-                ((MenuGameState) controller.getGameState()).getMenuOptions().get(
-                        ((MenuGameState) controller.getGameState()).getSelectedOption()
+                ((MainMenuGameState) controller.getGameState()).getMenuOptions().get(
+                        ((MainMenuGameState) controller.getGameState()).getSelectedOption()
                 ).getOptionText()
         );
     }
 
     @Test
     public void controlsOptionTest() {
-        controller.processAction(new MenuDown((MenuGameState) controller.getGameState()));
-        assertEquals(1, ((MenuGameState) controller.getGameState()).getSelectedOption());
-        assertEquals("Controls", ((MenuGameState) controller.getGameState()).getMenuOptions(
+        controller.processAction(new MenuDown((MainMenuGameState) controller.getGameState()));
+        assertEquals(1, ((MainMenuGameState) controller.getGameState()).getSelectedOption());
+        assertEquals("Controls", ((MainMenuGameState) controller.getGameState()).getMenuOptions(
                 ).get(
-                ((MenuGameState) controller.getGameState()).getSelectedOption()
+                ((MainMenuGameState) controller.getGameState()).getSelectedOption()
                 ).getOptionText()
         );
     }
 
     @Test public void quitOptionTest() {
-        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
-        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
+        controller.processAction(new MenuDown((MainMenuGameState)controller.getGameState()));
+        controller.processAction(new MenuDown((MainMenuGameState)controller.getGameState()));
 
-        assertEquals(2, ((MenuGameState) controller.getGameState()).getSelectedOption());
-        assertEquals("Quit", ((MenuGameState) controller.getGameState()).getMenuOptions(
+        assertEquals(2, ((MainMenuGameState) controller.getGameState()).getSelectedOption());
+        assertEquals("Quit", ((MainMenuGameState) controller.getGameState()).getMenuOptions(
                 ).get(
-                ((MenuGameState) controller.getGameState()).getSelectedOption()
+                ((MainMenuGameState) controller.getGameState()).getSelectedOption()
                 ).getOptionText()
         );
     }
@@ -68,19 +68,19 @@ public class MenuOptionsTest {
     @Test
     public void upOverflowTest() {
 
-        controller.processAction(new MenuUp((MenuGameState) controller.getGameState()));
-        assertEquals(0, ((MenuGameState) controller.getGameState()).getSelectedOption());
+        controller.processAction(new MenuUp((MainMenuGameState) controller.getGameState()));
+        assertEquals(0, ((MainMenuGameState) controller.getGameState()).getSelectedOption());
     }
 
     // Check if it stays at the last option after Arrow Down input
     @Test
     public void downOverflowTest() {
         // Start at the last option
-        MenuGameState menu = (MenuGameState)controller.getGameState();
+        MainMenuGameState menu = (MainMenuGameState)controller.getGameState();
         menu.setSelectedOption(2);
 
-        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
-        assertEquals(2, ((MenuGameState) controller.getGameState()).getSelectedOption());
+        controller.processAction(new MenuDown((MainMenuGameState)controller.getGameState()));
+        assertEquals(2, ((MainMenuGameState) controller.getGameState()).getSelectedOption());
     }
 
 }

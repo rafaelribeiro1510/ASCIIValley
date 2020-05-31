@@ -31,7 +31,7 @@ public class GameController {
     private PauseMenuView pauseMenuView;
 
 
-    // private GameState gameState = new MenuGameState(this);
+    // private GameState gameState = new MainMenuGameState(this);
     private GameState gameState;
 
     private GameState controlsState;
@@ -54,7 +54,7 @@ public class GameController {
         this.controlsState = new ControlsState(this);
         this.deadPlayerState = new DeadPlayerState(this);
         this.inGameState = new InGameState(this);
-        this.menuGameState = new MenuGameState(this);
+        this.menuGameState = new MainMenuGameState(this);
         this.pauseState = new PauseMenuState(this);
 
         gameState = menuGameState;

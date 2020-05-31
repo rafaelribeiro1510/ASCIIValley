@@ -1,6 +1,6 @@
 package com.g64.view;
 
-import com.g64.model.gameState.MenuGameState;
+import com.g64.model.gameState.MainMenuGameState;
 import com.g64.model.menuCommands.MenuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
@@ -13,7 +13,7 @@ public class MenuView {
 
     public MenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(MenuGameState menuGameState_) {
+    public void draw(MainMenuGameState mainMenuGameState_) {
         int row = 4;
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -24,10 +24,10 @@ public class MenuView {
 
         row += 3;
 
-        for (int i = 0; i < menuGameState_.getMenuOptions().size(); i++) {
-            MenuOption option = menuGameState_.getMenuOptions().get(i);
+        for (int i = 0; i < mainMenuGameState_.getMenuOptions().size(); i++) {
+            MenuOption option = mainMenuGameState_.getMenuOptions().get(i);
 
-            if (i == menuGameState_.getSelectedOption()) {
+            if (i == mainMenuGameState_.getSelectedOption()) {
                 graphics.enableModifiers(SGR.BLINK);
                 graphics.putString((40 - option.getOptionText().length()) / 2, row += 2, option.getOptionText());
                 graphics.disableModifiers(SGR.BLINK);

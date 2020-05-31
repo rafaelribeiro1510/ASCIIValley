@@ -1,12 +1,13 @@
 package com.g64.controller.action;
 
+import com.g64.model.gameState.MenuGameState;
 import com.g64.model.gameState.PauseMenuState;
 
 public class PauseEnterPressed implements ActionEvent {
 
-    private PauseMenuState state;
+    private MenuGameState state;
 
-    public PauseEnterPressed(PauseMenuState state) { this.state = state; }
+    public PauseEnterPressed(MenuGameState state) { this.state = state; }
 
     @Override
     public void execute() {
