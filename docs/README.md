@@ -119,6 +119,50 @@ especially alongisde the pattern next described.
 
 
 ### 3. State
+#### **Problem in Context**
+Having started by implementing the game itself, we came across difficulties when trying to incorporate other parts of the game, highlighting the menu that appears at the start.
+The different game "states" and the transitions (finite-state machine) between them were mostly dealt with by using a switch statement in the start function of the game controller.
+
+```java
+enum gameStates {
+    MAIN_MENU, CONTROLS, IN_GAME;
+}
+
+public void start() {
+    while (running){
+        switch (gameState) {
+            case MAIN_MENU:
+                // (...)
+                break;
+
+            case CONTROLS:
+                // (...)
+                break;
+
+            case IN_GAME:
+                // (...)    
+                break;
+        }
+    }
+}
+```
+
+This first solution was obviously not optimal: the function was becoming unnecessarily long and in case of a new possible game state the enum gameStates and the function start would need to be changed (adding another case to the switch statement), for example.
+
+#### **The Pattern**
+The pattern **State** was the chosen one. It lets an object change its behavior depending on its internal state and is a way of implementing a finite-state machine making it highly appropriate for the situation.
+
+#### **Implementation**
+The game controller keeps track of the current state of the game which can be changed according to the player input.
+Each possible ``GameState`` implements an ``execute`` (which calls the necessary draw functions) and ``processKey`` functions (which processes the player's key presses), allowing different funcionalities for a same key press depending on the context
+and transitions between states.
+
+![action](umls/stateGame.png)
+
+#### **Consequences**
+This pattern helped reducing the clutter and size of ``start`` function of [GameController](../src/main/java/com/g64/controller/GameController.java) (it is now about 5 times smaller than previously) 
+and made it possible to easily add afterwards a [DeadPlayerState](../src/main/java/com/g64/model/gameState/DeadPlayerState.java) 
+(for when the player dies), improving consequentially the maintainability and readability of the code.
 
 ### 4. Factory
 #### **Problem in Context**
