@@ -10,6 +10,8 @@ public class ChunkView {
 
     public ChunkView(Screen screen) { entityView = new EntityView(screen);}
 
+    public ChunkView(EntityView entityView) { this.entityView = entityView;}
+
     public void draw(ChunkModel chunk) {
         for (MapTerrain cell : chunk.getTerrain()){
             entityView.draw(chunk.getEntityAt(cell.getPosition()), chunk);

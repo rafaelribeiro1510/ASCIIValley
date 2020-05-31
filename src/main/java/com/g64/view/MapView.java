@@ -15,6 +15,11 @@ public class MapView {
         chunkView = new ChunkView(screen);
     }
 
+    public MapView(Screen screen, ChunkView chunkView) {
+        this.screen = screen;
+        this.chunkView = chunkView;
+    }
+
     public void draw(MapModel map){
         screen.clear();
         chunkView.draw(map.thisChunk());
