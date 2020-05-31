@@ -44,19 +44,20 @@ public class MapModel {
 
     public void moveNorth(){
         if (findChunk(thisChunk().getNorthId()) != null) this.currentChunkID = thisChunk().getNorthId();
-        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
+        if (isEnemyChunk(this.currentChunkID)) thisChunk().tryAddingEnemies();
     }
+
     public void moveSouth(){
         if (findChunk(thisChunk().getSouthId()) != null) this.currentChunkID = thisChunk().getSouthId();
-        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
+        if (isEnemyChunk(this.currentChunkID)) thisChunk().tryAddingEnemies();
     }
     public void moveEast(){
         if (findChunk(thisChunk().getEastId()) != null) this.currentChunkID = thisChunk().getEastId();
-        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
+        if (isEnemyChunk(this.currentChunkID)) thisChunk().tryAddingEnemies();
     }
     public void moveWest(){
         if (findChunk(thisChunk().getWestId()) != null) this.currentChunkID = thisChunk().getWestId();
-        if (isEnemyChunk(this.currentChunkID)) EnemyFactory.generate(this.thisChunk());
+        if (isEnemyChunk(this.currentChunkID)) thisChunk().tryAddingEnemies();
     }
 
     public void readMap(String relativePathname) {
