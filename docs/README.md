@@ -142,7 +142,7 @@ by the ChunkModel whenever there is a need to add an enemy to a chunk.
 
 #### **Consequences**
 This pattern helped by decoupling the creation of these entities from the classes that hold them, improving readability as well. 
-We didn't implement other types of enemies besides [Mummies](../src/main/java/com/g64/model/entities/enemy/Mummy.java)
+We didn't implement other types of enemies besides [Mummies](../src/main/java/com/g64/model/entities/enemy/Mummy.java) and [Ghosts](../src/main/java/com/g64/model/entities/enemy/Ghost.java)
 but this could easily be expanded on with this pattern.
 
 ### 5. Visitor

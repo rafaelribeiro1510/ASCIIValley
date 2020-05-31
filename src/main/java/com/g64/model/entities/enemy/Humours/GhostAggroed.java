@@ -5,13 +5,11 @@ import com.g64.controller.action.*;
 import com.g64.model.entities.enemy.Enemy;
 import com.googlecode.lanterna.TextColor;
 
-import java.util.Random;
+public class GhostAggroed extends AggroedHumour{
+    private static final int maxCooldown = 15;
+    private static final TextColor color = new TextColor.RGB(255,15,113);
 
-public class MummyNormal extends NormalHumour{
-    private static final int maxCooldown = 45;
-    private static final TextColor color = new TextColor.RGB(182, 172, 101);
-
-    public MummyNormal(Enemy me) {
+    public GhostAggroed(Enemy me) {
         super(me, maxCooldown, color);
     }
 

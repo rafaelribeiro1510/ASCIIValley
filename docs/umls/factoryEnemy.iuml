@@ -9,10 +9,14 @@ abstract class Enemy{
 class Mummy{
 }
 
+class Ghost{
+}
+
 class ChunkModel{
 }
 
 ChunkModel .> EnemyFactory : uses
-EnemyFactory .> Enemy : creates
+EnemyFactory ..> Enemy : creates
 Enemy -|> Mummy
+Ghost <|- Enemy
 @enduml

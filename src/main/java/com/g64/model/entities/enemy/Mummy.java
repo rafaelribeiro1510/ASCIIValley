@@ -8,13 +8,11 @@ import com.g64.model.items.drops.Drop;
 import com.g64.model.items.drops.HealthConsumableDrop;
 
 public class Mummy extends Enemy {
-    private static final int AGGROED_COOLDOWN = 30;
-    private static final int NOT_AGGROED_COOLDOWN = 45;
 
     public Mummy(Position position) {
-        super(position, "M", new TextColor.RGB(255,255,255), true, new Drop[] {new HealthConsumableDrop()}, 10, 5, 4);
-        aggroedHumour = new MummyAggroed(this, AGGROED_COOLDOWN, new TextColor.RGB(182,0,0));
-        normalHumour = new MummyNormal(this, NOT_AGGROED_COOLDOWN, new TextColor.RGB(255, 255, 255));
+        super(position, "M", new TextColor.RGB(182, 172, 101), true, new Drop[] {new HealthConsumableDrop()}, 10, 5, 2);
+        aggroedHumour = new MummyAggroed(this);
+        normalHumour = new MummyNormal(this);
         this.activeHumour = normalHumour;
     }
 
