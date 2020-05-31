@@ -14,12 +14,12 @@ import com.g64.model.terrain.GrassTerrain;
 import com.g64.model.terrain.MapTerrain;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
