@@ -27,7 +27,6 @@ public class GameController {
     private Display display;
     private MenuView menuView;
 
-
     private GameState gameState = new menuGameState(this);
 
     public GameController() {
