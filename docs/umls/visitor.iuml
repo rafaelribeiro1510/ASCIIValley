@@ -12,27 +12,27 @@ interface Visitor{
   void allowUsage(Hoe item)
 }
 
-class TargetVisitor{
+class ItemVisitor{
   void allowUsage(SeedDrop item)
   void allowUsage(Hoe item)
 }
 
 interface Item{
-  void accept(TargetVisitor targetVisitor)
+  void accept(TargetVisitor itemVisitor)
 }
 
 class Hoe{
-  void accept(TargetVisitor targetVisitor)
+  void accept(TargetVisitor itemVisitor)
 }
 
 class SeedDrop{
-  void accept(TargetVisitor targetVisitor)
+  void accept(TargetVisitor itemVisitor)
 }
 
-n1 . TargetVisitor
+n1 . ItemVisitor
 n2 . Hoe
 SeedDrop . n2
-Visitor <|--TargetVisitor
+Visitor <|--ItemVisitor
 Item <|-- Hoe
 Item <|-- SeedDrop
 GameController->Visitor

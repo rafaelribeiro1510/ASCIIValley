@@ -1,6 +1,6 @@
 package com.g64.model.items;
 
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
 
 public interface Item {
     String getName();
@@ -14,5 +14,5 @@ public interface Item {
     }
     usageValue decrementValue();
 
-    usageValue accept(TargetVisitor targetVisitor);
+    usageValue accept(ItemVisitor itemVisitor);
 }

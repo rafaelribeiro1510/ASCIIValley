@@ -1,6 +1,6 @@
 package com.g64.model.items.drops;
 
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
 
 public class GrownCornDrop extends ConsumableDrop {
     public GrownCornDrop() {
@@ -8,7 +8,7 @@ public class GrownCornDrop extends ConsumableDrop {
     }
 
     @Override
-    public usageValue accept(TargetVisitor targetVisitor) {
-        return targetVisitor.allowUsage(this);
+    public usageValue accept(ItemVisitor itemVisitor) {
+        return itemVisitor.allowUsage(this);
     }
 }

@@ -1,6 +1,6 @@
 package com.g64.model.items.tools;
 
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
 
 public class WateringCan extends Tool{
     public WateringCan(int durability) {
@@ -10,7 +10,7 @@ public class WateringCan extends Tool{
     }
 
     @Override
-    public usageValue accept(TargetVisitor targetVisitor) {
-        return targetVisitor.allowUsage(this);
+    public usageValue accept(ItemVisitor itemVisitor) {
+        return itemVisitor.allowUsage(this);
     }
 }

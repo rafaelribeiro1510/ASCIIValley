@@ -1,6 +1,6 @@
 package com.g64.model;
 
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
 import com.g64.model.items.*;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.tools.*;
@@ -50,8 +50,8 @@ public class InventoryModel {
         items.add(drop);
     }
 
-    public void useItem(Item item, TargetVisitor targetVisitor){
+    public void useItem(Item item, ItemVisitor itemVisitor){
         if (item == null) return;
-        if (item.accept(targetVisitor) == Item.usageValue.BROKEN) items.remove(item);
+        if (item.accept(itemVisitor) == Item.usageValue.BROKEN) items.remove(item);
     }
 }

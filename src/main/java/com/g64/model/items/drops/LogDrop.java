@@ -3,7 +3,8 @@ package com.g64.model.items.drops;
 import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.map.TreeEntity;
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
+
 public class LogDrop extends Drop {
 
     public LogDrop(){
@@ -16,7 +17,7 @@ public class LogDrop extends Drop {
     }
 
     @Override
-    public usageValue accept(TargetVisitor targetVisitor) {
-        return targetVisitor.allowUsage(this);
+    public usageValue accept(ItemVisitor itemVisitor) {
+        return itemVisitor.allowUsage(this);
     }
 }

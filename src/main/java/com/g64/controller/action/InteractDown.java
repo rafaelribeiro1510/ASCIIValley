@@ -2,7 +2,7 @@ package com.g64.controller.action;
 
 import com.g64.controller.GameController;
 import com.g64.model.Position;
-import com.g64.model.entities.visitors.TargetVisitor;
+import com.g64.model.entities.visitors.ItemVisitor;
 import com.g64.model.items.Item;
 
 public class InteractDown implements ActionEvent {
@@ -14,6 +14,6 @@ public class InteractDown implements ActionEvent {
     public void execute() {
         Item selectedItem = controller.getInventoryModel().getSelectedItem();
         Position target = controller.getPlayer().getPosition().lookDown();
-        controller.getInventoryModel().useItem(selectedItem, new TargetVisitor(controller, target));
+        controller.getInventoryModel().useItem(selectedItem, new ItemVisitor(controller, target));
     }
 }
