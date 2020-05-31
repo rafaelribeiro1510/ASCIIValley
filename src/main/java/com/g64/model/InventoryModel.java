@@ -1,7 +1,7 @@
 package com.g64.model;
 
 import com.g64.model.entities.visitors.ItemVisitor;
-import com.g64.model.items.*;
+import com.g64.model.items.Item;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.tools.*;
 

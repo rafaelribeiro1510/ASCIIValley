@@ -1,8 +1,8 @@
-package com.g64.model.menuCommands;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 
-public class PlayCommand implements MenuCommand {
+public class PlayCommand implements Command {
 
     GameController gameController;
 

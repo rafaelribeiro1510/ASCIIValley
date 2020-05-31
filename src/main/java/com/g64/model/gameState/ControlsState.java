@@ -1,9 +1,9 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
-import com.g64.controller.action.ExitToMainMenu;
-import com.g64.controller.action.NullAction;
+import com.g64.controller.Commands.Command;
+import com.g64.controller.Commands.ControlsCommand;
+import com.g64.controller.Commands.NullAction;
 import com.g64.view.ControlsView;
 import com.googlecode.lanterna.input.KeyStroke;
 
@@ -29,11 +29,11 @@ public class ControlsState implements GameState {
     }
 
     @Override
-    public ActionEvent keyStrokeToActionEvent(KeyStroke key) {
+    public Command keyStrokeToActionEvent(KeyStroke key) {
         gameController.getDisplay().getScreen().clear();
 
         // any key works
-        if (key != null) return new ExitToMainMenu(gameController);
+        if (key != null) return new ControlsCommand.ExitToMainMenu(gameController);
 
         return new NullAction();
     }

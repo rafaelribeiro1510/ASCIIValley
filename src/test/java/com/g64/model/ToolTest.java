@@ -10,13 +10,13 @@ import com.g64.model.items.tools.Tool;
 import com.g64.model.terrain.NullTerrain;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 import org.mockito.Mockito;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class ToolTest {
     GameController controller;

@@ -1,11 +1,11 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 import com.g64.model.entities.plant.PlantEntity;
 import com.g64.model.entities.plant.SeedEntity;
 
 
-public class Grew implements ActionEvent {
+public class Grew implements Command {
     private final GameController controller;
     private final SeedEntity seed;
     private final PlantEntity plant;

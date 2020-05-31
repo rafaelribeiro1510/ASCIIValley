@@ -1,10 +1,10 @@
 package com.g64.model.entities.plant;
 
-import com.g64.model.items.drops.SeedDropFactory;
-import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
+import com.g64.model.items.drops.SeedDropFactory;
 import com.g64.model.items.drops.TallGrassDrop;
+import com.googlecode.lanterna.TextColor;
 
 public class TallGrassEntity extends PlantEntity {
     public TallGrassEntity(Position position){

@@ -1,9 +1,9 @@
-package com.g64.controller.action;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 import com.g64.model.entities.EntityModel;
 
-public class MoveDown implements ActionEvent {
+public class MoveDown implements Command {
     private final GameController controller;
     private final EntityModel entity;
 

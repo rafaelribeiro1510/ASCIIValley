@@ -1,7 +1,7 @@
 package com.g64.model;
 
 import com.g64.controller.GameController;
-import com.g64.controller.action.ActionEvent;
+import com.g64.controller.Commands.Command;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
 import com.g64.model.entities.plant.CarrotSeedEntity;
@@ -49,12 +49,12 @@ public class PlantGrowingTest {
         assertTrue(chunk.getEntityAt(new Position(0,0)) instanceof CarrotSeedEntity);
         assertTrue(chunk.getEntityAt(new Position(1,1)) instanceof CornSeedEntity);
 
-        for (ActionEvent event: mapSpy.updateEntities(controller)) controller.processAction(event);
+        for (Command event: mapSpy.updateEntities(controller)) controller.processAction(event);
 
         assertTrue(chunk.getEntityAt(new Position(0,0)) instanceof CarrotSeedEntity);
         assertTrue(chunk.getEntityAt(new Position(1,1)) instanceof CornSeedEntity);
 
-        for (ActionEvent event: mapSpy.updateEntities(controller)) controller.processAction(event);
+        for (Command event: mapSpy.updateEntities(controller)) controller.processAction(event);
 
         assertFalse(chunk.getEntityAt(new Position(0,0)) instanceof CarrotSeedEntity);
         assertFalse(chunk.getEntityAt(new Position(1,1)) instanceof CornSeedEntity);

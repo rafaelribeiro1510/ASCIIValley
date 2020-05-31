@@ -1,11 +1,11 @@
 package com.g64.model.entities.enemy;
 
+import com.g64.model.Position;
 import com.g64.model.entities.enemy.humours.MummyAggroed;
 import com.g64.model.entities.enemy.humours.MummyNormal;
-import com.googlecode.lanterna.TextColor;
-import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
 import com.g64.model.items.drops.HealthConsumableDrop;
+import com.googlecode.lanterna.TextColor;
 
 public class Mummy extends Enemy {
 

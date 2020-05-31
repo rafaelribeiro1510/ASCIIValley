@@ -1,16 +1,16 @@
 package com.g64.model.entities.enemy;
 
-import com.g64.controller.action.ActionEvent;
-import com.g64.controller.action.NullAction;
+import com.g64.controller.GameController;
+import com.g64.controller.Commands.Command;
+import com.g64.controller.Commands.NullAction;
 import com.g64.model.MapModel;
+import com.g64.model.Position;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.humours.AggroedHumour;
 import com.g64.model.entities.enemy.humours.EnemyHumour;
 import com.g64.model.entities.enemy.humours.NormalHumour;
-import com.googlecode.lanterna.TextColor;
-import com.g64.controller.GameController;
-import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
+import com.googlecode.lanterna.TextColor;
 
 public abstract class Enemy extends EntityModel {
 
@@ -38,7 +38,7 @@ public abstract class Enemy extends EntityModel {
     }
 
     @Override
-    public ActionEvent update(GameController controller) {
+    public Command update(GameController controller) {
         if (movementCooldown == 0) {
             this.movementCooldown = activeHumour.getMaxCooldown();
             return activeHumour.enemyAction(controller);

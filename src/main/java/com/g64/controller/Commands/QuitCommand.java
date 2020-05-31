@@ -1,10 +1,10 @@
-package com.g64.model.menuCommands;
+package com.g64.controller.Commands;
 
 import com.g64.controller.GameController;
 
 import java.io.IOException;
 
-public class QuitCommand implements MenuCommand {
+public class QuitCommand implements Command {
 
     GameController gameController;
 

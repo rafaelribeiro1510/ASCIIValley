@@ -1,10 +1,10 @@
 package com.g64.model.gameState;
 
 import com.g64.controller.GameController;
-import com.g64.model.menuCommands.ControlsCommand;
-import com.g64.model.menuCommands.MenuOption;
-import com.g64.model.menuCommands.PlayCommand;
-import com.g64.model.menuCommands.QuitCommand;
+import com.g64.controller.Commands.ControlsCommand;
+import com.g64.controller.Commands.MenuOption;
+import com.g64.controller.Commands.PlayCommand;
+import com.g64.controller.Commands.QuitCommand;
 import com.g64.view.MenuView;
 
 import java.util.ArrayList;

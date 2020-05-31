@@ -1,7 +1,7 @@
 package com.g64.model.terrain;
 
-import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
+import com.googlecode.lanterna.TextColor;
 
 public class PlanksTerrain extends MapTerrain{
     public PlanksTerrain(Position position, Integer id){
