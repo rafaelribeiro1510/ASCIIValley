@@ -123,46 +123,4 @@ public class MapModel {
 
     public enum Crossing{NO_CROSS, CROSS_UP, CROSS_DOWN, CROSS_LEFT, CROSS_RIGHT};
 
-    public void handleMapCrossing(EntityModel entity){
-        Crossing crossing = checkBoundaries(entity.getPosition());
-        if (entity instanceof Player) {
-            switch (crossing) {
-                case NO_CROSS:
-                    break;
-                case CROSS_DOWN:
-                    moveSouth();
-                    entity.setPosition(new Position(entity.getPosition().getX(), 0));
-                    break;
-                case CROSS_UP:
-                    moveNorth();
-                    entity.setPosition(new Position(entity.getPosition().getX(), thisChunk().getHeight() - 1));
-                    break;
-                case CROSS_LEFT:
-                    moveWest();
-                    entity.setPosition(new Position(thisChunk().getWidth() - 1, entity.getPosition().getY()));
-                    break;
-                case CROSS_RIGHT:
-                    moveEast();
-                    entity.setPosition(new Position(0, entity.getPosition().getY()));
-                    break;
-            }
-        }
-        else if (entity instanceof Enemy){
-            switch (crossing){
-                case NO_CROSS: break;
-                case CROSS_DOWN:
-                    entity.setPosition(new Position(entity.getPosition().getX(), thisChunk().getHeight() - 1));
-                    break;
-                case CROSS_UP:
-                    entity.setPosition(new Position(entity.getPosition().getX(), 0));
-                    break;
-                case CROSS_LEFT:
-                    entity.setPosition(new Position(0, entity.getPosition().getY()));
-                    break;
-                case CROSS_RIGHT:
-                    entity.setPosition(new Position(thisChunk().getWidth() - 1, entity.getPosition().getY()));
-                    break;
-            }
-        }
-    }
 }

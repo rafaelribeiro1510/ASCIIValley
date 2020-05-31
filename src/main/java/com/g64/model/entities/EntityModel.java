@@ -1,5 +1,6 @@
 package com.g64.model.entities;
 
+import com.g64.model.MapModel;
 import com.googlecode.lanterna.TextColor;
 import com.g64.model.Position;
 import com.g64.model.items.drops.Drop;
@@ -60,4 +61,5 @@ public abstract class EntityModel extends Updatable{
         return currentHealth;
     }
 
+    public void handleMapCrossing(MapModel map){ }
 }

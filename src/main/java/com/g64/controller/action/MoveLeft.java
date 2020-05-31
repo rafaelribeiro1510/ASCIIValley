@@ -17,6 +17,6 @@ public class MoveLeft implements ActionEvent {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookLeft());
 
         if (!target.hasCollision()) entity.getPosition().moveLeft();
-        controller.getMapModel().handleMapCrossing(entity);
+        entity.handleMapCrossing(controller.getMapModel());
     }
 }

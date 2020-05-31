@@ -17,6 +17,6 @@ public class MoveDown implements ActionEvent {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookDown());
 
         if (!target.hasCollision()) entity.getPosition().moveDown();
-        controller.getMapModel().handleMapCrossing(entity);
+        entity.handleMapCrossing(controller.getMapModel());
     }
 }

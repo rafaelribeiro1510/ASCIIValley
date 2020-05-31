@@ -2,6 +2,7 @@ package com.g64.model.entities.enemy;
 
 import com.g64.controller.action.ActionEvent;
 import com.g64.controller.action.NullAction;
+import com.g64.model.MapModel;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.enemy.humours.AggroedHumour;
 import com.g64.model.entities.enemy.humours.EnemyHumour;
@@ -57,6 +58,26 @@ public abstract class Enemy extends EntityModel {
     public void setNormalState(){
         this.setColor(normalHumour.getColor());
         activeHumour = normalHumour;
+    }
+
+    @Override
+    public void handleMapCrossing(MapModel map){
+        MapModel.Crossing crossing = map.checkBoundaries(position);
+        switch (crossing){
+            case NO_CROSS: break;
+            case CROSS_DOWN:
+                setPosition(new Position(position.getX(), map.thisChunk().getHeight() - 1));
+                break;
+            case CROSS_UP:
+                setPosition(new Position(position.getX(), 0));
+                break;
+            case CROSS_LEFT:
+                setPosition(new Position(0, position.getY()));
+                break;
+            case CROSS_RIGHT:
+                setPosition(new Position(map.thisChunk().getWidth() - 1, position.getY()));
+                break;
+        }
     }
 
 }

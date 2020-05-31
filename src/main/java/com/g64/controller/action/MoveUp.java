@@ -17,6 +17,6 @@ public class MoveUp implements ActionEvent {
         EntityModel target = controller.getMapModel().thisChunk().getEntityAt(entity.getPosition().lookUp());
 
         if (!target.hasCollision()) entity.getPosition().moveUp();
-        controller.getMapModel().handleMapCrossing(entity);
+        entity.handleMapCrossing(controller.getMapModel());
     }
 }
