@@ -54,7 +54,7 @@ public class actionEventTest {
         MapModel map = new MapModel(1, chunks);
         mapSpy = Mockito.spy(map);
 
-        Player player = new Player(new Position(0,0)," ", Mockito.mock(TextColor.class));
+        Player player = new Player(new Position(0,0));
         playerSpy = Mockito.spy(player);
 
         ArrayList<Item> items = new ArrayList<>(); items.add(new Scythe(10)); items.add(new Pickaxe(1));

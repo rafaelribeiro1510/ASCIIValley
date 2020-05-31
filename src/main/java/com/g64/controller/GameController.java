@@ -39,7 +39,7 @@ public class GameController {
         this.mapModel = new MapModel(5,  "resources/chunks.csv");
         this.display = new Display(mapModel.thisChunk().getWidth(), mapModel.thisChunk().getHeight() + 3);
         this.mapView = new MapView(display.getScreen());
-        this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
+        this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2));
         this.inventoryModel = new InventoryModel();
         this.running = true;
 
