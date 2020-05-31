@@ -329,7 +329,7 @@ their `draw()` methods have a lot of duplicate code.
 
 #### **Solution**
 By using the **Extract superclass** method the duplicate code can be stored in a
-superclass `MenuView` 
+superclass `MenuView` with a single `draw()` method that maintains functionality.
 
 ### 4. OOP Abuser - instanceof
 #### **Problem in Context**
