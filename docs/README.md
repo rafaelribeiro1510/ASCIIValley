@@ -18,6 +18,7 @@ for LPOO 2019⁄20
 Storing of map state in a save file. The map is divided in chunks and each chunk's data is divided in 4 parts: an ID, the IDs of it's neighbor 
 chunks, a matrix that references the ground "type" and another that references the entity on said tile, if it exists. 
 The interpretation of these values is intentionally hardcoded, since these save files are only edited and accessed by the game.
+
 ### Map visualization
 Displaying of the chunk where the player is located, terrain and map entities included.
 
@@ -30,16 +31,16 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 
 ![Chunk Transition Previous - figure 2](./screenshots/movement.gif)
 
-### Enemies and their "behaviour".
+### Enemies and their behaviour.
 The enemy entities (Mummies) have different behaviour depending on how close they are to the player,
-determining their next movement based on it.
+determining their next action based on it.
 
 ![Mummy Behaviour Passive - figure 3](./screenshots/mummyBehaviour1.png)
 
 ![Mummy Behaviour Passive - figure 4](./screenshots/mummyBehaviour2.png)
 
 ### Combat 
-Melee combat based on the hero project of the practical classes will be the way for the player to combat the enemies.
+Melee combat based on the hero project of the practical classes is the way for the player to combat the enemies.
 
 ### Main menu
 The starting point of the game is a menu that presents the player with options to load the game, see the game controls and quit.
@@ -249,9 +250,7 @@ Consequences: Benefits and liabilities of the design after the pattern instantia
 ## Known Code Smells And Refactoring Suggestions
 
 SMELLS
-(- Pair Enemy.java / SeedEntity.java / UpdatableEntity.java / MapModel.java not defined)
 - Mummy.java State for Mummy humor
-(- Switch in MapEntityFactory/MapTerrainFactory due to the factory design pattern)
 
 ### 1. Bloater - Long Method
 
