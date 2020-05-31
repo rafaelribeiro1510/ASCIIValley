@@ -11,6 +11,8 @@ and Rafael Ribeiro (up201806330@fe.up.pt)
  
 for LPOO 2019⁄20
  
+![MainGif](./screenshots/main.gif) 
+ 
  
 ## Implemented Features
 
@@ -35,9 +37,7 @@ When the player goes beyond an "edge" of a chunk it moves to the respective neig
 The enemy entities (Mummies) have different behaviour depending on how close they are to the player,
 determining their next action based on it.
 
-![Mummy Behaviour Passive - figure 3](./screenshots/mummyBehaviour1.png)
-
-![Mummy Behaviour Passive - figure 4](./screenshots/mummyBehaviour2.png)
+![Mummy Behaviour](./screenshots/enemyBehaviour.gif)
 
 ### Combat 
 Melee combat based on the hero project of the practical classes is the way for the player to combat the enemies.

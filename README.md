@@ -12,5 +12,4 @@ and Rafael Ribeiro (up201806330@fe.up.pt)
  
  for LPOO 2019⁄20
 
-![Screenshot1](docs/screenshots/mainMenuMockup.png)
-![Screenshot2](docs/screenshots/guiMockup.png)
+![MainGif](docs/screenshots/main.gif) 
