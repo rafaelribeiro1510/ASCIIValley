@@ -81,7 +81,6 @@ public class stateViewTest {
     @Test
     public void inGameExecute() {
         when(controller.getMapModel().thisChunk()).thenReturn(Mockito.mock(ChunkModel.class));
-        // when(controller.getMapModel().updateEntities(controller)).thenReturn(new ArrayList<Command>());
         EntityView entityView = Mockito.mock(EntityView.class);
         InventoryView inventoryView = Mockito.mock(InventoryView.class);
 

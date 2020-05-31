@@ -9,35 +9,30 @@ import com.googlecode.lanterna.screen.Screen;
 public class InventoryView {
     private TextGraphics graphics;
     private int yCoordinate;
+    private ItemView itemView;
 
     public InventoryView(Screen screen, int yCoordinate) {
         this.graphics = screen.newTextGraphics();
         this.yCoordinate = yCoordinate;
+        this.itemView = new ItemView(graphics, yCoordinate);
     }
 
     public void draw(InventoryModel inventory, int playerHealth){
         drawItems(inventory);
         drawHealth(playerHealth);
     }
-    
+
     public void drawItems(InventoryModel inventory){
         for (int i = 0 ; i < inventory.getItems().size() ; i++){
             Item item = inventory.getItems().get(i);
-            if (i == inventory.getSelectedIndex()) {
-                graphics.setBackgroundColor(TextColor.ANSI.WHITE);
-                graphics.setForegroundColor(TextColor.ANSI.BLACK);
-            }
-            else {
-                graphics.setBackgroundColor(TextColor.ANSI.BLACK);
-                graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            }
-            graphics.putString(i * 5, yCoordinate, item.getName());
-            graphics.putString(i * 5, yCoordinate + 1, String.valueOf(item.getValue()));
+            if (i == inventory.getSelectedIndex()) itemView.drawSelectedItem(i, item);
+            else itemView.drawNotSelectedItem(i, item);
         }
     }
 
     public void drawHealth(int playerHealth){
         graphics.setBackgroundColor(new TextColor.RGB(255,0,0));
-        for (int j = 0 ; j < playerHealth ; j++) graphics.putString(j, yCoordinate + 2, " ");
+        for (int j = 0 ; j < playerHealth ; j++)
+            graphics.putString(j, yCoordinate + 2, " ");
     }
 }
