@@ -4,12 +4,7 @@ import java.util.Random;
 
 public class SeedDropFactory {
     public static SeedDrop getRandomSeed(){
-        switch (new Random().nextInt(2)){
-            case 0:
-                return new CornSeedDrop();
-            case 1:
-                return new CarrotSeedDrop();
-        }
-        return null;
+        SeedDrop[] seeds = {new CornSeedDrop(), new CarrotSeedDrop()};
+        return seeds[new Random().nextInt(seeds.length)];
     }
 }

@@ -7,6 +7,3 @@ public class Application {
         controller.start();
     }
 }
-
-
-//TODO Smell: some instanceof still

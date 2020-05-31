@@ -25,9 +25,6 @@ public class GameController {
 
     private boolean running;
     private Display display;
-    // private MenuView menuView;
-    // private PauseMenuView pauseMenuView;
-
 
     private GameState gameState;
 
@@ -45,8 +42,6 @@ public class GameController {
         this.player = new Player(new Position(mapModel.thisChunk().getWidth()/2, mapModel.thisChunk().getHeight()/2), "\u263B", TextColor.ANSI.BLACK);
         this.inventoryModel = new InventoryModel();
         this.running = true;
-        // this.menuView = new MenuView(display.getScreen());
-        // this.pauseMenuView = new PauseMenuView(display.getScreen());
 
         this.controlsState = new ControlsState(this);
         this.deadPlayerState = new DeadPlayerState(this);
@@ -97,10 +92,6 @@ public class GameController {
     public MapView getMapView() { return mapView; }
 
     public InventoryModel getInventoryModel() { return inventoryModel; }
-
-    // public MenuView getMenuView() { return menuView; }
-
-    // public PauseMenuView getPauseMenuView() { return pauseMenuView; }
 
     public void setGameState(GameState gameState) { this.gameState = gameState; }
 

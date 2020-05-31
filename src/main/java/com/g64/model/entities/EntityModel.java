@@ -61,5 +61,5 @@ public abstract class EntityModel extends Updatable{
         return currentHealth;
     }
 
-    public void handleMapCrossing(MapModel map){ }
+    public void handleBoundaryCrossing(MapModel map){ }
 }
