@@ -12,7 +12,6 @@ public class PlayCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        // gameController.setGameState(new InGameState(gameController));
         gameController.setGameState(gameController.getInGameState());
     }
 }

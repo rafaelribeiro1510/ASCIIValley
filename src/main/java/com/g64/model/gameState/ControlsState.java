@@ -25,13 +25,11 @@ public class ControlsState implements GameState {
 
     @Override
     public void execute() {
-        // draw control menu
         controlsView.draw();
     }
 
     @Override
     public ActionEvent processKey(KeyStroke key) {
-        // gameController.getMapView().getScreen().clear();
         gameController.getDisplay().getScreen().clear();
 
         // any key works

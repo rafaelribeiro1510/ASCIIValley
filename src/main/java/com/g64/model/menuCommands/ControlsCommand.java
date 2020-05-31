@@ -10,7 +10,6 @@ public class ControlsCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        // gameController.setGameState(new ControlsState(gameController));
         gameController.setGameState(gameController.getControlsState());
     }
 }

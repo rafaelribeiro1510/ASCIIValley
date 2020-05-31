@@ -12,7 +12,6 @@ public class QuitGame implements ActionEvent {
 
     @Override
     public void execute() {
-        // try { controller.getMapView().getScreen().close(); }
         try { controller.getDisplay().getScreen().close(); }
         catch (IOException e) { e.printStackTrace(); }
         controller.setRunning(false);

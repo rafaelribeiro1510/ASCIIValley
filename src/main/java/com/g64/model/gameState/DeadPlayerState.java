@@ -24,13 +24,11 @@ public class DeadPlayerState implements GameState {
 
     @Override
     public void execute() {
-        // draw game over screen
         deadView.draw();
     }
 
     @Override
     public ActionEvent processKey(KeyStroke key) {
-        // gameController.getMapView().getScreen().clear();
         gameController.getDisplay().getScreen().clear();
 
         // any key works
