@@ -74,13 +74,13 @@ development process.
 
 #### **The Pattern**
 
-Therefore we chose to use the architectural pattern known as **MVC**: Model-View-Controller. It divides the application in three parts, 
+Therefore we chose the **MVC** pattern: Model-View-Controller. It divides the application in three parts, 
 allowing for separation in groups of functions according to their role and by extension allowing also better function separation/organization.
 
 
 #### **Implementation**
-We started off by creating a GameController class in charge of holding a MapView and EntityView classes. 
-From here it will be easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
+We started off by creating a GameController class in charge of holding a MapView and MapModel classes. 
+From here it was easy to implement new features on the Player and Entity end, but also to easily grow the input actions.   
 
 ![mvc](umls/mvc.png)
 
@@ -94,7 +94,7 @@ entities besides the player.)
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
  files [ChunkView.java](../src/main/java/com.g64.view/ChunkView.java), [MapView.java](../src/main/java/com.g64.view/MapView.java) and [EntityView.java
  ](../src/main/java/com.g64.view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `com.g64.view`.
-- possibly faster development speed in the long run due to the consistent organization.
+- faster development speed in the long run due to consistent organization.
 
 **Liabilities:**
 - requires a higher number of files that can build up over time with the increase of the project's complexity.
