@@ -1,7 +1,7 @@
 package com.g64.controller.action;
 
 import com.g64.controller.GameController;
-import com.g64.model.gameState.menuGameState;
+import com.g64.model.gameState.MenuGameState;
 
 public class ExitToMainMenu implements ActionEvent {
     GameController gameController;
@@ -13,6 +13,6 @@ public class ExitToMainMenu implements ActionEvent {
     @Override
     public void execute() {
         gameController.getMapView().getScreen().clear();
-        gameController.setGameState(new menuGameState(gameController));
+        gameController.setGameState(new MenuGameState(gameController));
     }
 }

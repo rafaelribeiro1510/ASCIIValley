@@ -1,7 +1,7 @@
 package com.g64.model.menu;
 
 import com.g64.controller.GameController;
-import com.g64.model.gameState.controlsState;
+import com.g64.model.gameState.ControlsState;
 
 public class controlsCommand implements MenuCommand {
 
@@ -11,6 +11,6 @@ public class controlsCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        gameController.setGameState(new controlsState(gameController));
+        gameController.setGameState(new ControlsState(gameController));
     }
 }

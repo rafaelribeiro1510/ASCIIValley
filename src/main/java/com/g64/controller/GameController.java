@@ -6,7 +6,7 @@ import com.g64.model.MapModel;
 import com.g64.model.Position;
 import com.g64.model.entities.Player;
 import com.g64.model.gameState.GameState;
-import com.g64.model.gameState.menuGameState;
+import com.g64.model.gameState.MenuGameState;
 import com.g64.view.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -28,7 +28,7 @@ public class GameController {
     private MenuView menuView;
 
 
-    private GameState gameState = new menuGameState(this);
+    private GameState gameState = new MenuGameState(this);
 
     public GameController() {
         this.mapModel = new MapModel(6,  "resources/chunks.csv");

@@ -7,19 +7,19 @@ import com.g64.view.InventoryView;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-public class inGameState implements GameState {
+public class InGameState implements GameState {
 
     private GameController gameController;
     private EntityView entityView;
     private InventoryView inventoryView;
 
-    public inGameState(GameController gameController) {
+    public InGameState(GameController gameController) {
         this.gameController = gameController;
         this.entityView = new EntityView(gameController.getDisplay().getScreen());
         this.inventoryView = new InventoryView(gameController.getDisplay().getScreen());
     }
 
-    public inGameState(GameController gameController, EntityView entityView, InventoryView inventoryView) {
+    public InGameState(GameController gameController, EntityView entityView, InventoryView inventoryView) {
         this.gameController = gameController;
         this.entityView = entityView;
         this.inventoryView = inventoryView;

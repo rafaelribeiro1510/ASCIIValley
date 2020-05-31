@@ -8,16 +8,16 @@ import com.g64.view.ControlsView;
 import com.googlecode.lanterna.input.KeyStroke;
 
 
-public class controlsState implements GameState {
+public class ControlsState implements GameState {
     GameController gameController;
     ControlsView controlsView;
 
-    public controlsState(GameController gameController) {
+    public ControlsState(GameController gameController) {
         this.gameController = gameController;
         this.controlsView = new ControlsView(gameController.getDisplay().getScreen());
     }
 
-    public controlsState(GameController gameController, ControlsView controlsView) {
+    public ControlsState(GameController gameController, ControlsView controlsView) {
         this.gameController = gameController;
         this.controlsView = controlsView;
     }

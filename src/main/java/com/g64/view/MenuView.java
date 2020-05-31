@@ -1,7 +1,6 @@
 package com.g64.view;
 
-import com.g64.model.MenuModel;
-import com.g64.model.gameState.menuGameState;
+import com.g64.model.gameState.MenuGameState;
 import com.g64.model.menu.menuOption;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
@@ -14,7 +13,7 @@ public class MenuView {
 
     public MenuView(Screen screen) { graphics = screen.newTextGraphics(); }
 
-    public void draw(menuGameState menuGameState_) {
+    public void draw(MenuGameState menuGameState_) {
         int row = 4;
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.setForegroundColor(TextColor.ANSI.WHITE);

@@ -7,17 +7,17 @@ import com.g64.controller.action.QuitGame;
 import com.g64.view.DeadView;
 import com.googlecode.lanterna.input.KeyStroke;
 
-public class deadPlayerState implements GameState {
+public class DeadPlayerState implements GameState {
 
     GameController gameController;
     private DeadView deadView;
 
-    public deadPlayerState(GameController gameController) {
+    public DeadPlayerState(GameController gameController) {
         this.gameController = gameController;
         this.deadView = new DeadView(gameController.getDisplay().getScreen());
     }
 
-    public deadPlayerState(GameController gameController, DeadView deadView) {
+    public DeadPlayerState(GameController gameController, DeadView deadView) {
         this.gameController = gameController;
         this.deadView = deadView;
     }

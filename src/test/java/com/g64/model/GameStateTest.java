@@ -4,10 +4,10 @@ import com.g64.controller.GameController;
 import com.g64.controller.action.*;
 import com.g64.model.entities.EntityModel;
 import com.g64.model.entities.Player;
-import com.g64.model.gameState.controlsState;
-import com.g64.model.gameState.deadPlayerState;
-import com.g64.model.gameState.inGameState;
-import com.g64.model.gameState.menuGameState;
+import com.g64.model.gameState.ControlsState;
+import com.g64.model.gameState.InGameState;
+import com.g64.model.gameState.MenuGameState;
+import com.g64.model.gameState.DeadPlayerState;
 import com.g64.view.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.Before;
@@ -38,27 +38,27 @@ public class GameStateTest {
     public void menuToInGameStateTest() {
         when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
-        // checks if gameState is initially menuGameState (in menu)
-        assertEquals(menuGameState.class, controller.getGameState().getClass());
+        // checks if gameState is initially MenuGameState (in menu)
+        assertEquals(MenuGameState.class, controller.getGameState().getClass());
 
-        controller.processAction(new EnterPressed((menuGameState)controller.getGameState()));
+        controller.processAction(new EnterPressed((MenuGameState)controller.getGameState()));
 
-        // checks if gameState changed from menuGameState to inGameState
-        assertEquals(inGameState.class, controller.getGameState().getClass());
+        // checks if gameState changed from MenuGameState to InGameState
+        assertEquals(InGameState.class, controller.getGameState().getClass());
     }
 
     @Test
     public void menuToControlsStateTest() {
         when(controller.getDisplay().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
-        // checks if gameState is initially menuGameState (in menu)
-        assertEquals(menuGameState.class, controller.getGameState().getClass());
+        // checks if gameState is initially MenuGameState (in menu)
+        assertEquals(MenuGameState.class, controller.getGameState().getClass());
 
-        controller.processAction(new MenuDown((menuGameState)controller.getGameState()));
-        controller.processAction(new EnterPressed((menuGameState)controller.getGameState()));
+        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
+        controller.processAction(new EnterPressed((MenuGameState)controller.getGameState()));
 
-        // checks if gameState changed from menuGameState to controlsState
-        assertEquals(controlsState.class, controller.getGameState().getClass());
+        // checks if gameState changed from MenuGameState to ControlsState
+        assertEquals(ControlsState.class, controller.getGameState().getClass());
     }
 
     @Test
@@ -67,14 +67,14 @@ public class GameStateTest {
         when(controller.getMapView().getScreen()).thenReturn(Mockito.mock(Screen.class));
 
         // to "start" at the controls menu
-        controller.setGameState(new controlsState(controller));
+        controller.setGameState(new ControlsState(controller));
 
         // checks "starting" state
-        assertEquals(controlsState.class, controller.getGameState().getClass());
+        assertEquals(ControlsState.class, controller.getGameState().getClass());
         controller.processAction(new ExitToMainMenu(controller));
 
-        // checks if gameState changed from controlsState to menuGameState
-        assertEquals(menuGameState.class, controller.getGameState().getClass());
+        // checks if gameState changed from ControlsState to MenuGameState
+        assertEquals(MenuGameState.class, controller.getGameState().getClass());
     }
 
     @Test
@@ -83,13 +83,13 @@ public class GameStateTest {
         when(controller.getMapView().getScreen()).thenReturn(mocked);
 
         // checks "starting" state
-        assertEquals(menuGameState.class, controller.getGameState().getClass());
+        assertEquals(MenuGameState.class, controller.getGameState().getClass());
 
-        controller.processAction(new MenuDown((menuGameState)controller.getGameState()));
-        controller.processAction(new MenuDown((menuGameState)controller.getGameState()));
+        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
+        controller.processAction(new MenuDown((MenuGameState)controller.getGameState()));
 
         // selected "Quit" option
-        controller.processAction(new EnterPressed((menuGameState)controller.getGameState()));
+        controller.processAction(new EnterPressed((MenuGameState)controller.getGameState()));
 
         // checks if the close screen method was called (once)
         try { verify(mocked).close(); }
@@ -105,12 +105,12 @@ public class GameStateTest {
         when(controller.getPlayer().reduceHealth(anyInt())).thenReturn(EntityModel.healthReduction.DIED);
 
         // to "start" in game
-        controller.setGameState(new inGameState(controller));
+        controller.setGameState(new InGameState(controller));
 
         // controller.getPlayer().reduceHealth(anyInt());
         controller.processAction(new AttackPlayer(controller, anyInt()));
 
-        assertEquals(deadPlayerState.class, controller.getGameState().getClass());
+        assertEquals(DeadPlayerState.class, controller.getGameState().getClass());
 
         controller.processAction(new QuitGame(controller));
 

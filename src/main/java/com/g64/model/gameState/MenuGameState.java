@@ -12,13 +12,13 @@ import com.googlecode.lanterna.input.KeyType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class menuGameState implements GameState {
+public class MenuGameState implements GameState {
 
     private int selectedOption;
     private GameController gameController;
     private ArrayList<menuOption> menuOptions;
 
-    public menuGameState(GameController gameController) {
+    public MenuGameState(GameController gameController) {
         this.selectedOption = 0;
         this.gameController = gameController;
         menuOptions = new ArrayList<>(
