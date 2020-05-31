@@ -92,8 +92,8 @@ entities besides the player.)
 **Benefits:**
 - ease of working simultaneously in the same project without interfering with each other's work.
 - allows for a higher degree of cohesion. Methods that perform actions of the same "domain" are grouped together. For example, the
- files [ChunkView.java](../src/main/java/com.g64.view/ChunkView.java), [MapView.java](../src/main/java/com.g64.view/MapView.java) and [EntityView.java
- ](../src/main/java/com.g64.view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `com.g64.view`.
+ files [ChunkView.java](../src/main/java/com/g64/view/ChunkView.java), [MapView.java](../src/main/java/com/g64/view/MapView.java) and [EntityView.java
+ ](../src/main/java/com/g64/view/EntityView.java) that deal which tasks are related to data displaying all belong to the package `com.g64.view`.
 - faster development speed in the long run due to consistent organization.
 
 **Liabilities:**
@@ -113,7 +113,7 @@ The **Command** pattern consists of parameterizing clients with different reques
 
 #### **Implementation**
 This was done in the form of an **Action** interface and several commands that are executed when appropriate. 
-Namely, the [Move](../src/main/java/com/g64/controller/action/MoveDown.java) family of actions, responsible for movement and collision checking of the "invoker" entity.
+Namely, the [Move](../src/main/java/com/g64/controller/commands/MoveDown.java) family of actions, responsible for movement and collision checking of the "invoker" entity.
 
 ![action](umls/action.png)
 

@@ -5,7 +5,7 @@ note "Command" as n1
 note "Concrete commands" as n2
 note "Receiver" as n3
 note "Invoker" as n4
-interface ActionEvent {
+interface Command {
   execute()
 }
 class InteractDown{
@@ -20,11 +20,11 @@ class GameState{
   processKey()
 }
 
-n1 .. ActionEvent
+n1 .. Command
 n2 .. InteractDown
 n3 .. GameController
-GameState o-- ActionEvent
+GameState o-- Command
 GameState . n4
-ActionEvent <|- InteractDown
+Command <|- InteractDown
 GameController <-- InteractDown : receiver
 @enduml
