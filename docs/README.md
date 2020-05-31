@@ -153,14 +153,17 @@ public void start() {
 }
 ```
 
-This first solution was obviously not optimal: the function was becoming unnecessarily long and in case of a new possible game state the enum gameStates and the function start would need to be changed (adding another case to the switch statement), for example.
+This first solution was obviously not optimal: the function was becoming unnecessarily long and in case of a new possible game state the enum gameStates 
+and the function start would need to be changed (adding another case to the switch statement), for example.
 
 #### **The Pattern**
-The pattern **State** was the chosen one. It lets an object change its behavior depending on its internal state and is a way of implementing a finite-state machine making it highly appropriate for the situation.
+The pattern **State** was the chosen one. It lets an object change its behavior depending on its internal state and is a way of 
+implementing a finite-state machine making it highly appropriate for the situation.
 
 #### **Implementation**
 The game controller keeps track of the current state of the game which can be changed according to the player input.
-Each possible ``GameState`` implements an ``execute`` (which calls the necessary draw functions) and ``processKey`` functions (which processes the player's key presses), allowing different funcionalities for a same key press depending on the context
+Each possible ``GameState`` implements an ``execute`` (which calls the necessary draw functions) and ``processKey`` 
+functions (which processes the player's key presses), allowing different funcionalities for a same key press depending on the context
 and transitions between states.
 
 ![action](umls/stateGame.png)

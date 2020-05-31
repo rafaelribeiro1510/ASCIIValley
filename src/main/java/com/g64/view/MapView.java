@@ -20,12 +20,6 @@ public class MapView {
         chunkView.draw(map.thisChunk());
     }
 
-    /*
-    public Screen getScreen() {
-        return screen;
-    }
-    */
-
     public void blink(Position position) {
         screen.setCursorPosition(new TerminalPosition(position.getX(), position.getY()));
         try {

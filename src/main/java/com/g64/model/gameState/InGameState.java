@@ -16,7 +16,7 @@ public class InGameState implements GameState {
     public InGameState(GameController gameController) {
         this.gameController = gameController;
         this.entityView = new EntityView(gameController.getDisplay().getScreen());
-        this.inventoryView = new InventoryView(gameController.getDisplay().getScreen());
+        this.inventoryView = new InventoryView(gameController.getDisplay().getScreen(), gameController.getMapModel().thisChunk().getHeight());
     }
 
     public InGameState(GameController gameController, EntityView entityView, InventoryView inventoryView) {
@@ -35,8 +35,7 @@ public class InGameState implements GameState {
 
         // draw inventory
         inventoryView.draw(gameController.getInventoryModel(),
-                gameController.getPlayer().getCurrentHealth(),
-                gameController.getMapModel().thisChunk().getHeight()
+                gameController.getPlayer().getCurrentHealth()
         );
 
         // draw player
