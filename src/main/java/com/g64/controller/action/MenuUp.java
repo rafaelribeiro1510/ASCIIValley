@@ -1,11 +1,12 @@
 package com.g64.controller.action;
 
 import com.g64.model.gameState.MainMenuGameState;
+import com.g64.model.gameState.MenuGameState;
 
 public class MenuUp implements ActionEvent {
-    private MainMenuGameState state;
+    private MenuGameState state;
 
-    public MenuUp(MainMenuGameState state) { this.state = state; }
+    public MenuUp(MenuGameState state) { this.state = state; }
 
     @Override
     public void execute() {
