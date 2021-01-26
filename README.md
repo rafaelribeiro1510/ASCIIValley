@@ -19,3 +19,7 @@ Planting and harvesting crops and fighting off mummies are some of the things th
 ## Gameplay
 
 ![MainGif](docs/screenshots/main.gif) 
+
+## Report
+
+[Readme](docs/README.md)
